@@ -2,21 +2,21 @@ name: transformer
 channels:
   - defaults
 dependencies:
-  - ca-certificates=2022.4.26=hecd8cb5_0
-  - certifi=2022.5.18.1=py38hecd8cb5_0
-  - libcxx=12.0.0=h2f01273_0
-  - libffi=3.3=hb1e8313_2
-  - ncurses=6.3=hca72f7f_2
-  - openssl=1.1.1o=hca72f7f_0
-  - pip=21.2.4=py38hecd8cb5_0
-  - python=3.8.13=hdfd78df_0
-  - readline=8.1.2=hca72f7f_1
-  - setuptools=61.2.0=py38hecd8cb5_0
-  - sqlite=3.38.3=h707629a_0
-  - tk=8.6.12=h5d9f67b_0
-  - wheel=0.37.1=pyhd3eb1b0_0
-  - xz=5.2.5=hca72f7f_1
-  - zlib=1.2.12=h4dc903c_2
+  - ca-certificates
+  - certifi
+  - libcxx
+  - libffi
+  - ncurses
+  - openssl
+  - pip
+  - python=3.8
+  - readline
+  - setuptools
+  - sqlite
+  - tk
+  - wheel
+  - xz
+  - zlib
   - pip:
     - absl-py==1.1.0
     - blis==0.7.7
