@@ -127,7 +127,7 @@ def train(model, iterator, optimizer, criterion):
         i+=1
         optimizer.zero_grad()
 
-        predictions = model(batch.text)#.squeeze(1)
+        predictions = model(batch.text.to(device))#.squeeze(1)
 
         label=batch.label.to(device)
         #print(label)
