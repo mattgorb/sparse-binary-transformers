@@ -81,7 +81,7 @@ if __name__ == "__main__":
     parser.add_argument("--ngrams", type=int, default=2, help="ngrams (default=2)")
     parser.add_argument("--num-workers", type=int, default=1, help="num of workers (default=1)")
     parser.add_argument("--device", default="cpu", help="device (default=cpu)")
-    parser.add_argument("--data-dir", default=".data", help="data directory (default=.data)")
+    parser.add_argument("--data-dir", default="data", help="data directory (default=.data)")
     parser.add_argument(
         "--use-sp-tokenizer", type=bool, default=False, help="use sentencepiece tokenizer (default=False)"
     )
