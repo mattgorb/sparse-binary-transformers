@@ -19,7 +19,8 @@ if device=='cuda':
 else:
     root_dir='data'
 
-
+print(root_dir)
+sys.exit()
 #train_data, test_data = IMDB(split=('train', 'test'), root=root_dir)
 train_iter = IMDB(split='train', root=root_dir)
 test_iter = IMDB(split='test', root=root_dir)
