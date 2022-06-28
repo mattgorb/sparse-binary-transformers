@@ -13,7 +13,13 @@ SEED = 1234
 #TEXT = data.Field(tokenize = 'spacy',tokenizer_language = 'en_core_web_sm')
 TEXT = data.Field()
 LABEL = data.LabelField(dtype = torch.float)
-train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+if device=='cuda':
+    root_dir='/s/luffy/b/nobackup/mgorb/data'
+else:
+    root_dir='data'
+
+train_data, test_data = datasets.IMDB.splits(TEXT, LABEL, root=root_dir)
 
 print(len(train_data))
 print(vars(train_data.examples[0]))
@@ -40,7 +46,6 @@ print(LABEL.vocab.stoi)
 
 BATCH_SIZE = 64
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
     (train_data, valid_data, test_data),
