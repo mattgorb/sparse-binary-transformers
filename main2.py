@@ -14,6 +14,7 @@ SEED = 1234
 TEXT = data.Field()
 LABEL = data.LabelField(dtype = torch.float)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(device)
 if device=='cuda':
     root_dir='/s/luffy/b/nobackup/mgorb/data'
 else:
