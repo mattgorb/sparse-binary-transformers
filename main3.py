@@ -13,10 +13,8 @@ from torch.nn.utils.rnn import pad_sequence
 SEED = 1234
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(device)
-print(str(device)=='cuda')
-print(device=='cuda')
-if device=='cuda':
+
+if str(device)=='cuda':
     root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
 else:
     root_dir='data'
