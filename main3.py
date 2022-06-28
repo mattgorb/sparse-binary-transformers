@@ -15,6 +15,7 @@ SEED = 1234
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
 print(str(device)=='cuda')
+print(device=='cuda')
 if device=='cuda':
     root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
 else:
