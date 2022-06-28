@@ -16,11 +16,13 @@ LABEL = data.LabelField(dtype = torch.float)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(device)
 if device=='cuda':
-    root_dir='/s/luffy/b/nobackup/mgorb/data'
+    root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
 else:
     root_dir='data'
 
-train_data, test_data = datasets.IMDB.splits(TEXT, LABEL, root=root_dir)
+dataset = datasets.IMDB(root=root_dir)
+
+train_data, test_data = dataset.splits(TEXT, LABEL,)
 
 print(len(train_data))
 print(vars(train_data.examples[0]))
