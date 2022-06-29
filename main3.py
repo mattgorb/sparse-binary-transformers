@@ -132,23 +132,21 @@ def train(model, iterator, optimizer, criterion):
         text=text.to(device)
 
 
-        print(f'batch {i}')
+        #print(f'batch {i}')
         i+=1
         optimizer.zero_grad()
-
         predictions = model(text)#.squeeze(1)
-
-        #label=label.type(torch.LongTensor)
-
         loss = criterion(predictions, label)
 
-        acc = binary_accuracy(predictions, label)
-        print(acc)
+        #acc = binary_accuracy(predictions, label)
+        #print(acc)
         loss.backward()
 
         optimizer.step()
 
         epoch_loss += loss.item()
+
+        acc = binary_accuracy(predictions, label)
         epoch_acc += acc.item()
 
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
