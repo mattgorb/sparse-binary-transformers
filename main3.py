@@ -52,11 +52,12 @@ tokenizer = get_tokenizer('basic_english')
 counter = Counter()
 for (label, line) in train_dataset:
     counter.update(tokenizer(line))
-print(torchtext.__version__)
-vocab = torchtext.vocab.vocab(counter, min_freq=10, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
+#print(torchtext.__version__)
+vocab = torchtext.vocab.vocab(counter, min_freq=50, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
 vocab.set_default_index(vocab['<unk>'])
 #torchtext.vocab.v
 ntokens=vocab.__len__()
+print(ntokens)
 
 train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=True,collate_fn=collate_batch)
 test_dataloader = DataLoader(test_dataset, batch_size=16, shuffle=True,collate_fn=collate_batch)
