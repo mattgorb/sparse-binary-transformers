@@ -59,8 +59,8 @@ vocab.set_default_index(vocab['<unk>'])
 ntokens=vocab.__len__()
 print(ntokens)
 
-train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=True,collate_fn=collate_batch)
-test_dataloader = DataLoader(test_dataset, batch_size=16, shuffle=True,collate_fn=collate_batch)
+train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
+test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
 
 
 
