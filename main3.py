@@ -105,11 +105,14 @@ def evaluate(model, iterator, criterion):
 
     with torch.no_grad():
         for batch in iterator:
-            predictions = model(batch.text).squeeze(1)
+            label, text = batch
+            label = label.to(device)
+            text = text.to(device)
+            predictions = model(text).squeeze(1)
 
-            loss = criterion(predictions, batch.label)
+            loss = criterion(predictions, label)
 
-            acc = binary_accuracy(predictions, batch.label)
+            acc = binary_accuracy(predictions, label)
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
