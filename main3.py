@@ -6,10 +6,13 @@ import torch.optim as optim
 import torch.nn as nn
 from model import TransformerModel
 from collections import Counter
-from torchtext.vocab import Vocab
+import torchtext
 from torchtext.data.utils import get_tokenizer
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
+
+from torchtext.data.functional import to_map_style_dataset
+
 SEED = 1234
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -25,17 +28,13 @@ print(root_dir)
 train_iter = IMDB(split='train', root=root_dir)
 test_iter = IMDB(split='test', root=root_dir)
 
+train_dataset = to_map_style_dataset(train_iter)
+test_dataset = to_map_style_dataset(test_iter)
+#print(list(train_iter))
 
 
-tokenizer = get_tokenizer('basic_english')
 
-counter = Counter()
-for (label, line) in train_iter:
-    counter.update(tokenizer(line))
-vocab = Vocab(counter, min_freq=10, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
 
-text_transform = lambda x: [vocab['<BOS>']] + [vocab[token] for token in tokenizer(x)] + [vocab['<EOS>']]
-label_transform = lambda x: 1 if x == 'pos' else 0
 
 def collate_batch(batch):
    label_list, text_list = [], []
@@ -46,43 +45,22 @@ def collate_batch(batch):
    return torch.tensor(label_list), pad_sequence(text_list, padding_value=3.0)
 
 
-train_dataloader = DataLoader(list(train_iter), batch_size=64, shuffle=True,
-                              collate_fn=collate_batch)
 
-for batch in train_dataloader:
-    print(batch)
-    sys.exit()
+text_transform = lambda x:  [vocab['<BOS>']] + [vocab[token] for token in tokenizer(x)] + [vocab['<EOS>']]
+label_transform = lambda x: 1 if x == 'pos' else 0
+tokenizer = get_tokenizer('basic_english')
+counter = Counter()
+for (label, line) in train_dataset:
+    counter.update(tokenizer(line))
+print(torchtext.__version__)
+vocab = torchtext.vocab.vocab(counter, min_freq=10, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
+vocab.set_default_index(vocab['<unk>'])
+#torchtext.vocab.v
+ntokens=vocab.__len__()
 
-print(len(train_dataloader))
-print(vars(train_data.examples[0]))
+train_dataloader = DataLoader(train_dataset, batch_size=64, shuffle=True,collate_fn=collate_batch)
+test_dataloader = DataLoader(test_dataset, batch_size=64, shuffle=True,collate_fn=collate_batch)
 
-
-
-train_data, valid_data = train_data.split(random_state = random.seed(SEED))
-
-print(f'Number of training examples: {len(train_data)}')
-print(f'Number of validation examples: {len(valid_data)}')
-print(f'Number of testing examples: {len(test_data)}')
-
-
-MAX_VOCAB_SIZE = 50_000
-
-TEXT.build_vocab(train_data, max_size = MAX_VOCAB_SIZE)
-LABEL.build_vocab(train_data)
-print(f"Unique tokens in TEXT vocabulary: {len(TEXT.vocab)}")
-print(f"Unique tokens in LABEL vocabulary: {len(LABEL.vocab)}")
-
-print(TEXT.vocab.freqs.most_common(20))
-print(LABEL.vocab.stoi)
-
-
-BATCH_SIZE = 64
-
-
-train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(
-    (train_data, valid_data, test_data),
-    batch_size = BATCH_SIZE,
-    device = device)
 
 
 
@@ -111,15 +89,10 @@ EMBEDDING_DIM = 50
 #print(len(vocab.dictionary))
 #sys.exit()
 #ntoken, ninp, nhead, nhid, nlayers=6,
-model = TransformerModel(ntoken=len(TEXT.vocab), ninp=EMBEDDING_DIM, nhead=5, nhid=16, nlayers=2).to(device)
+model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=5, nhid=16, nlayers=2).to(device)
 
 print(f'The model has {count_parameters(model):,} trainable parameters')
 
-#for n,p in model.named_parameters():
-    #print(n)
-    #if p.requires_grad:
-        #print(p.size())
-#@print( model.parameters())
 
 
 optimizer = optim.Adam(model.parameters(),lr=1e-4)
@@ -154,19 +127,19 @@ def train(model, iterator, optimizer, criterion):
     model.train()
     i=0
     for batch in iterator:
+        label, text=batch
+        label=label.to(device)
+        text=text.to(device)
+
+
         print(f'batch {i}')
         i+=1
         optimizer.zero_grad()
 
-        predictions = model(batch.text.to(device))#.squeeze(1)
+        predictions = model(text)#.squeeze(1)
 
-        label=batch.label.to(device)
-        #print(label)
-        #print(predictions)
-        #print(label.dtype)
-        label=label.type(torch.LongTensor)
-        #print(predictions.size())
-        #print(label.size())
+        #label=label.type(torch.LongTensor)
+
         loss = criterion(predictions, label)
 
         acc = binary_accuracy(predictions, label)
@@ -198,8 +171,8 @@ for epoch in range(N_EPOCHS):
 
     start_time = time.time()
 
-    train_loss, train_acc = train(model, train_iterator, optimizer, criterion)
-    valid_loss, valid_acc = evaluate(model, valid_iterator, criterion)
+    train_loss, train_acc = train(model, train_dataloader, optimizer, criterion)
+    valid_loss, valid_acc = evaluate(model, test_dataloader, criterion)
 
     end_time = time.time()
 
