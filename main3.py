@@ -126,6 +126,7 @@ def train(model, iterator, optimizer, criterion):
     model.train()
     i=0
     for batch in iterator:
+        optimizer.zero_grad()
         label, text=batch
         label=label.to(device)
         text=text.to(device)
@@ -133,7 +134,7 @@ def train(model, iterator, optimizer, criterion):
 
         #print(f'batch {i}')
         i+=1
-        optimizer.zero_grad()
+
         predictions = model(text)#.squeeze(1)
         loss = criterion(predictions, label)
 
