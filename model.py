@@ -3,63 +3,56 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class RNNModel(nn.Module):
-    """Container module with an encoder, a recurrent module, and a decoder."""
+class Net(nn.Module):
+    """
+    Text classifier based on a pytorch TransformerEncoder.
+    """
 
-    def __init__(self, rnn_type, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False):
-        super(RNNModel, self).__init__()
-        self.ntoken = ntoken
-        self.drop = nn.Dropout(dropout)
-        self.encoder = nn.Embedding(ntoken, ninp)
-        if rnn_type in ['LSTM', 'GRU']:
-            self.rnn = getattr(nn, rnn_type)(ninp, nhid, nlayers, dropout=dropout)
-        else:
-            try:
-                nonlinearity = {'RNN_TANH': 'tanh', 'RNN_RELU': 'relu'}[rnn_type]
-            except KeyError:
-                raise ValueError( """An invalid option for `--model` was supplied,
-                                 options are ['LSTM', 'GRU', 'RNN_TANH' or 'RNN_RELU']""")
-            self.rnn = nn.RNN(ninp, nhid, nlayers, nonlinearity=nonlinearity, dropout=dropout)
-        self.decoder = nn.Linear(nhid, ntoken)
+    def __init__(
+        self,
+        embeddings,
+        nhead=8,
+        dim_feedforward=2048,
+        num_layers=6,
+        dropout=0.1,
+        activation="relu",
+        classifier_dropout=0.1,
+    ):
 
-        # Optionally tie weights as in:
-        # "Using the Output Embedding to Improve Language Models" (Press & Wolf 2016)
-        # https://arxiv.org/abs/1608.05859
-        # and
-        # "Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling" (Inan et al. 2016)
-        # https://arxiv.org/abs/1611.01462
-        if tie_weights:
-            if nhid != ninp:
-                raise ValueError('When using the tied flag, nhid must be equal to emsize')
-            self.decoder.weight = self.encoder.weight
+        super().__init__()
 
-        self.init_weights()
+        vocab_size, d_model = embeddings.size()
+        assert d_model % nhead == 0, "nheads must divide evenly into d_model"
 
-        self.rnn_type = rnn_type
-        self.nhid = nhid
-        self.nlayers = nlayers
+        self.emb = nn.Embedding.from_pretrained(embeddings, freeze=False)
 
-    def init_weights(self):
-        initrange = 0.1
-        nn.init.uniform_(self.encoder.weight, -initrange, initrange)
-        nn.init.zeros_(self.decoder.bias)
-        nn.init.uniform_(self.decoder.weight, -initrange, initrange)
+        self.pos_encoder = PositionalEncoding(
+            d_model=d_model,
+            dropout=dropout,
+            vocab_size=vocab_size,
+        )
 
-    def forward(self, input, hidden):
-        emb = self.drop(self.encoder(input))
-        output, hidden = self.rnn(emb, hidden)
-        output = self.drop(output)
-        decoded = self.decoder(output)
-        decoded = decoded.view(-1, self.ntoken)
-        return F.log_softmax(decoded, dim=1), hidden
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model,
+            nhead=nhead,
+            dim_feedforward=dim_feedforward,
+            dropout=dropout,
+        )
+        self.transformer_encoder = nn.TransformerEncoder(
+            encoder_layer,
+            num_layers=num_layers,
+        )
+        self.classifier = nn.Linear(d_model, 2)
+        self.d_model = d_model
 
-    def init_hidden(self, bsz):
-        weight = next(self.parameters())
-        if self.rnn_type == 'LSTM':
-            return (weight.new_zeros(self.nlayers, bsz, self.nhid),
-                    weight.new_zeros(self.nlayers, bsz, self.nhid))
-        else:
-            return weight.new_zeros(self.nlayers, bsz, self.nhid)
+    def forward(self, x):
+        x = self.emb(x) * math.sqrt(self.d_model)
+        x = self.pos_encoder(x)
+        x = self.transformer_encoder(x)
+        x = x.mean(dim=1)
+        x = self.classifier(x)
+
+        return x
 
 # Temporarily leave PositionalEncoding module here. Will be moved somewhere else.
 class PositionalEncoding(nn.Module):

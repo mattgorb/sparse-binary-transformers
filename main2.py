@@ -132,9 +132,7 @@ def train(model, iterator, optimizer, criterion):
         predictions = model(batch.text.to(device))#.squeeze(1)
 
         label=batch.label.to(device)
-        #print(label)
-        #print(predictions)
-        #print(label.dtype)
+
         label=label.type(torch.LongTensor)
         #print(predictions.size())
         #print(label.size())

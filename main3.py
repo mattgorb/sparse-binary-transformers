@@ -4,7 +4,7 @@ from torchtext.datasets import IMDB
 import random
 import torch.optim as optim
 import torch.nn as nn
-from model import TransformerModel
+from model import TransformerModel, Net
 from collections import Counter
 import torchtext
 from torchtext.data.utils import get_tokenizer
@@ -85,7 +85,7 @@ EMBEDDING_DIM = 50
 #print(len(vocab.dictionary))
 #sys.exit()
 #ntoken, ninp, nhead, nhid, nlayers=6,
-model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=5, nhid=16, nlayers=2).to(device)
+model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 
 print(f'The model has {count_parameters(model):,} trainable parameters')
 
