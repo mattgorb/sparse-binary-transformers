@@ -6,7 +6,7 @@ from torch.nn import MultiheadAttention
 class SparseTransformerEncoderLayer(nn.Module):
 
     def __init__(self, d_model, nhead, dim_feedforward=2048, dropout=0.1, activation=F.relu,
-                 layer_norm_eps=1e-5,
+                 layer_norm_eps=1e-5, batch_first=False,
                  device=None, dtype=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
@@ -18,6 +18,8 @@ class SparseTransformerEncoderLayer(nn.Module):
 
         self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+
+
 
         self.activation = activation
 
@@ -37,7 +39,7 @@ class SparseTransformerEncoderLayer(nn.Module):
                            attn_mask=attn_mask,
                            key_padding_mask=key_padding_mask,
                            need_weights=False)[0]
-        return self.dropout1(x)
+        return x
 
     # feed forward block
     def _ff_block(self, x) :
