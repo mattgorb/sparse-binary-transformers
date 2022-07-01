@@ -3,80 +3,16 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class Net(nn.Module):
-    """
-    Text classifier based on a pytorch TransformerEncoder.
-    """
-
-    def __init__(
-        self,
-        embeddings,
-        nhead=8,
-        dim_feedforward=2048,
-        num_layers=6,
-        dropout=0.1,
-        activation="relu",
-        classifier_dropout=0.1,
-    ):
-
-        super().__init__()
-
-        vocab_size, d_model = embeddings.size()
-        assert d_model % nhead == 0, "nheads must divide evenly into d_model"
-
-        self.emb = nn.Embedding.from_pretrained(embeddings, freeze=False)
-
-        self.pos_encoder = PositionalEncoding(
-            d_model=d_model,
-            dropout=dropout,
-            vocab_size=vocab_size,
-        )
-
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=nhead,
-            dim_feedforward=dim_feedforward,
-            dropout=dropout,
-        )
-        self.transformer_encoder = nn.TransformerEncoder(
-            encoder_layer,
-            num_layers=num_layers,
-        )
-        self.classifier = nn.Linear(d_model, 2)
-        self.d_model = d_model
-
-    def forward(self, x):
-        x = self.emb(x) * math.sqrt(self.d_model)
-        x = self.pos_encoder(x)
-        x = self.transformer_encoder(x)
-        x = x.mean(dim=1)
-        x = self.classifier(x)
-
-        return x
 
 # Temporarily leave PositionalEncoding module here. Will be moved somewhere else.
 class PositionalEncoding(nn.Module):
-    r"""Inject some information about the relative or absolute position of the tokens in the sequence.
-        The positional encodings have the same dimension as the embeddings, so that the two can be summed.
-        Here, we use sine and cosine functions of different frequencies.
-    .. math:
-        \text{PosEncoder}(pos, 2i) = sin(pos/10000^(2i/d_model))
-        \text{PosEncoder}(pos, 2i+1) = cos(pos/10000^(2i/d_model))
-        \text{where pos is the word position and i is the embed idx)
-    Args:
-        d_model: the embed dim (required).
-        dropout: the dropout value (default=0.1).
-        max_len: the max. length of the incoming sequence (default=5000).
-    Examples:
-        >>> pos_encoder = PositionalEncoding(d_model)
-    """
-
-    def __init__(self, d_model, dropout=0.1, max_len=5000):
+    def __init__(self, d_model, dropout=None, max_len=5000):
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
 
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
+
         div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
@@ -84,21 +20,10 @@ class PositionalEncoding(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
-        r"""Inputs of forward function
-        Args:
-            x: the sequence fed to the positional encoder model (required).
-        Shape:
-            x: [sequence length, batch size, embed dim]
-            output: [sequence length, batch size, embed dim]
-        Examples:
-            >>> output = pos_encoder(x)
-        """
-
         x = x + self.pe[:x.size(0), :]
         return self.dropout(x)
 
 class TransformerModel(nn.Module):
-    """Container module with an encoder, a recurrent or transformer module, and a decoder."""
 
     def __init__(self, ntoken, ninp, nhead, nhid, nlayers=6, dropout=0.0):
         super(TransformerModel, self).__init__()
@@ -132,6 +57,7 @@ class TransformerModel(nn.Module):
         if has_mask:
             device = src.device
             if self.src_mask is None or self.src_mask.size(0) != len(src):
+
                 mask = self._generate_square_subsequent_mask(len(src)).to(device)
                 self.src_mask = mask
         else:
