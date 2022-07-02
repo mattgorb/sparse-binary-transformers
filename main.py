@@ -51,8 +51,6 @@ def train(model, iterator, optimizer, criterion):
         label=label.to(device)
         text=text.to(device)
 
-
-        #print(f'batch {i}')
         i+=1
 
         predictions = model(text)#.squeeze(1)
