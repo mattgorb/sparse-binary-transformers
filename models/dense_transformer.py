@@ -66,7 +66,7 @@ class TransformerModel(nn.Module):
         if has_pad_mask:
             device = src.device
             #if self.pad_mask is None or self.src_mask.size(0) != len(src):
-            mask = (src > 0).t()#.unsqueeze(1).repeat(1, src.size(1), 1).unsqueeze(1)
+            mask = (src == 0).t()#.unsqueeze(1).repeat(1, src.size(1), 1).unsqueeze(1)
             self.pad_mask = mask.to(device)
         else:
             self.pad_mask = None
