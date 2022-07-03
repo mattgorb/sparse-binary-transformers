@@ -10,7 +10,7 @@ class PositionalEncoding(nn.Module):
 
     def __init__(self, d_model, dropout=None, max_len=5000):
         super(PositionalEncoding, self).__init__()
-        self.dropout = nn.Dropout(p=dropout)
+        #self.dropout = nn.Dropout(p=dropout)
 
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
@@ -23,7 +23,7 @@ class PositionalEncoding(nn.Module):
 
     def forward(self, x):
         x = x + self.pe[:x.size(0), :]
-        return self.dropout(x)
+        return x
 
 class SBTransformerModel(nn.Module):
     """Container module with an encoder, a recurrent or transformer module, and a decoder."""
@@ -31,10 +31,10 @@ class SBTransformerModel(nn.Module):
     def __init__(self, ntoken, ninp, nhead, nhid, nlayers=6, dropout=0.0):
         super(SBTransformerModel, self).__init__()
         try:
-            from utils.sparser_encoder import SparseTransformerEncoder
+            from utils.sparse_encoder import SparseTransformerEncoder
             from utils.sparse_encoder_layer import  SparseTransformerEncoderLayer
         except:
-            raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
+            raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'
         self.src_mask = None
         self.pos_encoder = PositionalEncoding(ninp, dropout)

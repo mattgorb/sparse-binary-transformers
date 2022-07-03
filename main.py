@@ -10,7 +10,7 @@ import torchtext
 from torchtext.data.utils import get_tokenizer
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
-
+from utils.model_utils import *
 from torchtext.data.functional import to_map_style_dataset
 
 
@@ -56,7 +56,6 @@ def train(model, iterator, optimizer, criterion):
         predictions = model(text)#.squeeze(1)
         loss = criterion(predictions, label)
 
-        #acc = binary_accuracy(predictions, label)
 
         loss.backward()
 
@@ -65,7 +64,7 @@ def train(model, iterator, optimizer, criterion):
         epoch_loss += loss.item()
 
         acc = binary_accuracy(predictions, label)
-        #print(acc)
+
         epoch_acc += acc.item()
 
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
@@ -143,7 +142,8 @@ model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, n
 
 #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 print(f'The model has {count_parameters(model):,} trainable parameters')
-
+#freeze_model_weights(model)
+#sys.exit()
 
 
 optimizer = optim.Adam(model.parameters(),lr=1e-4)

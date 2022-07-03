@@ -1,6 +1,6 @@
 import torch.nn as nn
 from utils.lin_type import SubnetConvBiprop as Linear
-import torch.functional as F
+import torch.nn.functional as F
 from torch.nn import MultiheadAttention
 
 class SparseTransformerEncoderLayer(nn.Module):
@@ -33,8 +33,7 @@ class SparseTransformerEncoderLayer(nn.Module):
         return x
 
     # self-attention block
-    def _sa_block(self, x,
-                  attn_mask, key_padding_mask) :
+    def _sa_block(self, x,attn_mask, key_padding_mask) :
         x = self.self_attn(x, x, x,
                            attn_mask=attn_mask,
                            key_padding_mask=key_padding_mask,
