@@ -7,7 +7,7 @@ from torch.nn import functional as F
 from torch.nn import Module
 from torch.nn import ModuleList
 import torch.nn as nn
-from utils.multhead_attention_base import MultiheadAttention
+from utils.multihead_attention_base import MultiheadAttention
 
 class TransformerEncoderLayer(Module):
     r"""TransformerEncoderLayer is made up of self-attn and feedforward network.

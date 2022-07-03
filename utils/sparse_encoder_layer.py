@@ -1,7 +1,7 @@
 import torch.nn as nn
 from utils.lin_type import SubnetConvBiprop as Linear
 import torch.nn.functional as F
-from torch.nn import MultiheadAttention
+from utils.multihead_attention_base import MultiheadAttention
 
 class SparseTransformerEncoderLayer(nn.Module):
 

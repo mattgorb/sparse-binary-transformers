@@ -1,3 +1,4 @@
+
 def freeze_model_weights(model):
     print("=> Freezing model weights")
 
