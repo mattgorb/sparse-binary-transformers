@@ -135,18 +135,18 @@ test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn
 
 EMBEDDING_DIM = 50
 
-import copy
+'''import copy
 import torch.quantization.quantize_fx as quantize_fx
 model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 model_to_quantize = copy.deepcopy(model)
 model_to_quantize.train()
 qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
-model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)
+model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
 
-#model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 print(f'The model has {count_parameters(model):,} trainable parameters')
-#freeze_model_weights(model)
-#sys.exit()
+freeze_model_weights(model)
+sys.exit()
 
 
 optimizer = optim.Adam(model.parameters(),lr=1e-4)
@@ -166,8 +166,8 @@ for epoch in range(N_EPOCHS):
     start_time = time.time()
 
     train_loss, train_acc = train(model, train_dataloader, optimizer, criterion)
-    model_int8 = quantize_fx.convert_fx(model)
-    valid_loss, valid_acc = evaluate(model_int8, test_dataloader, criterion)
+    #model_int8 = quantize_fx.convert_fx(model)
+    valid_loss, valid_acc = evaluate(model, test_dataloader, criterion)
 
     end_time = time.time()
 
