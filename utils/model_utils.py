@@ -107,13 +107,10 @@ def _init_score(args, scores):
 
 def freeze_model_weights(model):
     print("=> Freezing model weights")
-
     for n, m in model.named_modules():
-        print(n)
-
         if hasattr(m, "weight") and m.weight is not None:
-
-            continue
+            if 'norm' in n:
+                continue
             print(f"==> No gradient to {n}.weight")
             m.weight.requires_grad = False
             if m.weight.grad is not None:

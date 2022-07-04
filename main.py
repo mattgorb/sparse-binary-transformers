@@ -146,7 +146,7 @@ model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
 model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 print(f'The model has {count_parameters(model):,} trainable parameters')
 freeze_model_weights(model)
-sys.exit()
+
 
 
 optimizer = optim.Adam(model.parameters(),lr=1e-4)
