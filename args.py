@@ -116,7 +116,7 @@ def parse_arguments():
 
 
     parser.add_argument(
-        "--weight_init", default="kaiming_normal", help="Weight initialization modifications"
+        "--weight_init", default=None, help="Weight initialization modifications"
     )
     parser.add_argument(
         "--score_init", default=None, help="Weight initialization modifications"
