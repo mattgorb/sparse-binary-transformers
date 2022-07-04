@@ -189,5 +189,5 @@ def main():
 
 if __name__ == "__main__":
     print(args)
-    sys.exit()
+    #sys.exit()
     main()
