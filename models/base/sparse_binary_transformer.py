@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from models.layers.sparse_lin_type import SubnetConvBiprop as Linear
+from models.layers.sparse_lin_type import linear_init
 
 # Temporarily leave PositionalEncoding module here. Will be moved somewhere else.
 class PositionalEncoding(nn.Module):
@@ -44,7 +44,7 @@ class SBTransformerModel(nn.Module):
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
         self.encoder = nn.Embedding(ntoken, ninp)
         self.ninp = ninp
-        self.decoder = Linear(ninp, 2,args=args)
+        self.decoder = linear_init(ninp, 2,bias=False,args=args, )
 
         self.init_weights()
 
