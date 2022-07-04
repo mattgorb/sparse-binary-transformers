@@ -67,7 +67,7 @@ class MultiheadAttention(nn.MultiheadAttention):
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
-        self.linear_Q = Linear(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
+        self.linear_Q = Linear(self.embed_dim, self.embed_dim,args, bias=bias,**factory_kwargs)
         self.linear_K = Linear(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         self.linear_V = Linear(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
