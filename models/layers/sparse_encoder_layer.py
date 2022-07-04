@@ -10,7 +10,7 @@ class SparseTransformerEncoderLayer(nn.Module):
                  device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
-        self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,
+        self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                             **factory_kwargs)
         # Implementation of Feedforward model
         self.linear1 = linear_init(d_model, dim_feedforward,args=args, **factory_kwargs)
