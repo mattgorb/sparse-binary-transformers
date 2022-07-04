@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/args.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/sparse-transformer.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/sparse_lin_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_lin_type.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/models/layers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/configs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -44,11 +48,11 @@
       <recent name="$PROJECT_DIR$/models" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/models/layers" />
       <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/utils" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -63,7 +67,7 @@
       <updated>1655435556671</updated>
       <workItem from="1655435559737" duration="34077000" />
       <workItem from="1655906842829" duration="15688000" />
-      <workItem from="1656387581098" duration="47262000" />
+      <workItem from="1656387581098" duration="49154000" />
     </task>
     <servers />
   </component>

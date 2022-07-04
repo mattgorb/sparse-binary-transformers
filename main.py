@@ -11,10 +11,11 @@ from utils.model_utils import *
 from torchtext.data.functional import to_map_style_dataset
 import time
 from torch import optim
+from args import args
 import warnings
 warnings.filterwarnings("ignore")
 
-def evaluate(model, iterator, criterion):
+def evaluate(model, iterator, criterion, device):
     epoch_loss = 0
     epoch_acc = 0
 
@@ -36,7 +37,7 @@ def evaluate(model, iterator, criterion):
 
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
-def train(model, iterator, optimizer, criterion):
+def train(model, iterator, optimizer, criterion, device):
     epoch_loss = 0
     epoch_acc = 0
 
@@ -98,85 +99,95 @@ def binary_accuracy(preds, y):
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
-SEED = 1234
+def main():
+    SEED = 1234
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-if str(device)=='cuda':
-    root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
-else:
-    root_dir='data'
+    if str(device)=='cuda':
+        root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
+    else:
+        root_dir='data'
 
-print(root_dir)
+    print(root_dir)
 
-#train_data, test_data = IMDB(split=('train', 'test'), root=root_dir)
-train_iter = IMDB(split='train', root=root_dir)
-test_iter = IMDB(split='test', root=root_dir)
+    #train_data, test_data = IMDB(split=('train', 'test'), root=root_dir)
+    train_iter = IMDB(split='train', root=root_dir)
+    test_iter = IMDB(split='test', root=root_dir)
 
-train_dataset = to_map_style_dataset(train_iter)
-test_dataset = to_map_style_dataset(test_iter)
-#print(list(train_iter))
+    train_dataset = to_map_style_dataset(train_iter)
+    test_dataset = to_map_style_dataset(test_iter)
+    #print(list(train_iter))
 
-text_transform = lambda x:  [vocab['<BOS>']] + [vocab[token] for token in tokenizer(x)] + [vocab['<EOS>']]
-label_transform = lambda x: 1 if x == 'pos' else 0
-tokenizer = get_tokenizer('basic_english')
-counter = Counter()
-for (label, line) in train_dataset:
-    counter.update(tokenizer(line))
-#print(torchtext.__version__)
-vocab = torchtext.vocab.vocab(counter, min_freq=50, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
-vocab.set_default_index(vocab['<unk>'])
-#torchtext.vocab.v
-ntokens=vocab.__len__()
-print(ntokens)
+    global text_transform
+    global label_transform
+    text_transform = lambda x:  [vocab['<BOS>']] + [vocab[token] for token in tokenizer(x)] + [vocab['<EOS>']]
+    label_transform = lambda x: 1 if x == 'pos' else 0
+    tokenizer = get_tokenizer('basic_english')
+    counter = Counter()
+    for (label, line) in train_dataset:
+        counter.update(tokenizer(line))
+    #print(torchtext.__version__)
+    vocab = torchtext.vocab.vocab(counter, min_freq=50, specials=('<unk>', '<BOS>', '<EOS>', '<PAD>'))
+    vocab.set_default_index(vocab['<unk>'])
+    #torchtext.vocab.v
+    ntokens=vocab.__len__()
+    print(ntokens)
 
-train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
-test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
+    train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
+    test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
 
-EMBEDDING_DIM = 50
+    EMBEDDING_DIM = 50
 
-'''import copy
-import torch.quantization.quantize_fx as quantize_fx
-model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-model_to_quantize = copy.deepcopy(model)
-model_to_quantize.train()
-qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
-model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
+    model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+    '''import copy
+    import torch.quantization.quantize_fx as quantize_fx
+    model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+    model_to_quantize = copy.deepcopy(model)
+    model_to_quantize.train()
+    qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
+    model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
 
-model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-print(f'The model has {count_parameters(model):,} trainable parameters')
-freeze_model_weights(model)
-
-
-
-optimizer = optim.Adam(model.parameters(),lr=1e-4)
-#criterion = nn.BCEWithLogitsLoss()
-
-
-criterion = nn.CrossEntropyLoss()
+    #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+    print(f'The model has {count_parameters(model):,} trainable parameters')
+    freeze_model_weights(model)
 
 
 
-N_EPOCHS = 10
+    optimizer = optim.Adam(model.parameters(),lr=1e-4)
+    #criterion = nn.BCEWithLogitsLoss()
 
-best_valid_loss = float('inf')
 
-for epoch in range(N_EPOCHS):
+    criterion = nn.CrossEntropyLoss()
 
-    start_time = time.time()
 
-    train_loss, train_acc = train(model, train_dataloader, optimizer, criterion)
-    #model_int8 = quantize_fx.convert_fx(model)
-    valid_loss, valid_acc = evaluate(model, test_dataloader, criterion)
 
-    end_time = time.time()
+    N_EPOCHS = 10
 
-    epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+    best_valid_loss = float('inf')
 
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'tut1-model.pt')
+    for epoch in range(N_EPOCHS):
 
-    print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-    print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+        start_time = time.time()
+
+        train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
+        #model_int8 = quantize_fx.convert_fx(model)
+        valid_loss, valid_acc = evaluate(model, test_dataloader, criterion, device)
+
+        end_time = time.time()
+
+        epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+
+        if valid_loss < best_valid_loss:
+            best_valid_loss = valid_loss
+            torch.save(model.state_dict(), 'tut1-model.pt')
+
+        print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+        print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
+        print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+
+if __name__ == "__main__":
+    print(args)
+    sys.exit()
+    main()
