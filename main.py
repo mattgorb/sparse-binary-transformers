@@ -136,8 +136,11 @@ test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn
 EMBEDDING_DIM = 50
 
 model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+module_names=[]
+for n, m in model.named_modules():
+    module_names.append(n)
 model.qconfig = torch.quantization.get_default_qat_qconfig('fbgemm')
-model_fp32_fused = torch.quantization.fuse_modules(model,[['linear', 'layernorm', 'relu']])
+model_fp32_fused = torch.quantization.fuse_modules(model,[module_names])
 model = torch.quantization.prepare_qat(model_fp32_fused)
 
 #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
