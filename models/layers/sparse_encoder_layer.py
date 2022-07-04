@@ -1,5 +1,5 @@
 import torch.nn as nn
-from models.layers.sparse_lin_type import SubnetConvBiprop as Linear
+from models.layers.sparse_lin_type import linear_init
 import torch.nn.functional as F
 from models.layers.sparse_multihead_attention import MultiheadAttention
 
@@ -13,8 +13,8 @@ class SparseTransformerEncoderLayer(nn.Module):
         self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,
                                             **factory_kwargs)
         # Implementation of Feedforward model
-        self.linear1 = Linear(d_model, dim_feedforward,args=args, **factory_kwargs)
-        self.linear2 = Linear(dim_feedforward, d_model,args=args, **factory_kwargs)
+        self.linear1 = linear_init(d_model, dim_feedforward,args=args, **factory_kwargs)
+        self.linear2 = linear_init(dim_feedforward, d_model,args=args, **factory_kwargs)
 
         self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)

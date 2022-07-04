@@ -9,6 +9,12 @@ import math
 from utils.model_utils import _init_weight,_init_score
 import numpy as np
 
+
+def linear_init(in_dim, out_dim, bias=None, args=None, **factory_kwargs):
+    layer=SubnetConvBiprop(in_dim,out_dim, bias,**factory_kwargs)
+    layer.init(args)
+    return layer
+
 class GetQuantnet_binary(autograd.Function):
     @staticmethod
     def forward(ctx, scores, weights, k):
@@ -46,10 +52,6 @@ class SubnetConvBiprop(nn.Linear):
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
-        #self.args=args
-        print(*args)
-        print(**kwargs)
-        sys.exit()
 
     @property
     def clamped_scores(self):
