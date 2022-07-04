@@ -11,8 +11,8 @@ from utils.model_utils import *
 from torchtext.data.functional import to_map_style_dataset
 import time
 from torch import optim
-
-
+import warnings
+warnings.filterwarnings("ignore")
 
 def evaluate(model, iterator, criterion):
     epoch_loss = 0
@@ -137,7 +137,7 @@ EMBEDDING_DIM = 50
 
 model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 model.qconfig = torch.quantization.get_default_qat_qconfig('fbgemm')
-model_fp32_fused = torch.quantization.fuse_modules(model,[['conv', 'bn', 'relu']])
+model_fp32_fused = torch.quantization.fuse_modules(model,[['linear', 'layernorm', 'relu']])
 model = torch.quantization.prepare_qat(model_fp32_fused)
 
 #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
