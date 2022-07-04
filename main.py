@@ -135,14 +135,12 @@ test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn
 
 EMBEDDING_DIM = 50
 
+import copy
+import torch.quantization.quantize_fx as quantize_fx
 model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-module_names=[]
-for n, m in model.named_modules():
-    if n!='':
-        module_names.append(n)
-model.qconfig = torch.quantization.get_default_qat_qconfig('fbgemm')
-model_fp32_fused = torch.quantization.fuse_modules(model,[module_names])
-model = torch.quantization.prepare_qat(model_fp32_fused)
+model_to_quantize = copy.deepcopy(model)
+qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
+model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)
 
 #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 print(f'The model has {count_parameters(model):,} trainable parameters')
@@ -167,7 +165,7 @@ for epoch in range(N_EPOCHS):
     start_time = time.time()
 
     train_loss, train_acc = train(model, train_dataloader, optimizer, criterion)
-    model_int8 = torch.quantization.convert(model)
+    model_int8 = quantize_fx.convert_fx(model)
     valid_loss, valid_acc = evaluate(model_int8, test_dataloader, criterion)
 
     end_time = time.time()
