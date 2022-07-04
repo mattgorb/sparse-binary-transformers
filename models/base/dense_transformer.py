@@ -29,7 +29,7 @@ class TransformerModel(nn.Module):
         super(TransformerModel, self).__init__()
         try:
             from torch.nn import TransformerEncoder
-            from utils.transformer_encoder_layer_base import TransformerEncoderLayer
+            from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
         except:
             raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
         self.model_type = 'Transformer'
@@ -71,8 +71,6 @@ class TransformerModel(nn.Module):
             self.pad_mask = mask.to(device)
         else:
             self.pad_mask = None
-
-
 
         src = self.encoder(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)

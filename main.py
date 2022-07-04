@@ -1,10 +1,7 @@
 import torch
-import time
 from torchtext.datasets import IMDB
-import torch.optim as optim
-import torch.nn as nn
-from models.dense_transformer import TransformerModel
-from models.sparse_binary_transformer import SBTransformerModel
+from models.base.dense_transformer import TransformerModel
+from models.base.sparse_binary_transformer import SBTransformerModel
 from collections import Counter
 import torchtext
 from torchtext.data.utils import get_tokenizer
@@ -12,8 +9,8 @@ from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from utils.model_utils import *
 from torchtext.data.functional import to_map_style_dataset
-
-
+import time
+from torch import optim
 
 
 
@@ -137,8 +134,11 @@ train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True,collate_
 test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
 
 EMBEDDING_DIM = 50
-model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 
+model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+model.qconfig = torch.quantization.get_default_qat_qconfig('fbgemm')
+model_fp32_fused = torch.quantization.fuse_modules(model,[['conv', 'bn', 'relu']])
+model = torch.quantization.prepare_qat(model_fp32_fused)
 
 #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
 print(f'The model has {count_parameters(model):,} trainable parameters')
@@ -163,7 +163,8 @@ for epoch in range(N_EPOCHS):
     start_time = time.time()
 
     train_loss, train_acc = train(model, train_dataloader, optimizer, criterion)
-    valid_loss, valid_acc = evaluate(model, test_dataloader, criterion)
+    model_int8 = torch.quantization.convert(model)
+    valid_loss, valid_acc = evaluate(model_int8, test_dataloader, criterion)
 
     end_time = time.time()
 

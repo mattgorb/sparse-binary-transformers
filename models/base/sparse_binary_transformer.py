@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils.lin_type import SubnetConvBiprop as Linear
+from models.layers.sparse_lin_type import SubnetConvBiprop as Linear
 
 # Temporarily leave PositionalEncoding module here. Will be moved somewhere else.
 class PositionalEncoding(nn.Module):
@@ -31,8 +31,8 @@ class SBTransformerModel(nn.Module):
     def __init__(self, ntoken, ninp, nhead, nhid, nlayers=6, dropout=0.0):
         super(SBTransformerModel, self).__init__()
         try:
-            from utils.sparse_encoder import SparseTransformerEncoder
-            from utils.sparse_encoder_layer import  SparseTransformerEncoderLayer
+            from models.layers.sparse_encoder import SparseTransformerEncoder
+            from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer
         except:
             raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'

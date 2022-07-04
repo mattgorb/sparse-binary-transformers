@@ -82,6 +82,8 @@ class MultiheadAttention(nn.MultiheadAttention):
         self.dequant_k = torch.quantization.DeQuantStub()
         self.dequant_v = torch.quantization.DeQuantStub()
 
+
+
     def _get_name(self):
         return 'QuantizableMultiheadAttention'
 
@@ -225,11 +227,7 @@ class MultiheadAttention(nn.MultiheadAttention):
                                                inplace=False,
                                                remove_qconfig=True,
                                                convert_custom_config_dict=None)
-        # Remove the parameters for the bias_k and bias_v to quantize them
-        # TODO: This is a potential source of accuracy drop.
-        #       quantized cat takes the scale and zp of the first
-        #       element, which might lose the precision in the bias_k
-        #       and the bias_v (which are cat'ed with k/v being first).
+
         if converted.bias_k is not None:
             bias_k = converted._parameters.pop('bias_k')
             sc, zp = torch._choose_qparams_per_tensor(bias_k,
@@ -253,49 +251,6 @@ class MultiheadAttention(nn.MultiheadAttention):
                 key_padding_mask: Optional[Tensor] = None,
                 need_weights: bool = True,
                 attn_mask: Optional[Tensor] = None) -> Tuple[Tensor, Optional[Tensor]]:
-        r"""
-    Note::
-        Please, refer to :func:`~torch.nn.MultiheadAttention.forward` for more
-        information
-
-    Args:
-        query, key, value: map a query and a set of key-value pairs to an output.
-            See "Attention Is All You Need" for more details.
-        key_padding_mask: if provided, specified padding elements in the key will
-            be ignored by the attention. When given a binary mask and a value is True,
-            the corresponding value on the attention layer will be ignored. When given
-            a byte mask and a value is non-zero, the corresponding value on the attention
-            layer will be ignored
-        need_weights: output attn_output_weights.
-        attn_mask: 2D or 3D mask that prevents attention to certain positions. A 2D mask will be broadcasted for all
-            the batches while a 3D mask allows to specify a different mask for the entries of each batch.
-
-    Shape:
-        - Inputs:
-        - query: :math:`(L, N, E)` where L is the target sequence length, N is the batch size, E is
-          the embedding dimension. :math:`(N, L, E)` if ``batch_first`` is ``True``.
-        - key: :math:`(S, N, E)`, where S is the source sequence length, N is the batch size, E is
-          the embedding dimension. :math:`(N, S, E)` if ``batch_first`` is ``True``.
-        - value: :math:`(S, N, E)` where S is the source sequence length, N is the batch size, E is
-          the embedding dimension. :math:`(N, S, E)` if ``batch_first`` is ``True``.
-        - key_padding_mask: :math:`(N, S)` where N is the batch size, S is the source sequence length.
-          If a ByteTensor is provided, the non-zero positions will be ignored while the position
-          with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
-          value of ``True`` will be ignored while the position with the value of ``False`` will be unchanged.
-        - attn_mask: 2D mask :math:`(L, S)` where L is the target sequence length, S is the source sequence length.
-          3D mask :math:`(N*num_heads, L, S)` where N is the batch size, L is the target sequence length,
-          S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
-          positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
-          while the zero positions will be unchanged. If a BoolTensor is provided, positions with ``True``
-          is not allowed to attend while ``False`` values will be unchanged. If a FloatTensor
-          is provided, it will be added to the attention weight.
-
-        - Outputs:
-        - attn_output: :math:`(L, N, E)` where L is the target sequence length, N is the batch size,
-          E is the embedding dimension. :math:`(N, L, E)` if ``batch_first`` is ``True``.
-        - attn_output_weights: :math:`(N, L, S)` where N is the batch size,
-          L is the target sequence length, S is the source sequence length.
-        """
 
         return self._forward_impl(query, key, value, key_padding_mask,
                                   need_weights, attn_mask)

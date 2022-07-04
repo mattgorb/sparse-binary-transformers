@@ -1,5 +1,5 @@
 import copy
-from typing import Optional, Any, Union, Callable
+from typing import Optional
 
 import torch
 from torch import Tensor
@@ -7,7 +7,7 @@ from torch.nn import functional as F
 from torch.nn import Module
 from torch.nn import ModuleList
 import torch.nn as nn
-from utils.multihead_attention_base import MultiheadAttention
+from models.layers.base_multihead_attention import MultiheadAttention
 
 class TransformerEncoderLayer(Module):
     r"""TransformerEncoderLayer is made up of self-attn and feedforward network.

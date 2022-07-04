@@ -6,7 +6,7 @@ import torch.nn.functional as F
 import math
 
 
-from utils.initializations import _init_weight,_init_score
+from utils.model_utils import _init_weight,_init_score
 import numpy as np
 
 class GetQuantnet_binary(autograd.Function):

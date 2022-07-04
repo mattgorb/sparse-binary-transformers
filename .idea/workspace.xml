@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/models/base/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/layers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/dense_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/dense_transformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/sparse_binary_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/initializations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/lin_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_lin_type.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/model_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/multhead_attention_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/multihead_attention_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/sparse_encoder_layer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/transformer_encoder_layer_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/transformer_encoder_layer_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/multihead_attention_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/base_multihead_attention.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/sparse_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/transformer_encoder_layer_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/base_transformer_encoder_layer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/models/layers" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -41,9 +51,13 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/layers" />
+      <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/models" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models/layers" />
+      <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/models" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/utils" />
@@ -61,7 +75,7 @@
       <updated>1655435556671</updated>
       <workItem from="1655435559737" duration="34077000" />
       <workItem from="1655906842829" duration="15688000" />
-      <workItem from="1656387581098" duration="34675000" />
+      <workItem from="1656387581098" duration="43395000" />
     </task>
     <servers />
   </component>
@@ -73,9 +87,10 @@
       <screen x="0" y="25" width="1680" height="913" />
     </state>
     <state x="792" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.913@0.25.1680.913" timestamp="1656470744489" />
-    <state x="702" y="236" width="597" height="490" key="find.popup" timestamp="1656390581995">
-      <screen x="0" y="25" width="1680" height="913" />
+    <state x="2482" y="269" width="683" height="567" key="find.popup" timestamp="1656874428427">
+      <screen x="1680" y="25" width="1920" height="1055" />
     </state>
     <state x="702" y="236" width="597" height="490" key="find.popup/0.25.1680.913@0.25.1680.913" timestamp="1656390581995" />
+    <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1656874428427" />
   </component>
 </project>
