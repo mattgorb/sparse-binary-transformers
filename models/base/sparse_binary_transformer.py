@@ -38,6 +38,9 @@ class SBTransformerModel(nn.Module):
         self.model_type = 'Transformer'
         self.src_mask = None
         self.args=args
+        print(self.args)
+        sys.exit()
+
         self.pos_encoder = PositionalEncoding(ninp, )
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
