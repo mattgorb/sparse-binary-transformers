@@ -43,5 +43,8 @@ class SparseTransformerEncoderLayer(nn.Module):
 
     # feed forward block
     def _ff_block(self, x) :
-        x = self.linear2(self.dropout(self.activation(self.linear1(x))))
+        x=self.linear1(x)
+        x=self.activation(x)
+        #x=self.dropout(x)
+        x = self.linear2(x)
         return x
