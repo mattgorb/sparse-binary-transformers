@@ -60,6 +60,8 @@ class SubnetConvBiprop(nn.Linear):
 
     def init(self,args):
         self.args=args
+        print(self.args)
+        sys.exit()
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.prune_rate
