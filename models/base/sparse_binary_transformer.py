@@ -40,7 +40,7 @@ class SBTransformerModel(nn.Module):
         self.args=args
 
         self.pos_encoder = PositionalEncoding(ninp, )
-        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args)
+        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
         self.encoder = nn.Embedding(ntoken, ninp)
         self.ninp = ninp
