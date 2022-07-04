@@ -61,17 +61,19 @@ class MultiheadAttention(nn.MultiheadAttention):
                  dropout: float = 0., bias: bool = True,
                  add_bias_kv: bool = False, add_zero_attn: bool = False,
                  kdim: int = None, vdim: int = None, batch_first: bool = False,
-                 device=None, dtype=None) -> None:
+                 device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(MultiheadAttention, self).__init__(embed_dim, num_heads, dropout,
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
-        self.linear_Q = Linear(self.embed_dim, self.embed_dim, bias=bias, **factory_kwargs)
-        self.linear_K = Linear(self.kdim, self.embed_dim, bias=bias, **factory_kwargs)
-        self.linear_V = Linear(self.vdim, self.embed_dim, bias=bias, **factory_kwargs)
+        self.linear_Q = Linear(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
+        self.linear_K = Linear(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
+        self.linear_V = Linear(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
-        self.out_proj = Linear(self.embed_dim, self.embed_dim, bias=bias, **factory_kwargs)  # type: ignore[assignment]
+        self.out_proj = Linear(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
+
+        self.args=args
 
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()

@@ -7,14 +7,14 @@ class SparseTransformerEncoderLayer(nn.Module):
 
     def __init__(self, d_model, nhead, dim_feedforward=2048, dropout=0.1, activation=F.relu,
                  layer_norm_eps=1e-5, batch_first=False,
-                 device=None, dtype=None) -> None:
+                 device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
-        self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,
+        self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                             **factory_kwargs)
         # Implementation of Feedforward model
-        self.linear1 = Linear(d_model, dim_feedforward, **factory_kwargs)
-        self.linear2 = Linear(dim_feedforward, d_model, **factory_kwargs)
+        self.linear1 = Linear(d_model, dim_feedforward,args=args, **factory_kwargs)
+        self.linear2 = Linear(dim_feedforward, d_model,args=args, **factory_kwargs)
 
         self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)

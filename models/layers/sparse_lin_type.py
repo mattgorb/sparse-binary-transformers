@@ -46,6 +46,8 @@ class SubnetConvBiprop(nn.Linear):
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
+        self.args=args
+        print(args)
 
     @property
     def clamped_scores(self):

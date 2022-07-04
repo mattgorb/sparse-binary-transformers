@@ -139,7 +139,7 @@ def main():
 
     EMBEDDING_DIM = 50
 
-    model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+    #model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
     '''import copy
     import torch.quantization.quantize_fx as quantize_fx
     model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
@@ -148,11 +148,11 @@ def main():
     qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
     model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
 
-    '''model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-    freeze_model_weights(model)'''
+    model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+    freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
-
+    sys.exit()
 
 
     optimizer = optim.Adam(model.parameters(),lr=1e-4)

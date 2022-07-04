@@ -28,7 +28,7 @@ class PositionalEncoding(nn.Module):
 class SBTransformerModel(nn.Module):
     """Container module with an encoder, a recurrent or transformer module, and a decoder."""
 
-    def __init__(self, ntoken, ninp, nhead, nhid, nlayers=6, dropout=0.0):
+    def __init__(self, ntoken, ninp, nhead, nhid, nlayers=6, args=None):
         super(SBTransformerModel, self).__init__()
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
@@ -37,12 +37,13 @@ class SBTransformerModel(nn.Module):
             raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'
         self.src_mask = None
-        self.pos_encoder = PositionalEncoding(ninp, dropout)
-        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, dropout)
+        self.args=args
+        self.pos_encoder = PositionalEncoding(ninp, )
+        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
         self.encoder = nn.Embedding(ntoken, ninp)
         self.ninp = ninp
-        self.decoder = Linear(ninp, 2)
+        self.decoder = Linear(ninp, 2,args=args)
 
         self.init_weights()
 
