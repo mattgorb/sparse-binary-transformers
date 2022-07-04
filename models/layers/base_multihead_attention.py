@@ -465,10 +465,10 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
         # Reentering the quantized zone
-        print(attn_output)
+        #print(attn_output)
         attn_output = self.quant_attn_output(attn_output)
-        print(attn_output)
-        sys.exit()
+        #print(attn_output)
+        #sys.exit()
         # for the type: ignore[has-type], see https://github.com/pytorch/pytorch/issues/58969
         attn_output = self.out_proj(attn_output)  # type: ignore[has-type]
         attn_output_weights = self.quant_attn_output_weights(attn_output_weights)
