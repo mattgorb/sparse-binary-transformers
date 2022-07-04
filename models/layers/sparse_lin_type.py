@@ -48,6 +48,7 @@ class SubnetConvBiprop(nn.Linear):
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
         #self.args=args
         print(*args)
+        print(**kwargs)
         sys.exit()
 
     @property
