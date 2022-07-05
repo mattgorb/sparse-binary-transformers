@@ -152,7 +152,7 @@ def main():
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
-    #sys.exit()
+    sys.exit()
 
 
     optimizer = optim.Adam(model.parameters(),lr=1e-4)

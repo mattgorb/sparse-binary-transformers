@@ -111,6 +111,8 @@ def freeze_model_weights(model):
         if hasattr(m, "weight") and m.weight is not None:
             if 'norm' in n:
                 continue
+            print(n)
+            continue
             print(f"==> No gradient to {n}.weight")
             m.weight.requires_grad = False
             if m.weight.grad is not None:
