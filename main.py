@@ -191,13 +191,13 @@ def main():
         print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-        print_model_size(model)
+        print_model_size(model,args)
 
         if args.model_type == 'Dense':
             model_dynamic_quantized = torch.quantization.quantize_dynamic(
                 model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
             )
-            print_model_size(model_dynamic_quantized)
+            print_model_size(model_dynamic_quantized,args)
             valid_loss, valid_acc = evaluate(model_dynamic_quantized, test_dataloader, criterion, device)
             print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
