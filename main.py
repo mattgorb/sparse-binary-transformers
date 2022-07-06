@@ -13,6 +13,7 @@ import time
 from torch import optim
 from args import args
 import warnings
+from utils.model_size import *
 warnings.filterwarnings("ignore")
 
 def evaluate(model, iterator, criterion, device):
@@ -36,6 +37,7 @@ def evaluate(model, iterator, criterion, device):
             epoch_acc += acc.item()
 
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
+
 
 def train(model, iterator, optimizer, criterion, device):
     epoch_loss = 0
@@ -139,16 +141,17 @@ def main():
 
     EMBEDDING_DIM = 50
 
-    #model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-    '''import copy
-    import torch.quantization.quantize_fx as quantize_fx
-    model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-    model_to_quantize = copy.deepcopy(model)
-    model_to_quantize.train()
-    qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
-    model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
-
-    model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+    if args.model_type=='Dense':
+        model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+        '''import copy
+        import torch.quantization.quantize_fx as quantize_fx
+        model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
+        model_to_quantize = copy.deepcopy(model)
+        model_to_quantize.train()
+        qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
+        model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
+    else:
+        model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
@@ -181,11 +184,24 @@ def main():
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
-            torch.save(model.state_dict(), 'tut1-model.pt')
+            torch.save(model.state_dict(), args.weight_file)
+
 
         print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
         print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+        print_model_size(model)
+
+        if args.model_type == 'Dense':
+            model_dynamic_quantized = torch.quantization.quantize_dynamic(
+                model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
+            )
+            print_model_size(model_dynamic_quantized)
+            valid_loss, valid_acc = evaluate(model_dynamic_quantized, test_dataloader, criterion, device)
+            print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+
 
 
 if __name__ == "__main__":

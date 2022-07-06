@@ -5,3 +5,5 @@ weight_seed: 0
 score_seed: 0
 gpu: 6
 
+model_type: 'SparseBinary'
+weight_file: /s/luffy/b/nobackup/mgorb/weights/sb_weight.pt
