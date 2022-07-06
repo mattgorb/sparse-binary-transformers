@@ -1,4 +1,4 @@
-prune_rate: 0.2
+prune_rate: 0.05
 #weight_init: kaiming_normal
 #score_init: None
 weight_seed: 0
