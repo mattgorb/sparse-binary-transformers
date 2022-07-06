@@ -2,6 +2,7 @@ import torch
 from torchtext.datasets import IMDB
 from models.base.dense_transformer import TransformerModel
 from models.base.sparse_binary_transformer import SBTransformerModel
+from models.layers.sparse_lin_type import SubnetConvBiprop
 from collections import Counter
 import torchtext
 from torchtext.data.utils import get_tokenizer
@@ -112,13 +113,13 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
     print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-    sys.exit()
+    #sys.exit()
     #print(model.state_dict())
     print(model.transformer_encoder.layers[0].linear1.weight[0][:25])
     print(model)
     #if args.model_type == 'Dense':
     model_dynamic_quantized = torch.quantization.quantize_dynamic(
-        model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention}, dtype=torch.qint8
+        model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetConvBiprop}, dtype=torch.qint8
     )
     #print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight()[0][:25])
     print(model_dynamic_quantized)
