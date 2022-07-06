@@ -190,13 +190,16 @@ def main():
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
         model_cpu = torch.load(args.weight_file, map_location=torch.device('cpu'))
-        print_model_size(model_cpu,args)
+        print(model_cpu)
+        print(model_cpu.state_dict())
+        sys.exit()
+        print_model_size(model_cpu,)
 
         if args.model_type == 'Dense':
             model_dynamic_quantized = torch.quantization.quantize_dynamic(
                 model_cpu, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
             )
-            print_model_size(model_dynamic_quantized,args)
+            print_model_size(model_dynamic_quantized,)
             valid_loss, valid_acc = evaluate(model_dynamic_quantized, test_dataloader, criterion, device)
             print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
