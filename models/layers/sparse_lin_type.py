@@ -66,7 +66,7 @@ class SubnetConvBiprop(nn.Linear):
         self.prune_rate=args.prune_rate
 
     @property
-    def alpha_(self):
+    def calc_alpha(self):
         abs_wgt = torch.abs(self.weights.clone()) # Absolute value of original weights
         q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
         num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
@@ -75,7 +75,7 @@ class SubnetConvBiprop(nn.Linear):
     def forward(self, x):
 
         # Get binary mask and gain term for subnetwork
-        quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate, self.alpha_)
+        quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha)
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = torch.sign(self.weight) * quantnet
         # Pass binary subnetwork weights to convolution layer
