@@ -67,7 +67,7 @@ class SubnetConvBiprop(nn.Linear):
 
     #@property
     def calc_alpha(self):
-        abs_wgt = torch.abs(self.weights.clone()) # Absolute value of original weights
+        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
         q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
         num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
         self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
