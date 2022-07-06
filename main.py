@@ -164,8 +164,6 @@ def main():
 
     criterion = nn.CrossEntropyLoss()
 
-
-
     N_EPOCHS = 10
 
     best_valid_loss = float('inf')
@@ -191,11 +189,12 @@ def main():
         print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-        print_model_size(model,args)
+        model_cpu = torch.load(args.weight_file, map_location=torch.device('cpu'))
+        print_model_size(model_cpu,args)
 
         if args.model_type == 'Dense':
             model_dynamic_quantized = torch.quantization.quantize_dynamic(
-                model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
+                model_cpu, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
             )
             print_model_size(model_dynamic_quantized,args)
             valid_loss, valid_acc = evaluate(model_dynamic_quantized, test_dataloader, criterion, device)
@@ -206,5 +205,4 @@ def main():
 
 if __name__ == "__main__":
     print(args)
-    #sys.exit()
     main()
