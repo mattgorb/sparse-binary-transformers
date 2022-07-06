@@ -116,7 +116,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     print(model)
     if args.model_type == 'Dense':
         model_dynamic_quantized = torch.quantization.quantize_dynamic(
-            model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
+            model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention}, dtype=torch.qint8
         )
         print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight()[0][:25])
         print(model_dynamic_quantized)
