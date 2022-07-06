@@ -107,10 +107,10 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     model = model.to(device)
     criterion=criterion.to(device)
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
-    # print(model_cpu)
-    # print(model_cpu.state_dict())
-    # sys.exit()
+
     print_model_size(model, )
+    print(model.modules[0])
+    sys.exit()
 
     if args.model_type == 'Dense':
         model_dynamic_quantized = torch.quantization.quantize_dynamic(
