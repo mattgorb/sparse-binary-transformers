@@ -109,8 +109,8 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
     print_model_size(model, )
-    print(model.state_dict())
-    print(model.transformer_encoder.layers[0].linear1)
+    #print(model.state_dict())
+    print(model.transformer_encoder.layers[0].linear1.weight)
     sys.exit()
 
     if args.model_type == 'Dense':
