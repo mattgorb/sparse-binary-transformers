@@ -44,7 +44,7 @@ class GetQuantnet_binary(autograd.Function):
         # Get absolute value of weights from saved ctx
         abs_wgt, = ctx.saved_tensors
         # send the gradient g times abs_wgt on the backward pass
-        return g * abs_wgt, None, None
+        return g * abs_wgt, None, None, None
 
 class SubnetConvBiprop(nn.Linear):
     def __init__(self, *args, **kwargs):
