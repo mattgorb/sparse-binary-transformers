@@ -110,7 +110,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
 
     print_model_size(model, )
     print(model.state_dict())
-    print(model.transformer_encoder)
+    print(model.transformer_encoder.layers[0])
     sys.exit()
 
     if args.model_type == 'Dense':
