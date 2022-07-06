@@ -189,10 +189,11 @@ def main():
         print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-        model_cpu = torch.load(args.weight_file, map_location=torch.device('cpu'))
-        print(model_cpu)
-        print(model_cpu.state_dict())
-        sys.exit()
+        model_cpu=model
+        model_cpu.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
+        #print(model_cpu)
+        #print(model_cpu.state_dict())
+        #sys.exit()
         print_model_size(model_cpu,)
 
         if args.model_type == 'Dense':
