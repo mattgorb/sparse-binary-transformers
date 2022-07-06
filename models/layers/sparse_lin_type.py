@@ -17,7 +17,7 @@ def linear_init(in_dim, out_dim, bias=None, args=None, **factory_kwargs):
 
 class GetQuantnet_binary(autograd.Function):
     @staticmethod
-    def forward(ctx, scores, weights, k):
+    def forward(ctx, scores, weights, k, alpha):
         # Get the subnetwork by sorting the scores and using the top k%
         out = scores.clone()
         _, idx = scores.flatten().sort()
@@ -29,9 +29,9 @@ class GetQuantnet_binary(autograd.Function):
 
         # Perform binary quantization of weights
         abs_wgt = torch.abs(weights.clone()) # Absolute value of original weights
-        q_weight = abs_wgt * out # Remove pruned weights
-        num_unpruned = int(k * scores.numel()) # Number of unpruned weights
-        alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
+        #q_weight = abs_wgt * out # Remove pruned weights
+        #num_unpruned = int(k * scores.numel()) # Number of unpruned weights
+        #alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
 
         # Save absolute value of weights for backward
         ctx.save_for_backward(abs_wgt)
@@ -51,6 +51,7 @@ class SubnetConvBiprop(nn.Linear):
         super().__init__(*args, **kwargs)
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
+        self.alpha = nn.Parameter(1)
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
 
     @property
@@ -64,11 +65,17 @@ class SubnetConvBiprop(nn.Linear):
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.prune_rate
 
+    @property
+    def alpha_(self):
+        abs_wgt = torch.abs(self.weights.clone()) # Absolute value of original weights
+        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
+        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
+        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
 
     def forward(self, x):
 
         # Get binary mask and gain term for subnetwork
-        quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate)
+        quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate, self.alpha_)
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = torch.sign(self.weight) * quantnet
         # Pass binary subnetwork weights to convolution layer
