@@ -118,7 +118,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
         model_dynamic_quantized = torch.quantization.quantize_dynamic(
             model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
         )
-        print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight)
+        print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight()[0][:25])
         print_model_size(model_dynamic_quantized, )
         valid_loss, valid_acc = test(model_dynamic_quantized, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
