@@ -16,7 +16,7 @@ import warnings
 from utils.model_size import *
 warnings.filterwarnings("ignore")
 
-def evaluate(model, iterator, criterion, device):
+def test(model, iterator, criterion, device):
     epoch_loss = 0
     epoch_acc = 0
 
@@ -101,6 +101,26 @@ def binary_accuracy(preds, y):
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
+
+def evaluate_memory_size(model, test_dataloader, criterion,):
+    device ='cpu'
+    model = model.to(device)
+    criterion=criterion.to(device)
+    model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
+    # print(model_cpu)
+    # print(model_cpu.state_dict())
+    # sys.exit()
+    print_model_size(model, )
+
+    if args.model_type == 'Dense':
+        model_dynamic_quantized = torch.quantization.quantize_dynamic(
+            model, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
+        )
+        print_model_size(model_dynamic_quantized, )
+        valid_loss, valid_acc = test(model_dynamic_quantized, test_dataloader, criterion, device)
+        print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+
 def main():
     SEED = 1234
 
@@ -168,13 +188,18 @@ def main():
 
     best_valid_loss = float('inf')
 
+    if args.evaluate:
+        evaluate_memory_size(model, test_dataloader, criterion,)
+        return
+
+
     for epoch in range(N_EPOCHS):
 
         start_time = time.time()
 
         train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
         #model_int8 = quantize_fx.convert_fx(model)
-        valid_loss, valid_acc = evaluate(model, test_dataloader, criterion, device)
+        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
         end_time = time.time()
 
@@ -188,21 +213,6 @@ def main():
         print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
         print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
         print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-
-        model_cpu=model
-        model_cpu.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
-        #print(model_cpu)
-        #print(model_cpu.state_dict())
-        #sys.exit()
-        print_model_size(model_cpu,)
-
-        if args.model_type == 'Dense':
-            model_dynamic_quantized = torch.quantization.quantize_dynamic(
-                model_cpu, qconfig_spec={torch.nn.Linear}, dtype=torch.qint8
-            )
-            print_model_size(model_dynamic_quantized,)
-            valid_loss, valid_acc = evaluate(model_dynamic_quantized, test_dataloader, criterion, device)
-            print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
 
 
