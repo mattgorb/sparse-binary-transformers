@@ -115,7 +115,8 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     #sys.exit()
     #print(model.state_dict())
-    print(model.transformer_encoder.layers[0].linear1.parameters())
+    for m in model.transformer_encoder.layers[0].linear1.parameters():
+        print(m)
     sys.exit()
     #print(model)
     if args.model_type == 'Dense':
