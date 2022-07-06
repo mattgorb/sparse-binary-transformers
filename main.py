@@ -118,6 +118,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     print(model.transformer_encoder.layers[0].linear1.calc_alpha())
     for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
         print(n)
+    print(model.transformer_encoder.layers[0].linear1.get_buffer('alpha'))
     sys.exit()
     #print(model)
     if args.model_type == 'Dense':
