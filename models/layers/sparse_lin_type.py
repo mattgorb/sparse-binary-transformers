@@ -51,7 +51,7 @@ class SubnetConvBiprop(nn.Linear):
         super().__init__(*args, **kwargs)
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
-        self.alpha = torch.tensor(1, requires_grad=False)
+        self.register_parameter(name='alpha' , param=nn.Parameter(torch.tensor(1, requires_grad=False)))
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
 
     @property
