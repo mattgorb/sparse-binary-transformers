@@ -93,7 +93,7 @@ class SubnetLinBiprop(nn.Linear):
 
 
 def emb_init(in_dim, out_dim,  args=None, **factory_kwargs):
-    layer=SubnetEmbBiprop(in_dim,out_dim, **factory_kwargs)
+    layer=SubnetEmb(in_dim,out_dim, **factory_kwargs)
     layer.init(args)
     return layer
 
@@ -117,12 +117,12 @@ class GetSubnet_emb(autograd.Function):
         # send the gradient g straight-through on the backward pass.
         return g, None, None
 
-class SubnetEmbBiprop(nn.Embedding):
+class SubnetEmb(nn.Embedding):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
-        self.register_buffer('alpha' , torch.tensor(1, requires_grad=False))
+
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
 
     @property
@@ -137,7 +137,6 @@ class SubnetEmbBiprop(nn.Embedding):
         self.prune_rate=args.prune_rate
 
     def forward(self, x):
-        # Get binary mask and gain term for subnetwork
         subnet = GetSubnet_emb.apply(self.clamped_scores, self.weight, self.prune_rate, )
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
