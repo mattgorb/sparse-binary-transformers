@@ -192,7 +192,7 @@ def main():
     train_dataloader = DataLoader(train_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
     test_dataloader = DataLoader(test_dataset, batch_size=8, shuffle=True,collate_fn=collate_batch)
 
-    EMBEDDING_DIM = 25
+    EMBEDDING_DIM = 30
 
     if args.model_type=='Dense':
         model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
