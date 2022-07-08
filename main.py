@@ -159,8 +159,10 @@ def main():
 
     if str(device)=='cuda':
         root_dir='/s/luffy/b/nobackup/mgorb/data/imdb'
+        args.weight_file='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
     else:
         root_dir='data'
+        args.weight_file = 'weights/' + args.weight_file
 
     print(root_dir)
 

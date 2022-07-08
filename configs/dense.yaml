@@ -7,4 +7,4 @@ gpu: 6
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
 
-weight_file: weights/dense.pt
+weight_file: dense.pt

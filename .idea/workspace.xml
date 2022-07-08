@@ -6,11 +6,7 @@
       <change beforePath="$PROJECT_DIR$/configs/dense.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/sparse-transformer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse-transformer.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_lin_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/model_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/sparse_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_type.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +67,7 @@
       <workItem from="1655435559737" duration="34077000" />
       <workItem from="1655906842829" duration="15688000" />
       <workItem from="1656387581098" duration="68743000" />
-      <workItem from="1657249626173" duration="5268000" />
+      <workItem from="1657249626173" duration="6257000" />
     </task>
     <servers />
   </component>
