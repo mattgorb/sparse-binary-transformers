@@ -1,5 +1,5 @@
 import torch.nn as nn
-from models.layers.sparse_lin_type import linear_init
+from models.layers.sparse_type import linear_init
 import torch.nn.functional as F
 from models.layers.sparse_multihead_attention import MultiheadAttention
 

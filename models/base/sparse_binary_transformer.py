@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from models.layers.sparse_lin_type import linear_init
+from models.layers.sparse_type import linear_init,emb_init
 
 # Temporarily leave PositionalEncoding module here. Will be moved somewhere else.
 class PositionalEncoding(nn.Module):
@@ -42,7 +42,7 @@ class SBTransformerModel(nn.Module):
         self.pos_encoder = PositionalEncoding(ninp, )
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
-        self.encoder = nn.Embedding(ntoken, ninp)
+        self.encoder = emb_init(ntoken, ninp,args=args,)
         self.ninp = ninp
         self.decoder = linear_init(ninp, 2,bias=False,args=args, )
 
@@ -68,6 +68,7 @@ class SBTransformerModel(nn.Module):
                 self.src_mask = mask
         else:
             self.src_mask = None
+
 
         src = self.encoder(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)

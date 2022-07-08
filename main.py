@@ -2,7 +2,7 @@ import torch
 from torchtext.datasets import IMDB
 from models.base.dense_transformer import TransformerModel
 from models.base.sparse_binary_transformer import SBTransformerModel
-from models.layers.sparse_lin_type import SubnetConvBiprop
+from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
 import torchtext
 from torchtext.data.utils import get_tokenizer
@@ -16,6 +16,7 @@ from args import args
 import warnings
 from utils.model_size import *
 warnings.filterwarnings("ignore")
+from torch.quantization import *
 
 def test(model, iterator, criterion, device):
     epoch_loss = 0
@@ -110,19 +111,36 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
     print_model_size(model, )
-    memory_profile(model, test_dataloader, device)
+    #memory_profile(model, test_dataloader, device)
     #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
     #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
     if args.model_type == 'Dense':
-        model_dynamic_quantized = torch.quantization.quantize_dynamic(
-            model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetConvBiprop}, dtype=torch.qint8
+        print(model)
+
+        #qconfig_dict = {'fc': default_dynamic_qconfig}
+        #quantize_dynamic(model, qconfig_dict, inplace=True)
+        torch.quantization.quantize_dynamic(
+            model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetLinBiprop}, dtype=torch.qint8,
+            inplace=True
         )
-        print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight[0][:25])
-        print(model_dynamic_quantized)
-        print_model_size(model_dynamic_quantized, )
-        valid_loss, valid_acc = test(model_dynamic_quantized, test_dataloader, criterion, device)
+        model.encoder.qconfig = float_qparams_weight_only_qconfig
+        prepare(model, inplace=True)
+        convert(model, inplace=True)
+        '''qconfig_dict = {'fc': torch.quantization.default_dynamic_qconfig}
+        #torch.quantization.quantize_dynamic(
+            #model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetLinBiprop}, dtype=torch.qint8
+        #)
+        torch.quantization.quantize_dynamic(model, qconfig_dict, inplace=True)
+        model.encoder.qconfig = torch.quantization.float_qparams_weight_only_qconfig
+        torch.quantization.prepare(model, inplace=True)
+        model=torch.quantization.convert(model, inplace=True)'''
+        #print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight[0][:25])
+        print(model)
+        print_model_size(model, )
+
+        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     else:
         #sys.exit()

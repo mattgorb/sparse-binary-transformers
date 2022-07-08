@@ -5,7 +5,7 @@ import torch.nn.quantized as nnq
 
 from torch import Tensor
 from typing import Optional, Tuple
-from models.layers.sparse_lin_type import linear_init
+from models.layers.sparse_type import linear_init
 
 import warnings
 

@@ -106,11 +106,11 @@ def _init_score(args, scores):
     return scores
 
 def freeze_model_weights(model):
-    from models.layers.sparse_lin_type import SubnetConvBiprop
+    from models.layers.sparse_type import SubnetLinBiprop
 
     print("=> Freezing model weights")
     for n, m in model.named_modules():
-        if not type(m)==SubnetConvBiprop:
+        if not type(m)==SubnetLinBiprop:
             continue
         if hasattr(m, "weight") and m.weight is not None:
             if 'norm' in n:
