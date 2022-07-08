@@ -110,17 +110,11 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
     print_model_size(model, )
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    memory_profile(model, test_dataloader, device)
+    #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
-    print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-    #sys.exit()
-    #print(model.state_dict())
-    print(model.transformer_encoder.layers[0].linear1.calc_alpha())
-    for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
-        print(n)
-    print(model.transformer_encoder.layers[0].linear1.get_buffer('alpha'))
-    sys.exit()
-    #print(model)
+    #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
     if args.model_type == 'Dense':
         model_dynamic_quantized = torch.quantization.quantize_dynamic(
             model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetConvBiprop}, dtype=torch.qint8
@@ -130,7 +124,15 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
         print_model_size(model_dynamic_quantized, )
         valid_loss, valid_acc = test(model_dynamic_quantized, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-
+    else:
+        #sys.exit()
+        #print(model.state_dict())
+        print(model.transformer_encoder.layers[0].linear1.calc_alpha())
+        for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
+            print(n)
+        print(model.transformer_encoder.layers[0].linear1.get_buffer('alpha'))
+        sys.exit()
+        #print(model)
 
 def main():
     SEED = 1234

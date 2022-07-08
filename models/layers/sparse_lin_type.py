@@ -85,3 +85,33 @@ class SubnetConvBiprop(nn.Linear):
         )
         # Return output from linear layer
         return x
+
+
+
+
+def quantized_linear_module(biprop_module, in_dim, out_dim, bias=None, args=None, **factory_kwargs):
+    layer=SparseQuantizedLinear(in_dim,out_dim, bias,**factory_kwargs)
+    layer.init(biprop_module)
+    return layer
+
+class SparseQuantizedLinear(nn.Linear):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.register_buffer('alpha' , torch.tensor(1, requires_grad=False))
+
+    def init(self,biprop_mod):
+        self.alpha=biprop_mod.alpha
+        self.weight=torch.tensor(torch.sign(biprop_mod), dtype=torch.int8)
+
+    def forward(self, x):
+
+        # Get binary mask and gain term for subnetwork
+        #quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
+        # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
+        w = self.weight*self.alpha
+        # Pass binary subnetwork weights to convolution layer
+        x= F.linear(
+            x, w, self.bias
+        )
+        # Return output from linear layer
+        return x
