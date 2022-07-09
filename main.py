@@ -112,14 +112,17 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
     print_model_size(model, )
-    memory_profile(model, test_dataloader, device)
+    #memory_profile(model, test_dataloader, device)
     #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
     #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     for batch in test_dataloader:
         label, text = batch
         text = text.to(device)
+        text=text[:,0]
+        break
     print(text.size())
+    text
     sys.exit()
     macs, params = get_model_complexity_info(model, (3, 224, 224), as_strings=True,
                                              print_per_layer_stat=True, verbose=True)
