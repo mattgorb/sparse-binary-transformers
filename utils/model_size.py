@@ -702,6 +702,7 @@ def start_flops_count(self, **kwargs):
     seen_types = set()
 
     def add_flops_counter_hook_function(module, ost, verbose, ignore_list):
+
         if type(module) in ignore_list:
             seen_types.add(type(module))
             if is_supported_instance(module):
@@ -794,6 +795,7 @@ def add_flops_counter_variable_or_reset(module):
 
 
 def is_supported_instance(module):
+    print(module)
     if type(module) in MODULES_MAPPING or type(module) in CUSTOM_MODULES_MAPPING:
         return True
     return False
