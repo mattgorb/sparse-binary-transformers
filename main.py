@@ -124,7 +124,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     print(text.size())
     #print(text)
     #sys.exit()
-    macs, params = get_model_complexity_info(model, (text).float(), as_strings=True,
+    macs, params = get_model_complexity_info(model, text.size(), as_strings=True,
                                              print_per_layer_stat=True, verbose=True)
     print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     print('{:<30}  {:<8}'.format('Number of parameters: ', params))
