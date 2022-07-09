@@ -119,6 +119,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     for batch in test_dataloader:
         label, text = batch
         text = text.to(device)
+        print(text.size())
         text=torch.unsqueeze(text[:,0], 1)
         break
     print(text.size())
