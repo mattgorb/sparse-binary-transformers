@@ -17,6 +17,7 @@ import warnings
 from utils.model_size import *
 warnings.filterwarnings("ignore")
 from torch.quantization import *
+from ptflops import get_model_complexity_info
 
 def test(model, iterator, criterion, device):
     epoch_loss = 0
@@ -115,6 +116,11 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
 
     #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+    macs, params = get_model_complexity_info(model, (3, 224, 224), as_strings=True,
+                                             print_per_layer_stat=True, verbose=True)
+    print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
+    print('{:<30}  {:<8}'.format('Number of parameters: ', params))
 
     if args.model_type == 'Dense':
         print(model)
