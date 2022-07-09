@@ -566,7 +566,7 @@ def get_flops_pytorch(model, input_res,
                                              device=next(flops_model.parameters()).device)
         except StopIteration:
             batch = torch.ones(()).new_empty((1, *input_res))
-
+        print(batch.size())
         _ = flops_model(batch)
 
     flops_count, params_count = flops_model.compute_average_flops_cost()
