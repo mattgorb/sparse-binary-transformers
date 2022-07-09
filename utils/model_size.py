@@ -568,8 +568,6 @@ def get_flops_pytorch(model, input_res,
         except StopIteration:
             batch = torch.ones(()).new_empty((1, *input_res))
         #print(batch.size())
-        print(batch)
-        print(flops_model)
         _ = flops_model(batch.int())
 
     flops_count, params_count = flops_model.compute_average_flops_cost()
