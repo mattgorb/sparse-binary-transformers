@@ -136,7 +136,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     #macs, params = count_ops_fx(model, text )
     #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
-    sys.exit()
+    #sys.exit()
     if args.model_type == 'Dense':
         print(model)
 
