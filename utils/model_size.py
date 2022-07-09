@@ -609,7 +609,6 @@ def add_flops_counter_variable_or_reset(module):
 
 
 def is_supported_instance(module):
-    print(module)
     if type(module) in MODULES_MAPPING or type(module) in CUSTOM_MODULES_MAPPING:
         return True
     return False
