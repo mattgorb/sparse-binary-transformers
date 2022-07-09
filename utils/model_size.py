@@ -121,7 +121,7 @@ def count_operations(module: Any) -> Any:
 
 
 class ProfilingInterpreter(Interpreter):
-    def __init__(self, mod: torch.nn.Module, custom_ops: Dict[str, Any] = {}):
+    def __init__(self, mod, custom_ops: Dict[str, Any] = {}):
         gm = torch.fx.symbolic_trace(mod)
         super().__init__(gm)
 
