@@ -676,11 +676,12 @@ def compute_average_flops_cost(self):
 
     for m in self.modules():
         m.accumulate_flops = accumulate_flops.__get__(m)
-
+        print(m.accumulate_flops)
     flops_sum = self.accumulate_flops()
 
     print(flops_sum)
     print(self.__batch_counter__)
+    sys.exit()
 
     for m in self.modules():
         if hasattr(m, 'accumulate_flops'):
