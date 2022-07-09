@@ -564,6 +564,7 @@ def get_flops_pytorch(model, input_res,
             batch = torch.ones(()).new_empty( *input_res,
                                              dtype=next(flops_model.parameters()).dtype,
                                              device=next(flops_model.parameters()).device)
+            batch=torch.ones(*input_res)
         except StopIteration:
             batch = torch.ones(()).new_empty((1, *input_res))
         #print(batch.size())
