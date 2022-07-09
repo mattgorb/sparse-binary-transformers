@@ -489,7 +489,7 @@ def compute_average_flops_cost(self):
     print('here')
     for m in self.modules():
         m.accumulate_flops = accumulate_flops.__get__(m)
-        print(m.accumulate_flops)
+        #print(m.accumulate_flops)
     flops_sum = self.accumulate_flops()
     print('here2')
     print(flops_sum)
