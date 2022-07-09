@@ -571,6 +571,8 @@ def get_flops_pytorch(model, input_res,
         _ = flops_model(batch.int())
 
     flops_count, params_count = flops_model.compute_average_flops_cost()
+    print(flops_count)
+    sys.exit()
 
     if print_per_layer_stat:
         print_model_with_flops(
