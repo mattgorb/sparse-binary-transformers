@@ -226,7 +226,7 @@ def main():
         return
 
 
-    for epoch in range(N_EPOCHS):
+    for epoch in range(args.epochs):
 
         start_time = time.time()
 
