@@ -117,6 +117,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
 
     #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     for batch in test_dataloader:
+        label, text = batch
         text = text.to(device)
     print(text.size())
     sys.exit()
