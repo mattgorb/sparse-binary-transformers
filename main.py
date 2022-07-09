@@ -123,7 +123,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
         break
     print(text.size())
 
-    macs, params = get_model_complexity_info(model, (512,1),input_constructor=torch.ones(512,1), as_strings=True,
+    macs, params = get_model_complexity_info(model, (512,1),input_constructor=torch.ones, as_strings=True,
                                              print_per_layer_stat=True, verbose=True)
     print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     print('{:<30}  {:<8}'.format('Number of parameters: ', params))
