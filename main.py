@@ -137,7 +137,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
                                              , as_strings=True,
                                              print_per_layer_stat=True, verbose=True)'''
 
-    num_flops, num_nonzero_flops=flops(model,torch.ones(512,1) )
+    num_flops, num_nonzero_flops=flops(model,torch.ones(512,1).int() )
     memory,nonzero_memory=memory_size(model, torch.ones(512,1))
     print(num_flops)
     print(num_nonzero_flops)
