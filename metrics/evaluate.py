@@ -25,7 +25,7 @@ from metrics.accuracy import test
 from models.layers.base_multihead_attention import MultiheadAttention as DenseMultiheadAttention
 
 
-def evaluate_memory_size(model, test_dataloader, criterion,train_dataloader):
+def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader):
     device ='cpu'
     model = model.to(device)
     criterion=criterion.to(device)

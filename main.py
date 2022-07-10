@@ -20,8 +20,8 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-from metrics.accuracy import test
-from metrics.evaluate import evaluate_memory_size
+from metrics.accuracy import test, binary_accuracy
+from metrics.evaluate import evaluate_flops_memory_size
 
 
 def train(model, iterator, optimizer, criterion, device):
@@ -152,7 +152,7 @@ def main():
     best_valid_loss = float('inf')
 
     if args.evaluate:
-        evaluate_memory_size(model, test_dataloader, criterion,train_dataloader)
+        evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader)
         return
 
 
