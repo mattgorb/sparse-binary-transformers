@@ -64,7 +64,7 @@ def multihead_attention_flops(multihead_attention_module, input,):
     flops += qlen * vdim * (vdim + 1)
 
     flops *= batch_size
-    multihead_attention_module.__flops__ += int(flops)
+    return flops
 
 
 def dense_flops(in_neurons, out_neurons):
