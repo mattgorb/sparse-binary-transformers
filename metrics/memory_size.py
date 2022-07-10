@@ -34,7 +34,7 @@ def memory_size(model, input, as_bits=False):
     input_activations = [i for _, (i, o) in activations.items()]
 
     for act in input_activations:
-        print(act  )
+        print(act.size()  )
         print(act.dtype)
         t = np.prod(act.shape)
         nz = nonzero(act)
