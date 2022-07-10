@@ -68,6 +68,9 @@ def flops(model, input):
                 print('neeed multiheead attention nonzeero flops')
                 print(m)
                 print(act.shape)
+                lin_q=m.linear_Q(torch.tensor(act))
+                print(lin_q.size())
+                multihead_attention_nonzero_flops()
                 sys.exit()
                 module_nonzero_flops=0
             print(f'Module: {m}, FLOPs: {module_flops}, nonzeros: {module_nonzero_flops}')
