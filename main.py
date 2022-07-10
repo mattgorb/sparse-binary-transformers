@@ -135,7 +135,8 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
                                              print_per_layer_stat=True, verbose=True)'''
     from metrics.flops import flops
     flops, nonzero_flops=flops(model,torch.rand(1,3,224,224) )
-
+    print(flops)
+    print(nonzero_flops)
     #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
     #print(text)
