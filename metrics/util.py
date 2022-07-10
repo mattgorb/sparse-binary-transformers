@@ -52,9 +52,12 @@ def get_activations(model, input):
             f"{module} already in activations"
         # TODO [0] means first input, not all models have a single input
         #print(module.instance())
-        print(isinstance(module, nn.MultiheadAttention))
-        activations[module] = (input[0].detach().cpu().numpy().copy(),
-                               output.detach().cpu().numpy().copy(),)
+        if isinstance(module, nn.MultiheadAttention):
+            activations[module] = (input[0].detach().cpu().numpy().copy(),
+                                   output[0].detach().cpu().numpy().copy(),)
+        else:
+            activations[module] = (input[0].detach().cpu().numpy().copy(),
+                                   output.detach().cpu().numpy().copy(),)
 
     fn, hooks = hook_applyfn(store_activations, model, forward=True)
     model.apply(fn)
