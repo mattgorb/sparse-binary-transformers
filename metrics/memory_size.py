@@ -41,6 +41,7 @@ def memory_size(model, input, as_bits=False):
         print(t)
         if as_bits:
             bits = dtype2bits_np[str(act.dtype)]
+            print(bits)
             t *= bits
             nz *= bits
         print(t)
