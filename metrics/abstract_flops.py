@@ -44,11 +44,11 @@ def multihead_attention_flops(multihead_attention_module, input,):
     flops += qlen * qdim
 
     # Initial projections
-    flops += (
+    '''flops += (
         (qlen * qdim * qdim)  # QW
         + (klen * kdim * kdim)  # KW
         + (vlen * vdim * vdim)  # VW
-    )
+    )'''
 
     if multihead_attention_module.in_proj_bias is not None:
         flops += (qlen + klen + vlen) * qdim
@@ -57,9 +57,6 @@ def multihead_attention_flops(multihead_attention_module, input,):
     qk_head_dim = qdim // num_heads
     v_head_dim = vdim // num_heads
 
-    print(qk_head_dim)
-    print(v_head_dim)
-    sys.exit()
 
     head_flops = (
         (qlen * klen * qk_head_dim)  # QK^T
