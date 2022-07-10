@@ -44,7 +44,7 @@ def flops(model, input):
     FLOP_fn = {
         nn.Conv2d: _conv2d_flops,
         nn.Linear: _linear_flops,
-        MultiheadAttention: _multihead_attention_flops
+        #MultiheadAttention: _multihead_attention_flops
     }
 
     total_flops = nonzero_flops = 0
