@@ -76,16 +76,16 @@ def flops(model, input):
                 print('neeed multiheead attention nonzeero flops')
                 #print(m)
                 #print(act.shape)
-                lin_q=m.linear_Q(torch.tensor(act)).detach().cpu().numpy().copy()
-                lin_k = m.linear_K(torch.tensor(act)).detach().cpu().numpy().copy()
-                lin_v = m.linear_V(torch.tensor(act)).detach().cpu().numpy().copy()
+                #lin_q=m.linear_Q(torch.tensor(act)).detach().cpu().numpy().copy()
+                #lin_k = m.linear_K(torch.tensor(act)).detach().cpu().numpy().copy()
+                #lin_v = m.linear_V(torch.tensor(act)).detach().cpu().numpy().copy()
                 #print(lin_q.size())
                 #multihead_attention_nonzero_flops(m,lin_q,lin_k,lin_v)
                 #sys.exit()
                 module_nonzero_flops=0
-            print(f'Module: {m}, FLOPs: {module_flops}, nonzeros: {module_nonzero_flops}')
+            print(f'Module: {m.__class__}, FLOPs: {module_flops}, nonzero FLOPS: {module_nonzero_flops}')
         else:
             print(f'Module not found: {m.__class__}')
 
-    sys.exit()
+    #sys.exit()
     return total_flops,nonzero_flops
