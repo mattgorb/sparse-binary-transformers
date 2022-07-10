@@ -2,6 +2,15 @@ import numpy as np
 
 from .nonzero import dtype2bits, nonzero,dtype2bits_np
 from .util import get_activations
+import torch
+import os
+
+def print_model_size(mdl,):
+    torch.save(mdl.state_dict(), "tmp.pt")
+    #print("%.2f MB" %(os.path.getsize("tmp.pt") / 1e6))
+    bit_size=os.path.getsize("tmp.pt")*8
+    os.remove('tmp.pt')
+    print(bit_size)
 
 def model_size(model, as_bits=True):
     """Returns absolute and nonzero model size
