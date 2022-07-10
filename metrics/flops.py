@@ -53,12 +53,13 @@ def flops(model, input):
     # The ones we need for backprop
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
-            w = m.weight.detach().cpu().numpy().copy()
+
             module_flops = FLOP_fn[m.__class__](m, act)
             total_flops += module_flops
             # For our operations, all weights are symmetric so we can just
             # do simple rule of three for the estimation
             if m.__class__!='MultiheadAttention':
+                w = m.weight.detach().cpu().numpy().copy()
                 nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
             else:
                 print('neeed multiheead attention nonzeero flops')
