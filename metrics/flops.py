@@ -1,7 +1,7 @@
 import numpy as np
 from torch import nn
 from collections import OrderedDict, defaultdict
-
+from models.layers.base_multihead_attention import MultiheadAttention
 import torch
 from .nonzero import *
 from .abstract_flops import *
@@ -44,7 +44,7 @@ def flops(model, input):
     FLOP_fn = {
         nn.Conv2d: _conv2d_flops,
         nn.Linear: _linear_flops,
-        nn.MultiheadAttention: _multihead_attention_flops
+        MultiheadAttention: _multihead_attention_flops
     }
 
     total_flops = nonzero_flops = 0
