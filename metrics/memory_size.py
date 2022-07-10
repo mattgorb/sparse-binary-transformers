@@ -3,8 +3,31 @@ import numpy as np
 from .nonzero import dtype2bits, nonzero,dtype2bits_np
 from .util import get_activations
 
+def model_size(model, as_bits=True):
+    """Returns absolute and nonzero model size
+    Arguments:
+        model {torch.nn.Module} -- Network to compute model size over
+    Keyword Arguments:
+        as_bits {bool} -- Whether to account for the size of dtype
+    Returns:
+        int -- Total number of weight & bias params
+        int -- Out total_params exactly how many are nonzero
+    """
 
-def memory_size(model, input, as_bits=True):
+    total_params = 0
+    nonzero_params = 0
+    for tensor in model.parameters():
+        t = np.prod(tensor.shape)
+        nz = nonzero(tensor.detach().cpu().numpy())
+        if as_bits:
+            bits = dtype2bits[tensor.dtype]
+            t *= bits
+            nz *= bits
+        total_params += t
+        nonzero_params += nz
+    return int(total_params), int(nonzero_params)
+
+def memory(model, input, as_bits=True):
     """Compute memory size estimate
     Note that this is computed for training purposes, since
     all input activations to parametric are accounted for.

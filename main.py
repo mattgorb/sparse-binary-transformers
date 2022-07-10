@@ -19,7 +19,7 @@ warnings.filterwarnings("ignore")
 from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
-from metrics.memory_size import memory_size
+from metrics.memory_size import memory, model_size
 
 
 def test(model, iterator, criterion, device):
@@ -133,10 +133,12 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
 
 
     num_flops, num_nonzero_flops=flops(model,torch.ones(512,1).int() )
-    memory,nonzero_memory=memory_size(model, torch.ones(512,1).int())
-    print(f'Total FLOPs: {num_flops:,}, Total nonzero FLOPs: {num_nonzero_flops:,}')
+    total_memory,total_nonzero_memory=memory(model, torch.ones(512,1).int())
+    total_size,total_nz_size=model_size(model, torch.ones(512,1).int())
+    print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
 
-    print(f'Total Memory in Bits: {memory:,}, Total nonzero Memory in Bits: {nonzero_memory:,}')
+    print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
+    print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
 
 
     #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
