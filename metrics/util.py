@@ -59,6 +59,7 @@ def get_activations(model, input):
             activations[module] = (input[0].detach().cpu().numpy().copy(),
                                    output.detach().cpu().numpy().copy(),)
 
+
     fn, hooks = hook_applyfn(store_activations, model, forward=True)
     model.apply(fn)
     with torch.no_grad():
