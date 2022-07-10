@@ -61,7 +61,7 @@ def flops(model, input):
             nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
             print(f'Module: {m}, FLOPs: {module_flops}')
         else:
-            print(f'Module not found: {m}')
+            print(f'Module not found: {m.__class__')
 
     sys.exit()
     return total_flops,nonzero_flops
