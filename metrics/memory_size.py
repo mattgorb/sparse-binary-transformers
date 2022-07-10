@@ -4,7 +4,7 @@ from .nonzero import dtype2bits, nonzero,dtype2bits_np
 from .util import get_activations
 
 
-def memory_size(model, input, as_bits=True):
+def memory_size(model, input, as_bits=False):
     """Compute memory size estimate
     Note that this is computed for training purposes, since
     all input activations to parametric are accounted for.
