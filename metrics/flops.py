@@ -58,4 +58,4 @@ def flops(model, input):
             # do simple rule of three for the estimation
             nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
 
-    return total_flops,
+    return total_flops,nonzero_flops
