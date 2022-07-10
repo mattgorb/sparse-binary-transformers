@@ -1,6 +1,6 @@
 import numpy as np
 
-from .nonzero import dtype2bits
+from .nonzero import dtype2bits, nonzero
 from .util import get_activations
 
 
@@ -28,7 +28,7 @@ def memory_size(model, input, as_bits=False):
     total_memory = nonzero_memory = np.prod(input.shape)
 
     activations = get_activations(model, input)
-
+    print(activations)
     # TODO only count parametric layers
     # Input activations are the ones we need for backprop
     input_activations = [i for _, (i, o) in activations.items()]

@@ -18,6 +18,9 @@ from utils.model_size import *
 warnings.filterwarnings("ignore")
 from torch.quantization import *
 from utils.model_size import get_model_complexity_info
+from metrics.flops import flops
+from metrics.memory_size import memory_size
+
 
 def test(model, iterator, criterion, device):
     epoch_loss = 0
@@ -133,10 +136,14 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     '''macs, params = get_model_complexity_info(model, (1,3,224,224)#(512,1)
                                              , as_strings=True,
                                              print_per_layer_stat=True, verbose=True)'''
-    from metrics.flops import flops
-    flops, nonzero_flops=flops(model,torch.rand(1,3,224,224) )
-    print(flops)
-    print(nonzero_flops)
+
+    num_flops, num_nonzero_flops=flops(model,torch.rand(1,3,224,224) )
+    memory,nonzero_memory=memory_size(model, torch.rand(1,3,224,224))
+    print(num_flops)
+    print(num_nonzero_flops)
+    print(memory)
+    print(nonzero_memory)
+
     #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
     #print(text)
