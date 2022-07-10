@@ -4,7 +4,7 @@ import numpy as np
 def multihead_attention_flops(multihead_attention_module, input,):
     flops = 0
 
-    q, k, v = input
+    q, k, v = input, input, input
 
     batch_first = multihead_attention_module.batch_first \
         if hasattr(multihead_attention_module, 'batch_first') else False
