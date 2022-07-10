@@ -51,8 +51,8 @@ def get_activations(model, input):
         assert module not in activations, \
             f"{module} already in activations"
         # TODO [0] means first input, not all models have a single input
-        print(module.__class__)
-        print(module.isinstance( nn.MultiheadAttention))
+        #print(module.instance())
+        print(isinstance(module, nn.MultiheadAttention))
         activations[module] = (input[0].detach().cpu().numpy().copy(),
                                output.detach().cpu().numpy().copy(),)
 
