@@ -30,3 +30,23 @@ dtype2bits = {
     torch.long: 64,
     torch.bool: 1,
 }
+
+from numpy import dtype
+# https://pytorch.org/docs/stable/tensor_attributes.html
+dtype2bits_np = {
+    'float32': 32,
+    'float': 32,
+    'float64': 64,
+    'double': 64,
+    'float16': 16,
+    'half': 16,
+    'uint8': 8,
+    'int8': 8,
+    'int16': 16,
+    'short': 16,
+    'int32': 32,
+    'int': 32,
+    'int64': 64,
+    'long': 64,
+    'bool': 1,
+}
