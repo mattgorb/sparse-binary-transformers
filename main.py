@@ -21,7 +21,7 @@ from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 from metrics.accuracy import test
-
+from metrics.evaluate import evaluate_memory_size
 
 
 def train(model, iterator, optimizer, criterion, device):
