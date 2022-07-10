@@ -38,10 +38,14 @@ def memory_size(model, input, as_bits=False):
         print(act.dtype)
         t = np.prod(act.shape)
         nz = nonzero(act)
+        print(t)
         if as_bits:
             bits = dtype2bits_np[str(act.dtype)]
             t *= bits
             nz *= bits
+        print(t)
+
+        sys.exit()
         total_memory += t
         nonzero_memory += nz
 
