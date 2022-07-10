@@ -140,7 +140,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
     print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
     print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
 
-
+    print_model_size(model)
     #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
     #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
     #print(text)
