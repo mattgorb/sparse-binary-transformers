@@ -67,7 +67,7 @@ def flops(model, input):
             else:
                 print('neeed multiheead attention nonzeero flops')
                 print(m)
-                act.shape
+                print(act.shape)
                 sys.exit()
                 module_nonzero_flops=0
             print(f'Module: {m}, FLOPs: {module_flops}, nonzeros: {module_nonzero_flops}')
