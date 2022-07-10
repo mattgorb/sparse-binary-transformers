@@ -54,7 +54,7 @@ def flops(model, input):
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
             if m.__class__!=MultiheadAttention:
-                print(act)
+                print(act.shape)
             module_flops = FLOP_fn[m.__class__](m, act)
             total_flops += module_flops
             # For our operations, all weights are symmetric so we can just
