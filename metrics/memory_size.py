@@ -42,7 +42,7 @@ def memory_size(model, input, as_bits=False):
             bits = dtype2bits_np[str(act.dtype)]
             t *= bits
             nz *= bits
-        total_memory += np.prod(act.shape)
-        nonzero_memory += nonzero(act)
+        total_memory += t
+        nonzero_memory += nz
 
     return total_memory/batch_size, nonzero_memory/batch_size
