@@ -39,6 +39,8 @@ def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin
     # Q scaling
     flops += qlen * qdim
 
+    #print(flops)
+
     # Initial projections
     '''flops += (
         (qlen * qdim * qdim)  # QW
