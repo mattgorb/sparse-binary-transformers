@@ -44,7 +44,7 @@ def flops(model, input):
     FLOP_fn = {
         nn.Conv2d: _conv2d_flops,
         nn.Linear: _linear_flops,
-        #MultiheadAttention: _multihead_attention_flops
+        MultiheadAttention: _multihead_attention_flops
     }
 
     total_flops = nonzero_flops = 0
@@ -58,7 +58,10 @@ def flops(model, input):
             total_flops += module_flops
             # For our operations, all weights are symmetric so we can just
             # do simple rule of three for the estimation
-            nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
+            if m.__class__!='MultiheadAttention':
+                nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
+            else:
+                print('neeed multiheead attention nonzeero flops')
             print(f'Module: {m}, FLOPs: {module_flops}')
         else:
             print(f'Module not found: {m.__class__}')
