@@ -1,6 +1,6 @@
 import numpy as np
 
-from .nonzero import dtype2bits, nonzero
+from .nonzero import dtype2bits, nonzero,dtype2bits_np
 from .util import get_activations
 
 
