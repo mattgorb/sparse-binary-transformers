@@ -68,6 +68,7 @@ def flops(model, input):
                 print(nonzero(w).sum())
                 print(module_flops)
                 print(np.prod(w.shape))
+                print(module_nonzero_flops)
                 sys.exit()
 
                 nonzero_flops += module_nonzero_flops
