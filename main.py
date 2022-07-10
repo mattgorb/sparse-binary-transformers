@@ -134,7 +134,7 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
 
     num_flops, num_nonzero_flops=flops(model,torch.ones(512,1).int() )
     total_memory,total_nonzero_memory=memory(model, torch.ones(512,1).int())
-    total_size,total_nz_size=model_size(model, torch.ones(512,1).int())
+    total_size,total_nz_size=model_size(model)
     print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
 
     print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
