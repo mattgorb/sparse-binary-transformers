@@ -130,11 +130,14 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
 
     import torchvision
     model=torchvision.models.resnet18(pretrained=False)
-    macs, params = get_model_complexity_info(model, (1,3,224,224)#(512,1)
+    '''macs, params = get_model_complexity_info(model, (1,3,224,224)#(512,1)
                                              , as_strings=True,
-                                             print_per_layer_stat=True, verbose=True)
-    print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
-    print('{:<30}  {:<8}'.format('Number of parameters: ', params))
+                                             print_per_layer_stat=True, verbose=True)'''
+    from metrics.flops import flops
+    flops, nonzero_flops=flops(model,torch.rand((1,3,224,224)) )
+
+    #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
+    #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
     #print(text)
     #sys.exit()
     #macs, params = count_ops_fx(model, text )
