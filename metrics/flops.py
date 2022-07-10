@@ -7,6 +7,9 @@ from .nonzero import *
 from .abstract_flops import *
 from .util import get_activations
 
+def _multihead_attention_flops(module, activation):
+    return multihead_attention_flops(multihead_attention_module=module,input=activation)
+
 def _conv2d_flops(module, activation):
     # Auxiliary func to use abstract flop computation
 
@@ -41,8 +44,7 @@ def flops(model, input):
     FLOP_fn = {
         nn.Conv2d: _conv2d_flops,
         nn.Linear: _linear_flops,
-        #Conv2dMasked: _conv2d_flops,
-        #LinearMasked: _linear_flops,
+        nn.MultiheadAttention: _multihead_attention_flops
     }
 
     total_flops = nonzero_flops = 0
@@ -57,5 +59,9 @@ def flops(model, input):
             # For our operations, all weights are symmetric so we can just
             # do simple rule of three for the estimation
             nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
+            print(f'Module: {m}, FLOPs: {module_flops}')
+        else:
+            print(f'Module not found: {m}')
 
+    sys.exit()
     return total_flops,nonzero_flops

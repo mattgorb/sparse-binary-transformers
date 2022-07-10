@@ -34,19 +34,12 @@ def memory_size(model, input, as_bits=True):
     input_activations = [i for _, (i, o) in activations.items()]
 
     for act in input_activations:
-        print(act.shape  )
-        print(act.dtype)
         t = np.prod(act.shape)
         nz = nonzero(act)
-        print(t)
         if as_bits:
             bits = dtype2bits_np[str(act.dtype)]
-            print(bits)
             t *= bits
             nz *= bits
-        print(t)
-
-        sys.exit()
         total_memory += t
         nonzero_memory += nz
 
