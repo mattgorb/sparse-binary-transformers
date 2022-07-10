@@ -85,7 +85,7 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
     def _get_name(self):
-        return 'QuantizableMultiheadAttention'
+        return 'MultiheadAttention'
 
     @classmethod
     def from_float(cls, other):
