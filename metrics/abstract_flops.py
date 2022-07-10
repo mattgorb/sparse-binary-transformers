@@ -1,10 +1,10 @@
 import numpy as np
 
 
-def multihead_attention_nonzero_flops(multihead_attention_module, input,):
+def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin_v):
     flops = 0
 
-    q, k, v = input, input, input
+    q, k, v = lin_q,lin_k,lin_v
 
     batch_first = multihead_attention_module.batch_first \
         if hasattr(multihead_attention_module, 'batch_first') else False
