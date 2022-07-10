@@ -108,52 +108,34 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
-def evaluate_memory_size(model, test_dataloader, criterion,):
+def evaluate_memory_size(model, test_dataloader, criterion,train_dataloader):
     device ='cpu'
     model = model.to(device)
     criterion=criterion.to(device)
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
-    print_model_size(model, )
+    #print_model_size(model, )
     #memory_profile(model, test_dataloader, device)
-    #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-    #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-    for batch in test_dataloader:
-        label, text = batch
-        text = text.to(device)
-        print(text.size())
-        text=torch.unsqueeze(text[:,0], 1)
-        break
-    print(text.size())
-    #print(text.dtype)
-    #model(text)
-    preds=model(text)
-    print(preds)
+    max_len=0
+    for batch in train_dataloader:
+        _, text = batch
+        max_len=max(max_len,text.size(0))
 
 
-    num_flops, num_nonzero_flops=flops(model,torch.ones(512,1).int() )
-    total_memory,total_nonzero_memory=memory(model, torch.ones(512,1).int())
+    num_flops, num_nonzero_flops=flops(model,torch.ones(max_len,1).int() )
+    total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
     total_size,total_nz_size=model_size(model)
     print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
 
     print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
     print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
 
-    print_model_size(model)
-    #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
-    #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
-    #print(text)
-    #sys.exit()
-    #macs, params = count_ops_fx(model, text )
-    #print('{:<30}  {:<8}'.format('Computational complexity: ', macs))
-    #print('{:<30}  {:<8}'.format('Number of parameters: ', params))
-    sys.exit()
-    if args.model_type == 'Dense':
-        #print(model)
+    print(f"Memory in state_dict: {print_model_size(model)}")
 
-        #qconfig_dict = {'fc': default_dynamic_qconfig}
-        #quantize_dynamic(model, qconfig_dict, inplace=True)
+    if args.model_type == 'Dense':
         torch.quantization.quantize_dynamic(
             model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetLinBiprop}, dtype=torch.qint8,
             inplace=True
@@ -161,17 +143,17 @@ def evaluate_memory_size(model, test_dataloader, criterion,):
         model.encoder.qconfig = float_qparams_weight_only_qconfig
         prepare(model, inplace=True)
         convert(model, inplace=True)
-        '''qconfig_dict = {'fc': torch.quantization.default_dynamic_qconfig}
-        #torch.quantization.quantize_dynamic(
-            #model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetLinBiprop}, dtype=torch.qint8
-        #)
-        torch.quantization.quantize_dynamic(model, qconfig_dict, inplace=True)
-        model.encoder.qconfig = torch.quantization.float_qparams_weight_only_qconfig
-        torch.quantization.prepare(model, inplace=True)
-        model=torch.quantization.convert(model, inplace=True)'''
-        #print(model_dynamic_quantized.transformer_encoder.layers[0].linear1.weight[0][:25])
-        print(model)
-        print_model_size(model, )
+
+        #print(model)
+        num_flops, num_nonzero_flops = flops(model, torch.ones(max_len, 1).int())
+        total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
+        total_size, total_nz_size = model_size(model)
+        print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
+
+        print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
+        print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
+
+        print(f"Memory in state_dict: {print_model_size(model)}")
 
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
@@ -255,7 +237,7 @@ def main():
     best_valid_loss = float('inf')
 
     if args.evaluate:
-        evaluate_memory_size(model, test_dataloader, criterion,)
+        evaluate_memory_size(model, test_dataloader, criterion,train_dataloader)
         return
 
 
