@@ -53,7 +53,8 @@ def flops(model, input):
     # The ones we need for backprop
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
-
+            if m.__class__!=MultiheadAttention:
+                print(act.size())
             module_flops = FLOP_fn[m.__class__](m, act)
             total_flops += module_flops
             # For our operations, all weights are symmetric so we can just
