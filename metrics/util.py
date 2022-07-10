@@ -52,7 +52,7 @@ def get_activations(model, input):
             f"{module} already in activations"
         # TODO [0] means first input, not all models have a single input
         print(module)
-        print(type(module))
+        print(module.__class__)
         activations[module] = (input[0].detach().cpu().numpy().copy(),
                                output.detach().cpu().numpy().copy(),)
 
