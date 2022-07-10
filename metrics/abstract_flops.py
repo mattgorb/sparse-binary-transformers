@@ -25,10 +25,6 @@ def multihead_attention_flops(multihead_attention_module, input,):
     klen = k.shape[len_idx]
     vlen = v.shape[len_idx]
 
-    print(q.shape)
-    print(qdim)
-    print(qlen)
-
 
     num_heads = multihead_attention_module.num_heads
     assert qdim == multihead_attention_module.embed_dim

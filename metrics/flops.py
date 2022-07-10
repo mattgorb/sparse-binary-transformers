@@ -54,7 +54,7 @@ def flops(model, input):
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
             #if m.__class__==MultiheadAttention:
-            print(act.shape)
+            #print(act.shape)
             module_flops = FLOP_fn[m.__class__](m, act)
             total_flops += module_flops
             # For our operations, all weights are symmetric so we can just
@@ -64,7 +64,8 @@ def flops(model, input):
                 nonzero_flops += module_flops * nonzero(w).sum() / np.prod(w.shape)
             else:
                 print('neeed multiheead attention nonzeero flops')
-            print(f'Module: {m}, FLOPs: {module_flops}')
+                nonzero_flops=0
+            print(f'Module: {m}, FLOPs: {module_flops}, nonzeros: {nonzero_flops}')
         else:
             print(f'Module not found: {m.__class__}')
 
