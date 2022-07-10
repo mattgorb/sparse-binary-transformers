@@ -20,29 +20,8 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
+from metrics.accuracy import test
 
-
-def test(model, iterator, criterion, device):
-    epoch_loss = 0
-    epoch_acc = 0
-
-    model.eval()
-
-    with torch.no_grad():
-        for batch in iterator:
-            label, text = batch
-            label = label.to(device)
-            text = text.to(device)
-            predictions = model(text).squeeze(1)
-
-            loss = criterion(predictions, label)
-
-            acc = binary_accuracy(predictions, label)
-
-            epoch_loss += loss.item()
-            epoch_acc += acc.item()
-
-    return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
 
 def train(model, iterator, optimizer, criterion, device):
@@ -94,78 +73,14 @@ def collate_batch(batch):
    return torch.tensor(label_list), pad_sequence(text_list, padding_value=3.0)
 
 
-def binary_accuracy(preds, y):
-    """
-    Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8
-    """
-    _, predicted = torch.max(preds, 1)
 
-    acc = ((predicted == y).sum()/y.size(0))
-    return acc
 
 
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
-def evaluate_memory_size(model, test_dataloader, criterion,train_dataloader):
-    device ='cpu'
-    model = model.to(device)
-    criterion=criterion.to(device)
-    model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
 
-    #print_model_size(model, )
-    #memory_profile(model, test_dataloader, device)
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-
-    max_len=0
-    for batch in train_dataloader:
-        _, text = batch
-        max_len=max(max_len,text.size(0))
-
-
-    num_flops, num_nonzero_flops=flops(model,torch.ones(max_len,1).int() )
-    total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
-    total_size,total_nz_size=model_size(model)
-    print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
-
-    print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
-    print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
-
-    print(f"Memory in state_dict: {print_model_size(model)}")
-
-    if args.model_type == 'Dense':
-        torch.quantization.quantize_dynamic(
-            model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, torch.nn.MultiheadAttention,SubnetLinBiprop}, dtype=torch.qint8,
-            inplace=True
-        )
-        model.encoder.qconfig = float_qparams_weight_only_qconfig
-        prepare(model, inplace=True)
-        convert(model, inplace=True)
-
-        #print(model)
-        num_flops, num_nonzero_flops = flops(model, torch.ones(max_len, 1).int())
-        total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
-        total_size, total_nz_size = model_size(model)
-        print(f'Total FLOPs: {num_flops:,} Total nonzero FLOPs: {num_nonzero_flops:,}')
-
-        print(f'Total Memory in Bits: {total_memory:,} Total nonzero Memory in Bits: {total_nonzero_memory:,}')
-        print(f'Model Size in Bits: {total_size:,} Nonzero Model Size in Bits: {total_nz_size:,}')
-
-        print(f"Memory in state_dict: {print_model_size(model)}")
-
-        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-        print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-    else:
-        #sys.exit()
-        #print(model.state_dict())
-        print(model.transformer_encoder.layers[0].linear1.calc_alpha())
-        for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
-            print(n)
-        print(model.transformer_encoder.layers[0].linear1.get_buffer('alpha'))
-        sys.exit()
-        #print(model)
 
 def main():
     SEED = 1234
