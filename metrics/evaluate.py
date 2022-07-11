@@ -67,7 +67,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         )'''
         model.encoder.qconfig = float_qparams_weight_only_qconfig
         torch.quantinzation.prepare(model, inplace=True, )
-        convert(model, inplace=True)
+        torch.quantinzation.convert(model, inplace=True)
 
         #print(model)
         num_flops, num_nonzero_flops,modules_not_found = flops(model, torch.ones(max_len, 1).int())
