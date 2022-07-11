@@ -13,8 +13,8 @@ from torchtext.data.functional import to_map_style_dataset
 import time
 from torch import optim
 from args import args
-#from torch.quantization import *
-from torch.quantization.quantize import *
+from torch.quantization import *
+#from torch.quantization.quantize import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size,state_dict_size
@@ -65,8 +65,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
             model, qconfig_spec={torch.nn.LayerNorm}, dtype=torch.qint8,
             inplace=True
         )'''
-        #model.encoder.qconfig = float_qparams_weight_only_qconfig
-        prepare(model, inplace=True, )
+        model.encoder.qconfig = float_qparams_weight_only_qconfig
+        torch.quantinzation.prepare(model, inplace=True, )
         convert(model, inplace=True)
 
         #print(model)
