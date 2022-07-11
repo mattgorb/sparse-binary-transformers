@@ -31,7 +31,7 @@ def model_size(model, as_bits=True):
             print(k,v)
             continue
         print(k, v.size())
-    #return
+    return
 
     total_params = 0
     nonzero_params = 0
