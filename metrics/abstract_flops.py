@@ -1,5 +1,5 @@
 import numpy as np
-
+import torch
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
@@ -10,7 +10,7 @@ def norm_flops(module, input,):
     print(module.weight.size())
     print(batch_flops)
     print(input.shape)
-    print(module(input).size())
+    print(module(torch.tensor(input)).size())
 
     sys.exit()
     return batch_flops
