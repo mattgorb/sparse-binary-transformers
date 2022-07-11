@@ -8,6 +8,7 @@ def norm_flops(module, input,):
         batch_flops *= 2
         print("HERE?")
     print(batch_flops)
+    print(module)
     sys.exit()
     return batch_flops
 
