@@ -69,11 +69,9 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         qconfig_dict = {
             torch.nn.Embedding: float_qparams_weight_only_qconfig,
             torch.nn.Linear: default_dynamic_qconfig,
-            torch.nn.LayerNorm: default_dynamic_qconfig
         }
         quantize_dynamic(model, qconfig_dict, inplace=True,)
-        #print(q_model)
-        #sys.exit()
+
         model.qconfig = torch.quantization.default_qconfig
         #model.encoder.qconfig = float_qparams_weight_only_qconfig
 
@@ -83,7 +81,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         #torch.quantization.convert()
 
         print(model)
-        sys.exit()
+        #sys.exit()
         num_flops, num_nonzero_flops,modules_not_found = flops(model, torch.ones(max_len, 1).int())
         total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
         total_size, total_nz_size = model_size(model)
