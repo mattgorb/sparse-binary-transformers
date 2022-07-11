@@ -23,7 +23,8 @@ def model_size(model, as_bits=True):
         int -- Total number of weight & bias params
         int -- Out total_params exactly how many are nonzero
     """
-    print(model.state_dict())
+    for (k, v) in model.state_dict().items():
+        print(k, v.size())
     #return
 
     total_params = 0
