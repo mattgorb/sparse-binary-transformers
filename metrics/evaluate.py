@@ -65,7 +65,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
             model, qconfig_spec={torch.nn.LayerNorm}, dtype=torch.qint8,
             inplace=True
         )'''
-        model.encoder.qconfig = float_qparams_weight_only_qconfig
+        #model.encoder.qconfig = float_qparams_weight_only_qconfig
+        model.qconfig = torch.quantization.default_qconfig
         torch.quantization.prepare(model, inplace=True, )
         torch.quantization.convert(model, inplace=True)
 
@@ -81,8 +82,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         mem_state_dict=state_dict_size(model)
         print(f"Memory in Bits in state_dict: {mem_state_dict:,}")
 
-        #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-        #print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+        print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     else:
         #sys.exit()
         #print(model.state_dict())
