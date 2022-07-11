@@ -70,7 +70,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         model.encoder.qconfig = float_qparams_weight_only_qconfig
 
         torch.quantization.prepare(model, inplace=True,)
-        torch.quantization.prepare()
+        #torch.quantization.prepare()
         torch.quantization.convert(model, inplace=True,)
         #torch.quantization.convert()
 
