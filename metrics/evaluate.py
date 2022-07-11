@@ -16,7 +16,7 @@ from args import args
 from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
-from metrics.memory_size import memory, model_size
+from metrics.memory_size import memory, model_size,state_dict_size
 from metrics.accuracy import test
 from utils.model_size import *
 from models.layers.base_multihead_attention import MultiheadAttention as DenseMultiheadAttention
@@ -49,7 +49,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     print(f'Total Memory in Bits: {total_memory:,}')  # Total nonzero Memory in Bits: {total_nonzero_memory:,}')
     print(f'Model Size in Bits: {total_size:,} ')  # TNonzero Model Size in Bits: {total_nz_size:,}')
 
-    mem_state_dict = print_model_size(model)
+    mem_state_dict = state_dict_size(model)
     print(f"Memory in state_dict: {mem_state_dict}")
 
     if args.model_type == 'Dense':
@@ -71,7 +71,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         print(f'Total Memory in Bits: {total_memory:,}')#Total nonzero Memory in Bits: {total_nonzero_memory:,}')
         print(f'Model Size in Bits: {total_size:,} ')#TNonzero Model Size in Bits: {total_nz_size:,}')
 
-        mem_state_dict=print_model_size(model)
+        mem_state_dict=state_dict_size(model)
         print(f"Memory in state_dict: {mem_state_dict}")
 
         #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)

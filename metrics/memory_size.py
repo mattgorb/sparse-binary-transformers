@@ -5,7 +5,7 @@ from .util import get_activations
 import torch
 import os
 
-def print_model_size(mdl,):
+def state_dict_size(mdl,):
     torch.save(mdl.state_dict(), "tmp.pt")
     #print("%.2f MB" %(os.path.getsize("tmp.pt") / 1e6))
     bit_size=os.path.getsize("tmp.pt")*8
@@ -27,7 +27,8 @@ def model_size(model, as_bits=True):
 
     total_params = 0
     nonzero_params = 0
-    for tensor in model.parameters():
+    for name, tensor in model.named_parameters():
+        print(name)
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
         if as_bits:
