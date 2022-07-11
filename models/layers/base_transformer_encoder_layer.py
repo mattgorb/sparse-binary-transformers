@@ -55,8 +55,8 @@ class TransformerEncoderLayer(Module):
         self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
 
         self.norm_first = norm_first
-        self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm1 = nn.modules.normalization.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm2 = nn.modules.normalization.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.dropout1 = nn.Dropout(dropout)
         self.dropout2 = nn.Dropout(dropout)
 
