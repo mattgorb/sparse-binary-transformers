@@ -55,7 +55,11 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
         torch.quantization.quantize_dynamic(
-            model, qconfig_spec={torch.nn.Linear, torch.nn.LayerNorm, DenseMultiheadAttention}, dtype=torch.qint8,
+            model, qconfig_spec={torch.nn.Linear, DenseMultiheadAttention}, dtype=torch.qint8,
+            inplace=True
+        )
+        torch.quantization.quantize_dynamic(
+            model, qconfig_spec={torch.nn.LayerNorm}, dtype=torch.qint8,
             inplace=True
         )
         model.encoder.qconfig = float_qparams_weight_only_qconfig
