@@ -9,6 +9,10 @@ def norm_flops(module, input,):
         print("HERE?")
     print(batch_flops)
     print(module)
+    print(getattr(module, 'elementwise_affine', False))
+    print(getattr(module, 'affine', False))
+    print((getattr(module, 'affine', False)
+            or getattr(module, 'elementwise_affine', False)))
     sys.exit()
     return batch_flops
 

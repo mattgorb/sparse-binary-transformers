@@ -39,7 +39,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     for batch in train_dataloader:
         _, text = batch
         max_len=max(max_len,text.size(0))
-
+    print(max_len)
 
     num_flops, num_nonzero_flops=flops(model,torch.ones(max_len,1).int() )
     total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
