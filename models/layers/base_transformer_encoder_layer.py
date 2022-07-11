@@ -8,7 +8,6 @@ from torch.nn import Module
 from torch.nn import ModuleList
 import torch.nn as nn
 from models.layers.base_multihead_attention import MultiheadAttention
-from models.layers.quant_norm import LayerNorm
 
 class TransformerEncoderLayer(Module):
     r"""TransformerEncoderLayer is made up of self-attn and feedforward network.
@@ -56,8 +55,8 @@ class TransformerEncoderLayer(Module):
         self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
 
         self.norm_first = norm_first
-        self.norm1 = LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm1 = torch.nn.modules.normalization.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm2 = torch.nn.modules.normalization.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.dropout1 = nn.Dropout(dropout)
         self.dropout2 = nn.Dropout(dropout)
 
