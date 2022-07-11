@@ -6,13 +6,6 @@ def norm_flops(module, input,):
     if (getattr(module, 'affine', False)
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2
-        #print("HERE?")
-    print(module.weight.size())
-    print(batch_flops)
-    print(input.shape)
-    print(module(torch.tensor(input)).size())
-
-    sys.exit()
     return batch_flops
 
 def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin_v):
