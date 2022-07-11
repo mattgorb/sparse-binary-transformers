@@ -7,7 +7,7 @@ def norm_flops(module, input,):
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2
         #print("HERE?")
-    print(module.weight)
+    print(module.weight.size())
     print(batch_flops)
     print(input.shape)
 
@@ -116,8 +116,6 @@ def multihead_attention_flops(multihead_attention_module, input,):
         assert kdim == qdim
     if multihead_attention_module.vdim is None:
         assert vdim == qdim
-
-    flops = 0
 
     # Q scaling
     flops += qlen * qdim
