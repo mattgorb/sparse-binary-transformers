@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/evaluate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/memory_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/memory_size.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/model_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_size.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +65,7 @@
       <workItem from="1655435559737" duration="34077000" />
       <workItem from="1655906842829" duration="15688000" />
       <workItem from="1656387581098" duration="68743000" />
-      <workItem from="1657249626173" duration="38796000" />
+      <workItem from="1657249626173" duration="39412000" />
     </task>
     <servers />
   </component>

@@ -23,12 +23,14 @@ def model_size(model, as_bits=True):
         int -- Total number of weight & bias params
         int -- Out total_params exactly how many are nonzero
     """
-    print(model)
+    #print(model)
 
     total_params = 0
     nonzero_params = 0
     for name, tensor in model.named_parameters():
         print(name)
+        print(tensor)
+        break
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
         if as_bits:

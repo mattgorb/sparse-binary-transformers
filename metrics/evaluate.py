@@ -50,7 +50,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     print(f'Model Size in Bits: {total_size:,} ')  # TNonzero Model Size in Bits: {total_nz_size:,}')
 
     mem_state_dict = state_dict_size(model)
-    print(f"Memory in state_dict: {mem_state_dict}")
+    print(f"Memory in Bits in state_dict: {mem_state_dict:,}")
 
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
@@ -72,7 +72,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         print(f'Model Size in Bits: {total_size:,} ')#TNonzero Model Size in Bits: {total_nz_size:,}')
 
         mem_state_dict=state_dict_size(model)
-        print(f"Memory in state_dict: {mem_state_dict}")
+        print(f"Memory in Bits in state_dict: {mem_state_dict:,}")
 
         #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         #print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
