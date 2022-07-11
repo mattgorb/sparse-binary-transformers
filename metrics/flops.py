@@ -53,6 +53,7 @@ def flops(model, input):
     total_flops = nonzero_flops = 0
     activations = get_activations(model, input)
 
+    modules_not_found=[]
     # The ones we need for backprop
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
@@ -61,22 +62,14 @@ def flops(model, input):
             module_flops = FLOP_fn[m.__class__](m, act)
             module_nonzero_flops=0
             total_flops += module_flops
-            # For our operations, all weights are symmetric so we can just
+            '''# For our operations, all weights are symmetric so we can just
             # do simple rule of three for the estimation
-            if m.__class__!=MultiheadAttention:
-                w = m.weight.detach().cpu().numpy().copy()
-                module_nonzero_flops=module_flops * nonzero(w).sum() / np.prod(w.shape)
-
-                '''print(w.shape)
-                print(nonzero(w).sum())
-                print(module_flops)
-                print(np.prod(w.shape))
-                print(module_nonzero_flops)
-                sys.exit()'''
-
-                nonzero_flops += module_nonzero_flops
-            else:
-                print('neeed multiheead attention nonzeero flops')
+            #if m.__class__!=MultiheadAttention:
+                #w = m.weight.detach().cpu().numpy().copy()
+                #module_nonzero_flops=module_flops * nonzero(w).sum() / np.prod(w.shape)
+                #nonzero_flops += module_nonzero_flops
+                #else:
+                #print('neeed multiheead attention nonzeero flops')
                 #print(m)
                 #print(act.shape)
                 #lin_q=m.linear_Q(torch.tensor(act)).detach().cpu().numpy().copy()
@@ -85,10 +78,11 @@ def flops(model, input):
                 #print(lin_q.size())
                 #multihead_attention_nonzero_flops(m,lin_q,lin_k,lin_v)
                 #sys.exit()
-                module_nonzero_flops=0
-            print(f'Module: {m._get_name()}, FLOPs: {module_flops}, nonzero FLOPS: {module_nonzero_flops}')
+                module_nonzero_flops=0'''
+            print(f'Module: {m._get_name()}, FLOPs: {module_flops}')#, nonzero FLOPS: {module_nonzero_flops}')
         else:
-            print(f'Module not found: {m._get_name()}')
+            #print(f'Module not found: {m._get_name()}')
+            modules_not_found.append(m._get_name())
 
     #sys.exit()
-    return total_flops,nonzero_flops
+    return total_flops,nonzero_flops,set(modules_not_found)
