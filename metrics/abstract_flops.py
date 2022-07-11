@@ -10,6 +10,7 @@ def norm_flops(module, input,):
     print(module.weight.size())
     print(batch_flops)
     print(input.shape)
+    print(module(input).size())
 
     sys.exit()
     return batch_flops
