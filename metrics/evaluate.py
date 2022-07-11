@@ -13,17 +13,15 @@ from torchtext.data.functional import to_map_style_dataset
 import time
 from torch import optim
 from args import args
-import warnings
-from utils.model_size import *
-warnings.filterwarnings("ignore")
 from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 from metrics.accuracy import test
-
+from utils.model_size import *
 from models.layers.base_multihead_attention import MultiheadAttention as DenseMultiheadAttention
-
+import warnings
+warnings.filterwarnings("ignore")
 
 def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader):
     device ='cpu'

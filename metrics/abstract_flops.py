@@ -7,6 +7,7 @@ def norm_flops(module, input,):
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2
         #print("HERE?")
+    print(module.weight)
     print(batch_flops)
     print(input.shape)
 

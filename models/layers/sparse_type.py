@@ -122,9 +122,7 @@ class SubnetEmb(nn.Embedding):
         super().__init__(*args, **kwargs)
 
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
-
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
-
     @property
     def clamped_scores(self):
         # For unquantized activations
