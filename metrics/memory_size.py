@@ -29,8 +29,7 @@ def model_size(model, as_bits=True):
     nonzero_params = 0
     for name, tensor in model.named_parameters():
         print(name)
-        print(tensor)
-        break
+        print(tensor.shape)
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
         if as_bits:
