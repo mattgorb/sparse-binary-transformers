@@ -1,6 +1,16 @@
 import numpy as np
 
 
+def norm_flops(module, input,):
+    batch_flops = np.prod(input[0].shape)
+    if (getattr(module, 'affine', False)
+            or getattr(module, 'elementwise_affine', False)):
+        batch_flops *= 2
+        print("HERE?")
+    print(batch_flops)
+    sys.exit()
+    return batch_flops
+
 def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin_v):
     flops = 0
 

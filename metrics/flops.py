@@ -30,6 +30,8 @@ def _linear_flops(module, activation):
     # Auxiliary func to use abstract flop computation
     return dense_flops(module.in_features, module.out_features)
 
+def _layernorm_flops(module, activation):
+    return norm_flops(module,activation)
 
 def flops(model, input):
     """Compute Multiply-add FLOPs estimate from model
@@ -44,7 +46,8 @@ def flops(model, input):
     FLOP_fn = {
         nn.Conv2d: _conv2d_flops,
         nn.Linear: _linear_flops,
-        MultiheadAttention: _multihead_attention_flops
+        MultiheadAttention: _multihead_attention_flops,
+        nn.LayerNorm: _layernorm_flops
     }
 
     total_flops = nonzero_flops = 0
