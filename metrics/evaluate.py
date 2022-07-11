@@ -71,7 +71,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
             torch.nn.Linear: default_dynamic_qconfig,
             torch.nn.LayerNorm: default_dynamic_qconfig
         }
-        q_model = quantize_dynamic(model, qconfig_dict)
+        quantize_dynamic(model, qconfig_dict, inplace=True,)
         #print(q_model)
         #sys.exit()
         model.qconfig = torch.quantization.default_qconfig
