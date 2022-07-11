@@ -336,9 +336,9 @@ class MultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        x=self.quant(q)
+        #q=self.quant(q)
         q = self.q_scaling_product.mul_scalar(q, scaling)
-        x=self.dequant(q)
+        #q=self.dequant(q)
 
         if attn_mask is not None:
             assert attn_mask.dtype == torch.float32 or attn_mask.dtype == torch.float64 or \
