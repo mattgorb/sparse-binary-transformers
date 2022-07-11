@@ -29,6 +29,7 @@ def model_size(model, as_bits=True):
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
         if as_bits:
+            print(tensor.dtype)
             bits = dtype2bits[tensor.dtype]
             t *= bits
             nz *= bits

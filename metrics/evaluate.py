@@ -30,14 +30,16 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     model.load_state_dict(torch.load(args.weight_file, map_location=torch.device('cpu')))
     model.eval()
 
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-    print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+    #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    #print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-    max_len=0
+
+    max_len=2754
+    '''max_len=0
     for batch in train_dataloader:
         _, text = batch
         max_len=max(max_len,text.size(0))
-    print(max_len)
+    print(max_len)'''
 
     num_flops, num_nonzero_flops=flops(model,torch.ones(max_len,1).int() )
     total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
