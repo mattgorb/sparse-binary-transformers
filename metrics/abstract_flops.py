@@ -6,13 +6,10 @@ def norm_flops(module, input,):
     if (getattr(module, 'affine', False)
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2
-        print("HERE?")
+        #print("HERE?")
     print(batch_flops)
-    print(module)
-    print(getattr(module, 'elementwise_affine', False))
-    print(getattr(module, 'affine', False))
-    print((getattr(module, 'affine', False)
-            or getattr(module, 'elementwise_affine', False)))
+    print(input.shape)
+
     sys.exit()
     return batch_flops
 
