@@ -41,11 +41,11 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         max_len=max(max_len,text.size(0))
     print(max_len)'''
 
-    num_flops, num_nonzero_flops=flops(model,torch.ones(max_len,1).int() )
+    num_flops, num_nonzero_flops,modules_not_found=flops(model,torch.ones(max_len,1).int() )
     total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
     total_size,total_nz_size=model_size(model)
     print(f'Total FLOPs: {num_flops:,}')  # Total nonzero FLOPs: {num_nonzero_flops:,}')
-
+    print(f'Modules not found: {modules_not_found}')
     print(f'Total Memory in Bits: {total_memory:,}')  # Total nonzero Memory in Bits: {total_nonzero_memory:,}')
     print(f'Model Size in Bits: {total_size:,} ')  # TNonzero Model Size in Bits: {total_nz_size:,}')
 
