@@ -82,7 +82,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         torch.quantization.convert(model, inplace=True,)
         #torch.quantization.convert()
 
-        #print(model)
+        print(model)
+        sys.exit()
         num_flops, num_nonzero_flops,modules_not_found = flops(model, torch.ones(max_len, 1).int())
         total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
         total_size, total_nz_size = model_size(model)
