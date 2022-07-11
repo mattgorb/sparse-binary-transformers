@@ -10,7 +10,8 @@ def print_model_size(mdl,):
     #print("%.2f MB" %(os.path.getsize("tmp.pt") / 1e6))
     bit_size=os.path.getsize("tmp.pt")*8
     os.remove('tmp.pt')
-    print(bit_size)
+    #print(bit_size)
+    return bit_size
 
 def model_size(model, as_bits=True):
     """Returns absolute and nonzero model size
@@ -22,6 +23,7 @@ def model_size(model, as_bits=True):
         int -- Total number of weight & bias params
         int -- Out total_params exactly how many are nonzero
     """
+    print(model.parameters())
 
     total_params = 0
     nonzero_params = 0

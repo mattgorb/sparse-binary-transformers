@@ -79,10 +79,9 @@ def flops(model, input):
                 #multihead_attention_nonzero_flops(m,lin_q,lin_k,lin_v)
                 #sys.exit()
                 module_nonzero_flops=0'''
-            print(f'Module: {m._get_name()}, FLOPs: {module_flops}')#, nonzero FLOPS: {module_nonzero_flops}')
+            print(f'Module: {m._get_name()}, FLOPs: {module_flops:,}')#, nonzero FLOPS: {module_nonzero_flops}')
         else:
             #print(f'Module not found: {m._get_name()}')
             modules_not_found.append(m._get_name())
 
-    #sys.exit()
     return total_flops,nonzero_flops,set(modules_not_found)
