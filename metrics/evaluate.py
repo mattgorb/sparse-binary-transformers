@@ -66,9 +66,9 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
         #def unwrap_model(model):
         for i in model.modules():
-            print(i)
-            #if isinstance(i, nn.Sequential):
-                #unwrap_model(i)
+
+            if isinstance(i, nn.Layer):
+                print(i)
             #else:
                 #l.append(i)
         sys.exit()
