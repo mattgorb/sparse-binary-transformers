@@ -67,16 +67,15 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         #model.encoder.qconfig = float_qparams_weight_only_qconfig
 
         torch.quantization.prepare(model, inplace=True,)
-        #torch.quantization.prepare()
+
         torch.quantization.convert(model, inplace=True,)
-        #torch.quantization.convert()
 
         print(model)
         model.eval()
+        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+        print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+        sys.exit()
 
-        #sys.exit()
-        #num_flops, num_nonzero_flops,modules_not_found = flops(model, torch.ones(max_len, 1).int())
-        #total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
         total_size, total_nz_size = model_size(model)
         print(f'Total FLOPs: {num_flops:,}')# Total nonzero FLOPs: {num_nonzero_flops:,}')
         print(f'Modules not found: {modules_not_found}')
@@ -89,8 +88,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     else:
-        #sys.exit()
-        #print(model.state_dict())
+
         print(model.transformer_encoder.layers[0].linear1.calc_alpha())
         for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
             print(n)

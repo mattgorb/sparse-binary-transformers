@@ -126,13 +126,7 @@ def main():
 
     if args.model_type=='Dense':
         model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-        '''import copy
-        import torch.quantization.quantize_fx as quantize_fx
-        model = TransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2).to(device)
-        model_to_quantize = copy.deepcopy(model)
-        model_to_quantize.train()
-        qconfig_dict = {"": torch.quantization.get_default_qat_qconfig('qnnpack')}
-        model = quantize_fx.prepare_qat_fx(model_to_quantize, qconfig_dict)'''
+
     else:
         model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
     freeze_model_weights(model)

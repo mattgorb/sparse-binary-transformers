@@ -148,7 +148,6 @@ def dense_flops(in_neurons, out_neurons):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
     return in_neurons * out_neurons
 
-
 def conv2d_flops(in_channels, out_channels, input_shape, kernel_shape,
                  padding='same', strides=1, dilation=1):
     """Compute the number of multiply-adds used by a Conv2D layer
