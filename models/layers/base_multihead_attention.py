@@ -336,7 +336,7 @@ class MultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        print(q)
+        print(type(q))
         print(scaling)
         #q=self.quant(q)
         q = self.q_scaling_product.mul_scalar(q, scaling)
