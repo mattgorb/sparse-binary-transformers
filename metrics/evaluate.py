@@ -57,6 +57,15 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
+
+        for name, layer in model.named_modules():
+            if isinstance(layer, nn.LayerNorm):
+                print(name, layer)
+                layer.qconfig=torch.quantization.default_qconfig
+        torch.quantization.prepare(model, inplace=True,)
+        torch.quantization.convert(model ,inplace=True,)
+
+
         qconfig_dict = {
             torch.nn.Embedding: float_qparams_weight_only_qconfig,
             torch.nn.Linear: default_dynamic_qconfig,
@@ -64,25 +73,6 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         }
         quantize_dynamic(model, qconfig_dict, inplace=True,)
 
-        #def unwrap_model(model):
-        #print([n for n, _ in model.named_children()])
-        layerNorms=[n for n, _ in model.named_modules() if '.norm' in n]
-        print(layerNorms)
-        for name, layer in model.named_modules():
-            if isinstance(layer, nn.LayerNorm):
-                print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig
-
-        #model.transformer_encoder.layers[1].norm2.qconfig=torch.quantization.default_qconfig
-        #print(layerNorms)
-        #for l in layerNorms:
-            #model.l.qconfig=torch.quantization.default_qconfig
-        #model.qconfig = torch.quantization.default_qconfig
-        #model.encoder.qconfig = float_qparams_weight_only_qconfig
-        #torch.quantization.convert()
-        torch.quantization.prepare(model, inplace=True,)
-
-        torch.quantization.convert(model ,inplace=True,)
 
         print(model)
         model.eval()
