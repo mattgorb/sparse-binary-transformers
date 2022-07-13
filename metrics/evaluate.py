@@ -76,7 +76,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
                 #print(pytorch_layer_obj)
                 #print(layer)
                 #sys.exit()
-
+        model.transformer_encoder.layers[1].norm2=torch.quantization.default_qconfig
         #print(layerNorms)
         #for l in layerNorms:
             #model.l.qconfig=torch.quantization.default_qconfig
