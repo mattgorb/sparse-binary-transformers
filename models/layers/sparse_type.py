@@ -132,7 +132,7 @@ class SubnetEmb(nn.Embedding):
         self.args=args
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
-        self.prune_rate=args.prune_rate
+        self.prune_rate=args.emb_prune_rate
 
     def forward(self, x):
         subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate, )
@@ -170,7 +170,7 @@ class SubnetLayerNorm(nn.LayerNorm):
         self.args=args
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
-        self.prune_rate=args.prune_rate
+        self.prune_rate=args.layer_norm_prune_rate
 
     def calc_alpha(self):
         abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
