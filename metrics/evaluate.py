@@ -67,7 +67,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         #def unwrap_model(model):
         for i in model.modules():
 
-            if isinstance(i, nn.Layer):
+            if isinstance(i, torch.nn.LayerNorm):
                 print(i)
             #else:
                 #l.append(i)
