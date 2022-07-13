@@ -145,6 +145,16 @@ class SubnetEmb(nn.Embedding):
 
 
 
+
+
+
+
+
+def layernorm_init(in_dim,eps=None , args=None, **factory_kwargs):
+    layer=SubnetLayerNorm(in_dim,eps=eps **factory_kwargs)
+    layer.init(args)
+    return layer
+
 class SubnetLayerNorm(nn.LayerNorm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
