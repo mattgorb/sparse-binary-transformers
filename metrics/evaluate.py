@@ -61,17 +61,17 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
 
 
-        '''qconfig_dict = {
+        qconfig_dict = {
             #torch.nn.Embedding: float_qparams_weight_only_qconfig,
             torch.nn.Linear: default_dynamic_qconfig,
             #torch.nn.LayerNorm:default_dynamic_qconfig
             #torch.nn.MultiheadAttention: default_dynamic_qconfig
         }
-        quantize_dynamic(model, qconfig_dict, inplace=True,)'''
+        quantize_dynamic(model, qconfig_dict, inplace=True,)
         for name, layer in model.named_modules():
-            if isinstance(layer, nn.Linear):
+            '''if isinstance(layer, nn.Linear):
                 print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig
+                layer.qconfig=torch.quantization.default_qconfig'''
             if isinstance(layer, nn.LayerNorm):
                 print(name, layer)
                 layer.qconfig=torch.quantization.default_qconfig
