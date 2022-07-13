@@ -160,7 +160,7 @@ class SubnetLayerNorm(nn.LayerNorm):
         super().__init__(*args, **kwargs)
         print(self.weight.size())
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
-        nn.init.kaiming_normal(self.scores, )
+        nn.init.normal_(self.scores,0,1 )
     @property
     def clamped_scores(self):
         # For unquantized activations
