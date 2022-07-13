@@ -60,6 +60,11 @@ class TransformerEncoderLayer(Module):
         self.dropout1 = nn.Dropout(dropout)
         self.dropout2 = nn.Dropout(dropout)
 
+        self.q1 = torch.quantization.QuantStub()
+        self.q2 = torch.quantization.QuantStub()
+        self.dq1 = torch.quantization.DeQuantStub()
+        self.dq2 = torch.quantization.DeQuantStub()
+
         # Legacy string support for activation function.
         if isinstance(activation, str):
             self.activation = _get_activation_fn(activation)
@@ -86,18 +91,15 @@ class TransformerEncoderLayer(Module):
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
         x = src
-        '''if self.norm_first:
+        if self.norm_first:
             x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
             x = x + self._ff_block(self.norm2(x))
         else:
-            x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
-            x = self.norm2(x + self._ff_block(x))'''
-        x2=(x+self._sa_block(x, src_mask, src_key_padding_mask))
-        x3=self.norm1(x2)
-        x4=(x3+self._ff_block(x3))
-        x5=self.norm2(x4)
+            x = self.dq1(self.norm1(self.q1(x + self._sa_block(x, src_mask, src_key_padding_mask))))
+            x = self.dq2(self.norm2(self.q1(x + self._ff_block(x))))
 
-        return x5
+
+        return x
 
     # self-attention block
     def _sa_block(self, x: Tensor,
