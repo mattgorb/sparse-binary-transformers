@@ -92,12 +92,12 @@ class TransformerEncoderLayer(Module):
         else:
             x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
             x = self.norm2(x + self._ff_block(x))'''
-        x=(x+self._sa_block(x, src_mask, src_key_padding_mask))
-        x=self.norm1(x)
-        x=(x+self._ff_block(x))
-        x=self.norm2(x)
+        x2=(x+self._sa_block(x, src_mask, src_key_padding_mask))
+        x3=self.norm1(x2)
+        x4=(x3+self._ff_block(x3))
+        x5=self.norm2(x4)
 
-        return x
+        return x5
 
     # self-attention block
     def _sa_block(self, x: Tensor,
