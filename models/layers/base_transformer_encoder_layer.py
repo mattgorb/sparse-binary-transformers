@@ -96,7 +96,7 @@ class TransformerEncoderLayer(Module):
             x = self.norm2(x + self._ff_block(x))'''
         x = x + self._sa_block(x, src_mask, src_key_padding_mask)
         x=self.q1(x)
-        print(x.dtype)
+        #print(x.dtype)
         x=self.norm1(x)
         x=self.dq1(x)
         x = x + self._ff_block(x)
