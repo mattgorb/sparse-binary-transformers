@@ -70,11 +70,11 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         for name, layer in model.named_modules():
             if isinstance(layer, nn.LayerNorm):
                 print(name, layer)
-
-                pytorch_layer_obj = getattr(model, name)
-                print(pytorch_layer_obj)
-                print(layer)
-                sys.exit()
+                model.name=torch.quantization.default_qconfig
+                #pytorch_layer_obj = getattr(model, name)
+                #print(pytorch_layer_obj)
+                #print(layer)
+                #sys.exit()
 
         #print(layerNorms)
         #for l in layerNorms:
