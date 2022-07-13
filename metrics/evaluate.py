@@ -71,8 +71,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         for name, layer in model.named_modules():
             '''if isinstance(layer, nn.Linear):
                 print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig
-            if isinstance(layer, nn.LayerNorm):'''
+                layer.qconfig=torch.quantization.default_qconfig'''
+            if isinstance(layer, nn.LayerNorm):
                 print(name, layer)
                 layer.qconfig=torch.quantization.default_qconfig
             if isinstance(layer, nn.Embedding):
