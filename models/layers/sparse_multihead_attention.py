@@ -75,7 +75,9 @@ class MultiheadAttention(nn.MultiheadAttention):
         #self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
-        self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
+        self.out_proj = nn.Linear(self.embed_dim, self.embed_dim, bias=bias, **factory_kwargs)  # type: ignore[assignment]
+        #self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
+
 
         self.args=args
 
