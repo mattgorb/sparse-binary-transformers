@@ -70,7 +70,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
             if isinstance(i, torch.nn.LayerNorm):
                 print(i)
-                model.transformer_encoder.layers.
+                #model.transformer_encoder.layers.
             #else:
                 #l.append(i)
         sys.exit()
