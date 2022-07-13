@@ -180,7 +180,7 @@ class SubnetLayerNorm(nn.LayerNorm):
         return self.alpha
 
     def forward(self, x):
-        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)#s, self.calc_alpha())
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
         # Pass binary subnetwork weights to convolution layer
