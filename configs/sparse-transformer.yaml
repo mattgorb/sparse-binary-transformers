@@ -1,5 +1,5 @@
 dataset: imdb
-emb_prune_rate: 0.05
+emb_prune_rate: 0.02
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
 #weight_init: kaiming_normal
