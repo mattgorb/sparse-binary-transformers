@@ -98,12 +98,7 @@ def parse_arguments():
     parser.add_argument(
         "--save_every", default=-1, type=int, help="Save every ___ epochs"
     )
-    parser.add_argument(
-        "--prune_rate",
-        default=0.0,
-        help="Amount of pruning to do during sparse training",
-        type=float,
-    )
+
 
     parser.add_argument(
         "--conv-type", type=str, default=None, help="What kind of sparsity to use"

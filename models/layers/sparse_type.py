@@ -63,7 +63,7 @@ class SubnetLinBiprop(nn.Linear):
         self.args=args
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
-        self.prune_rate=args.prune_rate
+        self.prune_rate=args.lin_prune_rate
 
     #@property
     def calc_alpha(self):
