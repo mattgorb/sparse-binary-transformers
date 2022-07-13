@@ -135,7 +135,7 @@ class SubnetEmb(nn.Embedding):
         self.prune_rate=args.prune_rate
 
     def forward(self, x):
-        subnet = GetSubnetBinary.apply(self.clamped_scores, self.weight, self.prune_rate, )
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate, )
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
         # Pass binary subnetwork weights to convolution layer
@@ -151,7 +151,7 @@ class SubnetEmb(nn.Embedding):
 
 
 def layernorm_init(in_dim,eps=None , args=None, **factory_kwargs):
-    layer=SubnetLayerNorm(in_dim,eps=eps **factory_kwargs)
+    layer=SubnetLayerNorm(normalized_shape=in_dim,eps=eps, **factory_kwargs)
     layer.init(args)
     return layer
 
