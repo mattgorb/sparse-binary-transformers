@@ -129,6 +129,8 @@ def main():
 
     else:
         model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+    print(model)
+
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
