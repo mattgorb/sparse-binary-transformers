@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

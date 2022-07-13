@@ -42,11 +42,10 @@ class SBTransformerModel(nn.Module):
         self.pos_encoder = PositionalEncoding(ninp, )
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
-        #self.encoder = emb_init(ntoken, ninp,args=args,)
-        self.encoder = nn.Embedding(ntoken, ninp,  )
+        self.encoder = emb_init(ntoken, ninp,args=args,)
+        #self.encoder = nn.Embedding(ntoken, ninp,  )
         self.ninp = ninp
         self.decoder = linear_init(ninp, 2,bias=False,args=args, )
-        #self.decoder = nn.Linear(ninp, 2,bias=False, )
 
 
     def _generate_square_subsequent_mask(self, sz):

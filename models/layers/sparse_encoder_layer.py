@@ -1,5 +1,5 @@
 import torch.nn as nn
-from models.layers.sparse_type import linear_init
+from models.layers.sparse_type import linear_init,layernorm_init
 import torch.nn.functional as F
 from models.layers.sparse_multihead_attention import MultiheadAttention
 
@@ -14,17 +14,12 @@ class SparseTransformerEncoderLayer(nn.Module):
         self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                             **factory_kwargs)
         # Implementation of Feedforward model
-        #self.linear1 = nn.Linear(d_model, dim_feedforward, **factory_kwargs)
-        #self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
 
         self.linear1 = linear_init(d_model, dim_feedforward,args=args, **factory_kwargs)
         self.linear2 = linear_init(dim_feedforward, d_model,args=args, **factory_kwargs)
 
-        self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
-
-        #self.norm1 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
-        #self.norm2 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
+        self.norm1 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
+        self.norm2 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
 
         self.activation = activation
 

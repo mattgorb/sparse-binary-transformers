@@ -67,17 +67,13 @@ class MultiheadAttention(nn.MultiheadAttention):
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
-        self.linear_Q = nn.Linear(self.embed_dim, self.embed_dim,bias,**factory_kwargs)
-        self.linear_K = nn.Linear(self.kdim, self.embed_dim, bias=bias, **factory_kwargs)
-        self.linear_V = nn.Linear(self.vdim, self.embed_dim, bias=bias, **factory_kwargs)
-        #self.linear_Q = linear_init(self.embed_dim, self.embed_dim,bias,args,**factory_kwargs)
-        #self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
-        #self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
+
+        self.linear_Q = linear_init(self.embed_dim, self.embed_dim,bias,args,**factory_kwargs)
+        self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
+        self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
-        self.out_proj = nn.Linear(self.embed_dim, self.embed_dim, bias=bias, **factory_kwargs)  # type: ignore[assignment]
-        #self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
-
+        self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
 
         self.args=args
 
