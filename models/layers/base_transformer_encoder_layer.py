@@ -112,12 +112,12 @@ class TransformerEncoderLayer(Module):
                            attn_mask=attn_mask,
                            key_padding_mask=key_padding_mask,
                            need_weights=False)[0]
-        return self.dropout1(x)
+        return x
 
     # feed forward block
     def _ff_block(self, x: Tensor) -> Tensor:
-        x = self.linear2(self.dropout(self.activation(self.linear1(x))))
-        return self.dropout2(x)
+        x = self.linear2(self.activation(self.linear1(x)))
+        return x
 
 
 def _get_clones(module, N):
