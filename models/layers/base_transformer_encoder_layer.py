@@ -95,9 +95,10 @@ class TransformerEncoderLayer(Module):
             x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
             x = x + self._ff_block(self.norm2(x))
         else:
-            x = self.dq1(self.norm1(self.q1(x + self._sa_block(x, src_mask, src_key_padding_mask))))
-            x = self.dq2(self.norm2(self.q2(x + self._ff_block(x))))
-
+            x=self.q1(x)
+            x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
+            x = self.norm2(x + self._ff_block(x))
+            x=self.dq1(x)
 
         return x
 
