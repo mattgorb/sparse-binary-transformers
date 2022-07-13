@@ -91,20 +91,20 @@ class TransformerEncoderLayer(Module):
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
         x = src
-        '''if self.norm_first:
+        if self.norm_first:
             x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
             x = x + self._ff_block(self.norm2(x))
         else:
             x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
-            x = self.norm2(x + self._ff_block(x))'''
-        x = x + self._sa_block(x, src_mask, src_key_padding_mask)
+            x = self.norm2(x + self._ff_block(x))
+        '''x = x + self._sa_block(x, src_mask, src_key_padding_mask)
         x=self.q1(x)
         x=self.norm1(x)
         x=self.dq1(x)
         x = x + self._ff_block(x)
         x=self.q2(x)
         x=self.norm2(x)
-        x=self.dq2(x)
+        x=self.dq2(x)'''
         return x
 
     # self-attention block
