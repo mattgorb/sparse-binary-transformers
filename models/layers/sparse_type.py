@@ -15,7 +15,7 @@ def linear_init(in_dim, out_dim, bias=None, args=None, **factory_kwargs):
     layer.init(args)
     return layer
 
-class GetQuantnet_binary(autograd.Function):
+class GetSubnetBinary(autograd.Function):
     @staticmethod
     def forward(ctx, scores, weights, k, alpha):
         # Get the subnetwork by sorting the scores and using the top k%
@@ -76,7 +76,7 @@ class SubnetLinBiprop(nn.Linear):
     def forward(self, x):
 
         # Get binary mask and gain term for subnetwork
-        quantnet = GetQuantnet_binary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
+        quantnet = GetSubnetBinary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = torch.sign(self.weight) * quantnet
         # Pass binary subnetwork weights to convolution layer
@@ -97,7 +97,7 @@ def emb_init(in_dim, out_dim,  args=None, **factory_kwargs):
     layer.init(args)
     return layer
 
-class GetSubnet_emb(autograd.Function):
+class GetSubnetContinuous(autograd.Function):
     @staticmethod
     def forward(ctx, scores, weights, k, ):
         # Get the subnetwork by sorting the scores and using the top k%
@@ -135,7 +135,7 @@ class SubnetEmb(nn.Embedding):
         self.prune_rate=args.prune_rate
 
     def forward(self, x):
-        subnet = GetSubnet_emb.apply(self.clamped_scores, self.weight, self.prune_rate, )
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate, )
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
         # Pass binary subnetwork weights to convolution layer
@@ -145,3 +145,35 @@ class SubnetEmb(nn.Embedding):
 
 
 
+class SubnetLayerNorm(nn.LayerNorm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
+        nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
+    @property
+    def clamped_scores(self):
+        # For unquantized activations
+        return self.scores.abs()
+
+    def init(self,args):
+        self.args=args
+        self.weight=_init_weight(self.args, self.weight)
+        self.scores=_init_score(self.args, self.scores)
+        self.prune_rate=args.prune_rate
+
+    def calc_alpha(self):
+        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
+        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
+        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
+        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
+        return self.alpha
+
+    def forward(self, x):
+        subnet = GetSubnetBinary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
+        # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
+        w = self.weight * subnet
+        # Pass binary subnetwork weights to convolution layer
+        x=F.layer_norm(x,self.normalized_shape,w, self.bias)
+        # Return output from linear layer
+        return x
