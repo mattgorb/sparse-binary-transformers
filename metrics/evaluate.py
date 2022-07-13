@@ -66,7 +66,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
         #def unwrap_model(model):
         #print([n for n, _ in model.named_children()])
-        #layerNorms=[n for n, _ in model.named_modules() if '.norm' in n]
+        layerNorms=[n for n, _ in model.named_modules() if '.norm' in n]
+        print(layerNorms)
         for name, layer in model.named_modules():
             if isinstance(layer, nn.LayerNorm):
                 print(name, layer)
