@@ -65,10 +65,12 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         quantize_dynamic(model, qconfig_dict, inplace=True,)
 
         #def unwrap_model(model):
+        print(model.state_dict())
         for i in model.modules():
 
             if isinstance(i, torch.nn.LayerNorm):
                 print(i)
+                model.transformer_encoder.layers.
             #else:
                 #l.append(i)
         sys.exit()
