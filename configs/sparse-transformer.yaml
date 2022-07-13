@@ -1,7 +1,7 @@
 dataset: imdb
-emb_prune_rate: 0.01
+emb_prune_rate: 0.5
 layer_norm_prune_rate: 0.5
-lin_prune_rate: 0.01
+lin_prune_rate: 0.5
 #weight_init: kaiming_normal
 #score_init: None
 weight_seed: 0
