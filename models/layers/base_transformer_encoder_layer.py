@@ -57,8 +57,8 @@ class TransformerEncoderLayer(Module):
         self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
 
-        self.q1 = torch.quantization.QuantStub()
-        self.q2 = torch.quantization.QuantStub()
+        self.q1 = torch.quantization.QuantStub(qconfig=torch.quantization.default_qconfig)
+        self.q2 = torch.quantization.QuantStub(qconfig=torch.quantization.default_qconfig)
         self.dq1 = torch.quantization.DeQuantStub()
         self.dq2 = torch.quantization.DeQuantStub()
 
