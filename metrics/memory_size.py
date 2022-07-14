@@ -29,9 +29,8 @@ def model_size(model, as_bits=True):
         if isinstance(v,tuple)  and '_packed_params' in k:
             print('here')
             print(k)
-            #print(v)
-            print(v[0].dtype)
-            print(v[0].size())
+            print(v[0])
+
             t = np.prod(v[0].shape)
             nz = nonzero(v[0])
             if as_bits:
