@@ -10,7 +10,7 @@ def norm_flops(module, input,):
 
 
 def posenc_flops(module, input,):
-    flops = np.prod(input[0].shape)
+    flops = np.prod(input.shape)
     print(input.shape)
     print(flops)
     sys.exit()
