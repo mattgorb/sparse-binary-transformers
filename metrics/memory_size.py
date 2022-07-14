@@ -26,6 +26,8 @@ def model_size(model, as_bits=True):
     for (k, v) in model.state_dict().items():
         if 'dtype' in k:
             print("HERE2")
+            print(k)
+            print(v)
             continue
         if isinstance(v,tuple):
             print('here')
