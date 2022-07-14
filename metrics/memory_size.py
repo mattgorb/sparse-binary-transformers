@@ -29,7 +29,7 @@ def model_size(model, as_bits=True):
         if isinstance(v,tuple):
             print('here')
             print(k)
-            print(v)
+            #print(v)
             print(v[0].dtype)
             print(v[0].size())
             #print(k,v)
