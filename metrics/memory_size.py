@@ -23,15 +23,16 @@ def model_size(model, as_bits=True):
         int -- Total number of weight & bias params
         int -- Out total_params exactly how many are nonzero
     """
+
+    total_params = 0
+    nonzero_params = 0
     for (k, v) in model.state_dict().items():
         if 'dtype' in k and '_packed' in k:
             continue
         if isinstance(v,tuple)  and '_packed' in k:
-            print(k, v[0].size())
-
             temp=torch.int_repr(v[0]).numpy()
             assert(temp.dtype==np.int8)
-            dtype=torch.qint8
+
             t = np.prod(v[0].shape)
             nz = nonzero(temp)
             if as_bits:
@@ -39,10 +40,10 @@ def model_size(model, as_bits=True):
                 bits = dtype2bits[torch.qint8]
                 t *= bits
                 nz *= bits
+            total_params += t
+            nonzero_params += nz
         if not isinstance(v, tuple) and '_packed' in k:
-            print(k, v.size())
 
-            #
             temp = torch.int_repr(v).numpy()
             print(temp.dtype)
             assert(temp.dtype==np.uint8)
@@ -53,13 +54,10 @@ def model_size(model, as_bits=True):
                 bits = dtype2bits[torch.qint8]
                 t *= bits
                 nz *= bits
-            continue
-        #print(k, v)
-    #return
-    #print(model)
+            total_params += t
+            nonzero_params += nz
 
-    total_params = 0
-    nonzero_params = 0
+
     for name, tensor in model.named_parameters():
         print(name)
         #print(tensor.shape)
