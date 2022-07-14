@@ -28,31 +28,33 @@ def model_size(model, as_bits=True):
             continue
         if isinstance(v,tuple)  and '_packed' in k:
             print(k, v[0].size())
-            #dtype=torch.qint8
+
             temp=torch.int_repr(v[0]).numpy()
-            print(temp.dtype)
+            assert(temp.dtype==np.int8)
+            dtype=torch.qint8
             t = np.prod(v[0].shape)
             nz = nonzero(temp)
             if as_bits:
                 #print(dtype)
-                bits = dtype2bits[dtype]
+                bits = dtype2bits[torch.qint8]
                 t *= bits
                 nz *= bits
         if not isinstance(v, tuple) and '_packed' in k:
             print(k, v.size())
 
-            #dtype = torch.qint8
+            #
             temp = torch.int_repr(v).numpy()
             print(temp.dtype)
+            assert(temp.dtype==np.int8)
             t = np.prod(v.shape)
             nz = nonzero(temp)
             if as_bits:
                 #print(dtype)
-                bits = dtype2bits[temp.dtype]
+                bits = dtype2bits[torch.qint8]
                 t *= bits
                 nz *= bits
             continue
-        print(k, v)
+        #print(k, v)
     #return
     #print(model)
 
