@@ -25,6 +25,7 @@ def model_size(model, as_bits=True):
     """
     for (k, v) in model.state_dict().items():
         print(k)
+        continue
         if 'dtype' in k and '_packed_params' in k:
             continue
         if isinstance(v,tuple)  and '_packed_params' in k:
