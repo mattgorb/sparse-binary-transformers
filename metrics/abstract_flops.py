@@ -8,6 +8,12 @@ def norm_flops(module, input,):
         batch_flops *= 2
     return batch_flops
 
+
+def posenc_flops(module, input,):
+    flops = np.prod(input[0].shape)
+    print(flops)
+    return flops
+
 def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin_v):
     flops = 0
 
