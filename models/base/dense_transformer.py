@@ -17,6 +17,7 @@ class PositionalEncoding(nn.Module):
 
         print(div_term.size())
         print(position.size())
+        print(pe.size())
         sys.exit()
 
         pe[:, 0::2] = torch.sin(position * div_term)
