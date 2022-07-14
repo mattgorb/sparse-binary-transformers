@@ -45,7 +45,7 @@ def model_size(model, as_bits=True):
             #
             temp = torch.int_repr(v).numpy()
             print(temp.dtype)
-            assert(temp.dtype==np.int8)
+            assert(temp.dtype==np.uint8)
             t = np.prod(v.shape)
             nz = nonzero(temp)
             if as_bits:
