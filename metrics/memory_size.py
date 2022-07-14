@@ -30,9 +30,9 @@ def model_size(model, as_bits=True):
             print('here')
             print(k)
             #print(v[0].numpy())
-            dtype=torch.qint8
-            temp=v[0].float()
-
+            #dtype=torch.qint8
+            #temp=v[0].float()
+            temp=torch.int_repr(v[0]).numpy()
             t = np.prod(v[0].shape)
             nz = nonzero(temp)
             if as_bits:
