@@ -32,7 +32,7 @@ class TransformerModel(nn.Module):
 
     def init_weights(self):
         initrange = 0.1
-        nn.init.uniform_(self.encoder.weight, -initrange, initrange)
+        nn.init.uniform_(self.embedding.weight, -initrange, initrange)
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
@@ -53,7 +53,7 @@ class TransformerModel(nn.Module):
         else:
             self.pad_mask = None
 
-        src = self.encoder(src)*math.sqrt(self.ninp)
+        src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
         output = self.decoder(output)
