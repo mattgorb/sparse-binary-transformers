@@ -45,7 +45,7 @@ def model_size(model, as_bits=True):
         if not isinstance(v, tuple) and '_packed' in k:
 
             temp = torch.int_repr(v).numpy()
-            print(temp.dtype)
+            #print(temp.dtype)
             assert(temp.dtype==np.uint8)
             t = np.prod(v.shape)
             nz = nonzero(temp)
@@ -59,12 +59,12 @@ def model_size(model, as_bits=True):
 
 
     for name, tensor in model.named_parameters():
-        print(name)
+        #print(name)
         #print(tensor.shape)
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
         if as_bits:
-            print(tensor.dtype)
+            #print(tensor.dtype)
             bits = dtype2bits[tensor.dtype]
             t *= bits
             nz *= bits
