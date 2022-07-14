@@ -26,15 +26,22 @@ def model_size(model, as_bits=True):
     for (k, v) in model.state_dict().items():
         if 'dtype' in k and '_packed_params' in k:
             continue
-        if isinstance(v,tuple):
+        if isinstance(v,tuple)  and '_packed_params' in k:
             print('here')
             print(k)
             #print(v)
             print(v[0].dtype)
             print(v[0].size())
+            t = np.prod(v[0].shape)
+            nz = nonzero(v[0].detach().cpu().numpy())
+            if as_bits:
+                print(v[0].dtype)
+                bits = dtype2bits[v[0].dtype]
+                t *= bits
+                nz *= bits
             #print(k,v)
             continue
-        print(k, v.size())
+        #print(k, v.size())
     #return
     #print(model)
 

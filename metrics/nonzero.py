@@ -29,6 +29,7 @@ dtype2bits = {
     torch.int64: 64,
     torch.long: 64,
     torch.bool: 1,
+    torch.qint8:8
 }
 
 from numpy import dtype
