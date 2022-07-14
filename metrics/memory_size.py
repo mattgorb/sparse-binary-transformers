@@ -24,15 +24,12 @@ def model_size(model, as_bits=True):
         int -- Out total_params exactly how many are nonzero
     """
     for (k, v) in model.state_dict().items():
-        print('here')
-        print(k)
-        print(v)
-        continue
         if 'dtype' in k:
+            print("HERE2")
             continue
         if isinstance(v,tuple):
             print('here')
-            print(k.size())
+            print(v)
             #print(k,v)
             continue
         print(k, v.size())
