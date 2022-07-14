@@ -58,9 +58,6 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
 
-
-
-
         qconfig_dict = {
             torch.nn.Embedding: float_qparams_weight_only_qconfig,
             torch.nn.Linear: default_dynamic_qconfig,
@@ -96,7 +93,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     else:
-
+        sys.exit()
         print(model.transformer_encoder.layers[0].linear1.calc_alpha())
         for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
             print(n)
