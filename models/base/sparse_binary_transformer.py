@@ -36,7 +36,7 @@ class SBTransformerModel(nn.Module):
 
     def init_weights(self):
         initrange = 0.1
-        nn.init.uniform_(self.encoder.weight, -initrange, initrange)
+        nn.init.uniform_(self.embedding.weight, -initrange, initrange)
         #nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
@@ -51,7 +51,7 @@ class SBTransformerModel(nn.Module):
             self.src_mask = None
 
 
-        src = self.encoder(src)*math.sqrt(self.ninp)
+        src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
         output = self.transformer_encoder(src, self.src_mask)
         output = self.decoder(output)
