@@ -40,6 +40,7 @@ def model_size(model, as_bits=True):
                 t *= bits
                 nz *= bits
             #print(k,v)
+            sys.exit()
             continue
         #print(k, v.size())
     #return
