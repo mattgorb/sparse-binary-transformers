@@ -11,7 +11,9 @@ def norm_flops(module, input,):
 
 def posenc_flops(module, input,):
     flops = np.prod(input[0].shape)
+    print(input.shape)
     print(flops)
+    sys.exit()
     return flops
 
 def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin_v):
