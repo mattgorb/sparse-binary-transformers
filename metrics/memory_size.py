@@ -24,13 +24,13 @@ def model_size(model, as_bits=True):
         int -- Out total_params exactly how many are nonzero
     """
     for (k, v) in model.state_dict().items():
-        print(k)
-        continue
-        if 'dtype' in k and '_packed_params' in k:
+        #print(k)
+        #continue
+        if 'dtype' in k and '_packed' in k:
             continue
-        if isinstance(v,tuple)  and '_packed_params' in k:
+        if isinstance(v,tuple)  and '_packed' in k:
             print('here')
-            print(k, v[0])
+            print(k, v[0].size())
             #print(v[0].numpy())
             dtype=torch.qint8
             #temp=v[0].float()
