@@ -29,7 +29,7 @@ def model_size(model, as_bits=True):
             continue
         if isinstance(v,tuple)  and '_packed_params' in k:
             print('here')
-            print(k)
+            print(k, v[0])
             #print(v[0].numpy())
             dtype=torch.qint8
             #temp=v[0].float()
