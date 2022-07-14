@@ -29,13 +29,15 @@ def model_size(model, as_bits=True):
         if isinstance(v,tuple)  and '_packed_params' in k:
             print('here')
             print(k)
-            print(v[0].numpy())
+            #print(v[0].numpy())
+            dtype=torch.qint8
+            temp=v[0].float()
 
             t = np.prod(v[0].shape)
-            nz = nonzero(v[0])
+            nz = nonzero(temp)
             if as_bits:
-                print(v[0].dtype)
-                bits = dtype2bits[v[0].dtype]
+                print(dtype)
+                bits = dtype2bits[dtype]
                 t *= bits
                 nz *= bits
             #print(k,v)
