@@ -62,16 +62,14 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
 
         qconfig_dict = {
-            #torch.nn.Embedding: float_qparams_weight_only_qconfig,
+            torch.nn.Embedding: float_qparams_weight_only_qconfig,
             torch.nn.Linear: default_dynamic_qconfig,
-            #torch.nn.LayerNorm:default_dynamic_qconfig
-            #torch.nn.MultiheadAttention: default_dynamic_qconfig
         }
         quantize_dynamic(model, qconfig_dict, inplace=True,)
-        for name, layer in model.named_modules():
-            '''if isinstance(layer, nn.Linear):
+        '''for name, layer in model.named_modules():
+            if isinstance(layer, nn.Linear):
                 print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig'''
+                layer.qconfig=torch.quantization.default_qconfig
             if isinstance(layer, nn.LayerNorm):
                 print(name, layer)
                 layer.qconfig=torch.quantization.default_qconfig
@@ -79,13 +77,12 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
                 print(name, layer)
                 layer.qconfig=torch.quantization.float_qparams_weight_only_qconfig
         torch.quantization.prepare(model, inplace=True,)
-        torch.quantization.convert(model ,inplace=True,)
+        torch.quantization.convert(model ,inplace=True,)'''
 
-        print(model)
         model.eval()
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-        sys.exit()
+
 
         total_size, total_nz_size = model_size(model)
         print(f'Total FLOPs: {num_flops:,}')# Total nonzero FLOPs: {num_nonzero_flops:,}')
