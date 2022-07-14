@@ -24,6 +24,7 @@ def model_size(model, as_bits=True):
         int -- Out total_params exactly how many are nonzero
     """
     for (k, v) in model.state_dict().items():
+        print(k)
         if 'dtype' in k and '_packed_params' in k:
             continue
         if isinstance(v,tuple)  and '_packed_params' in k:
@@ -40,8 +41,7 @@ def model_size(model, as_bits=True):
                 bits = dtype2bits[dtype]
                 t *= bits
                 nz *= bits
-            #print(k,v)
-            #sys.exit()
+
             continue
         #print(k, v.size())
     #return
