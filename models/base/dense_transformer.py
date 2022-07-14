@@ -25,6 +25,7 @@ class PositionalEncoding(nn.Module):
     def forward(self, x):
         print(x.size())
         print(self.pe.size())
+        print(self.pe[:x.size(0), :].size())
         sys.exit()
         x = x + self.pe[:x.size(0), :]
         return self.dropout(x)
