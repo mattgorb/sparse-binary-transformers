@@ -33,7 +33,7 @@ def model_size(model, as_bits=True):
             print(v[0].dtype)
             print(v[0].size())
             t = np.prod(v[0].shape)
-            nz = nonzero(v[0].cpu().numpy())
+            nz = nonzero(v[0])
             if as_bits:
                 print(v[0].dtype)
                 bits = dtype2bits[v[0].dtype]
