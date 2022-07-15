@@ -397,6 +397,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         v = self.dequant_v(v)
 
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
+        print(torch.count_nonzero(attn_output_weights))
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
         if attn_mask is not None:
@@ -418,6 +419,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
 
         attn_output = torch.bmm(attn_output_weights, v)
+        print(torch.count_nonzero(attn_output))
+        sys.exit()
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
             attn_output = attn_output.view(bsz, tgt_len, self.embed_dim)
