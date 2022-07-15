@@ -193,6 +193,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     if multihead_attention_module.vdim is None:
         assert vdim == qdim
 
+    input=torch.tensor(input)
     q = multihead_attention_module.linear_Q(input)
     k = multihead_attention_module.linear_K(input)
     v = multihead_attention_module.linear_V(input)
