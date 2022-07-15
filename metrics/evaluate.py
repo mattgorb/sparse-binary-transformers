@@ -49,8 +49,9 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     flops_dict,modules_not_found=flops(model,torch.ones(max_len,1).int() )
     for k,v in flops_dict.items():
         print(f'{k}: {v}')
-    sys.exit()
+
     print(f'Modules not found for FLOP measurement: {modules_not_found}')
+    sys.exit()
     params_dict = model_size(model)
     for k,v in params_dict.items():
         print(f'{k}: {v}')
