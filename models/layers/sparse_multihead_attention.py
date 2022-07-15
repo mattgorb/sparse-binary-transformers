@@ -297,13 +297,13 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         #print(torch.prod(q.size()))
         #sys.exit()
         q_topk_val, q_topk_ind=torch.topk(q.flatten(),q_size)
-        q.flatten()[q_topk_ind]=q_topk_val
+        q.flatten()[~q_topk_ind]=0
 
         k_topk_val, k_topk_ind=torch.topk(k.flatten(),q_size)
-        k.flatten()[k_topk_ind]=k_topk_val
+        k.flatten()[~k_topk_ind]=0
 
         v_topk_val, v_topk_ind=torch.topk(v.flatten(),q_size)
-        v.flatten()[v_topk_ind]=v_topk_val
+        v.flatten()[~v_topk_ind]=0
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
