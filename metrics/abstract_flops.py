@@ -196,15 +196,10 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
 
 
-    # Q scaling
-    flops += qlen * qdim
 
-    # Initial projections
-    '''flops += (
-        (qlen * qdim * qdim)  # QW
-        + (klen * kdim * kdim)  # KW
-        + (vlen * vdim * vdim)  # VW
-    )'''
+    # Q scaling
+    flops += qlen * qdim * multihead_attention_module.attention_prune_rate
+
 
     if multihead_attention_module.in_proj_bias is not None:
         flops += (qlen + klen + vlen) * qdim
@@ -214,11 +209,48 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     v_head_dim = vdim // num_heads
 
 
-    head_flops = (
+
+
+    q_tensor=torch.tensor(q)
+    tgt_len, bsz, embed_dim_to_check = q.size()
+    head_dim = multihead_attention_module.embed_dim // multihead_attention_module.num_heads
+    q = multihead_attention_module.linear_Q(q_tensor)
+    k = multihead_attention_module.linear_K(q_tensor)
+    v = multihead_attention_module.linear_V(q_tensor)
+
+    prune_size = int(torch.flatten(q).size()[0] * multihead_attention_module.attention_prune_rate)
+
+    q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
+    q.flatten()[q_sort_ind[prune_size:]] = 0
+
+    k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
+    k.flatten()[k_sort_ind[prune_size:]] = 0
+
+    v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
+    v.flatten()[v_sort_ind[prune_size:]] = 0
+
+    print(q.size())
+    q = q.contiguous().view(tgt_len, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
+    if k is not None:
+        k = k.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
+    if v is not None:
+        v = v.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
+
+    attn_output_weights = torch.bmm(q, k.transpose(1, 2))
+    print(q.size())
+    print(attn_output_weights.size())
+    print(qlen)
+    print(klen)
+    print(qk_head_dim)
+    sys.exit()
+    head_flops1=(qlen * klen * qk_head_dim)
+    head_flops2=(qlen * klen)
+    head_flops3=(qlen * klen * v_head_dim)
+    '''head_flops = (
         (qlen * klen * qk_head_dim)  # QK^T
         + (qlen * klen)  # softmax
         + (qlen * klen * v_head_dim)  # AV
-    )
+    )'''
 
     flops += num_heads * head_flops
 
