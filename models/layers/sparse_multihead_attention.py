@@ -293,8 +293,9 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
 
         x=torch.flatten(q)
         print(x.size())
+        print(x.item())
         #q_size=torch.flatten(q).size()*0.5
-        print(q_size)
+        #print(q_size)
         #print(torch.prod(q.size()))
         sys.exit()
         q_topk_val, q_topk_ind=torch.topk(q,q_size)
