@@ -291,8 +291,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-
-        q_size=torch.flatten(q).size()[0]*0.5
+        print(q.size())
+        q_size=int(torch.flatten(q).size()[0]*0.5)
         print(q_size)
         #print(torch.prod(q.size()))
         sys.exit()
