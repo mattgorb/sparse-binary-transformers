@@ -211,7 +211,9 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
 
 
-
+    '''
+    finds the nonzero flop count
+    '''
     q_tensor=torch.tensor(q)
     tgt_len, bsz, embed_dim_to_check = q_tensor.size()
     head_dim = multihead_attention_module.embed_dim // multihead_attention_module.num_heads
@@ -246,14 +248,10 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     nonzero_attn_output=torch.count_nonzero(attn_output).item()
 
 
-    head_flops1=nonzero_attn_weights
-    head_flops2=(qlen * klen)
-    head_flops3=nonzero_attn_output
-    '''head_flops = (
-        (qlen * klen * qk_head_dim)  # QK^T
-        + (qlen * klen)  # softmax
-        + (qlen * klen * v_head_dim)  # AV
-    )'''
+    head_flops1=nonzero_attn_weights# QK^T
+    head_flops2=(qlen * klen)# softmax
+    head_flops3=nonzero_attn_output# AV
+
     head_flops=head_flops1+head_flops2+head_flops3
 
     flops += num_heads * head_flops
@@ -262,8 +260,6 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     flops += qlen * vdim * (vdim + 1)
 
     flops *= batch_size
-    print(flops)
-    sys.exit()
     return bops, flops
 
 
