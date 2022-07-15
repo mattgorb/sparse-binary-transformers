@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 from models.layers.sparse_type import *
+import torch.nn.functional as nnF
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
@@ -229,7 +230,6 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
     v.flatten()[v_sort_ind[prune_size:]] = 0
 
-    print(q.size())
     q = q.contiguous().view(tgt_len, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
     if k is not None:
         k = k.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
@@ -237,12 +237,19 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
         v = v.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
 
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
-    print(q.size())
-    print(attn_output_weights.size())
-    print(qlen)
-    print(klen)
-    print(qk_head_dim)
+
+    nonzero_attn_weights=torch.count_nonzero(attn_output_weights)
+
+    print(nonzero_attn_weights)
+
+    attn_output_weights = nnF.softmax(
+        attn_output_weights, dim=-1)
+
+    attn_output = torch.bmm(attn_output_weights, v)
+    nonzero_attn_output=torch.count_nonzero(attn_output)
+    print(nonzero_attn_output)
     sys.exit()
+
     head_flops1=(qlen * klen * qk_head_dim)
     head_flops2=(qlen * klen)
     head_flops3=(qlen * klen * v_head_dim)
