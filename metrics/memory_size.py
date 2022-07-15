@@ -1,5 +1,5 @@
 import numpy as np
-
+import sys
 from .nonzero import dtype2bits, nonzero,dtype2bits_np
 from .util import get_activations
 import torch
@@ -78,18 +78,28 @@ def model_size(model,args,quantized=False, as_bits=True):
             if hasattr(m, "weight") and m.weight is not None:
                 #print(name)
                 #print(m._get_name())
+                b=t=nz=0
                 print(f'Weights found for {m._get_name()}')
-            else:
-                print(f'No weights for {m._get_name()}')
-            continue
-            t = np.prod(tensor.shape)
-            nz = nonzero(tensor.detach().cpu().numpy())
-            print(name, tensor.shape)
-            bits = dtype2bits[tensor.dtype]
-            params_dict['total_bits']+=(bits*t)
-            params_dict['total_params'] += t
-            params_dict['total_nonzero_params'] += nz
-            params_dict['float32_params']+=t
+                if m._get_name()=='SubnetLinBiprop' or m._get_name()=='SubnetLayerNorm' :
+                    tensor=m.weight.detach().cpu().numpy()
+                    b = np.prod(tensor.shape)
+                    nz = b*m.prune_rate
+                    dtype=tensor.bool
+                    bits = dtype2bits[dtype]
+                    params_dict['total_bits'] += (bits * b)
+                elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
+                    tensor=m.weight.detach().cpu().numpy()
+                    t = np.prod(tensor.shape)
+                    nz = t*m.prune_rate
+                    params_dict['total_bits'] += (nz*32+(t-nz)*1)
+                else:
+                    print(f'Class not found {m._get_name()}')
+                    sys.exit()
+                params_dict['total_params'] += t
+                params_dict['total_nonzero_params'] += nz
+                params_dict['binary_params'] += b
+
+    print(params_dict)
     sys.exit()
     return params_dict
 
