@@ -60,7 +60,7 @@ def model_size(model, as_bits=True):
             params_dict['total_nonzero_params'] += nz
             params_dict['int8_params']+=t
         else:
-            print(k,v)
+            print(k)
 
     #logic for float32 and binary network
     for name, tensor in model.named_parameters():
