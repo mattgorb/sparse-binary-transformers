@@ -84,21 +84,21 @@ def model_size(model,args,quantized=False, as_bits=True):
                     nz = b*m.prune_rate
                     dtype=torch.bool
                     bits = dtype2bits[dtype]
-                    params_dict['total_bits'] += (bits * b)
+                    params_dict['total_bits'] += int(bits * b)
                 elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
                     tensor=m.weight.detach().cpu().numpy()
                     t = np.prod(tensor.shape)
                     nz = t*m.prune_rate
                     b=(t-nz)
                     f=t*m.prune_rate
-                    params_dict['total_bits'] += (nz*32+(t-nz)*1)
+                    params_dict['total_bits'] += int(nz*32+(t-nz)*1)
                 else:
                     print(f'Class not found {m._get_name()}')
                     sys.exit()
-                params_dict['total_params'] += t
-                params_dict['total_nonzero_params'] += nz
-                params_dict['float32_params'] += f
-                params_dict['binary_params'] += b
+                params_dict['total_params'] += int(t)
+                params_dict['total_nonzero_params'] += int(nz)
+                params_dict['float32_params'] += int(f)
+                params_dict['binary_params'] += int(b)
 
     print(params_dict)
     sys.exit()
