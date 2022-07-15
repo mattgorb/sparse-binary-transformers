@@ -199,6 +199,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     v = multihead_attention_module.linear_V(input)
 
     #q = self.q_scaling_product.mul_scalar(q, scaling)
+    print(q)
     print(q.size())
     print(torch.count_nonzero(q))
     sys.exit()
