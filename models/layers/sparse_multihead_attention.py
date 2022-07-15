@@ -292,7 +292,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
 
-        prune_size=int(torch.flatten(q).size()[0]*0.25)
+        prune_size=int(torch.flatten(q).size()[0]*0.05)
 
         q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
         q.flatten()[q_sort_ind[prune_size:]]=0
