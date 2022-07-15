@@ -75,13 +75,12 @@ def model_size(model,args,quantized=False, as_bits=True):
         #logic for float32 and binary network
         for name, m in model.named_modules():
             if hasattr(m, "weight") and m.weight is not None:
-                #print(name)
-                #print(m._get_name())
                 b=t=nz=f=0
                 print(f'Weights found for {m._get_name()}')
                 if m._get_name()=='SubnetLinBiprop'  :
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)
+                    t=b
                     nz = b*m.prune_rate
                     dtype=torch.bool
                     bits = dtype2bits[dtype]
@@ -90,6 +89,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     tensor=m.weight.detach().cpu().numpy()
                     t = np.prod(tensor.shape)
                     nz = t*m.prune_rate
+                    b=(t-nz)
                     f=t*m.prune_rate
                     params_dict['total_bits'] += (nz*32+(t-nz)*1)
                 else:
