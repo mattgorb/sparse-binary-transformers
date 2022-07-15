@@ -47,7 +47,7 @@ def model_size(model, as_bits=True):
             params_dict['total_params'] += t
             params_dict['total_nonzero_params'] += nz
             params_dict['int8_params']+=t
-        if not isinstance(v, tuple) and '_packed' in k:
+        elif not isinstance(v, tuple) and '_packed' in k:
 
             temp = torch.int_repr(v).numpy()
             assert(temp.dtype==np.uint8)
@@ -59,6 +59,8 @@ def model_size(model, as_bits=True):
             params_dict['total_params'] += t
             params_dict['total_nonzero_params'] += nz
             params_dict['int8_params']+=t
+        else:
+            print(k,v)
 
     #logic for float32 and binary network
     for name, tensor in model.named_parameters():
