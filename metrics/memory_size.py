@@ -23,9 +23,15 @@ def model_size(model, as_bits=True):
         int -- Total number of weight & bias params
         int -- Out total_params exactly how many are nonzero
     """
+    params_dict={}
+    params_dict['total_params']=0
+    params_dict['total_nonzero_params']=0
+    params_dict['int8_params']=0
+    params_dict['float32_params']=0
+    params_dict['binary_params']=0
+    params_dict['total_bits']=0
 
-    total_params = 0
-    nonzero_params = 0
+    #logic for quantized network
     for (k, v) in model.state_dict().items():
         if 'dtype' in k and '_packed' in k:
             continue
@@ -35,42 +41,36 @@ def model_size(model, as_bits=True):
 
             t = np.prod(v[0].shape)
             nz = nonzero(temp)
-            if as_bits:
-                #print(dtype)
-                bits = dtype2bits[torch.qint8]
-                t *= bits
-                nz *= bits
-            total_params += t
-            nonzero_params += nz
+
+            bits = dtype2bits[torch.qint8]
+            params_dict['total_bits']+=(bits*t)
+            params_dict['total_params'] += t
+            params_dict['total_nonzero_params'] += nz
+            params_dict['int8_params']+=t
         if not isinstance(v, tuple) and '_packed' in k:
 
             temp = torch.int_repr(v).numpy()
-            #print(temp.dtype)
             assert(temp.dtype==np.uint8)
             t = np.prod(v.shape)
             nz = nonzero(temp)
-            if as_bits:
-                #print(dtype)
-                bits = dtype2bits[torch.qint8]
-                t *= bits
-                nz *= bits
-            total_params += t
-            nonzero_params += nz
 
+            bits = dtype2bits[torch.qint8]
+            params_dict['total_bits']+=(bits*t)
+            params_dict['total_params'] += t
+            params_dict['total_nonzero_params'] += nz
+            params_dict['int8_params']+=t
 
+    #logic for float32 and binary network
     for name, tensor in model.named_parameters():
-        #print(name)
-        #print(tensor.shape)
         t = np.prod(tensor.shape)
         nz = nonzero(tensor.detach().cpu().numpy())
-        if as_bits:
-            #print(tensor.dtype)
-            bits = dtype2bits[tensor.dtype]
-            t *= bits
-            nz *= bits
-        total_params += t
-        nonzero_params += nz
-    return int(total_params), int(nonzero_params)
+
+        bits = dtype2bits[tensor.dtype]
+        params_dict['total_bits']+=(bits*t)
+        params_dict['total_params'] += t
+        params_dict['total_nonzero_params'] += nz
+        params_dict['float32_params']+=t
+    return params_dict
 
 def memory(model, input, as_bits=True):
     """Compute memory size estimate
