@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+from models.layers.sparse_type import *
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
@@ -156,11 +157,16 @@ def dense_flops(in_neurons, out_neurons):
 
 def subnet_dense_flops(module, input,):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
-    print(module)
+    quantnet = GetSubnetBinary.apply(module.clamped_scores, module.weight, module.prune_rate, module.calc_alpha())
+    # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
+    w = torch.sign(module.weight) * quantnet
+    print(torch.count_nonzero(w))
+
+    '''print(module)
     print(module.weight)
     print(module.weight.size())
     print(input)
-    print(input.shape)
+    print(input.shape)'''
     sys.exit()
     #return in_neurons * out_neurons
 
