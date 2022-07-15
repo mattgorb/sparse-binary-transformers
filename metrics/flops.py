@@ -93,7 +93,7 @@ def flops(model, input):
             module_bops, module_nonzero_flops = BOP_fn[m.__class__](m, act)
             flops_dict['total_flops'] += module_nonzero_flops
             flops_dict['total_bops'] += module_bops
-            print(f'Module: {m._get_name()}, BOPs: {module_bops:,}')  # , nonzero FLOPS: {module_nonzero_flops}')
+            print(f'Module: {m._get_name()}, BOPs: {module_bops:,},  Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')
 
         else:
             #print(f'Module not found: {m._get_name()}')
