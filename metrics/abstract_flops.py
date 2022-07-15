@@ -158,7 +158,7 @@ def subnet_dense_flops(module, input,):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
     print(module)
     print(input)
-    print(input.size())
+    print(input.shape)
     sys.exit()
     #return in_neurons * out_neurons
 
