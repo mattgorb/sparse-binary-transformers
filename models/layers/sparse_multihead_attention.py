@@ -294,7 +294,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
 
         q_size=int(torch.flatten(q).size()[0]*0.1)
         q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
-        q.flatten()[q_sort_val[q_size:]]=0
+        q.flatten()[q_sort_ind[q_size:]]=0
         #q.flatten()[~q_topk_ind]=0
         print(q)
         sys.exit()
