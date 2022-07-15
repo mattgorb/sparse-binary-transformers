@@ -65,7 +65,6 @@ def model_size(model,args,quantized=False, as_bits=True):
         for name, tensor in model.named_parameters():
             t = np.prod(tensor.shape)
             nz = nonzero(tensor.detach().cpu().numpy())
-            print(name, tensor.shape)
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
             params_dict['total_params'] += t
@@ -78,9 +77,9 @@ def model_size(model,args,quantized=False, as_bits=True):
             if hasattr(m, "weight") and m.weight is not None:
                 #print(name)
                 #print(m._get_name())
-                b=t=nz=0
+                b=t=nz=f=0
                 print(f'Weights found for {m._get_name()}')
-                if m._get_name()=='SubnetLinBiprop' or m._get_name()=='SubnetLayerNorm' :
+                if m._get_name()=='SubnetLinBiprop'  :
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)
                     nz = b*m.prune_rate
@@ -91,12 +90,14 @@ def model_size(model,args,quantized=False, as_bits=True):
                     tensor=m.weight.detach().cpu().numpy()
                     t = np.prod(tensor.shape)
                     nz = t*m.prune_rate
+                    f=t*m.prune_rate
                     params_dict['total_bits'] += (nz*32+(t-nz)*1)
                 else:
                     print(f'Class not found {m._get_name()}')
                     sys.exit()
                 params_dict['total_params'] += t
                 params_dict['total_nonzero_params'] += nz
+                params_dict['float32_params'] += f
                 params_dict['binary_params'] += b
 
     print(params_dict)
