@@ -1,7 +1,7 @@
 import torch.nn as nn
 from models.layers.sparse_type import linear_init,layernorm_init
 import torch.nn.functional as F
-from models.layers.sparse_multihead_attention import MultiheadAttention
+from models.layers.sparse_multihead_attention import SparseMultiheadAttention
 
 class SparseTransformerEncoderLayer(nn.Module):
 
@@ -11,7 +11,7 @@ class SparseTransformerEncoderLayer(nn.Module):
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
 
-        self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
+        self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                             **factory_kwargs)
         # Implementation of Feedforward model
 

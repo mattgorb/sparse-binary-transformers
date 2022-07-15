@@ -155,6 +155,88 @@ def dense_flops(in_neurons, out_neurons):
     return in_neurons * out_neurons
 
 
+
+
+
+
+
+def sparse_multihead_attention_flops(multihead_attention_module, input,):
+    flops = 0
+
+    q, k, v = input, input, input
+
+    batch_first = multihead_attention_module.batch_first \
+        if hasattr(multihead_attention_module, 'batch_first') else False
+    if batch_first:
+        batch_size = q.shape[0]
+        len_idx = 1
+    else:
+        batch_size = q.shape[1]
+        len_idx = 0
+
+    dim_idx = 2
+
+    qdim = q.shape[dim_idx]
+    kdim = k.shape[dim_idx]
+    vdim = v.shape[dim_idx]
+
+    qlen = q.shape[len_idx]
+    klen = k.shape[len_idx]
+    vlen = v.shape[len_idx]
+
+
+    num_heads = multihead_attention_module.num_heads
+    assert qdim == multihead_attention_module.embed_dim
+
+    if multihead_attention_module.kdim is None:
+        assert kdim == qdim
+    if multihead_attention_module.vdim is None:
+        assert vdim == qdim
+
+    q = multihead_attention_module.linear_Q(input)
+    k = multihead_attention_module.linear_K(input)
+    v = multihead_attention_module.linear_V(input)
+
+    #q = self.q_scaling_product.mul_scalar(q, scaling)
+
+    print(torch.count_nonzero(q))
+    sys.exit()
+
+    # Q scaling
+    flops += qlen * qdim
+
+    # Initial projections
+    '''flops += (
+        (qlen * qdim * qdim)  # QW
+        + (klen * kdim * kdim)  # KW
+        + (vlen * vdim * vdim)  # VW
+    )'''
+
+    if multihead_attention_module.in_proj_bias is not None:
+        flops += (qlen + klen + vlen) * qdim
+
+    # attention heads: scale, matmul, softmax, matmul
+    qk_head_dim = qdim // num_heads
+    v_head_dim = vdim // num_heads
+
+
+    head_flops = (
+        (qlen * klen * qk_head_dim)  # QK^T
+        + (qlen * klen)  # softmax
+        + (qlen * klen * v_head_dim)  # AV
+    )
+
+    flops += num_heads * head_flops
+
+    # final projection, bias is always enabled
+    flops += qlen * vdim * (vdim + 1)
+
+    flops *= batch_size
+    return flops
+
+
+
+
 def subnet_dense_flops(module):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
     return module.in_features*module.out_features, module.prune_rate*module.in_features*module.out_features

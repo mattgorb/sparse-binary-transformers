@@ -9,7 +9,7 @@ from models.layers.sparse_type import linear_init
 
 import warnings
 
-class MultiheadAttention(nn.MultiheadAttention):
+class SparseMultiheadAttention(nn.MultiheadAttention):
     _FLOAT_MODULE = nn.MultiheadAttention
 
     r"""Quantizable implementation of the MultiheadAttention.
@@ -63,7 +63,7 @@ class MultiheadAttention(nn.MultiheadAttention):
                  kdim: int = None, vdim: int = None, batch_first: bool = False,
                  device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
-        super(MultiheadAttention, self).__init__(embed_dim, num_heads, dropout,
+        super(SparseMultiheadAttention, self).__init__(embed_dim, num_heads, dropout,
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
@@ -90,7 +90,7 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
     def _get_name(self):
-        return 'QuantizableMultiheadAttention'
+        return 'SparseMultiheadAttention'
 
     @classmethod
     def from_float(cls, other):
