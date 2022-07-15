@@ -260,7 +260,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     flops += qlen * vdim * (vdim + 1)
 
     flops *= batch_size
-    return bops, flops
+    return bops, int(flops)
 
 
 

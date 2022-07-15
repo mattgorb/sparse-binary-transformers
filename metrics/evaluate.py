@@ -50,16 +50,16 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
     #print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-    flops_dict,modules_not_found=flops(model,torch.ones(max_len,1).int() )
-    for k,v in flops_dict.items():
-        print(f'{k}: {v}')
+    #flops_dict,modules_not_found=flops(model,torch.ones(max_len,1).int() )
+    #for k,v in flops_dict.items():
+        #print(f'{k}: {v}')
 
-    print(f'Modules not found for FLOP measurement: {modules_not_found}')
-    sys.exit()
+    #print(f'Modules not found for FLOP measurement: {modules_not_found}')
+
     params_dict = model_size(model)
     for k,v in params_dict.items():
         print(f'{k}: {v}')
-
+    sys.exit()
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
 
