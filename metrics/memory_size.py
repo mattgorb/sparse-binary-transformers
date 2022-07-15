@@ -84,7 +84,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)
                     nz = b*m.prune_rate
-                    dtype=tensor.bool
+                    dtype=torch.bool
                     bits = dtype2bits[dtype]
                     params_dict['total_bits'] += (bits * b)
                 elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
