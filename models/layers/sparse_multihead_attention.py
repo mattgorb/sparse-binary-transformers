@@ -288,6 +288,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         scaling = float(head_dim) ** -0.5
 
         q = self.linear_Q(query)
+        print(q)
+        sys.exit()
         k = self.linear_K(key)
         v = self.linear_V(value)
 
