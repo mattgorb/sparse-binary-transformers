@@ -46,14 +46,12 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         max_len=max(max_len,text.size(0))
     print(max_len)'''
 
-    num_flops, num_nonzero_flops,modules_not_found=flops(model,torch.ones(max_len,1).int() )
-    #total_memory,total_nonzero_memory=memory(model, torch.ones(max_len,1).int())
-    #params_dict=model_size(model)
-    print(f'\nTotal FLOPs: {num_flops:,}')  # Total nonzero FLOPs: {num_nonzero_flops:,}')
+    flops_dict,modules_not_found=flops(model,torch.ones(max_len,1).int() )
+    for k,v in flops_dict.items():
+        print(f'{k}: {v}')
     sys.exit()
     print(f'Modules not found for FLOP measurement: {modules_not_found}')
-    print(f'Total Memory in Bits: {total_memory:,}')  # Total nonzero Memory in Bits: {total_nonzero_memory:,}')
-    #print(f'Model Size in Bits: {total_size:,} ')  # TNonzero Model Size in Bits: {total_nz_size:,}')
+    params_dict = model_size(model)
     for k,v in params_dict.items():
         print(f'{k}: {v}')
 
@@ -82,13 +80,11 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
-        num_flops, num_nonzero_flops, modules_not_found = flops(model, torch.ones(max_len, 1).int())
-        total_memory, total_nonzero_memory = memory(model, torch.ones(max_len, 1).int())
-        params_dict = model_size(model)
-        print(f'\nTotal FLOPs: {num_flops:,}')  # Total nonzero FLOPs: {num_nonzero_flops:,}')
+        flops_dict, modules_not_found = flops(model, torch.ones(max_len, 1).int())
+        for k, v in flops_dict.items():
+            print(f'{k}: {v}')
         print(f'Modules not found for FLOP measurement: {modules_not_found}')
-        print(f'Total Memory in Bits: {total_memory:,}')  # Total nonzero Memory in Bits: {total_nonzero_memory:,}')
-        # print(f'Model Size in Bits: {total_size:,} ')  # TNonzero Model Size in Bits: {total_nz_size:,}')
+        params_dict = model_size(model)
         for k, v in params_dict.items():
             print(f'{k}: {v}')
 

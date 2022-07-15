@@ -42,7 +42,7 @@ def _posenc_flops(module, activation):
 
 def _subnet_linear_flops(module, activation):
     # Auxiliary func to use abstract flop computation
-    return subnet_dense_flops(module, activation)
+    return subnet_dense_flops(module, )
 
 def _subnet_layernorm_flops(module, activation):
     return subnet_norm_flops(module,activation)
@@ -67,38 +67,32 @@ def flops(model, input):
         SubnetLayerNorm: _subnet_layernorm_flops
     }
 
-    total_flops = nonzero_flops = 0
+    BOP_fn = {
+        SubnetLinBiprop: _subnet_linear_flops,
+        SubnetLayerNorm: _subnet_layernorm_flops
+    }
+
+    flops_dict={}
+    flops_dict['total_flops']=0
+    flops_dict['total_bops']=0
+
     activations = get_activations(model, input)
 
     modules_not_found=[]
     # The ones we need for backprop
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
-            #if m.__class__==MultiheadAttention:
-            #print(act.shape)
             module_flops = FLOP_fn[m.__class__](m, act)
-            module_nonzero_flops=0
-            total_flops += module_flops
-            '''# For our operations, all weights are symmetric so we can just
-            # do simple rule of three for the estimation
-            #if m.__class__!=MultiheadAttention:
-                #w = m.weight.detach().cpu().numpy().copy()
-                #module_nonzero_flops=module_flops * nonzero(w).sum() / np.prod(w.shape)
-                #nonzero_flops += module_nonzero_flops
-                #else:
-                #print('neeed multiheead attention nonzeero flops')
-                #print(m)
-                #print(act.shape)
-                #lin_q=m.linear_Q(torch.tensor(act)).detach().cpu().numpy().copy()
-                #lin_k = m.linear_K(torch.tensor(act)).detach().cpu().numpy().copy()
-                #lin_v = m.linear_V(torch.tensor(act)).detach().cpu().numpy().copy()
-                #print(lin_q.size())
-                #multihead_attention_nonzero_flops(m,lin_q,lin_k,lin_v)
-                #sys.exit()
-                module_nonzero_flops=0'''
+            flops_dict['total_flops'] += module_flops
             print(f'Module: {m._get_name()}, FLOPs: {module_flops:,}')#, nonzero FLOPS: {module_nonzero_flops}')
+        elif m.__class__ in BOP_fn:
+            module_bops, module_nonzero_flops = BOP_fn[m.__class__](m, act)
+            flops_dict['total_flops'] += module_nonzero_flops
+            flops_dict['total_bops'] += module_bops
+            print(f'Module: {m._get_name()}, FLOPs: {module_flops:,}')  # , nonzero FLOPS: {module_nonzero_flops}')
+
         else:
             #print(f'Module not found: {m._get_name()}')
             modules_not_found.append(m._get_name())
 
-    return total_flops,nonzero_flops,set(modules_not_found)
+    return flops_dict,set(modules_not_found)

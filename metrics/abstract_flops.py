@@ -155,27 +155,16 @@ def dense_flops(in_neurons, out_neurons):
     return in_neurons * out_neurons
 
 
-def subnet_dense_flops(module, input,):
+def subnet_dense_flops(module):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
-    quantnet = GetSubnetBinary.apply(module.clamped_scores, module.weight, module.prune_rate, module.calc_alpha())
-    # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
-    w = torch.sign(module.weight) * quantnet
-    print(torch.count_nonzero(w))
-
-    '''print(module)
-    print(module.weight)
-    print(module.weight.size())
-    print(input)
-    print(input.shape)'''
-    sys.exit()
-    #return in_neurons * out_neurons
+    return module.in_features*module.out_features, module.prune_rate*module.in_features*module.out_features
 
 def subnet_norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
     if (getattr(module, 'affine', False)
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2
-    return batch_flops
+    return batch_flops, batch_flops*module.prune_rate
 
 
 
