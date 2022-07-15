@@ -237,27 +237,24 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
         v = v.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
 
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
-
-    nonzero_attn_weights=torch.count_nonzero(attn_output_weights)
-
-    print(nonzero_attn_weights.item())
+    nonzero_attn_weights=torch.count_nonzero(attn_output_weights).item()
 
     attn_output_weights = nnF.softmax(
         attn_output_weights, dim=-1)
 
     attn_output = torch.bmm(attn_output_weights, v)
-    nonzero_attn_output=torch.count_nonzero(attn_output)
-    print(nonzero_attn_output)
-    sys.exit()
+    nonzero_attn_output=torch.count_nonzero(attn_output).item()
 
-    head_flops1=(qlen * klen * qk_head_dim)
+
+    head_flops1=nonzero_attn_weights
     head_flops2=(qlen * klen)
-    head_flops3=(qlen * klen * v_head_dim)
+    head_flops3=nonzero_attn_output
     '''head_flops = (
         (qlen * klen * qk_head_dim)  # QK^T
         + (qlen * klen)  # softmax
         + (qlen * klen * v_head_dim)  # AV
     )'''
+    head_flops=head_flops1+head_flops2+head_flops3
 
     flops += num_heads * head_flops
 
@@ -266,6 +263,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
     flops *= batch_size
     print(flops)
+    sys.exit()
     return bops, flops
 
 
