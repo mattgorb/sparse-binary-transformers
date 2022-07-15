@@ -291,13 +291,11 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        #print(q.size())
+
         q_size=int(torch.flatten(q).size()[0]*0.1)
-        #print(q_size)
-        #print(torch.prod(q.size()))
-        #sys.exit()
-        q_topk_val, q_topk_ind=torch.topk(q.flatten(),q_size)
-        q.flatten()[~q_topk_ind]=0
+        q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
+        q.flatten()[q_sort_val[q_size:]]=0
+        #q.flatten()[~q_topk_ind]=0
         print(q)
         sys.exit()
 
