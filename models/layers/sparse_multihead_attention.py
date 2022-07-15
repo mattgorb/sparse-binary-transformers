@@ -292,18 +292,16 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
 
-        q_size=int(torch.flatten(q).size()[0]*0.1)
+        prune_size=int(torch.flatten(q).size()[0]*0.25)
+
         q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
-        q.flatten()[q_sort_ind[q_size:]]=0
-        #q.flatten()[~q_topk_ind]=0
-        print(q)
-        sys.exit()
+        q.flatten()[q_sort_ind[prune_size:]]=0
 
-        k_topk_val, k_topk_ind=torch.topk(k.flatten(),q_size)
-        k.flatten()[~k_topk_ind]=0
+        k_sort_val, k_sort_ind=torch.sort(k.abs().flatten(),descending=True)
+        k.flatten()[k_sort_ind[prune_size:]]=0
 
-        v_topk_val, v_topk_ind=torch.topk(v.flatten(),q_size)
-        v.flatten()[~v_topk_ind]=0
+        v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
+        v.flatten()[v_sort_ind[prune_size:]]=0
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
