@@ -7,6 +7,7 @@ from .nonzero import *
 from .abstract_flops import *
 from .util import get_activations
 from models.layers.positional_encoder import PositionalEncoding
+from models.layers.sparse_type import SubnetLayerNorm,SubnetLinBiprop,SubnetEmb
 
 def _multihead_attention_flops(module, activation):
     return multihead_attention_flops(multihead_attention_module=module,input=activation)
@@ -37,6 +38,15 @@ def _layernorm_flops(module, activation):
 def _posenc_flops(module, activation):
     return posenc_flops(module,activation)
 
+
+
+def _subnet_linear_flops(module, activation):
+    # Auxiliary func to use abstract flop computation
+    return subnet_dense_flops(module, activation)
+
+def _subnet_layernorm_flops(module, activation):
+    return subnet_norm_flops(module,activation)
+
 def flops(model, input):
     """Compute Multiply-add FLOPs estimate from model
     Arguments:
@@ -52,7 +62,9 @@ def flops(model, input):
         nn.Linear: _linear_flops,
         MultiheadAttention: _multihead_attention_flops,
         nn.LayerNorm: _layernorm_flops,
-        PositionalEncoding: _posenc_flops
+        PositionalEncoding: _posenc_flops,
+        SubnetLinBiprop: _subnet_linear_flops,
+        SubnetLayerNorm: _subnet_layernorm_flops
     }
 
     total_flops = nonzero_flops = 0

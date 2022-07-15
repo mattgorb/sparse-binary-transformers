@@ -153,6 +153,23 @@ def dense_flops(in_neurons, out_neurons):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
     return in_neurons * out_neurons
 
+
+def subnet_dense_flops(module, input,):
+    """Compute the number of multiply-adds used by a Dense (Linear) layer"""
+    print(module)
+    print(input)
+    sys.exit()
+    #return in_neurons * out_neurons
+
+def subnet_norm_flops(module, input,):
+    batch_flops = np.prod(input[0].shape)
+    if (getattr(module, 'affine', False)
+            or getattr(module, 'elementwise_affine', False)):
+        batch_flops *= 2
+    return batch_flops
+
+
+
 def conv2d_flops(in_channels, out_channels, input_shape, kernel_shape,
                  padding='same', strides=1, dilation=1):
     """Compute the number of multiply-adds used by a Conv2D layer
