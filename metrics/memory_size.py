@@ -61,7 +61,7 @@ def model_size(model, as_bits=True):
             params_dict['int8_params']+=t
         #else:
             #print(k)
-    print("\n\n\n")
+    #print("\n\n\n")
     #logic for float32 and binary network
     for name, tensor in model.named_parameters():
         t = np.prod(tensor.shape)
