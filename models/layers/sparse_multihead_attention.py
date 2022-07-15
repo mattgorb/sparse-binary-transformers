@@ -292,9 +292,9 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
 
-        q_size=torch.prod(q.size())*0.5
+        q_size=torch.flatten(q).size()*0.5
         print(q_size)
-        print(torch.prod(q.size()))
+        #print(torch.prod(q.size()))
         sys.exit()
         q_topk_val, q_topk_ind=torch.topk(q,q_size)
         q[q_topk_ind]=q_topk_val
