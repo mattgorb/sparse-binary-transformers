@@ -298,6 +298,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         #sys.exit()
         q_topk_val, q_topk_ind=torch.topk(q.flatten(),q_size)
         q.flatten()[~q_topk_ind]=0
+        print(q)
+        sys.exit()
 
         k_topk_val, k_topk_ind=torch.topk(k.flatten(),q_size)
         k.flatten()[~k_topk_ind]=0
