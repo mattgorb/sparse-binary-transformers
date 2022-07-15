@@ -162,6 +162,7 @@ def dense_flops(in_neurons, out_neurons):
 
 def sparse_multihead_attention_flops(multihead_attention_module, input,):
     flops = 0
+    bops=0
 
     q, k, v = input, input, input
 
@@ -193,16 +194,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     if multihead_attention_module.vdim is None:
         assert vdim == qdim
 
-    input=torch.tensor(input)
-    q = multihead_attention_module.linear_Q(input)
-    k = multihead_attention_module.linear_K(input)
-    v = multihead_attention_module.linear_V(input)
 
-    #q = self.q_scaling_product.mul_scalar(q, scaling)
-    print(q)
-    print(q.size())
-    print(torch.count_nonzero(q))
-    sys.exit()
 
     # Q scaling
     flops += qlen * qdim
@@ -234,6 +226,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     flops += qlen * vdim * (vdim + 1)
 
     flops *= batch_size
+    print(flops)
     return flops
 
 
