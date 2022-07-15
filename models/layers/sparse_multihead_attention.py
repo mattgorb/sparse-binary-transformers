@@ -76,6 +76,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
 
         self.args=args
+        self.attention_prune_rate=args.attention_prune_rate
 
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
@@ -292,7 +293,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
 
-        prune_size=int(torch.flatten(q).size()[0]*0.05)
+        prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
 
         q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
         q.flatten()[q_sort_ind[prune_size:]]=0
