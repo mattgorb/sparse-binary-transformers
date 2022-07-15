@@ -56,10 +56,10 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
     #print(f'Modules not found for FLOP measurement: {modules_not_found}')
 
-    params_dict = model_size(model, args)
-    for k,v in params_dict.items():
-        print(f'{k}: {v}')
-    sys.exit()
+    #params_dict = model_size(model, args)
+    #for k,v in params_dict.items():
+        #print(f'{k}: {v}')
+    #sys.exit()
     if args.model_type == 'Dense':
         print('\n\n Running Quantized model...')
 
@@ -68,18 +68,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
             torch.nn.Linear: default_dynamic_qconfig,
         }
         quantize_dynamic(model, qconfig_dict, inplace=True,)
-        '''for name, layer in model.named_modules():
-            if isinstance(layer, nn.Linear):
-                print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig
-            if isinstance(layer, nn.LayerNorm):
-                print(name, layer)
-                layer.qconfig=torch.quantization.default_qconfig
-            if isinstance(layer, nn.Embedding):
-                print(name, layer)
-                layer.qconfig=torch.quantization.float_qparams_weight_only_qconfig
-        torch.quantization.prepare(model, inplace=True,)
-        torch.quantization.convert(model ,inplace=True,)'''
+
 
         model.eval()
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
@@ -98,10 +87,46 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
         print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
     else:
-        sys.exit()
-        print(model.transformer_encoder.layers[0].linear1.calc_alpha())
-        for n,m in model.transformer_encoder.layers[0].linear1.named_parameters():
-            print(n)
-        print(model.transformer_encoder.layers[0].linear1.get_buffer('alpha'))
-        sys.exit()
-        #print(model)
+        print('\n\n Running Quantized model...')
+
+        qconfig_dict = {
+            torch.nn.Embedding: float_qparams_weight_only_qconfig,
+            torch.nn.Linear: default_dynamic_qconfig,
+        }
+        quantize_dynamic(model, qconfig_dict, inplace=True,)
+
+        model.eval()
+        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+        print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''for name, layer in model.named_modules():
+    if isinstance(layer, nn.Linear):
+        print(name, layer)
+        layer.qconfig=torch.quantization.default_qconfig
+    if isinstance(layer, nn.LayerNorm):
+        print(name, layer)
+        layer.qconfig=torch.quantization.default_qconfig
+    if isinstance(layer, nn.Embedding):
+        print(name, layer)
+        layer.qconfig=torch.quantization.float_qparams_weight_only_qconfig
+torch.quantization.prepare(model, inplace=True,)
+torch.quantization.convert(model ,inplace=True,)'''
