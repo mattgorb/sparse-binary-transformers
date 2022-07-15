@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore")
 
 
 
-def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader):
+def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args):
     device ='cpu'
     model = model.to(device)
     criterion=criterion.to(device)
@@ -56,7 +56,7 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
 
     #print(f'Modules not found for FLOP measurement: {modules_not_found}')
 
-    params_dict = model_size(model)
+    params_dict = model_size(model, args)
     for k,v in params_dict.items():
         print(f'{k}: {v}')
     sys.exit()
@@ -89,7 +89,9 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
         for k, v in flops_dict.items():
             print(f'{k}: {v}')
         print(f'Modules not found for FLOP measurement: {modules_not_found}')
-        params_dict = model_size(model)
+
+
+        params_dict = model_size(model, args, quantized=True)
         for k, v in params_dict.items():
             print(f'{k}: {v}')
 

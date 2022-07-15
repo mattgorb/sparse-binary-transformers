@@ -148,7 +148,7 @@ def main():
     best_valid_loss = float('inf')
 
     if args.evaluate:
-        evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader)
+        evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
         return
 
 
