@@ -80,7 +80,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                 #print(m._get_name())
                 print(f'Weights found for {m._get_name()}')
             else:
-                print(f'No weights for {m}')
+                print(f'No weights for {m._get_name()}')
             continue
             t = np.prod(tensor.shape)
             nz = nonzero(tensor.detach().cpu().numpy())
