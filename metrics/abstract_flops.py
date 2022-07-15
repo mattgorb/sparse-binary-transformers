@@ -240,7 +240,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
     nonzero_attn_weights=torch.count_nonzero(attn_output_weights)
 
-    print(nonzero_attn_weights)
+    print(nonzero_attn_weights.item())
 
     attn_output_weights = nnF.softmax(
         attn_output_weights, dim=-1)
