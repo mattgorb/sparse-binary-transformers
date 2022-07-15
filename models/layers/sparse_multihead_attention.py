@@ -291,6 +291,17 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
+
+        q_size=torch.prod(q)*0.5
+        q_topk_val, q_topk_ind=torch.topk(q,q_size)
+        q[q_topk_ind]=q_topk_val
+
+        k_topk_val, k_topk_ind=torch.topk(k,q_size)
+        k[k_topk_ind]=k_topk_val
+
+        v_topk_val, v_topk_ind=torch.topk(v,q_size)
+        v[v_topk_ind]=v_topk_val
+
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
         if attn_mask is not None:
@@ -381,6 +392,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         q = self.dequant_q(q)
         k = self.dequant_k(k)
         v = self.dequant_v(v)
+
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
