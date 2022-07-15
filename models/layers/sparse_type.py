@@ -158,7 +158,6 @@ def layernorm_init(in_dim,eps=None , args=None, **factory_kwargs):
 class SubnetLayerNorm(nn.LayerNorm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        print(self.weight.size())
         self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
         nn.init.normal_(self.scores,0,1 )
     @property
