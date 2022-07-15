@@ -74,10 +74,14 @@ def model_size(model,args,quantized=False, as_bits=True):
 
     if args.model_type=='SparseBinary':
         #logic for float32 and binary network
-        for name, module in model.named_modules():
-            print(name)
-            print(module)
-            continue
+        for name, m in model.named_modules():
+            if hasattr(m, "weight") and m.weight is not None:
+                #print(name)
+                #print(m._get_name())
+                print(f'Weights found for {m._get_name()}')
+            else:
+                print(f'No weights for {m}')
+                continue
             t = np.prod(tensor.shape)
             nz = nonzero(tensor.detach().cpu().numpy())
             print(name, tensor.shape)
