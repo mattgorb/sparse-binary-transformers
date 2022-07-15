@@ -47,8 +47,8 @@ def evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloade
     print(max_len)'''
 
     model.eval()
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-    print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+    #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    #print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
     flops_dict,modules_not_found=flops(model,torch.ones(max_len,1).int() )
     for k,v in flops_dict.items():

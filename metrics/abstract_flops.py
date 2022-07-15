@@ -227,7 +227,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
     flops *= batch_size
     print(flops)
-    return flops
+    return bops, flops
 
 
 
