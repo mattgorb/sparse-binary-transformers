@@ -212,7 +212,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
 
     q_tensor=torch.tensor(q)
-    tgt_len, bsz, embed_dim_to_check = q.size()
+    tgt_len, bsz, embed_dim_to_check = q_tensor.size()
     head_dim = multihead_attention_module.embed_dim // multihead_attention_module.num_heads
     q = multihead_attention_module.linear_Q(q_tensor)
     k = multihead_attention_module.linear_K(q_tensor)
