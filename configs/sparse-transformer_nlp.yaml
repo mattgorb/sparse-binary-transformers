@@ -12,5 +12,5 @@ score_seed: 0
 gpu: 6
 epochs: 20
 model_type: 'SparseBinary'
-weight_file: sb_weight.pt
+weight_file: sb_weight_nlp.pt
 #weight_file: weights/sb_weight.pt

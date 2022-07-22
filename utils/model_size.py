@@ -3,10 +3,12 @@ import os
 import torch
 from torch.profiler import profile, record_function, ProfilerActivity
 from typing import Any, Dict, List, Tuple
-
+import numpy as np
 import torch.fx
 from torch.fx import Interpreter
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
 def memory_profile(model, iterator, device):
@@ -34,8 +36,6 @@ def memory_profile(model, iterator, device):
 
 
 
-
-import numpy as np
 
 
 def empty_flops_counter_hook(module, input, output):
