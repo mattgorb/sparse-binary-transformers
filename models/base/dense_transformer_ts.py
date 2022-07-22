@@ -36,9 +36,8 @@ class TSTransformerModel(nn.Module):
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
-    def forward(self, src, has_src_mask=False, has_pad_mask=True):
-        print(src)
-        sys.exit()
+    def forward(self, src, has_src_mask=False, has_pad_mask=False):
+
         if has_src_mask:
             device = src.device
             if self.src_mask is None or self.src_mask.size(0) != len(src):
