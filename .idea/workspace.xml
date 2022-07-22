@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/configs/dense_ts_smd.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_factory/data_loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/base/dense_transformer_ts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/dense.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_nlp.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse-transformer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse-transformer_nlp.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_nlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/dense_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/dense_transformer_nlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer_nlp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/positional_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/positional_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/model_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_size.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_factory/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_factory/data_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
