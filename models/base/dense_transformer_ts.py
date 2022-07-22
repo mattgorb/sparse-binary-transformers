@@ -54,14 +54,9 @@ class TSTransformerModel(nn.Module):
         else:
             self.pad_mask = None
 
-        print(src)
-
-
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
-        print(src.size())
-        sys.exit()
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
         output = self.decoder(output)
         output = output.mean(dim=0)
