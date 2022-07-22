@@ -16,8 +16,8 @@ def train(model, iterator, optimizer, criterion, device):
         i+=1
 
         predictions = model(data)#.squeeze(1)
-        print(predictions)
-        print(data)
+        print(predictions.size())
+        print(data.size())
         sys.exit()
         loss = criterion(predictions, data)
 
