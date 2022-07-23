@@ -58,10 +58,5 @@ class TSTransformerModel(nn.Module):
         src = self.pos_encoder(src)
 
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
-        print('here')
-        print(output.size())
         output = self.decoder(output)
-        print(output.size())
-        sys.exit()
-        #output = output.mean(dim=0)
-        #return F.log_softmax(output, dim=-1)
+        return output
