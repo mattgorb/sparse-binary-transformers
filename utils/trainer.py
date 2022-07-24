@@ -52,7 +52,7 @@ def test(model, iterator, criterion, device,args, epoch):
             x=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
 
             if len(x)>0:
-                print(x)
+                print(torch.tensor(x))
                 print(labels[torch.tensor(x),:])
                 sys.exit()
 
