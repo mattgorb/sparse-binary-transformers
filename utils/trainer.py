@@ -49,7 +49,7 @@ def test(model, iterator, criterion, device,args, epoch):
             epoch_loss += loss.item()
 
             x=torch.where(label[:,-1]==1,1,0)
-            #print(x)
+            x=torch.where((label[:,-1]==1 and label[:,-2]==0),1,0)
             if torch.sum(x)>0:
                 print(x)
 
