@@ -88,7 +88,7 @@ def main():
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device)
         #model_int8 = quantize_fx.convert_fx(model)
-        valid_loss = test(model, test_dataloader, criterion, device)
+        valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
 
         end_time = time.time()
 
