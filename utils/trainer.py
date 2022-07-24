@@ -45,7 +45,22 @@ def test(model, iterator, criterion, device,args, epoch):
         loss_dict[f'{name}_loss']+=loss.item()
         loss_dict[f'{name}_count']+=pred_data.size(0)
 
+    def get_graphs(data, name, indices=None):
+        pred_data=data
+        if indices is not None:
+            pred_data=data[indices,:,:]
+        predictions = model(pred_data)  # .squeeze(1)
+        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        if f'{name}_loss' not in graph_dict:
+            graph_dict[f'{name}_pred']=[]
+            graph_dict[f'{name}_actual']=[]
+        graph_dict[f'{name}_pred'].extend(predictions[:,-1,:].cpu().detach().numpy())
+
+        graph_dict[f'{name}_actual'].extend(pred_data[:,-1,:].cpu().detach().numpy())
+
+
     loss_dict={}
+    graph_dict={}
     model.eval()
     i=0
 
@@ -63,6 +78,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(normal_data)>0:
                 normal_data=torch.tensor(normal_data)
                 get_loss(data, 'benign', indices=normal_data)
+                get_graphs(data, 'benign', indices=normal_data)
 
 
             #examples with anomalies at forecast index
@@ -70,14 +86,23 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_data)>0:
                 anomaly_data=torch.tensor(anomaly_data)
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
+                get_graphs(data, 'anomaly_all', indices=anomaly_data)
 
-            #
-            anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
+            #anomaly is first in a benign set of time series data of  window size t
+            anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
             if len(anomaly_first)>0:
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
+                get_graphs(data, 'anomaly_first', indices=anomaly_data)
 
-
+    for item in ['benign','anomaly_all','anomaly_first']:
+        pred=np.array(graph_dict[f'{item}_pred'])
+        actual=np.array(graph_dict[f'{item}_actual'])
+        for feat in range(pred.shape[1]):
+            plt.clf()
+            plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
+            plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
+            plt.savefig(f'output/{item}_epoch{epoch}_feat{feat}')
 
     print(f' Val. Losses: ')
     for key, val in loss_dict.items():
