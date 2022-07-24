@@ -63,6 +63,6 @@ def test(model, iterator, criterion, device,args, epoch):
     plt.clf()
     plt.plot([x for x in range(len(preds))], preds, '.')
 
-    plt.savefig(f'output/{args.model_type}_{epoch}.png')
+    plt.savefig(f'../output/{args.model_type}_{epoch}.png')
     sys.exit()
     return epoch_loss / len(iterator)
