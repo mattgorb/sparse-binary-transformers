@@ -98,6 +98,9 @@ def test(model, iterator, criterion, device,args, epoch):
     for item in ['benign','anomaly_all','anomaly_first']:
         pred=np.array(graph_dict[f'{item}_pred'])
         actual=np.array(graph_dict[f'{item}_actual'])
+        print(pred.shape)
+        print(actual.shape)
+        sys.exit()
         for feat in range(pred.shape[1]):
             plt.clf()
             plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
