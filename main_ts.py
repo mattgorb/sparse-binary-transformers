@@ -101,7 +101,7 @@ def main():
 
         print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
         print(f'\tTrain Loss: {train_loss:.3f} ')
-        print(f'\t Val. Loss: {valid_loss:.3f} ')
+
 
 
 
