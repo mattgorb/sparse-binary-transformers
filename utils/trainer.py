@@ -53,7 +53,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
             if len(x)>0:
                 print(x)
-                print(labels[x,:])
+                print(labels[torch.tensor(x),:])
                 sys.exit()
 
 
