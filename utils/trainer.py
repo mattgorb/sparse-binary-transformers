@@ -10,11 +10,8 @@ def train(model, iterator, optimizer, criterion, device):
     for batch in iterator:
         optimizer.zero_grad()
         data, _=batch
-
         data=data.to(device)
-
         i+=1
-
         predictions = model(data)#.squeeze(1)
         loss = criterion(predictions, data)
 
@@ -24,8 +21,8 @@ def train(model, iterator, optimizer, criterion, device):
         #acc = binary_accuracy(predictions, label)
         #epoch_acc += acc.item()
 
-        if i%500==0:
-            print(i)
+        #if i%500==0:
+            #print(i)
 
     return epoch_loss / len(iterator)
 
@@ -39,16 +36,13 @@ def test(model, iterator, criterion, device):
 
     with torch.no_grad():
         for batch in iterator:
-            label, text = batch
-            label = label.to(device)
-            text = text.to(device)
-            predictions = model(text).squeeze(1)
-
-            loss = criterion(predictions, label)
-
-            acc = binary_accuracy(predictions, label)
+            data, _ = batch
+            data = data.to(device)
+            i += 1
+            predictions = model(data)  # .squeeze(1)
+            loss = criterion(predictions, data)
 
             epoch_loss += loss.item()
-            epoch_acc += acc.item()
+
 
     return epoch_loss / len(iterator)
