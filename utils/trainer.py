@@ -80,7 +80,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
 
     print(f' Val. Losses: ')
-    for key, val in loss_dict:
+    for key, val in loss_dict.items():
         print(f'{key}:  {val}')
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
