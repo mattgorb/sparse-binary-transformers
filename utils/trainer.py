@@ -54,10 +54,7 @@ def test(model, iterator, criterion, device,args, epoch):
         if f'{name}_pred' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
             graph_dict[f'{name}_actual']=[]
-        print('here')
-        print(predictions[:,-1,:].cpu().detach().numpy().shape)
         graph_dict[f'{name}_pred'].extend(predictions[:,-1,:].cpu().detach().numpy())
-        print(np.array(graph_dict[f'{name}_pred']).shape)
         graph_dict[f'{name}_actual'].extend(pred_data[:,-1,:].cpu().detach().numpy())
 
 
