@@ -99,15 +99,15 @@ def test(model, iterator, criterion, device,args, epoch):
         actual=np.array(graph_dict[f'{item}_actual'])
 
         if item=='benign':
-            pred=pred[:5000,:]
-            actual=actual[:5000,:]
+            pred=pred[:500,:]
+            actual=actual[:500,:]
         for feat in range(pred.shape[1]):
             plt.clf()
             plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
             plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
             plt.legend()
             plt.savefig(f'output/{item}_epoch{epoch}_feat{feat}')
-    sys.exit()
+    #sys.exit()
     print(f' Val. Losses: ')
     for key, val in loss_dict.items():
         print(f'{key}:  {val}')
