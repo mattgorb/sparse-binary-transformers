@@ -51,14 +51,16 @@ def test(model, iterator, criterion, device,args, epoch):
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
             if len(normal_data)>0:
+                print('here')
+                print(len(normal_data))
                 normal_data=torch.tensor(normal_data)
                 data_normal=data[normal_data, :,:]
                 predictions_normal = model(data_normal)
                 loss = criterion(predictions_normal[:, -1, :], data_normal[:, -1, :])
                 normal_ts_loss+=loss.item()
                 sys.exit()
-            print('here')
-            print(label)
+            #print('here')
+            #print(label)
             continue
             #
             x=torch.where(label[:,-1]==1,1,0)
