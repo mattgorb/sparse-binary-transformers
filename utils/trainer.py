@@ -49,8 +49,8 @@ def test(model, iterator, criterion, device,args, epoch):
 
             epoch_loss += loss.item()
 
-            preds.extend(predictions[:, -1, :].detach().numpy())
-            actual.extend(data[:,-1,:].detach().numpy())
+            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            actual.extend(data[:,-1,:].cpu().detach().numpy())
             labels.extend(label.detach().numpy())
 
     preds=np.array(preds)
