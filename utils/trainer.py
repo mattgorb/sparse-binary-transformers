@@ -31,9 +31,20 @@ def train(model, iterator, optimizer, criterion, device):
 
 
 def test(model, iterator, criterion, device,args, epoch):
-    epoch_loss = 0
-    normal_ts_loss=0
 
+    def get_loss(data,name, indices=None):
+        pred_data=data
+        if indices is not None:
+            pred_data=data[indices,:,:]
+        predictions = model(pred_data)  # .squeeze(1)
+        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        if loss_dict[f'{name}_loss'] is None:
+            loss_dict[f'{name}_loss']=0
+            loss_dict[f'{name}_count']=0
+        loss_dict[f'{name}_loss']+=loss.item()
+        loss_dict[f'{name}_count']+=pred_data.size(0)
+
+    loss_dict={}
     model.eval()
     i=0
 
@@ -44,41 +55,34 @@ def test(model, iterator, criterion, device,args, epoch):
             i += 1
 
             #full loss
-            predictions = model(data)  # .squeeze(1)
-            loss = criterion(predictions[:,-1,:], data[:,-1,:])
-            epoch_loss += loss.item()
+            get_loss(data, 'epoch', indices=None)
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
             if len(normal_data)>0:
-                print('here')
-                print(len(normal_data))
                 normal_data=torch.tensor(normal_data)
-                data_normal=data[normal_data, :,:]
-                predictions_normal = model(data_normal)
-                loss = criterion(predictions_normal[:, -1, :], data_normal[:, -1, :])
-                normal_ts_loss+=loss.item()
-                sys.exit()
-            #print('here')
-            #print(label)
-            continue
+                get_loss(normal_data, 'benign', indices=normal_data)
+
+
+            #examples with anomalies at forecast index
+            anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
+            if len(anomaly_data)>0:
+                anomaly_data=torch.tensor(anomaly_data)
+                get_loss(normal_data, 'anomaly_all', indices=anomaly_data)
+
             #
-            x=torch.where(label[:,-1]==1,1,0)
-            x=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
-
-            if len(x)>0:
-                print(torch.tensor(x))
-                print(torch.tensor(x).dtype)
-                print(label.size())
-                print(label[torch.tensor(x),:])
-                sys.exit()
-
-    valid_loss=epoch_loss / len(iterator)
-
-    print(f'\t Val. Loss: {valid_loss:.3f} ')
+            anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
+            if len(anomaly_first)>0:
+                anomaly_data=torch.tensor(anomaly_first)
+                get_loss(normal_data, 'anomaly_first', indices=anomaly_first)
 
 
-    return epoch_loss / len(iterator)
+
+    print(f' Val. Losses: ')
+    for key, val in loss_dict:
+        print(f'{key}:  {val}')
+
+    return loss_dict['epoch_loss'] / loss_dict['epoch_count']
     '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
     actual.extend(data[:,-1,:].cpu().detach().numpy())
     labels.extend(label[:,-1].detach().numpy())

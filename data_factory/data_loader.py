@@ -29,6 +29,27 @@ class SMDSegLoader(object):
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
+        '''print(data[0])
+        print(test_data[0])
+        print(data.shape)
+        print(test_data.shape)
+
+        feat=self.train.shape[1]
+        import matplotlib.pyplot as plt
+        for f in range(feat):
+            plt.clf()
+
+            plt.plot([i for i in range(self.train[450000:500000,f].shape[0])],self.train[450000:500000,f])
+            plt.savefig(f'output/{f}_train.png')
+
+        feat=self.test.shape[1]
+        import matplotlib.pyplot as plt
+        for f in range(feat):
+            plt.clf()
+
+            plt.plot([i for i in range(self.test[450000:500000,f].shape[0])],self.test[450000:500000,f])
+            plt.savefig(f'output/{f}_test.png')
+        sys.exit()'''
 
 
     def __len__(self):
