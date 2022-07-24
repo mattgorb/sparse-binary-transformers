@@ -51,7 +51,7 @@ def test(model, iterator, criterion, device,args, epoch):
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
         loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
-        if f'{name}_loss' not in graph_dict:
+        if f'{name}_pred' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
             graph_dict[f'{name}_actual']=[]
         print('here')
