@@ -20,9 +20,9 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-from metrics.accuracy import test, binary_accuracy
+
 from metrics.evaluate import evaluate_flops_memory_size
-from utils.trainer import *
+from utils.trainer import train,test
 from data_factory.data_loader import get_dataset
 
 
@@ -79,13 +79,16 @@ def main():
         return
 
 
+    print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
+    print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
+
     for epoch in range(args.epochs):
 
         start_time = time.time()
 
-        train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
+        train_loss = train(model, train_dataloader, optimizer, criterion, device)
         #model_int8 = quantize_fx.convert_fx(model)
-        valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+        valid_loss = test(model, test_dataloader, criterion, device)
 
         end_time = time.time()
 
@@ -97,8 +100,8 @@ def main():
 
 
         print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-        print(f'\tTrain Loss: {train_loss:.3f} | Train Acc: {train_acc * 100:.2f}%')
-        print(f'\t Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+        print(f'\tTrain Loss: {train_loss:.3f} ')
+        print(f'\t Val. Loss: {valid_loss:.3f} ')
 
 
 
