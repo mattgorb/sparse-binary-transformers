@@ -61,7 +61,7 @@ def test(model, iterator, criterion, device,args, epoch):
     print(labels.shape)
 
     features=preds.shape[1]
-    for feat in features:
+    for feat in range(features):
         plt.clf()
         plt.plot([i for i in range(len(labels)) if label[i]!=1], [preds[i,feat] for i in range(len(labels)) if label[i]!=1], '.', color='blue')
         plt.plot([i for i in range(len(labels)) if label[i]==1], [preds[i,feat] for i in range(len(labels)) if label[i]==1], 'o', color='red')
