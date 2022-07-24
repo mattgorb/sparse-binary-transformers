@@ -33,7 +33,7 @@ def test(model, iterator, criterion, device):
     epoch_acc = 0
 
     model.eval()
-
+    i=0
     with torch.no_grad():
         for batch in iterator:
             data, _ = batch
