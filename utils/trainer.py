@@ -63,8 +63,8 @@ def test(model, iterator, criterion, device,args, epoch):
     features=preds.shape[1]
     for feat in range(features):
         plt.clf()
-        plt.plot([i for i in range(len(labels)) if label[i]!=1], [preds[i,feat] for i in range(len(labels)) if label[i]!=1], '.', color='blue')
-        plt.plot([i for i in range(len(labels)) if label[i]==1], [preds[i,feat] for i in range(len(labels)) if label[i]==1], 'o', color='red')
+        plt.plot([i for i in range(len(labels)) if labels[i]!=1], [preds[i,feat] for i in range(len(labels)) if labels[i]!=1], '.', color='blue')
+        plt.plot([i for i in range(len(labels)) if labels[i]==1], [preds[i,feat] for i in range(len(labels)) if labels[i]==1], 'o', color='red')
         plt.savefig(f'../output/{args.model_type}_epoch_{epoch}_feature_{feat}.png')
         sys.exit()
     return epoch_loss / len(iterator)
