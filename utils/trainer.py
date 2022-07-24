@@ -35,7 +35,7 @@ def test(model, iterator, criterion, device,args, epoch):
     def get_loss(data,name, indices=None):
         pred_data=data
         print(pred_data.size())
-        print(indices.size())
+        print(indices)
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
@@ -63,20 +63,20 @@ def test(model, iterator, criterion, device,args, epoch):
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
             if len(normal_data)>0:
                 normal_data=torch.tensor(normal_data)
-                get_loss(normal_data, 'benign', indices=normal_data)
+                get_loss(data, 'benign', indices=normal_data)
 
 
             #examples with anomalies at forecast index
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_data=torch.tensor(anomaly_data)
-                get_loss(normal_data, 'anomaly_all', indices=anomaly_data)
+                get_loss(data, 'anomaly_all', indices=anomaly_data)
 
             #
             anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
             if len(anomaly_first)>0:
-                anomaly_data=torch.tensor(anomaly_first)
-                get_loss(normal_data, 'anomaly_first', indices=anomaly_first)
+                anomaly_first=torch.tensor(anomaly_first)
+                get_loss(data, 'anomaly_first', indices=anomaly_first)
 
 
 
