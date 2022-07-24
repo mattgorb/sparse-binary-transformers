@@ -51,7 +51,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data[:,-1,:].cpu().detach().numpy())
-            labels.extend(label.detach().numpy())
+            labels.extend(label[:,-1].detach().numpy())
             break
     preds=np.array(preds)
     actual=np.array(actual)
