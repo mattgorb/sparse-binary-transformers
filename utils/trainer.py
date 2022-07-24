@@ -38,7 +38,7 @@ def test(model, iterator, criterion, device,args, epoch):
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
         loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
-        if loss_dict[f'{name}_loss'] is None:
+        if f'{name}_loss' not in loss_dict:
             loss_dict[f'{name}_loss']=0
             loss_dict[f'{name}_count']=0
         loss_dict[f'{name}_loss']+=loss.item()
