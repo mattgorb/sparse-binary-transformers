@@ -50,7 +50,9 @@ def test(model, iterator, criterion, device,args, epoch):
 
             x=torch.where(label[:,-1]==1,1,0)
             x=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0) ]
-            if sum(x)>0:
+
+            if len(x)>0:
+                print(x)
                 print(labels[x,:])
                 sys.exit()
 
