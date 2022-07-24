@@ -52,10 +52,14 @@ def test(model, iterator, criterion, device,args, epoch):
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data[:,-1,:].cpu().detach().numpy())
             labels.extend(label.detach().numpy())
-
+            break
     preds=np.array(preds)
+    actual=np.array(actual)
+    labels=np.array(labels)
     print(preds.shape)
-
+    print(actual.shape)
+    print(labels.shape)
+    sys.exit()
     plt.clf()
     plt.plot([x for x in range(len(preds))], preds, '.')
 
