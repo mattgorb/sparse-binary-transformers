@@ -51,7 +51,8 @@ def test(model, iterator, criterion, device,args, epoch):
             x=torch.where(label[:,-1]==1,1,0)
             x=[1 if (label[i,-1]==1 and label[i,-2]==0) else 0 for i in range(label.size(0))]
             if sum(x)>0:
-                print(x)
+                print(labels*torch.tensor(x))
+                sys.exit()
 
 
     return epoch_loss / len(iterator)
