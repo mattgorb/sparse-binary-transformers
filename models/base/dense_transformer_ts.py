@@ -36,16 +36,12 @@ class TSTransformerModel(nn.Module):
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
-    def forward(self, src, has_src_mask=True, has_pad_mask=False):
+    def forward(self, src, has_src_mask=False, has_pad_mask=False):
         if has_src_mask:
             device = src.device
-            #if self.src_mask is None or self.src_mask.size(0) != len(src):
-
-                #ask = self._generate_square_subsequent_mask(len(src)).to(device)
-                #elf.src_mask = mask
-            self.src_mask=torch.zeros_like(src)
-            self.src_mask[:,:,-1]=1
-            self.src_mask=self.src_mask.to(torch.bool)
+            if self.src_mask is None or self.src_mask.size(0) != len(src):
+                mask = self._generate_square_subsequent_mask(len(src)).to(device)
+                self.src_mask = mask
 
         else:
             self.src_mask = None
@@ -62,4 +58,5 @@ class TSTransformerModel(nn.Module):
 
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
         output = self.decoder(output)
+
         return output
