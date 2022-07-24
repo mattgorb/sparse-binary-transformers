@@ -54,8 +54,10 @@ def test(model, iterator, criterion, device,args, epoch):
         if f'{name}_loss' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
             graph_dict[f'{name}_actual']=[]
+        print('here')
+        print(predictions[:,-1,:].cpu().detach().numpy().shape)
         graph_dict[f'{name}_pred'].extend(predictions[:,-1,:].cpu().detach().numpy())
-
+        print(np.array(graph_dict[f'{name}_pred']).shape)
         graph_dict[f'{name}_actual'].extend(pred_data[:,-1,:].cpu().detach().numpy())
 
 
@@ -93,7 +95,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_first)>0:
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
-                get_graphs(data, 'anomaly_first', indices=anomaly_data)
+                get_graphs(data, 'anomaly_first', indices=anomaly_first)
 
     for item in ['benign','anomaly_all','anomaly_first']:
         pred=np.array(graph_dict[f'{item}_pred'])
