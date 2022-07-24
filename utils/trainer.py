@@ -34,8 +34,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
     def get_loss(data,name, indices=None):
         pred_data=data
-        print(pred_data.size())
-        print(indices)
+
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
