@@ -12,8 +12,8 @@ def train(model, iterator, optimizer, criterion, device):
         data, _=batch
         data=data.to(device)
         i+=1
-        predictions = model(data)#.squeeze(1)
-        loss = criterion(predictions, data)
+        predictions = model(data)
+        loss = criterion(predictions[:,:,-1], data[:,:,-1])
 
         loss.backward()
         optimizer.step()
