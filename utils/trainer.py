@@ -31,7 +31,7 @@ def train(model, iterator, optimizer, criterion, device):
 
 
 def test(model, iterator, criterion, device,args, epoch):
-
+    criterion=torch.nn.MSELoss(reduction='sum')
     def get_loss(data,name, indices=None):
         pred_data=data
 
@@ -50,7 +50,6 @@ def test(model, iterator, criterion, device,args, epoch):
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
         if f'{name}_pred' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
             graph_dict[f'{name}_actual']=[]
@@ -108,16 +107,11 @@ def test(model, iterator, criterion, device,args, epoch):
             plt.legend()
             plt.savefig(f'output/{item}_feat{feat}')
 
-    if epoch==0:
-        for key, val in loss_dict.items():
-            if '_count' in key:
-                    print(f'{key}:  {val}')
+
 
     print(f' Val. Losses: ')
-    for key, val in loss_dict.items():
-        if '_loss' in key:
-            print(f'{key}:  {val/len(iterator)}')
-
+    for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
+        print(f"\n\t {item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}")
 
 
 
