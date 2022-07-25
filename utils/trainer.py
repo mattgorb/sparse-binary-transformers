@@ -76,7 +76,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(normal_data)>0:
                 normal_data=torch.tensor(normal_data)
                 get_loss(data, 'benign', indices=normal_data)
-                get_graphs(data, 'benign', indices=normal_data)
+                if epoch%5==0: get_graphs(data, 'benign', indices=normal_data)
 
 
             #examples with anomalies at forecast index
@@ -84,28 +84,28 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_data)>0:
                 anomaly_data=torch.tensor(anomaly_data)
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
-                get_graphs(data, 'anomaly_all', indices=anomaly_data)
+                if epoch%5==0: get_graphs(data, 'anomaly_all', indices=anomaly_data)
 
             #anomaly is first in a benign set of time series data of  window size t
             anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
             if len(anomaly_first)>0:
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
-                get_graphs(data, 'anomaly_first', indices=anomaly_first)
+                if epoch%5==0: get_graphs(data, 'anomaly_first', indices=anomaly_first)
+    if epoch % 5 == 0:
+        for item in ['benign','anomaly_all','anomaly_first']:
+            pred=np.array(graph_dict[f'{item}_pred'])
+            actual=np.array(graph_dict[f'{item}_actual'])
 
-    for item in ['benign','anomaly_all','anomaly_first']:
-        pred=np.array(graph_dict[f'{item}_pred'])
-        actual=np.array(graph_dict[f'{item}_actual'])
-
-        if item=='benign':
-            pred=pred[:500,:]
-            actual=actual[:500,:]
-        for feat in range(pred.shape[1]):
-            plt.clf()
-            plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
-            plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
-            plt.legend()
-            plt.savefig(f'output/{item}_feat{feat}')
+            if item=='benign':
+                pred=pred[:500,:]
+                actual=actual[:500,:]
+            for feat in range(pred.shape[1]):
+                plt.clf()
+                plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
+                plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
+                plt.legend()
+                plt.savefig(f'output/{item}_feat{feat}')
 
 
 
