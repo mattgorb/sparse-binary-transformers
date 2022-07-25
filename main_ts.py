@@ -78,7 +78,7 @@ def main():
 
 
     for epoch in range(args.epochs):
-        print(f'Epoch {epoch}: ')
+        print(f'\nEpoch {epoch}: ')
         start_time = time.time()
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device)
