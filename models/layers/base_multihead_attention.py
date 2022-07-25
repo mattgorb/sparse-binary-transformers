@@ -439,6 +439,13 @@ class MultiheadAttention(nn.MultiheadAttention):
         v = self.dequant_v(v)
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
+        #print('here')
+        #print(query.size())
+        #print(q.size())
+
+        #print(attn_output_weights.size())
+        #sys.exit(0)
+
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
         if attn_mask is not None:

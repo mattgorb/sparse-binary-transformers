@@ -29,6 +29,7 @@ class SMDSegLoader(object):
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
+
         '''print(data[0])
         print(test_data[0])
         print(data.shape)
