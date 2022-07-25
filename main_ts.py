@@ -65,13 +65,7 @@ def main():
 
 
     optimizer = optim.Adam(model.parameters(),lr=1e-4)
-    #criterion = nn.BCEWithLogitsLoss()
-
-
-    criterion = nn.MSELoss()
-
-    N_EPOCHS = 10
-
+    criterion = nn.MSELoss(reduction='sum')
     best_valid_loss = float('inf')
 
     if args.evaluate:
@@ -84,24 +78,23 @@ def main():
 
 
     for epoch in range(args.epochs):
-
+        print(f'Epoch {epoch}: ')
         start_time = time.time()
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device)
 
         valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
 
-        end_time = time.time()
 
-        epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
             torch.save(model.state_dict(), args.weight_file)
 
+        end_time = time.time()
+        epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+        print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
 
-        print(f'Epoch: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-        print(f'\tTrain Loss: {train_loss:.3f} ')
 
 
 

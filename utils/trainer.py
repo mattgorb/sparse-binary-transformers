@@ -25,13 +25,13 @@ def train(model, iterator, optimizer, criterion, device):
 
         #if i%500==0:
             #print(i)
-
-    return epoch_loss / len(iterator)
+    print(f'\tTrain Loss: {epoch_loss/iterator.dataset.__len__()} ')
+    return epoch_loss / iterator.dataset.__len__()
 
 
 
 def test(model, iterator, criterion, device,args, epoch):
-    criterion=torch.nn.MSELoss(reduction='sum')
+
     def get_loss(data,name, indices=None):
         pred_data=data
 
@@ -111,7 +111,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
     print(f' Val. Losses: ')
     for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
-        print(f"\n\t {item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}")
+        print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
 
 
