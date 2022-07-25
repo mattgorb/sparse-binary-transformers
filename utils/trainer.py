@@ -108,13 +108,18 @@ def test(model, iterator, criterion, device,args, epoch):
             plt.legend()
             plt.savefig(f'output/{item}_feat{feat}')
 
+    if epoch==0:
+        for key, val in loss_dict.items():
+            if '_count' in key:
+                    print(f'{key}:  {val}')
+
     print(f' Val. Losses: ')
     for key, val in loss_dict.items():
         if '_loss' in key:
             print(f'{key}:  {val/len(iterator)}')
-        else:
-            if epoch==0:
-                print(f'{key}:  {val}')
+
+
+
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
     '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
