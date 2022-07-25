@@ -113,7 +113,8 @@ def test(model, iterator, criterion, device,args, epoch):
         if '_loss' in key:
             print(f'{key}:  {val/len(iterator)}')
         else:
-            print(f'{key}:  {val}')
+            if epoch==0:
+                print(f'{key}:  {val}')
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
     '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
