@@ -107,10 +107,13 @@ def test(model, iterator, criterion, device,args, epoch):
             plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
             plt.legend()
             plt.savefig(f'output/{item}_feat{feat}')
-    #sys.exit()
+
     print(f' Val. Losses: ')
     for key, val in loss_dict.items():
-        print(f'{key}:  {val}')
+        if '_loss' in key:
+            print(f'{key}:  {val/len(iterator)}')
+        else:
+            print(f'{key}:  {val}')
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
     '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
