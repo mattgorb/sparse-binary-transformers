@@ -196,6 +196,8 @@ def test(model, iterator, criterion, device,args, epoch):
                 print(index[anomaly_first])
                 print(label.size())
                 print(label[anomaly_first])
+                print(data[anomaly_first].size())
+                print(data[anomaly_first])
                 sys.exit()
 
                 anomaly_first=torch.tensor(anomaly_first)
