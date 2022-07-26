@@ -108,10 +108,9 @@ def test(model, iterator, criterion, device,args, epoch):
     anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
     labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
     scores=benign+anomaly
-    print(metrics.roc_auc_score(labels, scores))
+    print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
-    print(metrics.auc(recall, precision))
-    sys.exit()
+    print(f'PR : {metrics.auc(recall, precision)}')
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
 
