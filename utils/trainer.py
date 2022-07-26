@@ -196,7 +196,7 @@ def test(model, iterator, criterion, device,args, epoch):
             for feat in range(pred.shape[1]):
                 plt.clf()
                 plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
-                plt.plot([i for i in range(actual.shape[0])], actual[:, feat], label='actual')
+                plt.plot([i for i in range(actual.shape[0])], actual[:, feat],':', label='actual')
                 plt.legend()
                 plt.savefig(f'output/{item}_feat{feat}')
 
