@@ -142,7 +142,7 @@ def test(model, iterator, criterion, device,args, epoch):
         pred_data=data
         if indices is not None:
             pred_data=data[indices,:,:]
-
+        print(data)
         print(pred_data.size())
         print(pred_data)
         sys.exit()
