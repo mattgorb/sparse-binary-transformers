@@ -32,16 +32,26 @@ class SMDSegLoader(object):
 
 
         '''print(self.test.shape)
-        print(self.test[:100,8])
-        print(self.test[-100:,8])
+        temp=[self.test[i] for i in range(len(self.test)) if self.test_labels[i]==1]
+        x=np.argwhere(self.test_labels == 1)
+        print(x)
+        a=self.test[10520:10700]
         import matplotlib.pyplot as plt
-        plt.plot([i for i in range(1000)], test_data[:1000,8])
-        plt.show()
-        plt.clf()
-        plt.plot([i for i in range(1000)], self.test[:1000,8])
-        plt.show()
+        for f in range(a.shape[1]):
+            plt.clf()
 
-        sys.exit()'''
+            plt.plot([i for i in range(a.shape[0])], a[:,f])
+            plt.title(f)
+            plt.show()
+        sys.exit()
+
+        plt.plot([i for i in range], )
+        plt.show()'''
+        #plt.clf()
+        #plt.plot([i for i in range(1000)], self.test[:1000,8])
+        #plt.show()
+
+        #sys.exit()
         '''print(data[0])
         print(test_data[0])
         print(data.shape)
@@ -85,7 +95,7 @@ class SMDSegLoader(object):
             return np.float32(self.val[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
         elif (self.mode == 'test'):
             return np.float32(self.test[index:index + self.win_size]), np.float32(
-                self.test_labels[index:index + self.win_size])
+                self.test_labels[index:index + self.win_size]), index
         else:
             return np.float32(self.test[
                               index // self.step * self.win_size:index // self.step * self.win_size + self.win_size]), np.float32(
