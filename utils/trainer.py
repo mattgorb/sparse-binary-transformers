@@ -108,6 +108,9 @@ def test(model, iterator, criterion, device,args, epoch):
     print(len(anomaly))
     labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
     scores=benign+anomaly
+    print(len(scores))
+    print(len(labels))
+    print(set(labels))
     print(metrics.roc_auc_score(labels, scores))
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(metrics.auc(recall, precision))
