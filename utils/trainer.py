@@ -194,6 +194,9 @@ def test(model, iterator, criterion, device,args, epoch):
             anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
             if len(anomaly_first)>0:
                 print(index[anomaly_first])
+                print(label.size())
+                print(label[anomaly_first])
+                sys.exit()
 
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
