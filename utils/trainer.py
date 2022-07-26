@@ -111,6 +111,8 @@ def test(model, iterator, criterion, device,args, epoch):
     print(len(scores))
     print(len(labels))
     print(set(labels))
+    print(scores[0])
+    sys.exit()
     print(metrics.roc_auc_score(labels, scores))
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(metrics.auc(recall, precision))
