@@ -57,8 +57,7 @@ def test(model, iterator, criterion, device,args, epoch):
         predictions = model(pred_data)  # .squeeze(1)
         loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
         loss = loss.mean(dim=1)
-        print(loss.size())
-        sys.exit()
+
         if f'{name}_sample_loss' not in sample_loss_dict:
             sample_loss_dict[f'{name}_sample_loss']=[]
         sample_loss_dict[f'{name}_sample_loss'].extend(loss.cpu().detach().numpy())
@@ -115,7 +114,7 @@ def test(model, iterator, criterion, device,args, epoch):
     print(len(labels))
     print(set(labels))
     print(scores[0])
-    sys.exit()
+    #sys.exit()
     print(metrics.roc_auc_score(labels, scores))
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(metrics.auc(recall, precision))
