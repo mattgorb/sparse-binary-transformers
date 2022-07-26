@@ -56,6 +56,7 @@ def test(model, iterator, criterion, device,args, epoch):
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
         loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        loss = loss.mean(dim=1)
         print(loss.size())
         sys.exit()
         if f'{name}_sample_loss' not in sample_loss_dict:
