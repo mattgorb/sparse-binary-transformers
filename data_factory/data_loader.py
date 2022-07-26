@@ -31,7 +31,7 @@ class SMDSegLoader(object):
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
 
 
-        print(self.test.shape)
+        '''print(self.test.shape)
         print(self.test[:100,8])
         print(self.test[-100:,8])
         import matplotlib.pyplot as plt
@@ -41,7 +41,7 @@ class SMDSegLoader(object):
         plt.plot([i for i in range(1000)], self.test[:1000,8])
         plt.show()
 
-        sys.exit()
+        sys.exit()'''
         '''print(data[0])
         print(test_data[0])
         print(data.shape)
