@@ -50,7 +50,7 @@ def main():
 
     input_dim=train_dataloader.dataset.train.shape[1]
 
-    dmodel = 64
+    dmodel = input_dim*4
 
     if args.model_type=='Dense':
         model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2).to(device)

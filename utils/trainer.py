@@ -33,7 +33,7 @@ def train(model, iterator, optimizer, criterion, device):
 
 
 
-def test(model, iterator, criterion, device,args, epoch):
+def test_old(model, iterator, criterion, device,args, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
     def get_loss(data,name, indices=None):
@@ -123,7 +123,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
 
 
-def test_old(model, iterator, criterion, device,args, epoch):
+def test(model, iterator, criterion, device,args, epoch):
 
     def get_loss(data,name, indices=None):
         pred_data=data

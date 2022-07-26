@@ -439,12 +439,7 @@ class MultiheadAttention(nn.MultiheadAttention):
         v = self.dequant_v(v)
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
-        #print('here')
-        #print(query.size())
-        #print(q.size())
 
-        #print(attn_output_weights.size())
-        #sys.exit(0)
 
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
@@ -468,7 +463,14 @@ class MultiheadAttention(nn.MultiheadAttention):
 
         attn_output = torch.bmm(attn_output_weights, v)
 
+        '''print('here')
+        print(query.size())
+        print(q.size())
+        print(attn_output_weights.size())
+        print(v.size())
+        print(attn_output.size())
 
+        sys.exit()'''
 
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
@@ -485,8 +487,13 @@ class MultiheadAttention(nn.MultiheadAttention):
         #sys.exit()
         #print(self.out_proj)
         # for the type: ignore[has-type], see https://github.com/pytorch/pytorch/issues/58969
+
+
+
         attn_output = self.out_proj(attn_output)  # type: ignore[has-type]
         attn_output_weights = self.quant_attn_output_weights(attn_output_weights)
+
+
         if need_weights:
             # average attention weights over heads
             attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
