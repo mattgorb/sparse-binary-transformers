@@ -144,7 +144,11 @@ def test(model, iterator, criterion, device,args, epoch):
             pred_data=data[indices,:,:]
         print(data)
         print(pred_data.size())
-        print(pred_data)
+        print(pred_data[:,-5:,0])
+        print(pred_data[:,-5:,1])
+        print(pred_data[:,-5:,2])
+        print(pred_data[:,-5:,3])
+        print(pred_data[:,-5:,4])
         sys.exit()
         predictions = model(pred_data)  # .squeeze(1)
 
