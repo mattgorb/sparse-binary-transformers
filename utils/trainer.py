@@ -142,7 +142,14 @@ def test(model, iterator, criterion, device,args, epoch):
         pred_data=data
         if indices is not None:
             pred_data=data[indices,:,:]
+
+        print(pred_data.size())
+        print(pred_data)
+        sys.exit()
         predictions = model(pred_data)  # .squeeze(1)
+
+
+
         if f'{name}_pred' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
             graph_dict[f'{name}_actual']=[]
@@ -169,7 +176,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(normal_data)>0:
                 normal_data=torch.tensor(normal_data)
                 get_loss(data, 'benign', indices=normal_data)
-                if epoch%5==0: get_graphs(data, 'benign', indices=normal_data)
+                #if epoch%5==0: get_graphs(data, 'benign', indices=normal_data)
 
 
             #examples with anomalies at forecast index
@@ -177,12 +184,13 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_data)>0:
                 anomaly_data=torch.tensor(anomaly_data)
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
-                if epoch%5==0: get_graphs(data, 'anomaly_all', indices=anomaly_data)
+                #if epoch%5==0: get_graphs(data, 'anomaly_all', indices=anomaly_data)
 
             #anomaly is first in a benign set of time series data of  window size t
             anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
             if len(anomaly_first)>0:
                 print(index[anomaly_first])
+
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
                 if epoch%5==0: get_graphs(data, 'anomaly_first', indices=anomaly_first)

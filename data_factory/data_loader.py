@@ -31,7 +31,7 @@ class SMDSegLoader(object):
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
 
 
-        '''print(self.test.shape)
+        print(self.test.shape)
         temp=[self.test[i] for i in range(len(self.test)) if self.test_labels[i]==1]
         x=np.argwhere(self.test_labels == 1)
         print(x)
@@ -43,10 +43,9 @@ class SMDSegLoader(object):
             plt.plot([i for i in range(a.shape[0])], a[:,f])
             plt.title(f)
             plt.show()
-        sys.exit()
 
-        plt.plot([i for i in range], )
-        plt.show()'''
+            sys.exit()
+
         #plt.clf()
         #plt.plot([i for i in range(1000)], self.test[:1000,8])
         #plt.show()
