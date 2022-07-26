@@ -2,6 +2,7 @@ from metrics.accuracy import binary_accuracy
 import torch
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn import metrics
 
 def train(model, iterator, optimizer, criterion, device):
     epoch_loss = 0
@@ -15,6 +16,7 @@ def train(model, iterator, optimizer, criterion, device):
         data=data.to(device)
         i+=1
         predictions = model(data)
+
         loss = criterion(predictions[:,-1,:], data[:,-1,:])
 
         loss.backward()
@@ -30,7 +32,92 @@ def train(model, iterator, optimizer, criterion, device):
 
 
 
+
 def test(model, iterator, criterion, device,args, epoch):
+
+    sample_criterion=torch.nn.MSELoss(reduction='none')
+    def get_loss(data,name, indices=None):
+        pred_data=data
+
+        if indices is not None:
+            pred_data=data[indices,:,:]
+        predictions = model(pred_data)  # .squeeze(1)
+        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        if f'{name}_loss' not in loss_dict:
+            loss_dict[f'{name}_loss']=0
+            loss_dict[f'{name}_count']=0
+        loss_dict[f'{name}_loss']+=loss.item()
+        loss_dict[f'{name}_count']+=pred_data.size(0)
+
+    def get_sample_loss(data, name, indices=None):
+        pred_data=data
+
+        if indices is not None:
+            pred_data=data[indices,:,:]
+        predictions = model(pred_data)  # .squeeze(1)
+        loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        if f'{name}_sample_loss' not in sample_loss_dict:
+            sample_loss_dict[f'{name}_sample_loss']=[]
+        sample_loss_dict[f'{name}_sample_loss'].extend(loss.cpu().detach().numpy())
+
+
+    loss_dict={}
+    sample_loss_dict={}
+    model.eval()
+    i=0
+
+    with torch.no_grad():
+        for batch in iterator:
+            data, label = batch
+            data = data.to(device)
+            i += 1
+
+            #full loss
+            get_loss(data, 'epoch', indices=None)
+
+            #first, specifically look at instances with no anomalies at all
+            normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
+            if len(normal_data)>0:
+                normal_data=torch.tensor(normal_data)
+                get_loss(data, 'benign', indices=normal_data)
+                get_sample_loss(data, 'benign', indices=normal_data)
+
+            #examples with anomalies at forecast index
+            anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
+            if len(anomaly_data)>0:
+                anomaly_data=torch.tensor(anomaly_data)
+                get_loss(data, 'anomaly_all', indices=anomaly_data)
+                get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
+
+            #anomaly is first in a benign set of time series data of  window size t
+            anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
+            if len(anomaly_first)>0:
+                anomaly_first=torch.tensor(anomaly_first)
+                get_loss(data, 'anomaly_first', indices=anomaly_first)
+                get_sample_loss(data, 'anomaly_first', indices=anomaly_first)
+
+    print(f' Val. Losses: ')
+    for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
+        print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
+
+
+    print(f'Binary classification scores ')
+    benign=list(sample_loss_dict['benign_sample_loss'])
+    anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
+    print(len(benign))
+    print(len(anomaly))
+    labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
+    scores=benign+anomaly
+    print(metrics.roc_auc_score(labels, scores))
+    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
+    print(metrics.auc(recall, precision))
+    sys.exit()
+
+    return loss_dict['epoch_loss'] / loss_dict['epoch_count']
+
+
+
+def test_old(model, iterator, criterion, device,args, epoch):
 
     def get_loss(data,name, indices=None):
         pred_data=data
