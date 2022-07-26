@@ -106,15 +106,8 @@ def test(model, iterator, criterion, device,args, epoch):
     print(f'Binary classification scores ')
     benign=list(sample_loss_dict['benign_sample_loss'])
     anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
-    print(len(benign))
-    print(len(anomaly))
     labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
     scores=benign+anomaly
-    print(len(scores))
-    print(len(labels))
-    print(set(labels))
-    print(scores[0])
-    #sys.exit()
     print(metrics.roc_auc_score(labels, scores))
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(metrics.auc(recall, precision))
