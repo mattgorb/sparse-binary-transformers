@@ -16,6 +16,7 @@ def train(model, iterator, optimizer, criterion, device):
         data=torch.clone(data_base)
         data[:,-1:,:]=0
         data=data.to(device)
+        data_base=data_base.to(device)
         i+=1
         predictions = model(data)
 
@@ -76,6 +77,7 @@ def test_old(model, iterator, criterion, device,args, epoch):
             data = torch.clone(data_base)
             data[:, -1:, :] = 0
             data = data.to(device)
+            data_base = data_base.to(device)
             i += 1
 
             #full loss
@@ -166,6 +168,7 @@ def test(model, iterator, criterion, device,args, epoch):
             data = torch.clone(data_base)
             data[:, -1:, :] = 0
             data = data.to(device)
+            data_base = data_base.to(device)
             i += 1
 
             #full loss
