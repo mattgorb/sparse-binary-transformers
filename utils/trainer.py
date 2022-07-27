@@ -108,7 +108,7 @@ def test(model, iterator, criterion, device,args, epoch):
     from itertools import groupby
     from operator import itemgetter
     for k, g in groupby(enumerate(data), lambda ix : ix[0] - ix[1]):
-        print(map(itemgetter(1), g))
+        print(list(map(itemgetter(1), g)))
     sys.exit()
 
     print(f' Val. Losses: ')
