@@ -13,7 +13,7 @@ def train(model, iterator, optimizer, criterion, device):
     for batch in iterator:
         optimizer.zero_grad()
         data_base, _=batch
-        data=data_base
+        data=torch.clone(data_base)
         data[:,-1:,:]=0
         data=data.to(device)
         print(data)
