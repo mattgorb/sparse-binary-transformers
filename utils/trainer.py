@@ -16,9 +16,6 @@ def train(model, iterator, optimizer, criterion, device):
         data=torch.clone(data_base)
         data[:,-1:,:]=0
         data=data.to(device)
-        print(data)
-        print(data_base)
-        sys.exit()
         i+=1
         predictions = model(data)
 
@@ -47,7 +44,7 @@ def test_old(model, iterator, criterion, device,args, epoch):
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
         if f'{name}_loss' not in loss_dict:
             loss_dict[f'{name}_loss']=0
             loss_dict[f'{name}_count']=0
@@ -60,7 +57,7 @@ def test_old(model, iterator, criterion, device,args, epoch):
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        loss = sample_criterion(predictions[:,-1,:], data_base[:,-1,:])
         loss = loss.mean(dim=1)
 
         if f'{name}_sample_loss' not in sample_loss_dict:
@@ -75,7 +72,9 @@ def test_old(model, iterator, criterion, device,args, epoch):
 
     with torch.no_grad():
         for batch in iterator:
-            data, label = batch
+            data_base, label = batch
+            data = torch.clone(data_base)
+            data[:, -1:, :] = 0
             data = data.to(device)
             i += 1
 
@@ -136,7 +135,7 @@ def test(model, iterator, criterion, device,args, epoch):
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
+        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
         if f'{name}_loss' not in loss_dict:
             loss_dict[f'{name}_loss']=0
             loss_dict[f'{name}_count']=0
@@ -148,8 +147,6 @@ def test(model, iterator, criterion, device,args, epoch):
         if indices is not None:
             pred_data=data[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-
-
 
         if f'{name}_pred' not in graph_dict:
             graph_dict[f'{name}_pred']=[]
@@ -165,7 +162,9 @@ def test(model, iterator, criterion, device,args, epoch):
 
     with torch.no_grad():
         for batch in iterator:
-            data, label, index = batch
+            data_base, label, index = batch
+            data = torch.clone(data_base)
+            data[:, -1:, :] = 0
             data = data.to(device)
             i += 1
 
