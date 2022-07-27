@@ -103,7 +103,12 @@ def test(model, iterator, criterion, device,args, epoch):
                 get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
     print(anomaly_ind)
-    print(benign_ind)
+    #print(benign_ind)
+
+    from itertools import groupby
+    from operator import itemgetter
+    for k, g in groupby(enumerate(data), lambda i, x: i - x):
+        print(map(itemgetter(1), g))
     sys.exit()
 
     print(f' Val. Losses: ')
