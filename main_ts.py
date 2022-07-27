@@ -81,7 +81,7 @@ def main():
         print(f'\nEpoch {epoch}: ')
         start_time = time.time()
 
-        train_loss = train(model, train_dataloader, optimizer, criterion, device)
+        #train_loss = train(model, train_dataloader, optimizer, criterion, device)
 
         valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
 
