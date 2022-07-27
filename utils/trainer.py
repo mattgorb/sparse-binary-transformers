@@ -102,12 +102,12 @@ def test(model, iterator, criterion, device,args, epoch):
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
                 get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
-    print(anomaly_ind)
+    #print(anomaly_ind)
     #print(benign_ind)
 
     from itertools import groupby
     from operator import itemgetter
-    for k, g in groupby(enumerate(data), lambda ix : ix[0] - ix[1]):
+    for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         print(list(map(itemgetter(1), g)))
     sys.exit()
 
