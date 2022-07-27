@@ -3,6 +3,8 @@ import torch
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import metrics
+from itertools import groupby
+from operator import itemgetter
 
 def train(model, iterator, optimizer, criterion, device):
     epoch_loss = 0
@@ -102,13 +104,13 @@ def test(model, iterator, criterion, device,args, epoch):
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
                 get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
-    #print(anomaly_ind)
-    #print(benign_ind)
 
-    from itertools import groupby
-    from operator import itemgetter
+    anomaly_dict={}
+    i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
-        print(list(map(itemgetter(1), g)))
+        anomaly_dict[i]=list(map(itemgetter(1), g))
+        i+=1
+    print(anomaly_dict)
     sys.exit()
 
     print(f' Val. Losses: ')
