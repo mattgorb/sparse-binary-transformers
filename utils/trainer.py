@@ -111,7 +111,7 @@ def test(model, iterator, criterion, device,args, epoch):
         print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
 
-    print(f'Binary classification scores ')
+    '''print(f'Binary classification scores ')
     benign=list(sample_loss_dict['benign_sample_loss'])
     anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
     labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
@@ -120,8 +120,8 @@ def test(model, iterator, criterion, device,args, epoch):
     df = pd.DataFrame({'scores': scores, 'labels':labels})
     df.to_csv('output/scores.csv')
     sys.exit()
-
-    '''print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
+    
+    print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(f'PR Curve : {metrics.auc(recall, precision)}')
     #print(f'Recall : {recall}')
