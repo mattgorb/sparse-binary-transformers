@@ -31,20 +31,20 @@ class SMDSegLoader(object):
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
 
 
-        '''print(self.test.shape)
-        temp=[self.test[i] for i in range(len(self.test)) if self.test_labels[i]==1]
+
+        '''temp=[self.test[i] for i in range(len(self.test)) if self.test_labels[i]==1]
         x=np.argwhere(self.test_labels == 1)
-        print(x)
-        a=self.test[10520:10700]
+        a=test_data[10400:10621]
+        print(x[0])
         import matplotlib.pyplot as plt
-        for f in range(a.shape[1]):
-            plt.clf()
-
-            plt.plot([i for i in range(a.shape[0])], a[:,f])
-            plt.title(f)
-            plt.show()
-
-            sys.exit()'''
+        #for f in range(4):
+        plt.clf()
+        #print(a[:,f])
+        plt.plot([i for i in range(a.shape[0])], a[:,6])
+        plt.title(31)
+        plt.show()
+        sys.exit()'''
+            #sys.exit()
 
         #plt.clf()
         #plt.plot([i for i in range(1000)], self.test[:1000,8])

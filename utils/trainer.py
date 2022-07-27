@@ -12,12 +12,17 @@ def train(model, iterator, optimizer, criterion, device):
     i=0
     for batch in iterator:
         optimizer.zero_grad()
-        data, _=batch
+        data_base, _=batch
+        data=data_base
+        data[:,-1:,:]=0
         data=data.to(device)
+        print(data)
+        print(data_base)
+        sys.exit()
         i+=1
         predictions = model(data)
 
-        loss = criterion(predictions[:,-1,:], data[:,-1,:])
+        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
         loss.backward()
         optimizer.step()
@@ -142,14 +147,6 @@ def test(model, iterator, criterion, device,args, epoch):
         pred_data=data
         if indices is not None:
             pred_data=data[indices,:,:]
-        print(data)
-        print(pred_data.size())
-        print(pred_data[:,-5:,0])
-        print(pred_data[:,-5:,1])
-        print(pred_data[:,-5:,2])
-        print(pred_data[:,-5:,3])
-        print(pred_data[:,-5:,4])
-        sys.exit()
         predictions = model(pred_data)  # .squeeze(1)
 
 
@@ -180,7 +177,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(normal_data)>0:
                 normal_data=torch.tensor(normal_data)
                 get_loss(data, 'benign', indices=normal_data)
-                #if epoch%5==0: get_graphs(data, 'benign', indices=normal_data)
+                if epoch%5==0: get_graphs(data, 'benign', indices=normal_data)
 
 
             #examples with anomalies at forecast index
@@ -188,19 +185,11 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_data)>0:
                 anomaly_data=torch.tensor(anomaly_data)
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
-                #if epoch%5==0: get_graphs(data, 'anomaly_all', indices=anomaly_data)
+                if epoch%5==0: get_graphs(data, 'anomaly_all', indices=anomaly_data)
 
             #anomaly is first in a benign set of time series data of  window size t
             anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
             if len(anomaly_first)>0:
-                print(index[anomaly_first])
-                print(label.size())
-                print(label[anomaly_first])
-                print(data[anomaly_first].size())
-                print(data[anomaly_first])
-                print(data[anomaly_first][:,-5:,:4])
-                sys.exit()
-
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
                 if epoch%5==0: get_graphs(data, 'anomaly_first', indices=anomaly_first)
