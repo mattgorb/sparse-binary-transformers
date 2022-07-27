@@ -222,7 +222,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
 
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
-    '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+    preds.extend(predictions[:, -1, :].cpu().detach().numpy())
     actual.extend(data[:,-1,:].cpu().detach().numpy())
     labels.extend(label[:,-1].detach().numpy())
     break
@@ -242,4 +242,3 @@ def test(model, iterator, criterion, device,args, epoch):
         plt.plot([i for i in range(len(labels)) if labels[i]==1], [preds[i,feat] for i in range(len(labels)) if labels[i]==1], 'o', color='red')
         plt.savefig(f'output/{args.model_type}_epoch_{epoch}_feature_{feat}.png')
         sys.exit()'''
-'''
