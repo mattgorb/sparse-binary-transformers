@@ -36,7 +36,7 @@ def train(model, iterator, optimizer, criterion, device):
 
 
 
-def test_old(model, iterator, criterion, device,args, epoch):
+def test(model, iterator, criterion, device,args, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
     def get_loss(data,name, indices=None):
@@ -71,9 +71,12 @@ def test_old(model, iterator, criterion, device,args, epoch):
     model.eval()
     i=0
 
+    anomaly_ind=[]
+    benign_ind=[]
+
     with torch.no_grad():
         for batch in iterator:
-            data_base, label = batch
+            data_base, label, index = batch
             data = torch.clone(data_base)
             data[:, -1:, :] = 0
             data = data.to(device)
@@ -86,6 +89,7 @@ def test_old(model, iterator, criterion, device,args, epoch):
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
             if len(normal_data)>0:
+                benign_ind.extend(index[normal_data].cpu().detach().numpy())
                 normal_data=torch.tensor(normal_data)
                 get_loss(data, 'benign', indices=normal_data)
                 get_sample_loss(data, 'benign', indices=normal_data)
@@ -93,16 +97,14 @@ def test_old(model, iterator, criterion, device,args, epoch):
             #examples with anomalies at forecast index
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
+                anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
                 anomaly_data=torch.tensor(anomaly_data)
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
                 get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
-            #anomaly is first in a benign set of time series data of  window size t
-            anomaly_first=[i for i in range(label.size(0)) if (label[i,-1]==1 and label[i,-2]==0 and torch.sum(label[i,:])==1) ]
-            if len(anomaly_first)>0:
-                anomaly_first=torch.tensor(anomaly_first)
-                get_loss(data, 'anomaly_first', indices=anomaly_first)
-                get_sample_loss(data, 'anomaly_first', indices=anomaly_first)
+    print(anomaly_ind)
+    print(benign_ind)
+    sys.exit()
 
     print(f' Val. Losses: ')
     for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
@@ -128,7 +130,7 @@ def test_old(model, iterator, criterion, device,args, epoch):
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
 
 
-
+'''
 def test(model, iterator, criterion, device,args, epoch):
 
     def get_loss(data,name, indices=None):
@@ -195,6 +197,7 @@ def test(model, iterator, criterion, device,args, epoch):
                 anomaly_first=torch.tensor(anomaly_first)
                 get_loss(data, 'anomaly_first', indices=anomaly_first)
                 if epoch%5==0: get_graphs(data, 'anomaly_first', indices=anomaly_first)
+                
     if epoch % 5 == 0:
         for item in ['anomaly_first']:
             pred=np.array(graph_dict[f'{item}_pred'])
@@ -239,3 +242,4 @@ def test(model, iterator, criterion, device,args, epoch):
         plt.plot([i for i in range(len(labels)) if labels[i]==1], [preds[i,feat] for i in range(len(labels)) if labels[i]==1], 'o', color='red')
         plt.savefig(f'output/{args.model_type}_epoch_{epoch}_feature_{feat}.png')
         sys.exit()'''
+'''
