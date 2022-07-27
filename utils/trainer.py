@@ -43,9 +43,9 @@ def test_old(model, iterator, criterion, device,args, epoch):
         pred_data=data
 
         if indices is not None:
-            pred_data=data[indices,:,:]
+            pred_data=data_base[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
         if f'{name}_loss' not in loss_dict:
             loss_dict[f'{name}_loss']=0
             loss_dict[f'{name}_count']=0
@@ -56,9 +56,9 @@ def test_old(model, iterator, criterion, device,args, epoch):
         pred_data=data
 
         if indices is not None:
-            pred_data=data[indices,:,:]
+            pred_data=data_base[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = sample_criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
         loss = loss.mean(dim=1)
 
         if f'{name}_sample_loss' not in sample_loss_dict:
@@ -135,9 +135,9 @@ def test(model, iterator, criterion, device,args, epoch):
         pred_data=data
 
         if indices is not None:
-            pred_data=data[indices,:,:]
+            pred_data=data_base[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
         if f'{name}_loss' not in loss_dict:
             loss_dict[f'{name}_loss']=0
             loss_dict[f'{name}_count']=0
@@ -147,7 +147,7 @@ def test(model, iterator, criterion, device,args, epoch):
     def get_graphs(data, name, indices=None):
         pred_data=data
         if indices is not None:
-            pred_data=data[indices,:,:]
+            pred_data=data_base[indices,:,:]
         predictions = model(pred_data)  # .squeeze(1)
 
         if f'{name}_pred' not in graph_dict:
