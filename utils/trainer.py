@@ -107,13 +107,20 @@ def test(model, iterator, criterion, device,args, epoch):
     print(len(sample_loss_dict['anomaly_all_sample_loss']))
     print(len(anomaly_ind))
 
-    sys.exit()
+    #sys.exit()
 
     anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
         i+=1
+
+
+    for key,val in anomaly_dict:
+        print(key)
+        print(val)
+        print(sample_loss_dict['anomaly_all'][val])
+        sys.exit()
 
     print(anomaly_dict)
     sys.exit()
