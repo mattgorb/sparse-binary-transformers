@@ -119,7 +119,7 @@ def test(model, iterator, criterion, device,args, epoch):
     anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
         anomaly_final_vals.append(max(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]+1]))
-        sys.exit()
+        #sys.exit()
 
 
 
