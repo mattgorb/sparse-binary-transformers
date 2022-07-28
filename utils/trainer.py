@@ -91,10 +91,11 @@ def test(model, iterator, criterion, device,args, epoch):
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_loss.mean(dim=1)
             print(sample_loss.size())
-            print(data_base)
+            print(sample_loss)
             for i,l in zip(index, sample_loss):
-                sample_loss_dict[i]=l
+                sample_loss_dict[i]=l.item()
             sys.exit()
 
             #first, specifically look at instances with no anomalies at all
