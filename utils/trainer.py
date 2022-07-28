@@ -116,7 +116,7 @@ def test(model, iterator, criterion, device,args, epoch):
         i+=1
 
 
-    for key,val in anomaly_dict:
+    for key,val in anomaly_dict.items():
         print(key)
         print(val)
         print(sample_loss_dict['anomaly_all'][val])
