@@ -96,6 +96,7 @@ def test(model, iterator, criterion, device,args, epoch):
             print(sample_loss)
             for i,l in zip(index, sample_loss):
                 sample_loss_dict[i]=l.item()
+            print(sample_loss_dict)
             sys.exit()
 
             #first, specifically look at instances with no anomalies at all
