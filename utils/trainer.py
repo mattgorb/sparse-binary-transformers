@@ -68,13 +68,12 @@ def test(model, iterator, criterion, device,args, epoch):
         sample_loss_dict[f'{name}_sample_loss'].extend(loss.cpu().detach().numpy())
 
 
-    loss_dict={}
-    sample_loss_dict={}
-    model.eval()
+    epoch_loss=0
     i=0
 
     anomaly_ind=[]
     benign_ind=[]
+    sample_loss_dict={}
 
     with torch.no_grad():
         for batch in iterator:
@@ -86,28 +85,32 @@ def test(model, iterator, criterion, device,args, epoch):
             i += 1
 
             #full loss
-            get_loss(data, 'epoch', indices=None)
+            #get_loss(data, 'epoch', indices=None)
+            predictions = model(data)  # .squeeze(1)
+            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            epoch_loss+=loss
+
+            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            print(sample_loss.size())
+            print(data_base)
+            for i,l in zip(index, sample_loss):
+                sample_loss_dict[i]=l
+            sys.exit()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
             if len(normal_data)>0:
                 benign_ind.extend(index[normal_data].cpu().detach().numpy())
-                normal_data=torch.tensor(normal_data)
-                get_loss(data, 'benign', indices=normal_data)
-                get_sample_loss(data, 'benign', indices=normal_data)
 
             #examples with anomalies at forecast index
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
-                anomaly_data=torch.tensor(anomaly_data)
-                get_loss(data, 'anomaly_all', indices=anomaly_data)
-                get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
-    print('here')
-    print(len(sample_loss_dict['anomaly_all_sample_loss']))
-    print(len(sample_loss_dict['benign_sample_loss']))
-    print(len(anomaly_ind))
+    #print('here')
+    #print(len(sample_loss_dict['anomaly_all_sample_loss']))
+    #print(len(sample_loss_dict['benign_sample_loss']))
+    #print(len(anomaly_ind))
 
     anomaly_dict={}
     i=0
