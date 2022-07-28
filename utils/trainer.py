@@ -115,11 +115,12 @@ def test(model, iterator, criterion, device,args, epoch):
         anomaly_dict[i]=list(map(itemgetter(1), g))
         i+=1
 
-
+    print(len(anomaly_dict.keys()))
     for key,val in anomaly_dict.items():
         print(key)
         print(val)
-        print(sample_loss_dict['anomaly_all'][val])
+        print(sample_loss_dict['_sample_loss'][val])
+        print(sample_loss_dict['_sample_loss'][val])
         sys.exit()
 
     print(anomaly_dict)
