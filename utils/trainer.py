@@ -119,8 +119,8 @@ def test(model, iterator, criterion, device,args, epoch):
     for key,val in anomaly_dict.items():
         print(key)
         print(val)
-        print(sample_loss_dict['anomaly_all_sample_loss'][val])
-        print(max(sample_loss_dict['anomaly_all_sample_loss'][val]))
+        print(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]])
+        print(max(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]]))
         sys.exit()
 
     print(anomaly_dict)
