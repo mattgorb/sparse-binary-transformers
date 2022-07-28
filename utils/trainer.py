@@ -104,10 +104,10 @@ def test(model, iterator, criterion, device,args, epoch):
                 get_loss(data, 'anomaly_all', indices=anomaly_data)
                 get_sample_loss(data, 'anomaly_all', indices=anomaly_data)
 
+    print('here')
     print(len(sample_loss_dict['anomaly_all_sample_loss']))
+    print(len(sample_loss_dict['benign_sample_loss']))
     print(len(anomaly_ind))
-
-    #sys.exit()
 
     anomaly_dict={}
     i=0
@@ -116,38 +116,37 @@ def test(model, iterator, criterion, device,args, epoch):
         i+=1
 
     print(len(anomaly_dict.keys()))
+    anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
-        print(key)
-        print(val)
-
-        print(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]+1])
-        print(max(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]+1]))
+        anomaly_final_vals.append(max(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]+1]))
         sys.exit()
 
-    print(anomaly_dict)
-    sys.exit()
+
 
     print(f' Val. Losses: ')
     for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
         print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
 
-    '''print(f'Binary classification scores ')
+    print(f'Binary classification scores ')
     benign=list(sample_loss_dict['benign_sample_loss'])
-    anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
-    labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly))]
-    scores=benign+anomaly
-    import pandas as pd
+    #anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
+    labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly_final_vals))]
+    scores=benign+anomaly_final_vals
+    '''import pandas as pd
     df = pd.DataFrame({'scores': scores, 'labels':labels})
     df.to_csv('output/scores.csv')
-    sys.exit()
+    sys.exit()'''
     
     print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(f'PR Curve : {metrics.auc(recall, precision)}')
     #print(f'Recall : {recall}')
     #print(f'Precision : {precision}')
-    print(f'F1 : {metrics.f1_score(labels, scores)}')'''
+    #print(f'F1 : {metrics.f1_score(labels, scores)}')
+
+    sys.exit()
+
     return loss_dict['epoch_loss'] / loss_dict['epoch_count']
 
 
