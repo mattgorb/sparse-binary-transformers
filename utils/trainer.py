@@ -5,6 +5,7 @@ import numpy as np
 from sklearn import metrics
 from itertools import groupby
 from operator import itemgetter
+import pandas as pd
 
 def train(model, iterator, optimizer, criterion, device,args):
     epoch_loss = 0
@@ -96,7 +97,7 @@ def test(model, iterator, criterion, device,args, epoch):
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
 
-    print(f' Val. Losses: ')
+    #print(f' Val. Losses: ')
     #for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
         #print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
@@ -106,10 +107,11 @@ def test(model, iterator, criterion, device,args, epoch):
     #anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
-    '''import pandas as pd
-    df = pd.DataFrame({'scores': scores, 'labels':labels})
-    df.to_csv('output/scores.csv')
-    sys.exit()'''
+
+    if args.save_scores:
+        df = pd.DataFrame({'scores': scores, 'labels':labels})
+        df.to_csv('output/scores.csv')
+    #sys.exit()
     
     print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
