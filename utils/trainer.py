@@ -43,7 +43,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
 
     epoch_loss=0
-    i=0
+    batch_num=0
 
     anomaly_ind=[]
     benign_ind=[]
@@ -58,7 +58,7 @@ def test(model, iterator, criterion, device,args, epoch):
 
             data = data.to(device)
             data_base = data_base.to(device)
-            i += 1
+            batch_num += 1
 
             #full loss
             predictions = model(data)
@@ -81,8 +81,8 @@ def test(model, iterator, criterion, device,args, epoch):
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
-            if i%500==0:
-                print(i)
+            if batch_num%500==0:
+                print(batch_num)
 
 
     anomaly_dict={}
