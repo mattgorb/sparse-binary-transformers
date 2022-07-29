@@ -54,8 +54,8 @@ class TransformerEncoderLayer(Module):
         self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
 
         self.norm_first = norm_first
-        self.norm1 = nn.BatchNorm1d(d_model, eps=1e-5)
-        self.norm2 = nn.BatchNorm1d(d_model, eps=1e-5)
+        self.norm1 = nn.LayerNorm(d_model, eps=1e-5)
+        self.norm2 = nn.LayerNorm(d_model, eps=1e-5)
 
         # Legacy string support for activation function.
         if isinstance(activation, str):
