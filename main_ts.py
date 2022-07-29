@@ -53,6 +53,8 @@ def main():
     dmodel = input_dim*4
 
     if args.model_type=='Dense':
+        print('here')
+        print(args)
         model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=32, nlayers=4, args=args).to(device)
 
     else:
