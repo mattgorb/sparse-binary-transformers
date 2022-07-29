@@ -59,8 +59,9 @@ class TransformerEncoderLayer(Module):
         self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
 
-        self.dropout1 = nn.Dropout(dropout)
-        self.dropout2 = nn.Dropout(dropout)
+        self.dropout=dropout
+        self.dropout1 = nn.Dropout(self.dropout)
+        self.dropout2 = nn.Dropout(self.dropout)
 
         # Legacy string support for activation function.
         if isinstance(activation, str):
