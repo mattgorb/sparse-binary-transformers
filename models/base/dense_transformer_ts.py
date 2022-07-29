@@ -17,9 +17,8 @@ class TSTransformerModel(nn.Module):
         self.src_mask = None
         self.pad_mask = None
         self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
-        print(args)
-        sys.exit()
-        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout,args,)
+        self.args=args
+        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout,self.args,)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
         self.embedding = nn.Linear(input_dim, ninp)
         self.ninp = ninp
