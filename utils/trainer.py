@@ -92,12 +92,10 @@ def test(model, iterator, criterion, device,args, epoch):
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            print(sample_loss.size())
-            print(sample_loss)
+
             for i,l in zip(index, sample_loss):
                 sample_loss_dict[i.item()]=l.item()
-            print(sample_loss_dict)
-            sys.exit()
+
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
@@ -109,10 +107,7 @@ def test(model, iterator, criterion, device,args, epoch):
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
 
-    #print('here')
-    #print(len(sample_loss_dict['anomaly_all_sample_loss']))
-    #print(len(sample_loss_dict['benign_sample_loss']))
-    #print(len(anomaly_ind))
+
 
     anomaly_dict={}
     i=0
@@ -125,8 +120,11 @@ def test(model, iterator, criterion, device,args, epoch):
     for key,val in anomaly_dict.items():
         print(key)
         print(val)
-        anomaly_final_vals.append(max(sample_loss_dict['anomaly_all_sample_loss'][val[0]:val[-1]+1]))
-        #sys.exit()
+        print(len(val))
+        sample_losses=[sample_loss_dict.get(key) for key in val]
+        print(sample_losses)
+        anomaly_final_vals.append(max(sample_losses))
+        sys.exit()
 
 
 
