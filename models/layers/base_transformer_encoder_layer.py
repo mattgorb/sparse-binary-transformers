@@ -56,8 +56,10 @@ class TransformerEncoderLayer(Module):
         print(self.args)
 
         self.norm_first = norm_first
-        self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        #self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        #self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        self.norm1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.norm2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
 
         self.dropout=dropout
         self.dropout1 = nn.Dropout(self.dropout)
@@ -89,7 +91,7 @@ class TransformerEncoderLayer(Module):
 
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
-        x = src
+        #x = src
         '''if self.norm_first:
             x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
             x = x + self._ff_block(self.norm2(x))

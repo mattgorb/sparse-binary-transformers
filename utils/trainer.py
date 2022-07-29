@@ -29,7 +29,7 @@ def train(model, iterator, optimizer, criterion, device,args):
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()
-        if i%500==0:
+        if i%1000==0:
             print(i)
 
     return epoch_loss / iterator.dataset.__len__()
@@ -80,7 +80,7 @@ def test(model, iterator, criterion, device,args, epoch):
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
-            if batch_num%500==0:
+            if batch_num%1000==0:
                 print(batch_num)
 
 
