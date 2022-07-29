@@ -53,7 +53,7 @@ class TransformerEncoderLayer(Module):
         self.linear1 = nn.Linear(d_model, dim_feedforward, **factory_kwargs)
         self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
         self.args=args
-        print(self.args)
+
         self.norm_first = norm_first
         self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
