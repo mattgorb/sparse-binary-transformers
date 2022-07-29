@@ -121,6 +121,13 @@ def test(model, iterator, criterion, device,args, epoch):
     print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     print(f'PR Curve : {metrics.auc(recall, precision)}')
+    numerator = 2 * recall * precision
+    denom = recall + precision
+    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
+    max_f1 = np.max(f1_scores)
+    max_f1_thresh = thresholds[np.argmax(f1_scores)]
+    print(f"max_f1_thresh: {max_f1_thresh}")
+    print(f"max_f1: {max_f1}")
     #print(f'Recall : {recall}')
     #print(f'Precision : {precision}')
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
