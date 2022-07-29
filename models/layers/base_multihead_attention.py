@@ -437,6 +437,7 @@ class MultiheadAttention(nn.MultiheadAttention):
         q = self.dequant_q(q)
         k = self.dequant_k(k)
         v = self.dequant_v(v)
+
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
 

@@ -57,6 +57,9 @@ class TransformerEncoderLayer(Module):
         self.norm1 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(d_model, eps=layer_norm_eps, **factory_kwargs)
 
+        self.dropout1 = nn.Dropout(dropout)
+        self.dropout2 = nn.Dropout(dropout)
+
         # Legacy string support for activation function.
         if isinstance(activation, str):
             self.activation = _get_activation_fn(activation)
@@ -83,16 +86,31 @@ class TransformerEncoderLayer(Module):
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
         x = src
-        if self.norm_first:
+        '''if self.norm_first:
             x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
             x = x + self._ff_block(self.norm2(x))
         else:
-            #x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
-            #x = self.norm2(x + self._ff_block(x))
+            x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
+            x = self.norm2(x + self._ff_block(x))
             x=x + self._sa_block(x, src_mask, src_key_padding_mask)
             x=x + self._ff_block(x)
+        #return x    
+        '''
 
-        return x
+        src2 = self.self_attn(src, src, src, attn_mask=src_mask,
+                              key_padding_mask=src_key_padding_mask)[0]
+        src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
+        src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+        # src = src.reshape([src.shape[0], -1])  # (batch_size, seq_length * d_model)
+        src = self.norm1(src)
+        src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        src2 = self.linear2(self.dropout(self.activation(self.linear1(src))))
+        src = src + self.dropout2(src2)  # (seq_len, batch_size, d_model)
+        src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+        src = self.norm2(src)
+        src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        return src
+
 
     # self-attention block
     def _sa_block(self, x: Tensor,
