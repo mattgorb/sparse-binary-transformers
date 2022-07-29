@@ -12,3 +12,4 @@ weight_file: dense_ts_smd.pt
 
 window_size: 250
 forecast: False
+save_scores: True
