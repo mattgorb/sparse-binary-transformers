@@ -6,7 +6,7 @@ from sklearn import metrics
 from itertools import groupby
 from operator import itemgetter
 
-def train(model, iterator, optimizer, criterion, device):
+def train(model, iterator, optimizer, criterion, device,args):
     epoch_loss = 0
     epoch_acc = 0
 
@@ -16,7 +16,8 @@ def train(model, iterator, optimizer, criterion, device):
         optimizer.zero_grad()
         data_base, _=batch
         data=torch.clone(data_base)
-        data[:,-1:,:]=0
+        if args.forecast:
+            data[:,-1:,:]=0
         data=data.to(device)
         data_base=data_base.to(device)
         i+=1
@@ -27,12 +28,7 @@ def train(model, iterator, optimizer, criterion, device):
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()
-        #acc = binary_accuracy(predictions, label)
-        #epoch_acc += acc.item()
 
-        #if i%500==0:
-            #print(i)
-    print(f'\tTrain Loss: {epoch_loss/iterator.dataset.__len__()} ')
     return epoch_loss / iterator.dataset.__len__()
 
 
@@ -41,31 +37,6 @@ def train(model, iterator, optimizer, criterion, device):
 def test(model, iterator, criterion, device,args, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
-    def get_loss(data,name, indices=None):
-        pred_data=data
-
-        if indices is not None:
-            pred_data=data_base[indices,:,:]
-        predictions = model(pred_data)  # .squeeze(1)
-        loss = criterion(predictions[:,-1,:], pred_data[:,-1,:])
-        if f'{name}_loss' not in loss_dict:
-            loss_dict[f'{name}_loss']=0
-            loss_dict[f'{name}_count']=0
-        loss_dict[f'{name}_loss']+=loss.item()
-        loss_dict[f'{name}_count']+=pred_data.size(0)
-
-    def get_sample_loss(data, name, indices=None):
-        pred_data=data
-
-        if indices is not None:
-            pred_data=data_base[indices,:,:]
-        predictions = model(pred_data)  # .squeeze(1)
-        loss = sample_criterion(predictions[:,-1,:], pred_data[:,-1,:])
-        loss = loss.mean(dim=1)
-
-        if f'{name}_sample_loss' not in sample_loss_dict:
-            sample_loss_dict[f'{name}_sample_loss']=[]
-        sample_loss_dict[f'{name}_sample_loss'].extend(loss.cpu().detach().numpy())
 
 
     epoch_loss=0
@@ -79,7 +50,9 @@ def test(model, iterator, criterion, device,args, epoch):
         for batch in iterator:
             data_base, label, index = batch
             data = torch.clone(data_base)
-            data[:, -1:, :] = 0
+            if args.forecast:
+                data[:, -1:, :] = 0
+
             data = data.to(device)
             data_base = data_base.to(device)
             i += 1

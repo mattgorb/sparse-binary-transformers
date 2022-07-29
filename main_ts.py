@@ -45,8 +45,8 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    train_dataloader=get_dataset(root_dir, args.batch_size,mode='train', dataset=args.dataset)
-    test_dataloader=get_dataset(root_dir,args.batch_size, mode='test', dataset=args.dataset)
+    train_dataloader=get_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset)
+    test_dataloader=get_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset)
 
     input_dim=train_dataloader.dataset.train.shape[1]
 
@@ -81,7 +81,7 @@ def main():
         print(f'\nEpoch {epoch}: ')
         start_time = time.time()
 
-        train_loss = train(model, train_dataloader, optimizer, criterion, device)
+        train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
 
         valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
 
