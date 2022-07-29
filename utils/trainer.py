@@ -115,29 +115,24 @@ def test(model, iterator, criterion, device,args, epoch):
         anomaly_dict[i]=list(map(itemgetter(1), g))
         i+=1
 
-    print(len(anomaly_dict.keys()))
     anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
-        print(key)
-        print(val)
-        print(len(val))
         sample_losses=[sample_loss_dict.get(key) for key in val]
-        print(sample_losses)
         anomaly_final_vals.append(max(sample_losses))
-        sys.exit()
 
+    benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
 
     print(f' Val. Losses: ')
-    for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
-        print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
+    #for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
+        #print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
 
     print(f'Binary classification scores ')
-    benign=list(sample_loss_dict['benign_sample_loss'])
+    #benign=list(sample_loss_dict['benign_sample_loss'])
     #anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
-    labels=[0 for i in range(len(benign))]+[1 for i in range(len(anomaly_final_vals))]
-    scores=benign+anomaly_final_vals
+    labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
+    scores=benign_final_vals+anomaly_final_vals
     '''import pandas as pd
     df = pd.DataFrame({'scores': scores, 'labels':labels})
     df.to_csv('output/scores.csv')
