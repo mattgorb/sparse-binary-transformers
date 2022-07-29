@@ -41,7 +41,6 @@ def test(model, iterator, criterion, device,args, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
 
-
     epoch_loss=0
     batch_num=0
 
