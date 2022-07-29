@@ -11,7 +11,7 @@ class TSSparseTransformerModel(nn.Module):
         super(TSSparseTransformerModel, self).__init__()
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
-            from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayerBN
+            from models.layers.sparse_encoder_layer_bn import  SparseTransformerEncoderLayerBN
         except:
             raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'

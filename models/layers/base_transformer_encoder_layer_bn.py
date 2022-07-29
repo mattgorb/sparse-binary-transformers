@@ -9,7 +9,7 @@ from torch.nn import ModuleList
 import torch.nn as nn
 from models.layers.base_multihead_attention import MultiheadAttention
 
-class TransformerEncoderLayerBN(Module):
+class TransformerEncoderLayer(Module):
     r"""TransformerEncoderLayer is made up of self-attn and feedforward network.
     This standard encoder layer is based on the paper "Attention Is All You Need".
     Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
@@ -46,7 +46,7 @@ class TransformerEncoderLayerBN(Module):
                  layer_norm_eps=1e-5, batch_first=False, norm_first=False,
                  device=None, dtype=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
-        super(TransformerEncoderLayerBN, self).__init__()
+        super(TransformerEncoderLayer, self).__init__()
         self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,
                                             **factory_kwargs)
         # Implementation of Feedforward model
