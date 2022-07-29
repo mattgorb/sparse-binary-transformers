@@ -210,9 +210,6 @@ def test(model, iterator, criterion, device,args, epoch):
         pred=np.array(graph_dict[f'{item}_pred'])
         actual=np.array(graph_dict[f'{item}_actual'])
 
-        if item=='benign':
-            pred=pred[:500,:]
-            actual=actual[:500,:]
         for feat in range(pred.shape[1]):
             plt.clf()
             plt.plot([i for i in range(pred.shape[0])],pred[:,feat], label='pred')
