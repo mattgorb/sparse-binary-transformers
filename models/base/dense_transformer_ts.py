@@ -10,7 +10,7 @@ class TSTransformerModel(nn.Module):
         super(TSTransformerModel, self).__init__()
         try:
             from torch.nn import TransformerEncoder
-            from models.layers.base_transformer_encoder_layer_bn import TransformerEncoderLayer
+            from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
         except:
             raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
         self.model_type = 'Transformer'
