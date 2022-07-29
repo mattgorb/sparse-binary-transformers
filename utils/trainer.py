@@ -81,7 +81,8 @@ def test(model, iterator, criterion, device,args, epoch):
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
-
+            if i%500==0:
+                print(i)
 
 
     anomaly_dict={}
