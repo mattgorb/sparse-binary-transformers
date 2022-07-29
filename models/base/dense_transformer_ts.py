@@ -6,7 +6,7 @@ from models.layers.positional_encoder import PositionalEncoding, LearnablePositi
 
 class TSTransformerModel(nn.Module):
 
-    def __init__(self, input_dim, ninp, nhead, nhid, nlayers=6, dropout=0.0):
+    def __init__(self, input_dim, ninp, nhead, nhid,args, nlayers=6, dropout=0.0):
         super(TSTransformerModel, self).__init__()
         try:
             from torch.nn import TransformerEncoder
@@ -17,7 +17,7 @@ class TSTransformerModel(nn.Module):
         self.src_mask = None
         self.pad_mask = None
         self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
-        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout)
+        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout,args,)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
         self.embedding = nn.Linear(input_dim, ninp)
         self.ninp = ninp
