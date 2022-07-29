@@ -94,7 +94,7 @@ def main():
         end_time = time.time()
         epoch_mins, epoch_secs = epoch_time(start_time, end_time)
         print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-
+        print(f'Train loss: {train_loss}, Validation loss: {valid_loss}')
 
 
 

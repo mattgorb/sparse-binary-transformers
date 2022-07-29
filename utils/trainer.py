@@ -145,9 +145,9 @@ def test(model, iterator, criterion, device,args, epoch):
     #print(f'Precision : {precision}')
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
 
-    sys.exit()
+    #sys.exit()
 
-    return loss_dict['epoch_loss'] / loss_dict['epoch_count']
+    return epoch_loss / iterator.dataset.__len__()
 
 
 '''
