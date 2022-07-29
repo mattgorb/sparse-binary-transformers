@@ -52,10 +52,10 @@ class TransformerEncoderLayer(Module):
         # Implementation of Feedforward model
         self.linear1 = nn.Linear(d_model, dim_feedforward, **factory_kwargs)
         self.linear2 = nn.Linear(dim_feedforward, d_model, **factory_kwargs)
-
+        self.args=args
         self.norm_first = norm_first
-        self.norm1 = nn.LayerNorm(args.window_size, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
 
         self.dropout1 = nn.Dropout(dropout)
         self.dropout2 = nn.Dropout(dropout)
