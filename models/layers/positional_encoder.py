@@ -4,7 +4,7 @@ import torch.nn as nn
 
 class LearnablePositionalEncoding(nn.Module):
     #taken from https://github.com/gzerveas/mvts_transformer/blob/master/src/models/ts_transformer.py
-    def __init__(self, d_model, dropout=0.1, max_len=1024):
+    def __init__(self, d_model, dropout=0.1, max_len=2048):
         super(LearnablePositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p=dropout)
         # Each position gets its own embedding
