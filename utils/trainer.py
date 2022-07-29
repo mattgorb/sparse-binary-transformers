@@ -94,10 +94,10 @@ def test(model, iterator, criterion, device,args, epoch):
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
-        print(key)
-        print(max(sample_losses))
-        print(sample_losses)
-    sys.exit()
+        #print(key)
+        #print(max(sample_losses))
+        #print(sample_losses)
+    #sys.exit()
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
