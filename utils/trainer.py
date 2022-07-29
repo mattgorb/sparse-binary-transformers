@@ -206,7 +206,7 @@ def test(model, iterator, criterion, device,args, epoch):
                 get_graphs(data, 'anomaly_first', indices=anomaly_first)
                 
 
-    for item in ['anomaly_first']:
+    for item in ['anomaly_all','benign']:
         pred=np.array(graph_dict[f'{item}_pred'])
         actual=np.array(graph_dict[f'{item}_actual'])
 
