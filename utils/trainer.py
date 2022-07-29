@@ -95,7 +95,7 @@ def test(model, iterator, criterion, device,args, epoch):
             print(sample_loss.size())
             print(sample_loss)
             for i,l in zip(index, sample_loss):
-                sample_loss_dict[i]=l.item()
+                sample_loss_dict[i.item()]=l.item()
             print(sample_loss_dict)
             sys.exit()
 
