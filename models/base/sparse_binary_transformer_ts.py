@@ -11,7 +11,7 @@ class TSSparseTransformerModel(nn.Module):
         super(TSSparseTransformerModel, self).__init__()
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
-            from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer
+            from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayerBN
         except:
             raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'
@@ -19,7 +19,7 @@ class TSSparseTransformerModel(nn.Module):
         self.pad_mask = None
         self.args=args
         self.pos_encoder = LearnablePositionalEncoding(ninp, )
-        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
+        encoder_layers = SparseTransformerEncoderLayerBN(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
