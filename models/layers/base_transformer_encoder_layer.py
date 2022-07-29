@@ -62,6 +62,7 @@ class TransformerEncoderLayer(Module):
         self.dropout=dropout
         self.dropout1 = nn.Dropout(self.dropout)
         self.dropout2 = nn.Dropout(self.dropout)
+        self.dropout3 = nn.Dropout(self.dropout)
 
         # Legacy string support for activation function.
         if isinstance(activation, str):
@@ -107,8 +108,8 @@ class TransformerEncoderLayer(Module):
         # src = src.reshape([src.shape[0], -1])  # (batch_size, seq_length * d_model)
         src = self.norm1(src)
         src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
-        src2 = self.linear2(self.dropout(self.activation(self.linear1(src))))
-        src = src + self.dropout2(src2)  # (seq_len, batch_size, d_model)
+        src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
+        src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
         src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
         src = self.norm2(src)
         src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
