@@ -11,5 +11,5 @@ epochs: 250
 weight_file: dense_ts_smd.pt
 
 window_size: 100
-forecast: True
+forecast: False
 save_scores: True
