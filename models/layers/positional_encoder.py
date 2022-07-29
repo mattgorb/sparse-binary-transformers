@@ -6,6 +6,7 @@ class LearnablePositionalEncoding(nn.Module):
     #taken from https://github.com/gzerveas/mvts_transformer/blob/master/src/models/ts_transformer.py
     def __init__(self, d_model, dropout=0.1, max_len=1024):
         super(LearnablePositionalEncoding, self).__init__()
+
         self.dropout = nn.Dropout(p=dropout)
         # Each position gets its own embedding
         # Since indices are always 0 ... max_len, we don't have to do a look-up

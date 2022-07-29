@@ -1,7 +1,7 @@
 import torch
 from torchtext.datasets import IMDB
 from models.base.dense_transformer_ts import TSTransformerModel
-#from models.base.sparse_binary_transformer_ts import SBTransformerModel
+from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
 import torchtext
@@ -55,8 +55,8 @@ def main():
     if args.model_type=='Dense':
         model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2).to(device)
 
-    #else:
-        #model=SBTransformerModel(ntoken=ntokens, ninp=EMBEDDING_DIM, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+    else:
+        model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
     #print(model)
 
     freeze_model_weights(model)
