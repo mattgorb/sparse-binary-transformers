@@ -29,6 +29,8 @@ def train(model, iterator, optimizer, criterion, device,args):
         loss.backward()
         optimizer.step()
         epoch_loss += loss.item()
+        if i%500==0:
+            print(i)
 
     return epoch_loss / iterator.dataset.__len__()
 
@@ -59,8 +61,7 @@ def test(model, iterator, criterion, device,args, epoch):
             i += 1
 
             #full loss
-            #get_loss(data, 'epoch', indices=None)
-            predictions = model(data)  # .squeeze(1)
+            predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss+=loss
 
