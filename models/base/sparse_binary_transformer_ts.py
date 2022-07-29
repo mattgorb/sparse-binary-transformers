@@ -21,15 +21,12 @@ class TSSparseTransformerModel(nn.Module):
         self.pos_encoder = LearnablePositionalEncoding(ninp, )
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
-        #self.embedding = nn.Linear(input_dim, ninp)
-        #self.ninp = ninp
-        #self.decoder = nn.Linear(ninp, input_dim)
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
         self.ninp = ninp
         self.decoder = linear_init(ninp, input_dim,bias=False,args=args, )
 
-        self.init_weights()
+        #self.init_weights()
 
     def _generate_square_subsequent_mask(self, sz):
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
