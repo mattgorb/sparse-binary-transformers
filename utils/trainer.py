@@ -22,6 +22,7 @@ def train(model, iterator, optimizer, criterion, device,args):
             #data[:,-1:,:]=0
         data=data.to(device)
         data_base=data_base.to(device)
+
         i+=1
 
         data=data.permute(1,0,2)
