@@ -62,6 +62,12 @@ def test(model, iterator, criterion, device,args, epoch):
             #full loss
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+
+            print(data_base[:, -1, :])
+            print(predictions[:, -1, :])
+            print(sample_criterion(predictions[:, -1, :], data_base[:, -1, :]))
+            sys.exit()
+
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
@@ -95,9 +101,9 @@ def test(model, iterator, criterion, device,args, epoch):
         sample_losses=[sample_loss_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
 
-        print(key)
+        #print(key)
         #print(max(sample_losses))
-        print(sample_losses)
+        #print(sample_losses)
     #sys.exit()
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
