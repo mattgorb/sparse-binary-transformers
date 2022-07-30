@@ -76,6 +76,10 @@ def test(model, iterator, criterion, device,args, epoch):
 
             #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_criterion(predictions, data[-1, :, :])
+            print(predictions.size())
+            print(data[-1, :, :].size())
+            print(sample_loss.size())
+            sys.exit()
             sample_loss = sample_loss.mean(dim=1)
 
             for i,l in zip(index, sample_loss):
