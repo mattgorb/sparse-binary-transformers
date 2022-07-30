@@ -4,6 +4,44 @@ import torch.nn as nn
 import torch.nn.functional as F
 from models.layers.positional_encoder import PositionalEncoding, LearnablePositionalEncoding
 
+
+
+# Proposed Model (VLDB 22)
+class TranAD_Basic(nn.Module):
+    def __init__(self, feats):
+        super(TranAD_Basic, self).__init__()
+        try:
+            from torch.nn import TransformerEncoder, TransformerEncoderLayer
+            #from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
+            from torch.nn import TransformerDecoder, TransformerDecoderLayer
+        except:
+            raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
+        self.name = 'TranAD_Basic'
+        #self.lr = lr
+        self.batch = 128
+        self.n_feats = feats
+        self.n_window = 100
+        self.n = self.n_feats * self.n_window
+        self.pos_encoder = PositionalEncoding(feats, 0.1, self.n_window)
+        encoder_layers = TransformerEncoderLayer(d_model=feats, nhead=feats, dim_feedforward=16, dropout=0.1)
+        self.transformer_encoder = TransformerEncoder(encoder_layers, 1)
+        decoder_layers = TransformerDecoderLayer(d_model=feats, nhead=feats, dim_feedforward=16, dropout=0.1)
+        self.transformer_decoder = TransformerDecoder(decoder_layers, 1)
+        #self.fcn = nn.Sigmoid()
+
+    def forward(self, src, tgt):
+        src = src * math.sqrt(self.n_feats)
+        src = self.pos_encoder(src)
+        memory = self.transformer_encoder(src)
+
+        x = self.transformer_decoder(tgt, memory)
+        #x = self.fcn(x)
+
+        return x
+
+
+
+
 class TSTransformerModel(nn.Module):
 
     def __init__(self, input_dim, ninp, nhead, nhid, args, nlayers=6, dropout=0.0):

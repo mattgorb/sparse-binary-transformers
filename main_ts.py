@@ -53,9 +53,9 @@ def main():
     dmodel = input_dim*4
 
     if args.model_type=='Dense':
-
-        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=32, nlayers=4, args=args).to(device)
-
+        from models.base.dense_transformer_ts import TranAD_Basic
+        #model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=32, nlayers=4, args=args).to(device)
+        model=TranAD_Basic(38)
     else:
         model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
     #print(model)

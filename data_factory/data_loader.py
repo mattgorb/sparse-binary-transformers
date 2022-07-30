@@ -19,8 +19,8 @@ class SMDSegLoader(object):
         self.mode = mode
         self.step = step
         self.win_size = win_size
-        #self.scaler = StandardScaler()
-        self.scaler=MinMaxScaler()
+        self.scaler = StandardScaler()
+
         data = np.load(data_path + "SMD/SMD_train.npy")
         self.scaler.fit(data)
         data = self.scaler.transform(data)

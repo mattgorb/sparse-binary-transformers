@@ -16,15 +16,18 @@ def train(model, iterator, optimizer, criterion, device,args):
     for batch in iterator:
         optimizer.zero_grad()
         data_base, _=batch
+
         data=torch.clone(data_base)
-        if args.forecast:
-            data[:,-1:,:]=0
+        #if args.forecast:
+            #data[:,-1:,:]=0
         data=data.to(device)
         data_base=data_base.to(device)
         i+=1
-        predictions = model(data)
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        data=data.permute(1,0,2)
+        predictions = model(data, data[-1,:,:].unsqueeze(0))
+        #loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions, data[-1, :, :])
 
         loss.backward()
         optimizer.step()
@@ -52,20 +55,26 @@ def test(model, iterator, criterion, device,args, epoch):
         for batch in iterator:
             data_base, label, index = batch
             data = torch.clone(data_base)
-            if args.forecast:
-                data[:, -1:, :] = 0
+            #if args.forecast:
+                #data[:, -1:, :] = 0
 
             data = data.to(device)
             data_base = data_base.to(device)
             batch_num += 1
 
             #full loss
-            predictions = model(data)
-            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            data = data.permute(1, 0, 2)
+            predictions = model(data, data[-1, :, :].unsqueeze(0))
+            # loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+            loss = criterion(predictions, data[-1, :, :])
+
+            #predictions = model(data)
+            #loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
 
             epoch_loss+=loss
 
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = criterion(predictions, data[-1, :, :])
             sample_loss = sample_loss.mean(dim=1)
 
             for i,l in zip(index, sample_loss):
