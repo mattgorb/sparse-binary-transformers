@@ -9,7 +9,7 @@ import collections
 import numbers
 import math
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
 import pickle
 
 
@@ -19,7 +19,8 @@ class SMDSegLoader(object):
         self.mode = mode
         self.step = step
         self.win_size = win_size
-        self.scaler = StandardScaler()
+        #self.scaler = StandardScaler()
+        self.scaler=MinMaxScaler()
         data = np.load(data_path + "SMD/SMD_train.npy")
         self.scaler.fit(data)
         data = self.scaler.transform(data)
@@ -30,48 +31,6 @@ class SMDSegLoader(object):
         self.val = self.train[(int)(data_len * 0.8):]
         self.test_labels = np.load(data_path + "SMD/SMD_test_label.npy")
 
-
-
-        '''temp=[self.test[i] for i in range(len(self.test)) if self.test_labels[i]==1]
-        x=np.argwhere(self.test_labels == 1)
-        a=test_data[10400:10621]
-        print(x[0])
-        import matplotlib.pyplot as plt
-        #for f in range(4):
-        plt.clf()
-        #print(a[:,f])
-        plt.plot([i for i in range(a.shape[0])], a[:,6])
-        plt.title(31)
-        plt.show()
-        sys.exit()'''
-            #sys.exit()
-
-        #plt.clf()
-        #plt.plot([i for i in range(1000)], self.test[:1000,8])
-        #plt.show()
-
-        #sys.exit()
-        '''print(data[0])
-        print(test_data[0])
-        print(data.shape)
-        print(test_data.shape)
-
-        feat=self.train.shape[1]
-        import matplotlib.pyplot as plt
-        for f in range(feat):
-            plt.clf()
-
-            plt.plot([i for i in range(self.train[450000:500000,f].shape[0])],self.train[450000:500000,f])
-            plt.savefig(f'output/{f}_train.png')
-
-        feat=self.test.shape[1]
-        import matplotlib.pyplot as plt
-        for f in range(feat):
-            plt.clf()
-
-            plt.plot([i for i in range(self.test[450000:500000,f].shape[0])],self.test[450000:500000,f])
-            plt.savefig(f'output/{f}_test.png')
-        sys.exit()'''
 
 
     def __len__(self):
