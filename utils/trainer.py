@@ -75,7 +75,7 @@ def test(model, iterator, criterion, device,args, epoch):
             epoch_loss+=loss
 
             #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-            sample_loss = criterion(predictions, data[-1, :, :])
+            sample_loss = sample_criterion(predictions, data[-1, :, :])
             sample_loss = sample_loss.mean(dim=1)
 
             for i,l in zip(index, sample_loss):
