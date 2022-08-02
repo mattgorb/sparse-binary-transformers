@@ -149,6 +149,10 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     plt.hist(np.array(train_losses))
     plt.savefig(f'output/{entity}.png')
 
+    plt.clf()
+    plt.hist(np.array(scores))
+    plt.savefig(f'output/{entity}_test.png')
+
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
 
