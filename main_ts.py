@@ -22,7 +22,7 @@ from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
-from utils.trainer import train,test
+from utils.trainer import train,test, validation
 from data_factory.entity_loader import get_entity_dataset
 
 
@@ -69,7 +69,7 @@ def main():
 
         optimizer = optim.Adam(model.parameters(),lr=1e-4)
         criterion = nn.MSELoss(reduction='sum')
-        best_test_loss = float('inf')
+        best_val_loss = float('inf')
 
         if args.evaluate:
             evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
@@ -86,18 +86,19 @@ def main():
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
+            val_loss = validation(model, train_dataloader, optimizer, criterion, device,args)
             if epoch==10:
                 print(f'Entity {ent}')
                 test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
-            #if test_loss < best_test_loss:
-                #best_test_loss = test_loss
-                #torch.save(model.state_dict(), args.weight_file)
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                torch.save(model.state_dict(), args.weight_file)
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
             print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-            print(f'Train loss: {train_loss}, Test loss: {test_loss}')
+            print(f'Train loss: {train_loss}, Val loss: {val_loss}, Test loss: {test_loss}')
 
 
 
