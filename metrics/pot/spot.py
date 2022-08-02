@@ -221,9 +221,6 @@ class SPOT:
         g, s, l = self._grimshaw()
         self.extreme_quantile = self._quantile(g, s)
 
-
-
-
         if verbose:
             print('[done]')
             print('\t' + chr(0x03B3) + ' = ' + str(g))
@@ -476,7 +473,7 @@ class SPOT:
                 else:
                     self.n += 1
 
-            th.append(self.extreme_quantile)  # thresholds record
+            th.append(self.extreme_quantile)  #thresholds record
 
         return {'thresholds': th, 'alarms': alarm}
 
