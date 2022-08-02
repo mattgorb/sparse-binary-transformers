@@ -67,7 +67,7 @@ def main():
 
     optimizer = optim.Adam(model.parameters(),lr=1e-4)
     criterion = nn.MSELoss(reduction='sum')
-    best_valid_loss = float('inf')
+    best_test_loss = float('inf')
 
     if args.evaluate:
         evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
