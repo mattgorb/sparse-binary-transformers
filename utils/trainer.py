@@ -144,7 +144,7 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     print(np.array(scores).shape)
     print(np.array(labels).shape)
     from metrics.pot.pot import pot_eval
-    result, _ = pot_eval(np.array(train_losses), np.array(scores), np.array(labels))
+    result, _ = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     sys.exit()
 
 

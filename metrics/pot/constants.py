@@ -1,4 +1,4 @@
-from metrics.pot.parser import *
+#from metrics.pot.parser import *
 #from metrics.pot.folderconstants import *
 
 # Threshold parameters
@@ -14,7 +14,7 @@ lm_d = {
 		'MSDS': [(0.91, 1), (0.9, 1.04)],
 		'MBA': [(0.87, 1), (0.93, 1.04)],
 	}
-lm = lm_d[args.dataset][1 if 'TranAD' in args.model_type else 0]
+#lm = lm_d[args.dataset][1 if 'TranAD' in args.model_type else 0]
 
 # Hyperparameters
 lr_d = {
@@ -29,7 +29,7 @@ lr_d = {
 		'NAB': 0.009, 
 		'MBA': 0.001, 
 	}
-lr = lr_d[args.dataset]
+#lr = lr_d[args.dataset]
 
 # Debugging
 percentiles = {
