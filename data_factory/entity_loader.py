@@ -37,7 +37,10 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
+        print(f'Sizes: ')
+        print(f'Train: {self.train.shape}')
 
+        print(f'Test: {self.test.shape}')
 
 
     def __len__(self):

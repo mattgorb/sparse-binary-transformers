@@ -102,11 +102,6 @@ def test(model, iterator, criterion, device,args, epoch):
         sample_losses=[sample_loss_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
 
-        #print(key)
-        #print(max(sample_losses))
-        #print(sample_losses)
-    #sys.exit()
-
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
 
@@ -140,7 +135,6 @@ def test(model, iterator, criterion, device,args, epoch):
     #print(f'Precision : {precision}')
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
 
-    #sys.exit()
 
     return epoch_loss / iterator.dataset.__len__()
 
