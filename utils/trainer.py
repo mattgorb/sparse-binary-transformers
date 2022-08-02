@@ -98,8 +98,7 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
             sample_loss = sample_criterion(predictions, data_base)
             sample_loss = sample_loss.mean(dim=1)
             sample_loss = sample_loss.mean(dim=1)
-            print(sample_loss.size())
-            sys.exit()
+
             train_losses.extend(sample_loss.cpu().detach().numpy())
 
         for batch in iterator:
