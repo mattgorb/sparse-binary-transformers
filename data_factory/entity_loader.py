@@ -31,8 +31,9 @@ class SMD(object):
                              delimiter=',')
         self.test = self.scaler.transform(test_data)
         self.train = data
-        self.train = self.train[:(int)(self.train * 0.8)]
+
         data_len = len(self.train)
+        self.train = self.train[:(int)(data_len * 0.8)]
         self.val = self.train[(int)(data_len * 0.8):]
         self.test_labels = np.genfromtxt(f'{data_path}SMD_raw/labels/{entity}',
                              dtype=np.int,
