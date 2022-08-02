@@ -66,6 +66,8 @@ def test(model, iterator, criterion, device,args, epoch):
             #full loss
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            print(loss)
+            sys.exit()
 
             epoch_loss+=loss
 
