@@ -1,5 +1,5 @@
-from src.parser import *
-from src.folderconstants import *
+from metrics.pot.parser import *
+#from metrics.pot.folderconstants import *
 
 # Threshold parameters
 lm_d = {

@@ -1,7 +1,7 @@
 import numpy as np
 
-from src.spot import SPOT
-from src.constants import *
+from metrics.pot.spot import SPOT
+from metrics.pot.constants import *
 from sklearn.metrics import *
 
 def calc_point2point(predict, actual):

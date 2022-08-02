@@ -41,7 +41,7 @@ def train(model, iterator, optimizer, criterion, device,args):
 
 
 
-def test(model, iterator, criterion, device,args, epoch):
+def test(model, iterator,train_iterator, criterion, device,args, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
 
@@ -52,7 +52,22 @@ def test(model, iterator, criterion, device,args, epoch):
     benign_ind=[]
     sample_loss_dict={}
 
+    train_losses=[]
+
     with torch.no_grad():
+        for batch in train_iterator:
+            data_base, label, index = batch
+            data = torch.clone(data_base)
+            if args.forecast:
+                data[:, -1:, :] = 0
+
+            data = data.to(device)
+            data_base = data_base.to(device)
+            predictions = model(data)
+            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_loss.mean(dim=1)
+            train_losses.extend(sample_loss.cpu().detach().numpy())
+
         for batch in iterator:
             data_base, label, index = batch
             data = torch.clone(data_base)
@@ -67,13 +82,8 @@ def test(model, iterator, criterion, device,args, epoch):
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
 
-            #sys.exit()
-
             epoch_loss+=loss
-            #print(epoch_loss / (batch_num * args.batch_size))
-
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-
             sample_loss = sample_loss.mean(dim=1)
 
 
@@ -109,15 +119,12 @@ def test(model, iterator, criterion, device,args, epoch):
 
 
     print(f'Binary classification scores ')
-    #benign=list(sample_loss_dict['benign_sample_loss'])
-    #anomaly=list(sample_loss_dict['anomaly_first_sample_loss'])
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
 
     if args.save_scores:
         df = pd.DataFrame({'scores': scores, 'labels':labels})
         df.to_csv('output/scores.csv')
-    #sys.exit()
     
     print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
@@ -132,6 +139,13 @@ def test(model, iterator, criterion, device,args, epoch):
     #print(f'Recall : {recall}')
     #print(f'Precision : {precision}')
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
+
+    print(np.array(train_losses).shape)
+    print(scores.shape)
+    print(labels.shape)
+    from metrics.pot.pot import pot_eval
+    result, _ = pot_eval(np.array(train_losses), scores, labels)
+    sys.exit()
 
 
     return epoch_loss / iterator.dataset.__len__()

@@ -83,7 +83,7 @@ def main():
         start_time = time.time()
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-        test_loss = test(model, test_dataloader, criterion, device, args, epoch)
+        test_loss = test(model, test_dataloader,train_dataloader, criterion, device, args, epoch)
 
         if test_loss < best_test_loss:
             best_test_loss = test_loss
