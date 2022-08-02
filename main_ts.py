@@ -90,9 +90,9 @@ def main():
                 print(f'Entity {ent}')
                 test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, epoch)
 
-            if test_loss < best_test_loss:
-                best_test_loss = test_loss
-                torch.save(model.state_dict(), args.weight_file)
+            #if test_loss < best_test_loss:
+                #best_test_loss = test_loss
+                #torch.save(model.state_dict(), args.weight_file)
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
