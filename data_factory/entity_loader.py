@@ -39,10 +39,7 @@ class SMD(object):
 
         print(f'Sizes: ')
         print(f'Train: {self.train.shape}')
-
         print(f'Test: {self.test.shape}')
-        print(self.train[0])
-        print(self.test[0])
 
 
     def __len__(self):
