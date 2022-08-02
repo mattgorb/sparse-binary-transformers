@@ -26,10 +26,10 @@ def train(model, iterator, optimizer, criterion, device,args):
 
         i+=1
 
-        #data=data.permute(1,0,2)
         predictions = model(data, )
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        #loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions, data_base)
 
         loss.backward()
         optimizer.step()
@@ -57,11 +57,10 @@ def validation(model, iterator, optimizer, criterion, device,args):
         data_base=data_base.to(device)
 
         i+=1
-
-        #data=data.permute(1,0,2)
         predictions = model(data, )
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        #loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions, data_base)
 
         loss.backward()
         optimizer.step()
@@ -95,8 +94,12 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
             data = data.to(device)
             data_base = data_base.to(device)
             predictions = model(data)
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_criterion(predictions, data_base)
             sample_loss = sample_loss.mean(dim=1)
+            sample_loss = sample_loss.mean(dim=1)
+            print(sample_loss.size())
+            sys.exit()
             train_losses.extend(sample_loss.cpu().detach().numpy())
 
         for batch in iterator:
@@ -111,10 +114,13 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
 
             #full loss
             predictions = model(data)
-            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            #loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            loss = criterion(predictions, data_base)
 
             epoch_loss+=loss
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_criterion(predictions, data_base)
+            sample_loss = sample_loss.mean(dim=1)
             sample_loss = sample_loss.mean(dim=1)
 
 
