@@ -42,7 +42,7 @@ def train(model, iterator, optimizer, criterion, device,args):
 
 
 
-def test(model, iterator,train_iterator, criterion, device,args, epoch):
+def test(model, iterator,train_iterator, criterion, device,args, entity):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
 
@@ -147,7 +147,7 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
 
     plt.clf()
     plt.hist(np.array(train_losses))
-    plt.show()
+    plt.savefig(f'output/{entity}.png')
 
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)

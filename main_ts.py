@@ -88,7 +88,7 @@ def main():
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             if epoch==5:
                 print(f'Entity {ent}')
-                test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, epoch)
+                test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, ent)
 
             #if test_loss < best_test_loss:
                 #best_test_loss = test_loss
