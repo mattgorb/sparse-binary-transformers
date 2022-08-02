@@ -131,7 +131,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
         dict: pot result dict
     """
     lm=lm_d[args.dataset]
-    lms = lm[1][0]
+    lms = lm[0][0]
     while True:
         try:
             s = SPOT(q)  # SPOT object
@@ -141,7 +141,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
         else: break
     ret = s.run(dynamic=False)  # run
 
-    pot_th = np.mean(ret['thresholds']) * lm[1][1]
+    pot_th = np.mean(ret['thresholds']) * lm[0][1]
 
     pred, p_latency = adjust_predicts(score, label, pot_th, calc_latency=True)
 
