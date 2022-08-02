@@ -162,7 +162,7 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
 
-    sys.exit()
+    #sys.exit()
 
 
     return epoch_loss / iterator.dataset.__len__()
