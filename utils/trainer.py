@@ -70,7 +70,7 @@ def test(model, iterator, criterion, device,args, epoch):
             #sys.exit()
 
             epoch_loss+=loss
-            print(epoch_loss / (batch_num * args.batch_size))
+            #print(epoch_loss / (batch_num * args.batch_size))
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
 
