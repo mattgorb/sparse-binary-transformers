@@ -56,7 +56,7 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
 
     with torch.no_grad():
         for batch in train_iterator:
-            data_base, label, index = batch
+            data_base, label = batch
             data = torch.clone(data_base)
             if args.forecast:
                 data[:, -1:, :] = 0
