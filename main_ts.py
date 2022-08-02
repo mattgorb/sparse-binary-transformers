@@ -48,7 +48,7 @@ def main():
     for ent in [0,12,25]:
         print(f'\n\n\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=ent, shuffle=True)
-        train_dataloader_ns=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size, dataset=args.dataset, entity=ent)
+        val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size, dataset=args.dataset, entity=ent)
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset, entity=ent)
 
         input_dim=train_dataloader.dataset.train.shape[1]
@@ -88,7 +88,7 @@ def main():
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             if epoch==10:
                 print(f'Entity {ent}')
-                test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, ent)
+                test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
             #if test_loss < best_test_loss:
                 #best_test_loss = test_loss
