@@ -204,14 +204,14 @@ class SPOT:
         self.Nt = self.peaks.size
         self.n = n_init
 
-        print("here")
+        '''print("here")
         print(level)
         print(n_init)
         print(self.init_threshold)
         print(self.peaks)
         print(self.Nt)
         print(self.n)
-        sys.exit()
+        sys.exit()'''
 
         if verbose:
             print('Initial threshold : %s' % self.init_threshold)
@@ -231,7 +231,7 @@ class SPOT:
             print('\tL = ' + str(l))
             print('Extreme quantile (probability = %s): %s' % (self.proba, self.extreme_quantile))
 
-        sys.exit()
+
 
         return
 
