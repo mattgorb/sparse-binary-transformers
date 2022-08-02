@@ -80,6 +80,7 @@ def main():
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
 
 
+        test_loss=None
         for epoch in range(args.epochs):
             print(f'\nEpoch {epoch}: ')
             start_time = time.time()
