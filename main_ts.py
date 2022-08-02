@@ -86,7 +86,7 @@ def main():
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-            if epoch==30:
+            if epoch==5:
                 print(f'Entity {ent}')
                 test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, epoch)
 

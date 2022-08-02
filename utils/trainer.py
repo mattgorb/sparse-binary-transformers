@@ -145,6 +145,10 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     print(np.array(scores).shape)
     print(np.array(labels).shape)
 
+    plt.clf()
+    plt.hist(np.array(train_losses))
+    plt.show()
+
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
 
