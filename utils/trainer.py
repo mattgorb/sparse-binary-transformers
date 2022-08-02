@@ -6,6 +6,7 @@ from sklearn import metrics
 from itertools import groupby
 from operator import itemgetter
 import pandas as pd
+from metrics.pot.pot import pot_eval
 
 def train(model, iterator, optimizer, criterion, device,args):
     epoch_loss = 0
@@ -143,8 +144,9 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     print(np.array(train_losses).shape)
     print(np.array(scores).shape)
     print(np.array(labels).shape)
-    from metrics.pot.pot import pot_eval
+
     result, _ = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
+    print(result)
     sys.exit()
 
 
