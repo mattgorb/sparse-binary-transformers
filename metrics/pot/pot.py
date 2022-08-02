@@ -131,7 +131,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
         dict: pot result dict
     """
     lm=lm_d[args.dataset]
-    lms = lm[0]
+    lms = lm[0][0]
     while True:
         try:
             s = SPOT(q)  # SPOT object
