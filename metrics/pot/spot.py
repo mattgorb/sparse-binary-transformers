@@ -211,6 +211,7 @@ class SPOT:
         print(self.peaks)
         print(self.Nt)
         print(self.n)
+        sys.exit()
 
         if verbose:
             print('Initial threshold : %s' % self.init_threshold)
