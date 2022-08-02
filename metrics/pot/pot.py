@@ -139,12 +139,10 @@ def pot_eval(init_score, score, label,args, q=1e-10, level=0.02):
             s.initialize(level=lms, min_extrema=False, verbose=True)  # initialization step
         except: lms = lms * 0.999
         else: break
-    ret = s.run(dynamic=False)  # run
+    #ret = s.run(dynamic=False)  # run
 
-    pot_th = np.mean(ret['thresholds']) * lm[0][1]
-    #print(ret['thresholds'])
-    #print(lm[0][1])
-    #sys.exit()
+    #pot_th = np.mean(ret['thresholds']) * lm[0][1]
+    pot_th=s.extreme_quantile
 
     pred, p_latency = adjust_predicts(score, label, pot_th, calc_latency=True)
 
