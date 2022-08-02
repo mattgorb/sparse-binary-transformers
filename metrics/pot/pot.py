@@ -144,7 +144,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
     # print(len(ret['thresholds']))
     print(np.mean(ret['thresholds']))
     print(lm[1])
-    pot_th = np.mean(ret['thresholds']) * lm[1]
+    pot_th = np.mean(ret['thresholds']) * lm[0][1]
     # pot_th = np.percentile(score, 100 * lm[0])
     # np.percentile(score, 100 * lm[0])
     pred, p_latency = adjust_predicts(score, label, pot_th, calc_latency=True)
