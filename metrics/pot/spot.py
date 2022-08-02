@@ -190,15 +190,27 @@ class SPOT:
 
         level = level - floor(level)
 
+
         n_init = self.init_data.size
+
 
         S = np.sort(self.init_data)  # we sort X to get the empirical quantile
         self.init_threshold = S[int(level * n_init)]  # t is fixed for the whole algorithm
+
+
 
         # initial peaks
         self.peaks = self.init_data[self.init_data > self.init_threshold] - self.init_threshold
         self.Nt = self.peaks.size
         self.n = n_init
+
+        print("here")
+        print(level)
+        print(n_init)
+        print(self.init_threshold)
+        print(self.peaks)
+        print(self.Nt)
+        print(self.n)
 
         if verbose:
             print('Initial threshold : %s' % self.init_threshold)
@@ -208,12 +220,17 @@ class SPOT:
         g, s, l = self._grimshaw()
         self.extreme_quantile = self._quantile(g, s)
 
+
+
+
         if verbose:
             print('[done]')
             print('\t' + chr(0x03B3) + ' = ' + str(g))
             print('\t' + chr(0x03C3) + ' = ' + str(s))
             print('\tL = ' + str(l))
             print('Extreme quantile (probability = %s): %s' % (self.proba, self.extreme_quantile))
+
+        sys.exit()
 
         return
 
