@@ -17,8 +17,8 @@ class SMD(object):
         self.mode = mode
         self.step = step
         self.win_size = win_size
-        self.scaler = StandardScaler()
-        #self.scaler=MinMaxScaler()
+        #self.scaler = StandardScaler()
+        self.scaler=MinMaxScaler()
 
         #data = np.load(data_path + "SMD_raw/SMD_train.npy")
         data = np.genfromtxt(f'{data_path}SMD_raw/train/{entity}',
