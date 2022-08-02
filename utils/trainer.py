@@ -145,13 +145,18 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     print(np.array(scores).shape)
     print(np.array(labels).shape)
 
-    plt.clf()
-    plt.hist(np.array(train_losses))
-    plt.savefig(f'output/{entity}.png')
+    print('train')
+    print(np.mean(np.array(train_losses)))
+    print(np.std(np.array(train_losses)))
+    print(np.max(np.array(train_losses)))
+    print(np.min(np.array(train_losses)))
+    print('test')
+    print(np.mean(np.array(scores)))
+    print(np.std(np.array(scores)))
+    print(np.max(np.array(scores)))
+    print(np.min(np.array(scores)))
 
-    plt.clf()
-    plt.hist(np.array(scores))
-    plt.savefig(f'output/{entity}_test.png')
+
 
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
