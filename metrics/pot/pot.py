@@ -142,6 +142,8 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
     ret = s.run(dynamic=False)  # run
     # print(len(ret['alarms']))
     # print(len(ret['thresholds']))
+    print(np.mean(ret['thresholds']))
+    print(lm[1])
     pot_th = np.mean(ret['thresholds']) * lm[1]
     # pot_th = np.percentile(score, 100 * lm[0])
     # np.percentile(score, 100 * lm[0])
