@@ -45,7 +45,7 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    for ent in [0,12,25]:
+    for ent in range(28):
         print(f'\n\n\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=ent, shuffle=True)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size, dataset=args.dataset, entity=ent)
@@ -87,7 +87,7 @@ def main():
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             val_loss = validation(model, train_dataloader, optimizer, criterion, device,args)
-            if epoch==10:
+            if epoch==30:
                 print(f'Entity {ent}')
                 test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
