@@ -28,8 +28,7 @@ def train(model, iterator, optimizer, criterion, device,args):
 
         predictions = model(data, )
 
-        #loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
-        loss = criterion(predictions, data_base)
+        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
         loss.backward()
         optimizer.step()
