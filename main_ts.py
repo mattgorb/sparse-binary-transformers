@@ -23,7 +23,7 @@ from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
 from utils.trainer import train,test
-from data_factory.data_loader import get_dataset
+from data_factory.entity_loader import get_entity_dataset
 
 
 
@@ -45,8 +45,8 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    train_dataloader=get_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset)
-    test_dataloader=get_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset)
+    train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=args.entity)
+    test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset, entity=args.entity)
 
     input_dim=train_dataloader.dataset.train.shape[1]
 
@@ -54,8 +54,8 @@ def main():
 
     if args.model_type=='Dense':
         from models.base.dense_transformer_ts import TranAD_Basic
-        #model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=32, nlayers=4, args=args).to(device)
-        model=TranAD_Basic(38).to(device)
+        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+        #model=TranAD_Basic(38).to(device)
     else:
         model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
     #print(model)
@@ -83,10 +83,7 @@ def main():
         start_time = time.time()
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-
         valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
-
-
 
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
