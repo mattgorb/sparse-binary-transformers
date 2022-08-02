@@ -145,8 +145,23 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     print(np.array(scores).shape)
     print(np.array(labels).shape)
 
-    result, _ = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
+    result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
+
+
+
+
+    print(f'ROC: {metrics.roc_auc_score(labels, updated_preds)}')
+    precision, recall, thresholds = metrics.precision_recall_curve(labels, updated_preds)
+    print(f'PR Curve : {metrics.auc(recall, precision)}')
+    numerator = 2 * recall * precision
+    denom = recall + precision
+    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
+    max_f1 = np.max(f1_scores)
+    max_f1_thresh = thresholds[np.argmax(f1_scores)]
+    print(f"max_f1_thresh: {max_f1_thresh}")
+    print(f"max_f1: {max_f1}")
+
     sys.exit()
 
 
