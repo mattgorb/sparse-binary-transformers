@@ -66,10 +66,11 @@ def test(model, iterator, criterion, device,args, epoch):
             #full loss
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            print(loss/(batch_num*args.batch_size))
+
             #sys.exit()
 
             epoch_loss+=loss
+            print(epoch_loss / (batch_num * args.batch_size))
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
 
