@@ -27,6 +27,8 @@ def train(model, iterator, optimizer, criterion, device,args):
 
         #data=data.permute(1,0,2)
         predictions = model(data, )
+        print(predictions.size())
+        sys.exit()
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
         loss.backward()

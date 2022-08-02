@@ -74,7 +74,7 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
         print(f'Dataset: {entities[entity]}')
-        #print(entities)
+        print(entities)
         dataset = SMD(data_path,entities[entity], win_size, step, mode)
 
 
