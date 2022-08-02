@@ -188,7 +188,6 @@ class SPOT:
             self.data = -self.data
             level = 1 - level
 
-        print(level)
         level = level - floor(level)
 
         n_init = self.init_data.size
