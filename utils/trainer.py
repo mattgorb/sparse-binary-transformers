@@ -141,10 +141,10 @@ def test(model, iterator,train_iterator, criterion, device,args, epoch):
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
 
     print(np.array(train_losses).shape)
-    print(scores.shape)
-    print(labels.shape)
+    print(np.array(scores).shape)
+    print(np.array(labels).shape)
     from metrics.pot.pot import pot_eval
-    result, _ = pot_eval(np.array(train_losses), scores, labels)
+    result, _ = pot_eval(np.array(train_losses), np.array(scores), np.array(labels))
     sys.exit()
 
 
