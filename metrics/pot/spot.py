@@ -474,7 +474,7 @@ class SPOT:
                     self.n += 1
 
             th.append(self.extreme_quantile)  #thresholds record
-            print(self.extreme_quantile)
+            #print(self.extreme_quantile)
         return {'thresholds': th, 'alarms': alarm}
 
     def plot(self, run_results, with_alarm=True):

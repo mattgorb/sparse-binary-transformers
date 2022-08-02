@@ -45,54 +45,57 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=args.entity)
-    test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset, entity=args.entity)
+    for ent in range(29):
+        train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=ent, shuffle=True)
+        train_dataloader_ns=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=ent)
+        test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test', win_size=args.window_size, dataset=args.dataset, entity=ent)
 
-    input_dim=train_dataloader.dataset.train.shape[1]
+        input_dim=train_dataloader.dataset.train.shape[1]
 
-    dmodel = input_dim*4
+        dmodel = input_dim*4
 
-    if args.model_type=='Dense':
-        from models.base.dense_transformer_ts import TranAD_Basic
-        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
-        #model=TranAD_Basic(38).to(device)
-    else:
-        model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
-    #print(model)
+        if args.model_type=='Dense':
+            from models.base.dense_transformer_ts import TranAD_Basic
+            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+            #model=TranAD_Basic(38).to(device)
+        else:
+            model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
 
-    freeze_model_weights(model)
-    print(f'The model has {count_parameters(model):,} trainable parameters')
-
-
-
-    optimizer = optim.Adam(model.parameters(),lr=1e-4)
-    criterion = nn.MSELoss(reduction='sum')
-    best_test_loss = float('inf')
-
-    if args.evaluate:
-        evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
-        return
+        freeze_model_weights(model)
+        print(f'The model has {count_parameters(model):,} trainable parameters')
 
 
-    print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
-    print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
+
+        optimizer = optim.Adam(model.parameters(),lr=1e-4)
+        criterion = nn.MSELoss(reduction='sum')
+        best_test_loss = float('inf')
+
+        if args.evaluate:
+            evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
+            return
 
 
-    for epoch in range(args.epochs):
-        print(f'\nEpoch {epoch}: ')
-        start_time = time.time()
+        print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
+        print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
 
-        train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-        test_loss = test(model, test_dataloader,train_dataloader, criterion, device, args, epoch)
 
-        if test_loss < best_test_loss:
-            best_test_loss = test_loss
-            torch.save(model.state_dict(), args.weight_file)
+        for epoch in range(args.epochs):
+            print(f'\nEpoch {epoch}: ')
+            start_time = time.time()
 
-        end_time = time.time()
-        epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-        print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-        print(f'Train loss: {train_loss}, Test loss: {test_loss}')
+            train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
+            if epoch==10:
+                print(f'Entity {ent}')
+                test_loss = test(model, test_dataloader,train_dataloader_ns, criterion, device, args, epoch)
+
+            if test_loss < best_test_loss:
+                best_test_loss = test_loss
+                torch.save(model.state_dict(), args.weight_file)
+
+            end_time = time.time()
+            epoch_mins, epoch_secs = epoch_time(start_time, end_time)
+            print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+            print(f'Train loss: {train_loss}, Test loss: {test_loss}')
 
 
 

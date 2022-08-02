@@ -72,7 +72,7 @@ class SMD(object):
 
 
 
-def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None):
+def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False):
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
         print(f'Dataset: {entities[entity]}')
@@ -81,8 +81,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
 
 
     shuffle = False
-    if mode == 'train':
-        shuffle = True
+    #if mode == 'train':
+        #shuffle = True
 
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,
