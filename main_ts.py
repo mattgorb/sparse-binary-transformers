@@ -87,13 +87,12 @@ def main():
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             val_loss = validation(model, train_dataloader, optimizer, criterion, device,args)
-            if epoch==30:
-                print(f'Entity {ent}')
-                test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), args.weight_file)
+                if epoch>5:
+                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
