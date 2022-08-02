@@ -67,8 +67,6 @@ def test(model, iterator, criterion, device,args, epoch):
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
 
-
-
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
@@ -105,11 +103,6 @@ def test(model, iterator, criterion, device,args, epoch):
         anomaly_final_vals.append(max(sample_losses))
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
-
-
-    #print(f' Val. Losses: ')
-    #for item in ['epoch', 'benign', 'anomaly_all', 'anomaly_first']:
-        #print(f"\t{item} avg. Loss {loss_dict[f'{item}_loss']/loss_dict[f'{item}_count']}, \n\tTotal: {loss_dict[f'{item}_loss']}, \n\tCount: {loss_dict[f'{item}_count']}\n")
 
 
     print(f'Binary classification scores ')

@@ -83,16 +83,16 @@ def main():
         start_time = time.time()
 
         train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-        valid_loss = test(model, test_dataloader, criterion, device, args, epoch)
+        test_loss = test(model, test_dataloader, criterion, device, args, epoch)
 
-        if valid_loss < best_valid_loss:
-            best_valid_loss = valid_loss
+        if test_loss < best_test_loss:
+            best_test_loss = test_loss
             torch.save(model.state_dict(), args.weight_file)
 
         end_time = time.time()
         epoch_mins, epoch_secs = epoch_time(start_time, end_time)
         print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-        print(f'Train loss: {train_loss}, Validation loss: {valid_loss}')
+        print(f'Train loss: {train_loss}, Test loss: {test_loss}')
 
 
 
