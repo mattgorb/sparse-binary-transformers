@@ -54,6 +54,21 @@ def main():
                                           dataset=args.dataset, entity=ent, forecast=args.forecast)
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
+        '''actual=[]
+        for batch in test_dataloader:
+            data_base, label, index = batch
+            actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+        actual=np.array(actual)
+        import matplotlib.pyplot as plt
+        #plt.plot([i for i  in range(len(test_dataloader.dataset.train))],test_dataloader.dataset.train[:,0], label='train' )
+        #plt.plot([i for i  in range(len(test_dataloader.dataset.val))],test_dataloader.dataset.val[:,0] ,label='val')
+        plt.plot([i for i  in range(len(test_dataloader.dataset.test))],test_dataloader.dataset.test[:,0],label='test' )
+        plt.plot([i for i  in range(len(actual))],actual[:,0],label='test2' )
+        print(np.max(actual[:, 0]))
+        plt.legend()
+        plt.show()
+        sys.exit()'''
+
 
         input_dim=train_dataloader.dataset.train.shape[1]
 
