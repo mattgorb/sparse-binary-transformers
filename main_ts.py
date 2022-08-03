@@ -45,7 +45,7 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    for ent in [0,1]:
+    for ent in [1]:
         print(f'\n\n\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
@@ -93,10 +93,10 @@ def main():
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), args.weight_file)
                 if epoch>5:
-                    if args.forecast:
-                        test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
-                    else:
-                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    #if args.forecast:
+                    test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    #else:
+                        #test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
             print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
