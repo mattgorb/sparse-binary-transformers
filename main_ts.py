@@ -45,7 +45,7 @@ def main():
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
 
-    for ent in [1]:
+    for ent in [0,1]:
         print(f'\n\n\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size, dataset=args.dataset, entity=ent, shuffle=True)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size, dataset=args.dataset, entity=ent)
