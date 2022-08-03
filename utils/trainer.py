@@ -187,45 +187,41 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     preds=[]
     actual=[]
 
-    #with torch.no_grad():
-    for batch in iterator:
-        data_base, label, index = batch
-        print(data_base[:, -1, :].size())
-        print(data_base[:, -1, :])
-        sys.exit()
-        '''data = torch.clone(data_base)
-        if args.forecast:
-            data[:, -1:, :] = 0
+    with torch.no_grad():
+        for batch in iterator:
+            data_base, label, index = batch
 
-        data = data.to(device)
-        data_base = data_base.to(device)
+            data = torch.clone(data_base)
+            if args.forecast:
+                data[:, -1:, :] = 0
 
-        # full loss
-        predictions = model(data)
+            data = data.to(device)
+            data_base = data_base.to(device)
 
-        loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-        epoch_loss += loss
-        batch_num+=1'''
+            # full loss
+            predictions = model(data)
 
-        #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-        #sample_loss = sample_loss.mean(dim=1)
+            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            epoch_loss += loss
+            batch_num+=1
 
-        #preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-        actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    #preds=np.array(preds)
+
+            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+
+    preds=np.array(preds)
     actual=np.array(actual)
-    #s=preds.shape[1]
-    #print(s)
-    #sys.exit()
-    for x in range(1):
+    s=preds.shape[1]
+
+    for x in range(s):
         plt.clf()
-        #plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
-        plt.plot([t for t in range(actual.shape[0])], actual[:,x], label='actual')
-        print(np.max(actual[:,x]))
+        plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
+        plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
+        #print(np.max(actual[:,x]))
         plt.legend()
-        plt.savefig(f'output/{x}_argh.png')
-        break
-    sys.exit()
+        plt.savefig(f'output/{x}.png')
+        #break
+    #sys.exit()
     return epoch_loss / iterator.dataset.__len__()
 

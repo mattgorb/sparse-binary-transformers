@@ -42,9 +42,9 @@ class SMD(object):
 
         #print(np.argwhere(self.test_labels==1))
         #if forecast:
-        #filter_anomalies=np.argwhere(self.test_labels==0)
-        #self.test=self.test[filter_anomalies[:,0]]
-        #self.test_labels=self.test_labels[filter_anomalies[:,0]]
+        filter_anomalies=np.argwhere(self.test_labels==0)
+        self.test=self.test[filter_anomalies[:,0]]
+        self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
 
 
@@ -64,7 +64,6 @@ class SMD(object):
             return (self.test.shape[0] - self.win_size)
 
     def __getitem__(self, index):
-
         if self.mode == "train":
             return np.float32(self.train[index:index + self.win_size]), np.zeros_like(self.train[index:index + self.win_size])
             #return np.float32(self.train[index:index + self.win_size]), None
@@ -88,11 +87,6 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         print(f'Dataset: {entities[entity]}')
         #print(entities)
         dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
-
-
-    #shuffle = False
-    #if mode == 'train':
-        #shuffle = True
 
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,
