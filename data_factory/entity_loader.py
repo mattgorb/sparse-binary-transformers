@@ -42,9 +42,9 @@ class SMD(object):
 
         #print(np.argwhere(self.test_labels==1))
         #if forecast:
-        #filter_anomalies=np.argwhere(self.test_labels==0)
-        #self.test=self.test[filter_anomalies[:,0]]
-        #self.test_labels=self.test_labels[filter_anomalies[:,0]]
+        filter_anomalies=np.argwhere(self.test_labels==0)
+        self.test=self.test[filter_anomalies[:,0]]
+        self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
 
         '''import matplotlib.pyplot as plt
