@@ -212,12 +212,15 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
 
     preds=np.array(preds)
     actual=np.array(actual)
-    s=preds.shape
-    print(s)
-    sys.exit()
-    for x in s[1]:
+    s=preds.shape[1]
+    #print(s)
+    #sys.exit()
+    for x in range(s):
         plt.clf()
-        #plt.
+        plt.plot([t for t in range(s.shape[0])], preds[:,x], label='preds')
+        plt.plot([t for t in range(actual.shape[0])], actual[:,x], label='actual')
+        plt.legend()
+        plt.savefig(f'output/{x}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
