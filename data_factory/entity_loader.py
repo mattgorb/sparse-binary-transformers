@@ -40,12 +40,13 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
+        print(np.argwhere(self.test_labels==1))
         #if forecast:
         filter_anomalies=np.argwhere(self.test_labels==0)
         self.test=self.test[filter_anomalies[:,0]]
         self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
-        print(np.argwhere(self.test_labels==1))
+
         '''import matplotlib.pyplot as plt
         plt.plot([i for i  in range(len(self.train))],self.train[:,3], label='train' )
         plt.plot([i for i  in range(len(self.val))],self.val[:,3] ,label='val')
