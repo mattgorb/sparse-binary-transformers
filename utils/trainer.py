@@ -196,9 +196,10 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
             predictions = model(data)
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            print(loss/(args.batch_size*batch_num))
+
 
             epoch_loss += loss
+            print(epoch_loss/(args.batch_size*batch_num))
 
     return epoch_loss / iterator.dataset.__len__()
 
