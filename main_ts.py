@@ -58,6 +58,9 @@ def main():
         for batch in test_dataloader:
             data_base, label, index = batch
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+            print(data_base[:, -1, :].size())
+            print(data_base[:, -1, :])
+            sys.exit()
         actual=np.array(actual)
         import matplotlib.pyplot as plt
         #plt.plot([i for i  in range(len(test_dataloader.dataset.train))],test_dataloader.dataset.train[:,0], label='train' )

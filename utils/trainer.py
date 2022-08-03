@@ -190,6 +190,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #with torch.no_grad():
     for batch in iterator:
         data_base, label, index = batch
+        print(data_base[:, -1, :].size())
+        print(data_base[:, -1, :])
+        sys.exit()
         '''data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0
