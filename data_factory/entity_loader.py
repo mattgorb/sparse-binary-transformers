@@ -40,8 +40,10 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
-        print(np.argwhere(self.test_labels==1))
-        sys.exit()
+        if forecast:
+            filter_anomalies=np.argwhere(self.test_labels==0)
+            self.test=self.test[filter_anomalies[:,0]]
+            self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
         print(f'Sizes: ')
         print(f'Train: {self.train.shape}')
