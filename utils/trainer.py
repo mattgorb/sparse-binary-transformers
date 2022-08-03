@@ -190,7 +190,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     with torch.no_grad():
         for batch in iterator:
             data_base, label, index = batch
-            data = torch.clone(data_base)
+            '''data = torch.clone(data_base)
             if args.forecast:
                 data[:, -1:, :] = 0
 
@@ -202,7 +202,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss += loss
-            batch_num+=1
+            batch_num+=1'''
 
             #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             #sample_loss = sample_loss.mean(dim=1)
