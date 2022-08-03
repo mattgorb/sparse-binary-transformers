@@ -50,7 +50,7 @@ def main():
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
-                                          dataset=args.dataset, entity=ent, shuffle=True,forecast=args.forecast)
+                                          dataset=args.dataset, entity=ent, forecast=args.forecast)
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
 
