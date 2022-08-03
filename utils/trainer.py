@@ -217,7 +217,7 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
     #sys.exit()
     for x in range(s):
         plt.clf()
-        plt.plot([t for t in range(s)], preds[:,x], label='preds')
+        plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
         plt.plot([t for t in range(actual.shape[0])], actual[:,x], label='actual')
         plt.legend()
         plt.savefig(f'output/{x}.png')
