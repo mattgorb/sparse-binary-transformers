@@ -217,7 +217,7 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
     sys.exit()
     for x in s[1]:
         plt.clf()
-        plt.
+        #plt.
 
     return epoch_loss / iterator.dataset.__len__()
 
