@@ -35,7 +35,7 @@ def train(model, iterator, optimizer, criterion, device,args):
         epoch_loss += loss.item()
         if i%1000==0:
             print(i)
-        print(loss)
+        #print(loss)
     return epoch_loss / iterator.dataset.__len__()
 
 
@@ -197,7 +197,7 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
             predictions = model(data)
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            print(loss)
+            #print(loss)
             epoch_loss += loss
 
     return epoch_loss / iterator.dataset.__len__()
