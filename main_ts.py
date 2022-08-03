@@ -22,7 +22,7 @@ from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
-from utils.trainer import train,test, validation
+from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
 
 
@@ -92,9 +92,11 @@ def main():
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), args.weight_file)
-                if epoch>3:
-                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
-
+                if epoch>5:
+                    if args.forecast:
+                        test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    else:
+                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
             print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
