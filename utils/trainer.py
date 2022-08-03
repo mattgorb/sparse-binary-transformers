@@ -180,8 +180,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
 
 
 def test_forecast(model, iterator, train_iterator, criterion, device, args, entity):
-    sample_criterion = torch.nn.MSELoss(reduction='none')
-
     epoch_loss = 0
     batch_num = 0
 
@@ -194,7 +192,6 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
 
             data = data.to(device)
             data_base = data_base.to(device)
-            batch_num += 1
 
             # full loss
             predictions = model(data)
