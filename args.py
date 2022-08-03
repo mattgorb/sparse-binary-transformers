@@ -24,6 +24,10 @@ def parse_arguments():
         "--log-dir", help="Where to save the runs. If None use ./runs", default=None
     )
     parser.add_argument(
+        "--window_size", help="WS", default=None
+    )
+
+    parser.add_argument(
         "-j",
         "--workers",
         default=20,
