@@ -45,26 +45,27 @@ def validation(model, iterator, optimizer, criterion, device,args):
 
     model.eval()
     i=0
-    for batch in iterator:
-        optimizer.zero_grad()
-        data_base, _=batch
+    with torch.no_grad():
+        for batch in iterator:
+            optimizer.zero_grad()
+            data_base, _=batch
 
-        data=torch.clone(data_base)
-        if args.forecast:
-            data[:,-1:,:]=0
-        data=data.to(device)
-        data_base=data_base.to(device)
+            data=torch.clone(data_base)
+            if args.forecast:
+                data[:,-1:,:]=0
+            data=data.to(device)
+            data_base=data_base.to(device)
 
-        i+=1
-        predictions = model(data, )
+            i+=1
+            predictions = model(data, )
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+            loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
-        loss.backward()
-        optimizer.step()
-        epoch_loss += loss.item()
-        if i%1000==0:
-            print(i)
+            loss.backward()
+            optimizer.step()
+            epoch_loss += loss.item()
+            if i%1000==0:
+                print(i)
 
     return epoch_loss / iterator.dataset.__len__()
 
