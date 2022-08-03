@@ -13,14 +13,13 @@ from sklearn.preprocessing import StandardScaler,MinMaxScaler
 import pickle
 
 class SMD(object):
-    def __init__(self, data_path,entity, win_size, step, mode="train"):
+    def __init__(self, data_path,entity, win_size, step, mode,forecast):
         self.mode = mode
         self.step = step
         self.win_size = win_size
         self.scaler = StandardScaler()
         #self.scaler=MinMaxScaler()
 
-        #data = np.load(data_path + "SMD_raw/SMD_train.npy")
         data = np.genfromtxt(f'{data_path}SMD_raw/train/{entity}',
                              dtype=np.float64,
                              delimiter=',')
@@ -41,6 +40,9 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
+        print(np.argwhere(self.test_labels==1))
+        sys.exit()
+
         print(f'Sizes: ')
         print(f'Train: {self.train.shape}')
         print(f'Test: {self.test.shape}')
@@ -60,10 +62,10 @@ class SMD(object):
     def __getitem__(self, index):
 
         if self.mode == "train":
-            return np.float32(self.train[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
+            return np.float32(self.train[index:index + self.win_size]), np.zeros_like(self.train[index:index + self.win_size])
             #return np.float32(self.train[index:index + self.win_size]), None
         elif (self.mode == 'val'):
-            return np.float32(self.val[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
+            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size])
         elif (self.mode == 'test'):
             return np.float32(self.test[index:index + self.win_size]), np.float32(
                 self.test_labels[index:index + self.win_size]), index
@@ -76,12 +78,12 @@ class SMD(object):
 
 
 
-def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False):
+def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
         print(f'Dataset: {entities[entity]}')
         #print(entities)
-        dataset = SMD(data_path,entities[entity], win_size, step, mode)
+        dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
 
 
     #shuffle = False
