@@ -160,9 +160,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     max_f1_thresh = thresholds[np.argmax(f1_scores)]
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
-    #print(f'Recall : {recall}')
-    #print(f'Precision : {precision}')
-    #print(f'F1 : {metrics.f1_score(labels, scores)}')
 
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
@@ -178,9 +175,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     max_f1_thresh = thresholds[np.argmax(f1_scores)]
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
-
-    #sys.exit()
-
 
     return epoch_loss / iterator.dataset.__len__()
 
