@@ -24,7 +24,7 @@ def parse_arguments():
         "--log-dir", help="Where to save the runs. If None use ./runs", default=None
     )
     parser.add_argument(
-        "--window_size", help="WS", default=None
+        "--window_size", help="WS",   type=int,default=None
     )
 
     parser.add_argument(
