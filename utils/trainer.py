@@ -174,8 +174,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     print(result)
 
 
-
-
     print(f'ROC: {metrics.roc_auc_score(labels, updated_preds)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, updated_preds)
     print(f'PR Curve : {metrics.auc(recall, precision)}')
