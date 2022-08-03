@@ -178,7 +178,7 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     return epoch_loss / iterator.dataset.__len__()
 
 
-def test_forecast(model, iterator, train_iterator, criterion, device, args, entity):
+def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
     epoch_loss = 0
     batch_num=1
     model.eval()
@@ -207,15 +207,15 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
             #sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             #sample_loss = sample_loss.mean(dim=1)
 
-            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            #preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    preds=np.array(preds)
+    #preds=np.array(preds)
     actual=np.array(actual)
-    s=preds.shape[1]
+    #s=preds.shape[1]
     #print(s)
     #sys.exit()
-    for x in range(s):
+    for x in range(5):
         plt.clf()
         #plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
         plt.plot([t for t in range(actual.shape[0])], actual[:,x], label='actual')

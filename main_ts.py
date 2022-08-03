@@ -101,7 +101,7 @@ def main():
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-            val_loss = validation(model, train_dataloader, optimizer, criterion, device,args)
+            val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
