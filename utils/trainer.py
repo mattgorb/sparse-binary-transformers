@@ -170,23 +170,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     #print(f'Precision : {precision}')
     #print(f'F1 : {metrics.f1_score(labels, scores)}')
 
-    print(np.array(train_losses).shape)
-    print(np.array(scores).shape)
-    print(np.array(labels).shape)
-
-    print('train')
-    print(np.mean(np.array(train_losses)))
-    print(np.std(np.array(train_losses)))
-    print(np.max(np.array(train_losses)))
-    print(np.min(np.array(train_losses)))
-    print('test')
-    print(np.mean(np.array(scores)))
-    print(np.std(np.array(scores)))
-    print(np.max(np.array(scores)))
-    print(np.min(np.array(scores)))
-
-
-
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
 
