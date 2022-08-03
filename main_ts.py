@@ -44,6 +44,7 @@ def main():
     else:
         root_dir='data/'
         args.weight_file = 'weights/' + args.weight_file
+    print(root_dir)
 
     for ent in [1]:
         print(f'\n\n\n\n\nEntity {ent}')
