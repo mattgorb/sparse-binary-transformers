@@ -181,7 +181,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
 
 def test_forecast(model, iterator, train_iterator, criterion, device, args, entity):
     epoch_loss = 0
-    batch_num = 0
 
     with torch.no_grad():
         for batch in iterator:
@@ -195,6 +194,9 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
 
             # full loss
             predictions = model(data)
+            print(predictions[0,-1,:])
+            print(data_base[0,-1,:])
+            sys.exit()
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss += loss
 
