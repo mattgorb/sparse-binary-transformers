@@ -49,13 +49,15 @@ class SMD(object):
         print(f'Train: {self.train.shape}')
         print(f'Test: {self.test.shape}')
 
-        import matplotlib.pyplot as plt
+        '''import matplotlib.pyplot as plt
         plt.plot([i for i  in range(len(self.train))],self.train[:,3], label='train' )
         plt.plot([i for i  in range(len(self.val))],self.val[:,3] ,label='val')
         plt.plot([i for i  in range(len(self.test))],self.test[:,3] )
         plt.legend()
         plt.show()
-        sys.exit()
+        sys.exit()'''
+
+
 
 
     def __len__(self):
