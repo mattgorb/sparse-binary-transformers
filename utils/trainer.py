@@ -141,6 +141,7 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
+    print(f'Benign loss: {sum(benign_final_vals)/len(benign_ind)}')
 
     print(f'Binary classification scores ')
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
