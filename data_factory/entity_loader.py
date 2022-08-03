@@ -20,16 +20,15 @@ class SMD(object):
         self.scaler = StandardScaler()
         #self.scaler=MinMaxScaler()
 
-        data = np.genfromtxt(f'{data_path}SMD_raw/train/{entity}',
+        self.data = np.genfromtxt(f'{data_path}SMD_raw/train/{entity}',
                              dtype=np.float64,
                              delimiter=',')
-        self.scaler.fit(data)
-        data = self.scaler.transform(data)
-        test_data = np.genfromtxt(f'{data_path}SMD_raw/test/{entity}',
+        self.scaler.fit(self.data)
+        self.train = self.scaler.transform(self.data)
+        self.test_data = np.genfromtxt(f'{data_path}SMD_raw/test/{entity}',
                              dtype=np.float64,
                              delimiter=',')
-        self.test = self.scaler.transform(test_data)
-        self.train = data
+        self.test = self.scaler.transform(self.test_data)
 
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]

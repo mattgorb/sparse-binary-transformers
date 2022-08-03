@@ -46,7 +46,7 @@ def main():
         args.weight_file = 'weights/' + args.weight_file
     print(root_dir)
 
-    for ent in [1]:
+    for ent in [11]:
         print(f'\n\n\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
@@ -55,18 +55,29 @@ def main():
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
         '''actual=[]
-        for batch in test_dataloader:
-            data_base, label, index = batch
+        for batch in train_dataloader:
+            data_base, label = batch
+            print(data_base.size())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+        sys.exit()'''
+        #for x in range(38):
+            #print(x)
+            #print(np.max(train_dataloader.dataset.train[:,x]))
+            #print(np.min(train_dataloader.dataset.train[:,x]))
+            #print(np.mean(train_dataloader.dataset.train[:, x]))
+            #print(np.std(train_dataloader.dataset.train[:, x]))
+        #sys.exit()
+        #actual=np.array(actual)
+        '''import matplotlib.pyplot as plt
+        for j in range(36):
+            plt.clf()
+            plt.plot([i for i  in range(len(train_dataloader.dataset.train))],train_dataloader.dataset.train[:,j],label='1' )
+            plt.plot([i for i  in range(len(train_dataloader.dataset.test))],train_dataloader.dataset.test[:,j],label='test' )
+            #plt.plot([i for i  in range(len(train_dataloader.dataset.train))],train_dataloader.dataset.train[:,0],label='1' )
+            #plt.plot([i for i  in range(len(train_dataloader.dataset.test))],train_dataloader.dataset.test[:,0],label='test' )
+            plt.legend()
+            plt.show()
 
-        actual=np.array(actual)
-        import matplotlib.pyplot as plt
-        #plt.plot([i for i  in range(len(test_dataloader.dataset.train))],test_dataloader.dataset.train[:,0], label='train' )
-        #plt.plot([i for i  in range(len(test_dataloader.dataset.val))],test_dataloader.dataset.val[:,0] ,label='val')
-        plt.plot([i for i  in range(len(test_dataloader.dataset.test))],test_dataloader.dataset.test[:,0],label='test' )
-        plt.plot([i for i  in range(len(actual))],actual[:,0],label='test2' )
-        print(np.max(actual[:, 0]))
-        plt.legend()
         plt.show()
         sys.exit()'''
 
