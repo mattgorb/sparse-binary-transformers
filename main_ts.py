@@ -91,7 +91,7 @@ def main():
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), args.weight_file)
-                if epoch>10:
+                if epoch>3:
                     test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
 
             end_time = time.time()
