@@ -10,7 +10,6 @@ from metrics.pot.pot import pot_eval
 
 def train(model, iterator, optimizer, criterion, device,args):
     epoch_loss = 0
-    epoch_acc = 0
 
     model.train()
     i=0
@@ -45,27 +44,25 @@ def validation(model, iterator, optimizer, criterion, device,args):
 
     model.eval()
     i=0
-    #with torch.no_grad():
-    for batch in iterator:
-        optimizer.zero_grad()
-        data_base, _=batch
+    with torch.no_grad():
+        for batch in iterator:
 
-        data=torch.clone(data_base)
-        if args.forecast:
-            data[:,-1:,:]=0
-        data=data.to(device)
-        data_base=data_base.to(device)
+            data_base, _=batch
 
-        i+=1
-        predictions = model(data, )
+            data=torch.clone(data_base)
+            if args.forecast:
+                data[:,-1:,:]=0
+            data=data.to(device)
+            data_base=data_base.to(device)
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+            i+=1
+            predictions = model(data, )
 
-        loss.backward()
-        optimizer.step()
-        epoch_loss += loss.item()
-        if i%1000==0:
-            print(i)
+            loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+
+            epoch_loss += loss.item()
+            if i%1000==0:
+                print(i)
 
     return epoch_loss / iterator.dataset.__len__()
 
@@ -199,7 +196,10 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
             predictions = model(data)
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            #print(loss)
+            print(loss)
+            print(predictions[:, -1, :])
+            print(data_base[:, -1, :])
+            sys.exit()
             epoch_loss += loss
 
     return epoch_loss / iterator.dataset.__len__()
