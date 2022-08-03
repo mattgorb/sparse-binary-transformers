@@ -182,23 +182,23 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
 def test_forecast(model, iterator, train_iterator, criterion, device, args, entity):
     epoch_loss = 0
 
-    with torch.no_grad():
-        for batch in iterator:
-            data_base, label, index = batch
-            data = torch.clone(data_base)
-            if args.forecast:
-                data[:, -1:, :] = 0
+    model.eval()
+    for batch in iterator:
+        data_base, label, index = batch
+        data = torch.clone(data_base)
+        if args.forecast:
+            data[:, -1:, :] = 0
 
-            data = data.to(device)
-            data_base = data_base.to(device)
+        data = data.to(device)
+        data_base = data_base.to(device)
 
-            # full loss
-            predictions = model(data)
-            print(predictions[0,-1,:])
-            print(data_base[0,-1,:])
-            sys.exit()
-            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            epoch_loss += loss
+        # full loss
+        predictions = model(data)
+        print(predictions[0,-1,:])
+        print(data_base[0,-1,:])
+        sys.exit()
+        loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+        epoch_loss += loss
 
     return epoch_loss / iterator.dataset.__len__()
 
