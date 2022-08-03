@@ -221,7 +221,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         plt.plot([t for t in range(actual.shape[0])], actual[:,x], label='actual')
         print(np.max(actual[:,x]))
         plt.legend()
-        plt.savefig(f'output/{x}.png')
+        plt.savefig(f'output/{x}_argh.png')
         break
     sys.exit()
     return epoch_loss / iterator.dataset.__len__()
