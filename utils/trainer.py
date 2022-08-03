@@ -110,16 +110,13 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
             #full loss
             predictions = model(data)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-
-
             epoch_loss+=loss
+
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-
             for i,l in zip(index, sample_loss):
                 sample_loss_dict[i.item()]=l.item()
-
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
@@ -130,9 +127,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
             anomaly_data=[i for i in range(label.size(0)) if label[i,-1]==1 ]
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
-            if batch_num%1000==0:
-                print(batch_num)
-
 
     anomaly_dict={}
     i=0
