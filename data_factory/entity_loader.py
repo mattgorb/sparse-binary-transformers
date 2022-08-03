@@ -45,9 +45,6 @@ class SMD(object):
         self.test=self.test[filter_anomalies[:,0]]
         self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
-        print(f'Sizes: ')
-        print(f'Train: {self.train.shape}')
-        print(f'Test: {self.test.shape}')
 
         '''import matplotlib.pyplot as plt
         plt.plot([i for i  in range(len(self.train))],self.train[:,3], label='train' )

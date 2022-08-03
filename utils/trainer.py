@@ -47,7 +47,7 @@ def validation(model, iterator, optimizer, criterion, device,args):
     i=0
     with torch.no_grad():
         for batch in iterator:
-            #optimizer.zero_grad()
+            optimizer.zero_grad()
             data_base, _=batch
 
             data=torch.clone(data_base)
@@ -61,8 +61,8 @@ def validation(model, iterator, optimizer, criterion, device,args):
 
             loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
-            #loss.backward()
-            #optimizer.step()
+            loss.backward()
+            optimizer.step()
             epoch_loss += loss.item()
             if i%1000==0:
                 print(i)
