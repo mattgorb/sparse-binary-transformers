@@ -11,6 +11,6 @@ model_type: 'Dense'
 epochs: 1000
 weight_file: dense_ts_smd.pt
 
-window_size: 200
+window_size: 500
 forecast: False
 save_scores: True

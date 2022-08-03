@@ -197,12 +197,7 @@ def test_forecast(model, iterator, train_iterator, criterion, device, args, enti
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
 
-
             epoch_loss += loss
-            #if epoch_loss/(args.batch_size*batch_num)>20:
-                #print(index)
-                #print(loss)
-                #sys.exit()
 
             batch_num+=1
 
