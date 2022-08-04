@@ -40,14 +40,15 @@ def main():
 
     if 'cuda' in str(device):
         root_dir='/s/luffy/b/nobackup/mgorb/data/'
-        args.weight_file='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
+        weight_file_base='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
     else:
         root_dir='data/'
-        args.weight_file = 'weights/' + args.weight_file
-    print(root_dir)
+        weight_file_base = 'weights/' + args.weight_file
 
-    for ent in [1]:
-        print(f'\n\n\n\n\nEntity {ent}')
+
+    for ent in range(28):
+        weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}.pt'
+        print(f'\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
@@ -90,8 +91,8 @@ def main():
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
-                torch.save(model.state_dict(), args.weight_file)
-                if epoch>10:
+                torch.save(model.state_dict(), weight_file)
+                if epoch>50:
                     if args.forecast:
                         test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
                     else:

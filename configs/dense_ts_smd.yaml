@@ -9,7 +9,7 @@ batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
 epochs: 750
-weight_file: dense_ts_smd.pt
+weight_file: dense_ts_smd.p
 
 window_size: 200
 forecast: True
