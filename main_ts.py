@@ -47,7 +47,7 @@ def main():
 
 
     for ent in range(28):
-        weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}.pt'
+        weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
@@ -103,8 +103,8 @@ def main():
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-            print(f'Entity: {ent} Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
-            print(f'Train loss: {train_loss}, Val loss: {val_loss}, Test loss: {test_loss}')
+            print(f'')
+            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
 
 
 
