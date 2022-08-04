@@ -163,18 +163,6 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
     print(result)
 
-
-    print(f'ROC: {metrics.roc_auc_score(labels, updated_preds)}')
-    precision, recall, thresholds = metrics.precision_recall_curve(labels, updated_preds)
-    print(f'PR Curve : {metrics.auc(recall, precision)}')
-    numerator = 2 * recall * precision
-    denom = recall + precision
-    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
-    max_f1 = np.max(f1_scores)
-    max_f1_thresh = thresholds[np.argmax(f1_scores)]
-    print(f"max_f1_thresh: {max_f1_thresh}")
-    print(f"max_f1: {max_f1}")
-
     return epoch_loss / iterator.dataset.__len__()
 
 
@@ -207,7 +195,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
 
 
-            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
     preds=np.array(preds)
@@ -218,10 +206,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         plt.clf()
         plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
         plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
-        #print(np.max(actual[:,x]))
         plt.legend()
-        plt.savefig(f'output/{x}.png')
-        #break
-    #sys.exit()
+        plt.savefig(f'output/{x}.png')'''
+
     return epoch_loss / iterator.dataset.__len__()
 

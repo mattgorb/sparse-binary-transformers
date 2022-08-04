@@ -8,9 +8,9 @@ gpu: 6
 batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
-epochs: 1000
+epochs: 750
 weight_file: dense_ts_smd.pt
 
 window_size: 200
-forecast: False
-save_scores: True
+forecast: True
+save_scores: False

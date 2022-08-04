@@ -54,33 +54,6 @@ def main():
                                           dataset=args.dataset, entity=ent, forecast=args.forecast)
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
-        '''actual=[]
-        for batch in train_dataloader:
-            data_base, label = batch
-            print(data_base.size())
-            actual.extend(data_base[:, -1, :].cpu().detach().numpy())
-        sys.exit()'''
-        #for x in range(38):
-            #print(x)
-            #print(np.max(train_dataloader.dataset.train[:,x]))
-            #print(np.min(train_dataloader.dataset.train[:,x]))
-            #print(np.mean(train_dataloader.dataset.train[:, x]))
-            #print(np.std(train_dataloader.dataset.train[:, x]))
-        #sys.exit()
-        #actual=np.array(actual)
-        '''import matplotlib.pyplot as plt
-        for j in range(36):
-            plt.clf()
-            plt.plot([i for i  in range(len(train_dataloader.dataset.train))],train_dataloader.dataset.train[:,j],label='1' )
-            plt.plot([i for i  in range(len(train_dataloader.dataset.test))],train_dataloader.dataset.test[:,j],label='test' )
-            #plt.plot([i for i  in range(len(train_dataloader.dataset.train))],train_dataloader.dataset.train[:,0],label='1' )
-            #plt.plot([i for i  in range(len(train_dataloader.dataset.test))],train_dataloader.dataset.test[:,0],label='test' )
-            plt.legend()
-            plt.show()
-
-        plt.show()
-        sys.exit()'''
-
 
         input_dim=train_dataloader.dataset.train.shape[1]
 
@@ -109,7 +82,7 @@ def main():
 
         test_loss=None
         for epoch in range(args.epochs):
-            print(f'\nEpoch {epoch}: ')
+            #print(f'\nEpoch {epoch}: ')
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
@@ -119,13 +92,17 @@ def main():
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), args.weight_file)
                 if epoch>10:
-                    #if args.forecast:
-                    test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
-                    #else:
-                        #test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    if args.forecast:
+                        test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    else:
+                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+            else:
+                val_loss=None
+                test_loss=None
+
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-            print(f'Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
+            print(f'Entity: {ent} Epoch Time: {epoch + 1:02} | Epoch Time: {epoch_mins}m {epoch_secs}s')
             print(f'Train loss: {train_loss}, Val loss: {val_loss}, Test loss: {test_loss}')
 
 
