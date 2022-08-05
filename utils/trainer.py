@@ -128,37 +128,20 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
 
-
-
-
-
-
-
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    preds=np.array(preds)
-    actual=np.array(actual)
-    s=preds.shape[1]
+    if args.save_graphs:
+        preds=np.array(preds)
+        actual=np.array(actual)
+        s=preds.shape[1]
 
-    for x in range(s):
-        plt.clf()
-        plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
-        plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
-        plt.legend()
-        plt.savefig(f'output/{x}.png')
-
-
-
-
-
-
-
-
-
-
-
-
+        for x in range(s):
+            plt.clf()
+            plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
+            plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
+            plt.legend()
+            plt.savefig(f'output/{x}.png')
 
 
     anomaly_dict={}
@@ -246,16 +229,17 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    preds=np.array(preds)
-    actual=np.array(actual)
-    s=preds.shape[1]
+    if args.save_graphs:
+        preds = np.array(preds)
+        actual = np.array(actual)
+        s = preds.shape[1]
 
-    for x in range(s):
-        plt.clf()
-        plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
-        plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
-        plt.legend()
-        plt.savefig(f'output/{x}.png')
+        for x in range(s):
+            plt.clf()
+            plt.plot([t for t in range(preds.shape[0])], preds[:, x], label='preds')
+            plt.plot([t for t in range(actual.shape[0])], actual[:, x], ':', label='actual')
+            plt.legend()
+            plt.savefig(f'output/{x}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
