@@ -166,6 +166,7 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     result['base_pr']=metrics.auc(recall, precision)
     result['base_max_f1']=max_f1
     result['base_max_f1_threshold']=max_f1_thresh
+    result['anomaly_losses']=anomaly_final_vals
 
     print(result)
 
