@@ -14,3 +14,4 @@ weight_file: dense_ts_smd
 window_size: 200
 forecast: True
 save_scores: False
+layer_norm: True

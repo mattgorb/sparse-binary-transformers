@@ -90,32 +90,22 @@ class TransformerEncoderLayer(Module):
 
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
-        #x = src
-        '''if self.norm_first:
-            x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask)
-            x = x + self._ff_block(self.norm2(x))
-        else:
-            x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
-            x = self.norm2(x + self._ff_block(x))
-            x=x + self._sa_block(x, src_mask, src_key_padding_mask)
-            x=x + self._ff_block(x)
-        #return x    
-        '''
-
         src2 = self.self_attn(src, src, src, attn_mask=src_mask,
                               key_padding_mask=src_key_padding_mask)[0]
         src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
 
-        '''src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
-        src = self.norm1(src)
-        src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)'''
+        if self.args.layer_norm:
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+            src = self.norm1(src)
+            src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
 
         src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
         src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
 
-        '''src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
-        src = self.norm2(src)
-        src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)'''
+        if self.args.layer_norm:
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+            src = self.norm2(src)
+            src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
 
         return src
 
