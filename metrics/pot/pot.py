@@ -136,7 +136,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
         try:
             s = SPOT(q)  # SPOT object
             s.fit(init_score, score)  # data import
-            s.initialize(level=lms, min_extrema=False, verbose=True)  # initialization step
+            s.initialize(level=lms, min_extrema=False, verbose=False)  # initialization step
         except: lms = lms * 0.999
         else: break
     ret = s.run(dynamic=False)  # run
