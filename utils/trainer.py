@@ -149,18 +149,24 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
         df = pd.DataFrame({'scores': scores, 'labels':labels})
         df.to_csv('output/scores.csv')
     
-    print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
+    #print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
-    print(f'PR Curve : {metrics.auc(recall, precision)}')
+    #print(f'PR Curve : {metrics.auc(recall, precision)}')
     numerator = 2 * recall * precision
     denom = recall + precision
     f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
     max_f1 = np.max(f1_scores)
     max_f1_thresh = thresholds[np.argmax(f1_scores)]
-    print(f"max_f1_thresh: {max_f1_thresh}")
-    print(f"max_f1: {max_f1}")
+    #print(f"max_f1_thresh: {max_f1_thresh}")
+    #print(f"max_f1: {max_f1}")
 
     result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
+
+    result['base_roc']=metrics.roc_auc_score(labels, scores)
+    result['base_pr']=metrics.auc(recall, precision)
+    result['base_max_f1']=max_f1
+    result['base_max_f1_threshold']=max_f1_thresh
+
     print(result)
 
     return epoch_loss / iterator.dataset.__len__()
