@@ -39,10 +39,10 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
-        #if forecast:
-            #filter_anomalies=np.argwhere(self.test_labels==0)
-            #self.test=self.test[filter_anomalies[:,0]]
-            #self.test_labels=self.test_labels[filter_anomalies[:,0]]
+        if forecast:
+            filter_anomalies=np.argwhere(self.test_labels==0)
+            self.test=self.test[filter_anomalies[:,0]]
+            self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
 
     def __len__(self):
