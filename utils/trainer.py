@@ -93,7 +93,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             data_base = data_base.to(device)
             predictions = model(data)
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-            #sample_loss = sample_loss.mean(dim=1)
+            sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
 
@@ -113,7 +113,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-            #sample_loss = sample_loss.mean(dim=1)
+            sample_loss = sample_loss.mean(dim=1)
 
             for i,l in zip(index, sample_loss):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
