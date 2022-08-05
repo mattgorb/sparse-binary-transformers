@@ -15,4 +15,4 @@ window_size: 200
 forecast: False
 save_scores: False
 layer_norm: False
-save_graphs: True
+save_graphs: False
