@@ -2,45 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/37.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/9.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +65,7 @@
       <workItem from="1655906842829" duration="15688000" />
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
-      <workItem from="1659729438170" duration="3953000" />
+      <workItem from="1659729438170" duration="4155000" />
     </task>
     <servers />
   </component>
