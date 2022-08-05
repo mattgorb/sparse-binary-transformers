@@ -208,7 +208,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
 
 
-            '''preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
     preds=np.array(preds)
@@ -220,7 +220,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
         plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
         plt.legend()
-        plt.savefig(f'output/{x}.png')'''
+        plt.savefig(f'output/{x}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
