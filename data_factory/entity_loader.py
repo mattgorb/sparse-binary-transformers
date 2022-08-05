@@ -17,8 +17,8 @@ class SMD(object):
         self.mode = mode
         self.step = step
         self.win_size = win_size
-        self.scaler = StandardScaler()
-        #self.scaler=MinMaxScaler()
+        #self.scaler = StandardScaler()
+        self.scaler=MinMaxScaler()
 
         self.data = np.genfromtxt(f'{data_path}SMD_raw/train/{entity}',
                              dtype=np.float64,
@@ -43,6 +43,7 @@ class SMD(object):
             #filter_anomalies=np.argwhere(self.test_labels==0)
             #self.test=self.test[filter_anomalies[:,0]]
             #self.test_labels=self.test_labels[filter_anomalies[:,0]]
+
 
     def __len__(self):
 
@@ -77,7 +78,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
         print(f'Dataset: {entities[entity]}')
-        #print(entities)
+        print(entities)
+
         dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
 
     data_loader = DataLoader(dataset=dataset,
