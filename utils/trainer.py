@@ -67,7 +67,7 @@ def validation(model, iterator, optimizer, criterion, device,args):
     return epoch_loss / iterator.dataset.__len__()
 
 
-def test(model, iterator,train_iterator, criterion, device,args, entity):
+def test(model, iterator,val_iterator, criterion, device,args, entity):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
 
@@ -78,10 +78,10 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     benign_ind=[]
     sample_loss_dict={}
 
-    train_losses=[]
+    val_losses=[]
 
     with torch.no_grad():
-        for batch in train_iterator:
+        for batch in val_iterator:
             data_base, label = batch
             data = torch.clone(data_base)
             if args.forecast:
@@ -93,7 +93,7 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-            train_losses.extend(sample_loss.cpu().detach().numpy())
+            val_losses.extend(sample_loss.cpu().detach().numpy())
 
         for batch in iterator:
             data_base, label, index = batch
@@ -160,13 +160,16 @@ def test(model, iterator,train_iterator, criterion, device,args, entity):
     #print(f"max_f1_thresh: {max_f1_thresh}")
     #print(f"max_f1: {max_f1}")
 
-    result, updated_preds = pot_eval(np.array(train_losses), np.array(scores), np.array(labels),args=args)
+    #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+    result={}
 
     result['base_roc']=metrics.roc_auc_score(labels, scores)
     result['base_pr']=metrics.auc(recall, precision)
     result['base_max_f1']=max_f1
     result['base_max_f1_threshold']=max_f1_thresh
     result['anomaly_losses']=anomaly_final_vals
+    result['max_val_loss']=max(val_losses)
+    result['max_benign_test_loss']=max(benign_final_vals)
 
     print(result)
 
