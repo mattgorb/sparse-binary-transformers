@@ -92,7 +92,7 @@ def main():
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
-                if epoch>25:
+                if epoch>10:
                     if args.forecast:
                         test_loss = test_forecast(model, test_dataloader,val_dataloader, criterion, device, args, ent)
                     else:
