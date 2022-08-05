@@ -173,6 +173,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     result['count_benign_gt_max_val']=len([i for i in benign_final_vals if i>max(val_losses)])
     result['count_anomaly_lt_max_val']=len([i for i in anomaly_final_vals if i<max(val_losses)])
     result['count_anomaly_gt_max_val']=len([i for i in anomaly_final_vals if i>max(val_losses)])
+    result['benign_loss']=np.mean(np.array(benign_final_vals))
     print(result)
 
     return epoch_loss / iterator.dataset.__len__()
