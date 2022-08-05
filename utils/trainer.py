@@ -93,7 +93,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             data_base = data_base.to(device)
             predictions = model(data)
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-            sample_loss = sample_loss.mean(dim=1)
+            #sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
 
@@ -113,10 +113,10 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
-            sample_loss = sample_loss.mean(dim=1)
+            #sample_loss = sample_loss.mean(dim=1)
 
             for i,l in zip(index, sample_loss):
-                sample_loss_dict[i.item()]=l.item()
+                sample_loss_dict[i.item()]=l.cpu().detach().numpy()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
@@ -156,10 +156,6 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
         anomaly_final_vals.append(max(sample_losses))
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
-
-    #print(f'Benign loss: {sum(benign_final_vals)/len(benign_ind)}')
-
-    #print(f'Binary classification scores ')
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
 
@@ -178,7 +174,9 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     #print(f"max_f1_thresh: {max_f1_thresh}")
     #print(f"max_f1: {max_f1}")
 
-    #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+    print(result)
+    sys.exit()
     result={}
 
     result['base_roc']=metrics.roc_auc_score(labels, scores)
