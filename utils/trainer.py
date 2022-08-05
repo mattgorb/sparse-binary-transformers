@@ -187,8 +187,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     result['base_max_f1_threshold']=max_f1_thresh
 
     result['total_anomalies']=len(anomaly_final_vals)
-    result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>max_f1_thresh])
-    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>max_f1_thresh])
+    result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
+    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
     #result['min_anomaly_loss']=min(anomaly_final_vals)
     #result['max_val_loss']=max(val_losses)
     #result['max_benign_test_loss']=max(benign_final_vals)
