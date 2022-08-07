@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: SMAP
+dataset: SMD
 
 weight_seed: 0
 score_seed: 0
@@ -8,12 +8,12 @@ gpu: 6
 batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
-epochs: 1000
+epochs: 500
 weight_file: dense_ts_smd
 
 window_size: 200
-forecast: False
+forecast: True
 save_scores: False
 layer_norm: True
 batch_norm: False
-save_graphs: True
+save_graphs: False
