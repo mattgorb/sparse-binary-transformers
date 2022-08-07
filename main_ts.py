@@ -91,8 +91,8 @@ def main():
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
 
-            if train_loss < best_val_loss:
-                best_val_loss = train_loss
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
                 if epoch>10:
                     if args.forecast:

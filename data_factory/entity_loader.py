@@ -50,7 +50,11 @@ class SMD(object):
         for i in range(self.train.shape[1]):
             print(f'{i}: {len(set(self.train[:,i]))}')
 
-
+            train_set=set(self.train[:,i])
+            if len(train_set)<50:
+                print(train_set)
+            #print(len([i for i in self.test[:,i] if i not in train_set]))
+        sys.exit()
     def __len__(self):
 
         if self.mode == "train":
@@ -103,7 +107,11 @@ class SMAP(object):
 
         #print(self.train.shape)
         for i in range(self.train.shape[1]):
-            print(len(set(self.train[:,i])))
+            print(f'{i}: {len(set(self.train[:, i]))}')
+            train_set = set(self.train[:, i])
+            if len(train_set) < 50:
+                print(train_set)
+        sys.exit()
         #sys.exit()
         '''print(self.train.shape)
         print(self.test.shape)
