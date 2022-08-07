@@ -46,7 +46,7 @@ class SMD(object):
             self.test=self.test[filter_anomalies[:,0]]
             self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
-        print(self.train.shape)
+        '''print(self.train.shape)
         for i in range(self.train.shape[1]):
             print(f'{i}: {len(set(self.train[:,i]))}')
 
@@ -54,7 +54,7 @@ class SMD(object):
             if len(train_set)<50:
                 print(train_set)
             #print(len([i for i in self.test[:,i] if i not in train_set]))
-        sys.exit()
+        sys.exit()'''
     def __len__(self):
 
         if self.mode == "train":
@@ -106,12 +106,12 @@ class SMAP(object):
         self.train = self.train[:(int)(data_len * 0.8)]
 
         #print(self.train.shape)
-        for i in range(self.train.shape[1]):
+        '''for i in range(self.train.shape[1]):
             print(f'{i}: {len(set(self.train[:, i]))}')
             train_set = set(self.train[:, i])
             if len(train_set) < 50:
                 print(train_set)
-        sys.exit()
+        sys.exit()'''
         #sys.exit()
         '''print(self.train.shape)
         print(self.test.shape)
