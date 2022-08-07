@@ -99,10 +99,10 @@ class TSTransformerModel(nn.Module):
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
-        self.src_mask=torch.zeros(self.args.window_size, self.args.window_size).to(self.args.device)
+        #self.src_mask=torch.zeros(self.args.window_size, self.args.window_size).to(self.args.device)
         #print(self.src_mask.size())
         #sys.exit()
-        self.src_mask[:,-1,]=1
+        #self.src_mask[:,-1,]=1
 
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
 
