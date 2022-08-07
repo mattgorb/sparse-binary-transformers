@@ -102,9 +102,9 @@ class TransformerEncoderLayer(Module):
             src = self.norm1(src)
             src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
         if self.args.batch_norm:
-            src = src.permute(1, 0, 2)
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
             src=self.bn1(src)
-            src = src.permute(0, 1, 2)
+            src = src.permute(2, 0, 1)
 
         src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
         src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
@@ -114,9 +114,9 @@ class TransformerEncoderLayer(Module):
             src = self.norm2(src)
             src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
         if self.args.batch_norm:
-            src = src.permute(1, 0, 2)
+            src = src.permute(1, 2, 0)
             src=self.bn2(src)
-            src = src.permute(0, 1, 2)
+            src = src.permute(2, 0, 1)
 
         return src
 
