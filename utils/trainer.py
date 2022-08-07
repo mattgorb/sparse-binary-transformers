@@ -145,7 +145,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             plt.axhspan(9, 12, facecolor='red', alpha=0.5)
 
             plt.legend()
-            plt.savefig(f'output/{x}.png')
+            plt.savefig(f'output/{x}_bin.png')
 
 
     anomaly_dict={}
