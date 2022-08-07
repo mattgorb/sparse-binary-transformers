@@ -12,7 +12,7 @@ epochs: 100
 weight_file: dense_ts_smd
 
 window_size: 200
-forecast: True
+forecast: False
 save_scores: False
 layer_norm: False
 batch_norm: True

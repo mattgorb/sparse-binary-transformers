@@ -94,10 +94,13 @@ class TSTransformerModel(nn.Module):
             self.pad_mask = None
 
 
+
         src = src.permute(1, 0, 2)
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
+        self.src_mask=torch.zeros_like(src)
+        self.src_mask[-1, :, :]=1
 
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
 
