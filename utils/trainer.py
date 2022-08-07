@@ -179,17 +179,17 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     #print(f"max_f1_thresh: {max_f1_thresh}")
     #print(f"max_f1: {max_f1}")
 
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+    #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
-
-    '''result['base_roc']=metrics.roc_auc_score(labels, scores)
+    result={}
+    result['base_roc']=metrics.roc_auc_score(labels, scores)
     result['base_pr']=metrics.auc(recall, precision)
     result['base_max_f1']=max_f1
     result['base_max_f1_threshold']=max_f1_thresh
 
     result['total_anomalies']=len(anomaly_final_vals)
     result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
-    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])'''
+    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
     #result['min_anomaly_loss']=min(anomaly_final_vals)
     #result['max_val_loss']=max(val_losses)
     #result['max_benign_test_loss']=max(benign_final_vals)

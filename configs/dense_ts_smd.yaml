@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: SMD
+dataset: SMAP
 
 weight_seed: 0
 score_seed: 0
@@ -12,7 +12,7 @@ epochs: 500
 weight_file: dense_ts_smd
 
 window_size: 200
-forecast: True
+forecast: False
 save_scores: False
 layer_norm: True
 batch_norm: False
