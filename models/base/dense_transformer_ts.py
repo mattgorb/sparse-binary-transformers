@@ -54,8 +54,11 @@ class TSTransformerModel(nn.Module):
         self.model_type = 'Transformer'
         self.src_mask = None
         self.pad_mask = None
-        self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
         self.args=args
+        if args.pos_enc=='Learnable':
+            self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
+        else:
+            self.pos_encoder = PositionalEncoding(ninp,)
 
         encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout,args=self.args,)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)

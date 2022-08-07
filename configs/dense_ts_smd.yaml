@@ -17,3 +17,5 @@ save_scores: False
 layer_norm: True
 batch_norm: False
 save_graphs: False
+
+pos_enc: 'Standard'
