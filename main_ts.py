@@ -37,7 +37,7 @@ def epoch_time(start_time, end_time):
 
 def main():
     device = torch.device(f'cuda:{args.gpu}' if torch.cuda.is_available() else 'cpu')
-
+    args.device=device
     if 'cuda' in str(device):
         root_dir='/s/luffy/b/nobackup/mgorb/data/'
         weight_file_base='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
