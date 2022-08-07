@@ -82,6 +82,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
 
     preds=[]
     actual=[]
+    labels=[]
     with torch.no_grad():
         for batch in val_iterator:
             data_base, label = batch
@@ -130,6 +131,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+            labels.extend(label.cpu().detach().numpy())
 
     if args.save_graphs:
         preds=np.array(preds)
@@ -140,6 +142,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             plt.clf()
             plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
             plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
+            plt.axhspan(9, 12, facecolor='red', alpha=0.5)
+
             plt.legend()
             plt.savefig(f'output/{x}.png')
 
