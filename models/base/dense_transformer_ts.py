@@ -59,6 +59,9 @@ class TSTransformerModel(nn.Module):
 
         encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid, dropout,args=self.args,)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
+
+        self.act=nn.ReLU()
+
         self.embedding = nn.Linear(input_dim, ninp)
         self.ninp = ninp
         self.decoder = nn.Linear(ninp, input_dim)
@@ -93,19 +96,12 @@ class TSTransformerModel(nn.Module):
         else:
             self.pad_mask = None
 
-
-
         src = src.permute(1, 0, 2)
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
-        #self.src_mask=torch.zeros(self.args.window_size, self.args.window_size).to(self.args.device)
-        #print(self.src_mask.size())
-        #sys.exit()
-        #self.src_mask[:,-1,]=1
-
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
-
+        output=self.act(output)
         output = output.permute(1, 0, 2)
         output = self.decoder(output)
 
