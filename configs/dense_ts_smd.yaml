@@ -14,5 +14,6 @@ weight_file: dense_ts_smd
 window_size: 200
 forecast: False
 save_scores: False
-layer_norm: True
+layer_norm: False
+batch_norm: True
 save_graphs: True

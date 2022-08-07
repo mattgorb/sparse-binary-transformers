@@ -57,8 +57,11 @@ class TransformerEncoderLayer(Module):
         self.norm_first = norm_first
         self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
         self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
-        #self.norm1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
-        #self.norm2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        if self.args.batch_norm and self.args.layer_norm:
+            print('Choose batch norm or layer norm')
+            sys.exit()
 
         self.dropout=dropout
         self.dropout1 = nn.Dropout(self.dropout)
@@ -98,6 +101,8 @@ class TransformerEncoderLayer(Module):
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
             src = self.norm1(src)
             src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        if self.args.batch_norm:
+            src=self.bn1(src)
 
         src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
         src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
@@ -106,6 +111,8 @@ class TransformerEncoderLayer(Module):
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
             src = self.norm2(src)
             src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        if self.args.batch_norm:
+            src=self.bn2(src)
 
         return src
 
