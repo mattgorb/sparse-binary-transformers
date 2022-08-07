@@ -142,7 +142,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             plt.clf()
             plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
             plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
-            plt.axhspan(9, 12, facecolor='red', alpha=0.5)
+            for a in iterator.anomalies:
+                plt.axvspan(a[0], a[1], facecolor='red', alpha=0.5)
 
             plt.legend()
             plt.savefig(f'output/{x}_bin.png')

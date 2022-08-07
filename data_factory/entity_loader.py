@@ -111,10 +111,10 @@ class SMAP(object):
 
         entities=pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
         anomalies=entities[entities['chan_id']==entity]['anomaly_sequences'].values[0]
-        anomalies = ast.literal_eval(anomalies)
+        self.anomalies = ast.literal_eval(anomalies)
         self.test_labels=[0 for i in range(self.test.shape[0])]
         self.test_labels = np.zeros([self.test.shape[0]], )
-        for a in anomalies:
+        for a in self.anomalies:
             self.test_labels[a[0]:a[1]+1]=1
         if forecast:
             filter_anomalies=np.argwhere(self.test_labels==0)
