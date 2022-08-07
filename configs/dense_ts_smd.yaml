@@ -12,8 +12,8 @@ epochs: 500
 weight_file: dense_ts_smd
 
 window_size: 200
-forecast: False
+forecast: True
 save_scores: False
 layer_norm: True
 batch_norm: False
-save_graphs: True
+save_graphs: False
