@@ -46,7 +46,7 @@ def main():
         weight_file_base = 'weights/' + args.weight_file
 
 
-    for ent in range(28):
+    for ent in range(1):
 
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
