@@ -16,4 +16,4 @@ forecast: False
 save_scores: False
 layer_norm: True
 batch_norm: False
-save_graphs: False
+save_graphs: True
