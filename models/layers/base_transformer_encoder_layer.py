@@ -97,6 +97,8 @@ class TransformerEncoderLayer(Module):
                               key_padding_mask=src_key_padding_mask)[0]
         src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
 
+
+
         if self.args.layer_norm:
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
             src = self.norm1(src)
@@ -118,6 +120,7 @@ class TransformerEncoderLayer(Module):
             src=self.bn2(src)
             src = src.permute(2, 0, 1)
 
+        #sys.exit()
         return src
 
 

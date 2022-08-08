@@ -338,7 +338,6 @@ class MultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-
         q=self.quant(q)
         #scaling=self.quant2(scaling)
         q = self.q_scaling_product.mul_scalar(q, scaling)
@@ -462,13 +461,16 @@ class MultiheadAttention(nn.MultiheadAttention):
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
-
+        #print(attn_output_weights)
         attn_output = torch.bmm(attn_output_weights, v)
 
 
-        #print(attn_output_weights)
+
         #print(attn_output_weights.size())
         #print(v.size())
+        #print(attn_output.size())
+        #print(attn_output_weights)
+        #print(attn_output[:,-2,:])
         #print(attn_output.size())
         #sys.exit()
         '''print('here')
@@ -489,17 +491,16 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
         # Reentering the quantized zone
-        #print(attn_output)
         attn_output = self.quant_attn_output(attn_output)
-        #print(attn_output.dtype)
-        #sys.exit()
-        #print(self.out_proj)
+
         # for the type: ignore[has-type], see https://github.com/pytorch/pytorch/issues/58969
 
 
 
         attn_output = self.out_proj(attn_output)  # type: ignore[has-type]
         attn_output_weights = self.quant_attn_output_weights(attn_output_weights)
+
+
 
 
         if need_weights:
