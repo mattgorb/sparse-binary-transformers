@@ -86,9 +86,14 @@ class TSTransformerModel(nn.Module):
         if has_src_mask:
             device = src.device
             if self.src_mask is None or self.src_mask.size(0) != len(src):
-                mask = self._generate_square_subsequent_mask(src.size(1)).to(device)
+                #mask = self._generate_square_subsequent_mask(src.size(1)).to(device)
+                size=src.size(1)
+                mask=torch.zeros(size,size)
+                mask=mask.masked_fill(mask == 0, float('-inf'))
+                mask[-1,:]=0
+                #print(mask)
+                #sys.exit()
                 self.src_mask = mask
-
         else:
             self.src_mask = None
         if has_pad_mask:

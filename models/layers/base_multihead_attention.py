@@ -450,6 +450,7 @@ class MultiheadAttention(nn.MultiheadAttention):
             else:
                 attn_output_weights += attn_mask
 
+
         if key_padding_mask is not None:
             attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
             attn_output_weights = attn_output_weights.masked_fill(
@@ -464,6 +465,12 @@ class MultiheadAttention(nn.MultiheadAttention):
 
         attn_output = torch.bmm(attn_output_weights, v)
 
+
+        #print(attn_output_weights)
+        #print(attn_output_weights.size())
+        #print(v.size())
+        #print(attn_output.size())
+        #sys.exit()
         '''print('here')
         print(query.size())
         print(q.size())
