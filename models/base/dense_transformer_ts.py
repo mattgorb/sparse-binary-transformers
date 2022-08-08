@@ -91,9 +91,8 @@ class TSTransformerModel(nn.Module):
                 mask=torch.zeros(size,size)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
                 mask[-1,:]=0
-                #print(mask)
-                #sys.exit()
-                self.src_mask = mask
+                self.src_mask = mask.to(self.args.device)
+
         else:
             self.src_mask = None
         if has_pad_mask:
