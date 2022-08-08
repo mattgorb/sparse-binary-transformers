@@ -88,7 +88,7 @@ class TSTransformerModel(nn.Module):
             if self.src_mask is None or self.src_mask.size(0) != len(src):
                 #mask = self._generate_square_subsequent_mask(src.size(1)).to(device)
                 size=src.size(1)
-                mask=torch.zeros(size,size)
+                mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
                 mask[-1,:]=0
                 self.src_mask = mask.to(self.args.device)
