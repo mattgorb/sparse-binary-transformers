@@ -55,6 +55,13 @@ class SMD(object):
                 print(train_set)
             #print(len([i for i in self.test[:,i] if i not in train_set]))
         sys.exit()'''
+        '''import matplotlib.pyplot as plt
+        for feat in range(self.train.shape[1]):
+            plt.clf()
+            plt.plot([i for i in range(self.train.shape[0])],self.train[:,feat],label='train')
+            plt.plot([i for i in range(self.test.shape[0])],self.test[:,feat],label='test')
+            plt.legend()
+            plt.show()'''
     def __len__(self):
 
         if self.mode == "train":
@@ -113,7 +120,7 @@ class SMAP(object):
                 print(train_set)
         sys.exit()'''
         #sys.exit()
-        '''print(self.train.shape)
+        print(self.train.shape)
         print(self.test.shape)
 
         import matplotlib.pyplot as plt
@@ -123,7 +130,7 @@ class SMAP(object):
             plt.plot([i for i in range(self.test_data.shape[0])],self.test_data[:,feat],label='t')
             plt.legend()
             plt.show()
-        sys.exit()'''
+        sys.exit()
 
         entities=pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
         anomalies=entities[entities['chan_id']==entity]['anomaly_sequences'].values[0]

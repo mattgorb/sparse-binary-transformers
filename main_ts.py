@@ -1,6 +1,6 @@
 import torch
 from torchtext.datasets import IMDB
-from models.base.dense_transformer_ts import TSTransformerModel
+from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
@@ -62,12 +62,13 @@ def main():
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            #model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
-            #from utils.trainer import train,test,test_forecast,validation
+            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
+            model=TranAD_Basic(feats=input_dim)
+            from utils.trainer import train,test,test_forecast,validation
 
-            from models.base.dense_anomaly_ts import AnomalyTransformer
-            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
-            from utils.trainer_anomaly import train, test, validation
+            #from models.base.dense_anomaly_ts import AnomalyTransformer
+            #model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
+            #from utils.trainer_anomaly import train, test, validation
 
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
@@ -99,11 +100,11 @@ def main():
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
-                if epoch>10:
-                    #if args.forecast:
-                        #test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
-                    #else:
-                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                if epoch>5:
+                    if args.forecast:
+                        test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
+                    else:
+                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
             else:
                 val_loss=None
                 test_loss=None

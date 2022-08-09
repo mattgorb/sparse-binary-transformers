@@ -27,9 +27,7 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         i+=1
 
         predictions = model(data, )
-        #print('here')
-        #print(predictions[:, :, :])
-        #sys.exit()
+
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
         loss.backward()
