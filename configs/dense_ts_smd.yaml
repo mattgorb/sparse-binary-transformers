@@ -11,7 +11,7 @@ model_type: 'Dense'
 epochs: 500
 weight_file: dense_ts_smd
 
-window_size: 250
+window_size: 200
 forecast: True
 save_scores: False
 layer_norm: False
@@ -20,5 +20,5 @@ save_graphs: True
 
 pos_enc: 'Standard'
 
-k: 3
-anormly_ratio: 4
+#k: 3
+#anormly_ratio: 4
