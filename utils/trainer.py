@@ -182,9 +182,9 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     #print(f"max_f1_thresh: {max_f1_thresh}")
     #print(f"max_f1: {max_f1}")
 
-    #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
-    result={}
+    #result={}
     result['base_roc']=metrics.roc_auc_score(labels, scores)
     result['base_pr']=metrics.auc(recall, precision)
     result['base_max_f1']=max_f1
