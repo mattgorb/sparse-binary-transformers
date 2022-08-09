@@ -67,7 +67,7 @@ def main():
             #from utils.trainer import train,test,test_forecast,validation
 
             from models.base.dense_anomaly_ts import AnomalyTransformer
-            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args)
+            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
             from utils.trainer_anomaly import train, test, validation
 
         else:
