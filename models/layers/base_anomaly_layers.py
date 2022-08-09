@@ -15,14 +15,15 @@ class TriangularCausalMask():
 
 
 class AnomalyAttention(nn.Module):
-    def __init__(self, win_size, mask_flag=True, scale=None, attention_dropout=0.0, output_attention=False):
+    def __init__(self, win_size, mask_flag=True, scale=None, attention_dropout=0.0, output_attention=False,args=None):
         super(AnomalyAttention, self).__init__()
+        self.args=args
         self.scale = scale
         self.mask_flag = mask_flag
         self.output_attention = output_attention
         self.dropout = nn.Dropout(attention_dropout)
         window_size = win_size
-        self.distances = torch.zeros((window_size, window_size)).cuda()
+        self.distances = torch.zeros((window_size, window_size)).to(args.device)
         for i in range(window_size):
             for j in range(window_size):
                 self.distances[i][j] = abs(i - j)
@@ -44,7 +45,7 @@ class AnomalyAttention(nn.Module):
         sigma = torch.sigmoid(sigma * 5) + 1e-5
         sigma = torch.pow(3, sigma) - 1
         sigma = sigma.unsqueeze(-1).repeat(1, 1, 1, window_size)  # B H L L
-        prior = self.distances.unsqueeze(0).unsqueeze(0).repeat(sigma.shape[0], sigma.shape[1], 1, 1).cuda()
+        prior = self.distances.unsqueeze(0).unsqueeze(0).repeat(sigma.shape[0], sigma.shape[1], 1, 1).to(self.args.device)
         prior = 1.0 / (math.sqrt(2 * math.pi) * sigma) * torch.exp(-prior ** 2 / 2 / (sigma ** 2))
 
         series = self.dropout(torch.softmax(attn, dim=-1))

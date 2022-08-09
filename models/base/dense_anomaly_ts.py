@@ -103,8 +103,8 @@ class Encoder(nn.Module):
 
 
 class AnomalyTransformer(nn.Module):
-    def __init__(self, win_size, enc_in, c_out, d_model=512, n_heads=8, e_layers=3, d_ff=512,
-                 dropout=0.0, activation='gelu', output_attention=True):
+    def __init__(self, win_size, enc_in, c_out, d_model=32, n_heads=2, e_layers=3, d_ff=32,
+                 dropout=0.0, activation='gelu', output_attention=True, args=None):
         super(AnomalyTransformer, self).__init__()
         self.output_attention = output_attention
 
@@ -116,7 +116,7 @@ class AnomalyTransformer(nn.Module):
             [
                 EncoderLayer(
                     AttentionLayer(
-                        AnomalyAttention(win_size, False, attention_dropout=dropout, output_attention=output_attention),
+                        AnomalyAttention(win_size, False, attention_dropout=dropout, output_attention=output_attention,args=args),
                         d_model, n_heads),
                     d_model,
                     d_ff,

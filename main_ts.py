@@ -63,12 +63,12 @@ def main():
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
-            from utils.trainer import train,test,test_forecast,validation
+            #model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
+            #from utils.trainer import train,test,test_forecast,validation
 
-            #from models.base.dense_anomaly_ts import AnomalyTransformer
-            #model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=3)
-
+            from models.base.dense_anomaly_ts import AnomalyTransformer
+            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args)
+            from utils.trainer_anomaly import train, test, validation
 
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
@@ -101,10 +101,10 @@ def main():
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
                 if epoch>10:
-                    if args.forecast:
-                        test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
-                    else:
-                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    #if args.forecast:
+                        #test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
+                    #else:
+                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
             else:
                 val_loss=None
                 test_loss=None

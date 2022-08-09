@@ -37,8 +37,8 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         epoch_loss += loss.item()
         if i%1000==0:
             print(i)
-    if epoch>20:
-        adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
+    #if epoch>20:
+        #adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
     return epoch_loss / iterator.dataset.__len__()
 
 
