@@ -49,7 +49,7 @@ def validation(model, vali_loader, optimizer, criterion, device,args):
         loss_1.append((rec_loss - args.k * series_loss).item())
         loss_2.append((rec_loss + args.k * prior_loss).item())
 
-    return np.average(loss_1), np.average(loss_2)
+    return np.average(loss_1)#, np.average(loss_2)
 
 
 def train(model, train_loader, optimizer, criterion, device,args,epoch):
