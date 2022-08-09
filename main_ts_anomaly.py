@@ -22,7 +22,7 @@ from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
-#from utils.trainer import train,test, validation,test_forecast
+from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
 
 
@@ -64,12 +64,6 @@ def main():
 
         if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=16, nlayers=8, args=args).to(device)
-            from utils.trainer import train,test,test_forecast,validation
-
-            #from models.base.dense_anomaly_ts import AnomalyTransformer
-            #model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=3)
-
-
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
 
@@ -94,7 +88,7 @@ def main():
             #print(f'\nEpoch {epoch}: ')
             start_time = time.time()
 
-            train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
+            train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
             val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
 
             if val_loss < best_val_loss:

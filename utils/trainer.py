@@ -7,8 +7,9 @@ from itertools import groupby
 from operator import itemgetter
 import pandas as pd
 from metrics.pot.pot import pot_eval
+from utils.train_util import adjust_learning_rate
 
-def train(model, iterator, optimizer, criterion, device,args):
+def train(model, iterator, optimizer, criterion, device,args,epoch):
     epoch_loss = 0
 
     model.train()
@@ -36,7 +37,8 @@ def train(model, iterator, optimizer, criterion, device,args):
         epoch_loss += loss.item()
         if i%1000==0:
             print(i)
-        #print(loss)
+
+    adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
     return epoch_loss / iterator.dataset.__len__()
 
 
