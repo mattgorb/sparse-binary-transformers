@@ -53,7 +53,7 @@ def validation(model, vali_loader, optimizer, criterion, device,args):
 
 
 def train(model, train_loader, optimizer, criterion, device,args,epoch):
-    print("======================TRAIN MODE======================")
+    #print("======================TRAIN MODE======================")
 
     time_now = time.time()
 
@@ -140,7 +140,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
     # (1) stastic on the train set
     attens_energy = []
-    for i, (input_data, labels) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         loss = torch.mean(criterion(input, output), dim=-1)
@@ -174,7 +174,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
@@ -214,7 +214,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
     # (3) evaluation on the test set
     test_labels = []
     attens_energy = []
-    for i, (input_data, labels) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 

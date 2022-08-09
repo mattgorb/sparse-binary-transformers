@@ -57,7 +57,6 @@ def main():
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
 
-        #continue
         input_dim=train_dataloader.dataset.train.shape[1]
 
         dmodel = input_dim*4
