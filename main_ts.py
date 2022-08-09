@@ -63,7 +63,7 @@ def main():
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=16, nlayers=8, args=args).to(device)
+            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
             from utils.trainer import train,test,test_forecast,validation
 
             #from models.base.dense_anomaly_ts import AnomalyTransformer
