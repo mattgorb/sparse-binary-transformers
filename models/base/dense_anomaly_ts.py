@@ -116,7 +116,7 @@ class AnomalyTransformer(nn.Module):
             [
                 EncoderLayer(
                     AttentionLayer(
-                        AnomalyAttention(win_size, False, attention_dropout=dropout, output_attention=output_attention,args=args),
+                        AnomalyAttention(win_size, True, attention_dropout=dropout, output_attention=output_attention,args=args),
                         d_model, n_heads),
                     d_model,
                     d_ff,

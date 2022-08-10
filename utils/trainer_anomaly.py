@@ -70,6 +70,10 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
         input = input_data.float().to(args.device)
 
         output, series, prior, _ = model(input)
+        print(input.size())
+        print(output.size())
+
+        sys.exit()
 
 
 
@@ -90,10 +94,10 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
                 my_kl_loss(series[u].detach(), (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
                                                                                                args.window_size)))))
-        series_loss = series_loss / len(prior)
+        series_loss = series_loss / len(series)
         prior_loss = prior_loss / len(prior)
 
-        rec_loss = criterion(output, input)
+        rec_loss = criterion(output[:,-1,:], input[:,-1,:])
 
         loss1_list.append((rec_loss - args.k * series_loss).item())
         loss1 = rec_loss - args.k * series_loss
@@ -144,7 +148,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
     for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
-        loss = torch.mean(criterion(input, output), dim=-1)
+        loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
         series_loss = 0.0
         prior_loss = 0.0
         for u in range(len(prior)):
@@ -175,11 +179,11 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels,index) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
-        loss = torch.mean(criterion(input, output), dim=-1)
+        loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
 
         series_loss = 0.0
         prior_loss = 0.0
@@ -219,7 +223,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
-        loss = torch.mean(criterion(input, output), dim=-1)
+        loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
 
         series_loss = 0.0
         prior_loss = 0.0

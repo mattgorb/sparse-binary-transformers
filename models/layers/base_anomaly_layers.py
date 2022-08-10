@@ -50,13 +50,21 @@ class AnomalyAttention(nn.Module):
         prior = self.distances.unsqueeze(0).unsqueeze(0).repeat(sigma.shape[0], sigma.shape[1], 1, 1).to(self.args.device)
         prior = 1.0 / (math.sqrt(2 * math.pi) * sigma) * torch.exp(-prior ** 2 / 2 / (sigma ** 2))
 
+
+
+        series = self.dropout(torch.softmax(attn, dim=-1))
+        '''print(attn_mask.mask)
         print(window_size)
         print(prior.size())
         print(queries.size())
-        print(attn.size())
-        sys.exit()
+        print(attn.size())'''
+        #sys.exit()
+        #print(series.size())
 
-        series = self.dropout(torch.softmax(attn, dim=-1))
+        #print(series[:,:,-1, :-1].unsqueeze(2).size())
+        series=series[:,:,-1, :-1].unsqueeze(2)
+        prior=prior[:,:,-1, :-1].unsqueeze(2)
+
         V = torch.einsum("bhls,bshd->blhd", series, values)
 
         if self.output_attention:
