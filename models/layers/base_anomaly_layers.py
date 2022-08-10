@@ -40,6 +40,8 @@ class AnomalyAttention(nn.Module):
             scores.masked_fill_(attn_mask.mask, -np.inf)
         attn = scale * scores
 
+
+
         sigma = sigma.transpose(1, 2)  # B L H ->  B H L
         window_size = attn.shape[-1]
         sigma = torch.sigmoid(sigma * 5) + 1e-5
@@ -47,6 +49,12 @@ class AnomalyAttention(nn.Module):
         sigma = sigma.unsqueeze(-1).repeat(1, 1, 1, window_size)  # B H L L
         prior = self.distances.unsqueeze(0).unsqueeze(0).repeat(sigma.shape[0], sigma.shape[1], 1, 1).to(self.args.device)
         prior = 1.0 / (math.sqrt(2 * math.pi) * sigma) * torch.exp(-prior ** 2 / 2 / (sigma ** 2))
+
+        print(window_size)
+        print(prior.size())
+        print(queries.size())
+        print(attn.size())
+        sys.exit()
 
         series = self.dropout(torch.softmax(attn, dim=-1))
         V = torch.einsum("bhls,bshd->blhd", series, values)
@@ -78,7 +86,10 @@ class AttentionLayer(nn.Module):
 
         self.n_heads = n_heads
 
+
+
     def forward(self, queries, keys, values, attn_mask):
+
         B, L, _ = queries.shape
         _, S, _ = keys.shape
         H = self.n_heads
