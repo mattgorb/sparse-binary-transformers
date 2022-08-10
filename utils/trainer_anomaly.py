@@ -70,10 +70,6 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
         input = input_data.float().to(args.device)
 
         output, series, prior, _ = model(input)
-        print(input.size())
-        print(output.size())
-
-        sys.exit()
 
 
 
