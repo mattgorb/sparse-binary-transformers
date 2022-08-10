@@ -45,7 +45,7 @@ def validation(model, vali_loader, optimizer, criterion, device,args):
         series_loss = series_loss / len(prior)
         prior_loss = prior_loss / len(prior)
 
-        rec_loss = criterion(output, input)
+        rec_loss = criterion(output[:,-1,:], input[:,-1,:])
         loss_1.append((rec_loss - args.k * series_loss).item())
         loss_2.append((rec_loss + args.k * prior_loss).item())
 
