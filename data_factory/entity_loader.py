@@ -110,7 +110,7 @@ class SMAP(object):
 
         print(self.test.shape)
         print(self.train.shape)
-        sys.exit()
+        #sys.exit()
 
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
