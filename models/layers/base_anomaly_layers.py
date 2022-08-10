@@ -61,11 +61,14 @@ class AnomalyAttention(nn.Module):
         #sys.exit()
         #print(series.size())
 
+
+
+        V = torch.einsum("bhls,bshd->blhd", series, values)
+
+
         #print(series[:,:,-1, :-1].unsqueeze(2).size())
         series=series[:,:,-1, :-1].unsqueeze(2)
         prior=prior[:,:,-1, :-1].unsqueeze(2)
-
-        V = torch.einsum("bhls,bshd->blhd", series, values)
 
         if self.output_attention:
             return (V.contiguous(), series, prior, sigma)
