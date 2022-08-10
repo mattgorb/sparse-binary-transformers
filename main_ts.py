@@ -111,7 +111,7 @@ def main():
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
+            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  ')#Val loss: {val_loss} |  Test loss: {test_loss}')
 
 
 
