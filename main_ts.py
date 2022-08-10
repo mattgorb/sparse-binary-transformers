@@ -95,16 +95,16 @@ def main():
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
-            val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
+            #val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
 
-            if val_loss < best_val_loss:
-                best_val_loss = val_loss
+            if train_loss < best_val_loss:
+                best_val_loss = train_loss
                 torch.save(model.state_dict(), weight_file)
                 if epoch>5:
                     #if args.forecast:
                         #test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
                     #else:
-                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                    test_loss = test(model, test_dataloader,train_dataloader, criterion, device, args, ent)
             else:
                 val_loss=None
                 test_loss=None
