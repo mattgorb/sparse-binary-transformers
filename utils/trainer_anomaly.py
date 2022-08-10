@@ -79,17 +79,17 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
         for u in range(len(prior)):
             series_loss += (torch.mean(my_kl_loss(series[u], (
                     prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                           args.window_size)).detach())) + torch.mean(
+                                                                                           args.window_size-1)).detach())) + torch.mean(
                 my_kl_loss((prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                                   args.window_size)).detach(),
+                                                                                                   args.window_size-1)).detach(),
                            series[u])))
             prior_loss += (torch.mean(my_kl_loss(
                 (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                        args.window_size)),
+                                                                                        args.window_size-1)),
                 series[u].detach())) + torch.mean(
                 my_kl_loss(series[u].detach(), (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size)))))
+                                                                                               args.window_size-1)))))
         series_loss = series_loss / len(series)
         prior_loss = prior_loss / len(prior)
 
