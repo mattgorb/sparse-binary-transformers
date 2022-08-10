@@ -87,7 +87,7 @@ def main():
 
         print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-
+        print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
 
         test_loss=None
         for epoch in range(args.epochs):
@@ -95,23 +95,23 @@ def main():
             start_time = time.time()
 
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
-            #val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
+            val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
 
-            if train_loss < best_val_loss:
-                best_val_loss = train_loss
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
                 if epoch>5:
                     #if args.forecast:
                         #test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
                     #else:
-                    test_loss = test(model, test_dataloader,train_dataloader, criterion, device, args, ent)
+                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
             else:
                 val_loss=None
                 test_loss=None
 
             end_time = time.time()
             epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  ')#Val loss: {val_loss} |  Test loss: {test_loss}')
+            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
 
 
 

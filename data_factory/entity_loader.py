@@ -109,8 +109,8 @@ class SMAP(object):
         self.test = self.scaler.transform(self.test_data)
 
         data_len = len(self.train)
-        #self.val = self.train[(int)(data_len * 0.5):]
-        #self.train = self.train[:(int)(data_len * 0.5)]
+        self.val = self.train[(int)(data_len * 0.8):]
+        self.train = self.train[:(int)(data_len * 0.8)]
 
         #print(self.train.shape)
         '''for i in range(self.train.shape[1]):
