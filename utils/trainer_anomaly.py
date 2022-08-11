@@ -138,6 +138,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
+        print(loss.size())
         series_loss = 0.0
         prior_loss = 0.0
         for u in range(len(prior)):
@@ -159,9 +160,13 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
                     series[u].detach()) * temperature
 
         metric = torch.softmax((-series_loss - prior_loss), dim=-1)
+        print(metric.size())
+        sys.exit()
         cri = metric * loss
         cri = cri.detach().cpu().numpy()
         attens_energy.append(cri)
+
+
 
     attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
     train_energy = np.array(attens_energy)
@@ -211,9 +216,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
     for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
-        print(output[:,-1,:].size())
-        print(input[:,-1,:].size())
-        sys.exit()
+
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
 
 
