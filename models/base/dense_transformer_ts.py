@@ -47,7 +47,7 @@ class TSTransformerModel(nn.Module):
     def __init__(self, input_dim, ninp, nhead, nhid, args, nlayers=6, dropout=0.0):
         super(TSTransformerModel, self).__init__()
         try:
-            from torch.nn import TransformerEncoder
+            from models.layers.base_transformer_encoder import TransformerEncoder
             from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
         except:
             raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
@@ -108,10 +108,10 @@ class TSTransformerModel(nn.Module):
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
-        output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
+        output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
 
         output=self.act(output)
         output = output.permute(1, 0, 2)
         output = self.decoder(output)
 
-        return output
+        return output, attention_list

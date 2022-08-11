@@ -93,11 +93,9 @@ class TransformerEncoderLayer(Module):
 
         # see Fig. 1 of https://arxiv.org/pdf/2002.04745v1.pdf
 
-        src2 = self.self_attn(src, src, src, attn_mask=src_mask,
-                              key_padding_mask=src_key_padding_mask)[0]
+        src2, attention = self.self_attn(src, src, src, attn_mask=src_mask,
+                              key_padding_mask=src_key_padding_mask)
         src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
-
-
 
         if self.args.layer_norm:
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
@@ -120,14 +118,13 @@ class TransformerEncoderLayer(Module):
             src=self.bn2(src)
             src = src.permute(2, 0, 1)
 
-        #sys.exit()
-        return src
+        return src, attention
 
 
     # self-attention block
     def _sa_block(self, x: Tensor,
                   attn_mask: Optional[Tensor], key_padding_mask: Optional[Tensor]) -> Tensor:
-        x = self.self_attn(x, x, x,
+        x, attention = self.self_attn(x, x, x,
                            attn_mask=attn_mask,
                            key_padding_mask=key_padding_mask,
                            need_weights=False)[0]

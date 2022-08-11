@@ -9,6 +9,21 @@ import pandas as pd
 from metrics.pot.pot import pot_eval
 from utils.train_util import adjust_learning_rate
 
+
+def attention_uniformity(attention_list,):
+    totals=None
+    for att in attention_list:
+        x=(torch.norm(att[:, -1, :], dim=1) *
+         (torch.sqrt(torch.tensor(att[-1, -1, :].numel())) - 1)) / (
+                    torch.sqrt(torch.tensor(att[-1, -1, :].numel())) - 1)
+        if totals is None:
+            totals=x
+        else:
+            totals+=x
+    totals/=len(attention_list)
+    return totals
+
+
 def train(model, iterator, optimizer, criterion, device,args,epoch):
     epoch_loss = 0
 
@@ -26,7 +41,9 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
 
         i+=1
 
-        predictions = model(data, )
+        predictions, attention_list = model(data, )
+
+        uniformity_metrics=attention_uniformity(attention_list)
 
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
@@ -41,11 +58,15 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
 
 
 
-def validation(model, iterator, optimizer, criterion, device,args):
+def validation(model, iterator, optimizer, criterion, device,args, epoch):
     epoch_loss = 0
 
     model.eval()
     i=0
+    sample_criterion=torch.nn.MSELoss(reduction='none')
+
+    losses=[]
+    attns=[]
     with torch.no_grad():
         for batch in iterator:
 
@@ -58,14 +79,24 @@ def validation(model, iterator, optimizer, criterion, device,args):
             data_base=data_base.to(device)
 
             i+=1
-            predictions = model(data, )
+            predictions, attention_list = model(data, )
 
-
+            uniformity_metrics = attention_uniformity(attention_list)
             loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+
+            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_loss.mean(dim=1)
+            attns.append(uniformity_metrics.cpu().detach().numpy())
+            losses.append(sample_loss.cpu().detach().numpy())
+
 
             epoch_loss += loss.item()
             if i%1000==0:
                 print(i)
+
+    plt.clf()
+    plt.plot(attns,losses, '.')
+    plt.savefig(f'output/compare{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 

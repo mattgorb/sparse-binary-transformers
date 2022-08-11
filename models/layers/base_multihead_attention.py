@@ -505,8 +505,8 @@ class MultiheadAttention(nn.MultiheadAttention):
 
         if need_weights:
             # average attention weights over heads
-            attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
+            #attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
 
-            return attn_output, attn_output_weights.mean(dim=1)
+            return attn_output, attn_output_weights#.mean(dim=1)
         else:
             return attn_output, None
