@@ -98,7 +98,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
 
     print(np.array(attns).shape)
     plt.clf()
-    plt.plot(attns,losses, '.')
+    plt.plot([attns[i] for i in attns if losses[i]<5],[losses[i] for i in attns if losses[i]<5], '.')
     plt.savefig(f'output/compare{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
