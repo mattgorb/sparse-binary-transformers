@@ -20,7 +20,11 @@ def attention_uniformity(attention_list,):
             totals=x
         else:
             totals+=x
+        print(totals.size())
+    print(totals.size())
     totals/=len(attention_list)
+    print(totals.size())
+    sys.exit()
     return totals
 
 
@@ -92,6 +96,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
 
             print(uniformity_metrics.size())
             print(sample_loss.size())
+            sys.exit()
 
             epoch_loss += loss.item()
             if i%1000==0:
