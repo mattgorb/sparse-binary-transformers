@@ -164,7 +164,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
         cri = cri.detach().cpu().numpy()
         attens_energy.append(cri)
 
-    print(attens_energy.shape)
+    print(np.array(attens_energy).shape)
     sys.exit()
 
     attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
