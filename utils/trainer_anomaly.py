@@ -300,7 +300,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     print(f"max_f1: {max_f1}")
 
     result, updated_preds = pot_eval(np.array(val_energy), np.array(test_energy), np.array(test_labels),args=args)
-
+    print(result)
     #result={}
     '''result['base_roc']=metrics.roc_auc_score(labels, scores)
     result['base_pr']=metrics.auc(recall, precision)
