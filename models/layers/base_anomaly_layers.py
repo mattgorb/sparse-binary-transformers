@@ -47,6 +47,7 @@ class AnomalyAttention(nn.Module):
                 #attn_mask=attn_mask.masked_fill(attn_mask == 0, float('-inf'))
                 self.attn_mask[-1,:]=1
                 self.attn_mask[-1,-1]=0
+                self.attn_mask=self.attn_mask.to(self.args.device)
                 #attn_mask[-1,-1]=float('-inf')
 
 
