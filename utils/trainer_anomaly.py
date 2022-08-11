@@ -249,7 +249,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         test_labels.extend(labels[:,-1].cpu().numpy())
 
         for j, l in zip(index, cri):
-            sample_loss_dict[j.item()] = l.cpu().detach().numpy()
+            sample_loss_dict[j.item()] = l#.cpu().detach().numpy()
 
         # first, specifically look at instances with no anomalies at all
         normal_data = [i for i in range(labels.size(0)) if torch.sum(labels[i, :]) == 0]
