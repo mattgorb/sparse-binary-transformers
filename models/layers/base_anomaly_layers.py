@@ -22,6 +22,7 @@ class AnomalyAttention(nn.Module):
         self.mask_flag = mask_flag
         self.output_attention = output_attention
         self.dropout = nn.Dropout(attention_dropout)
+        self.attn_mask=None
         window_size = win_size
         self.distances = torch.zeros((window_size, window_size)).to(args.device)
         for i in range(window_size):
@@ -35,9 +36,21 @@ class AnomalyAttention(nn.Module):
 
         scores = torch.einsum("blhe,bshe->bhls", queries, keys)
         if self.mask_flag:
-            if attn_mask is None:
-                attn_mask = TriangularCausalMask(B, L, device=queries.device)
-            scores.masked_fill_(attn_mask.mask, -np.inf)
+            if self.attn_mask is None:
+                #attn_mask = TriangularCausalMask(B, L, device=queries.device)
+
+                size=queries.size(1)
+                #print(attn_mask.mask)
+                #print(queries.size())
+                #sys.exit()
+                self.attn_mask=torch.eye(size,)
+                #attn_mask=attn_mask.masked_fill(attn_mask == 0, float('-inf'))
+                self.attn_mask[-1,:]=1
+                self.attn_mask[-1,-1]=0
+                #attn_mask[-1,-1]=float('-inf')
+
+
+            scores.masked_fill_(self.attn_mask, -np.inf)
         attn = scale * scores
 
 
