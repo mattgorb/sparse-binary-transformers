@@ -116,16 +116,7 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
     #print("Epoch: {} cost time: {}".format(epoch + 1, time.time() - epoch_time))
     train_loss = np.average(loss1_list)
 
-    #vali_loss1, vali_loss2 = self.vali(self.test_loader)
 
-    #print(
-        #"Epoch: {0}, Steps: {1} | Train Loss: {2:.7f} Vali Loss: {3:.7f} ".format(
-            #epoch + 1, train_steps, train_loss, ))
-    #early_stopping(vali_loss1, vali_loss2, self.model, path)
-    #if early_stopping.early_stop:
-        #print("Early stopping")
-        #break
-    #adjust_learning_rate(optimizer, epoch + 1, self.lr)
 
     return train_loss
 
@@ -222,6 +213,8 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
         output, series, prior, _ = model(input)
 
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
+        print(loss.size())
+        sys.exit()
 
         series_loss = 0.0
         prior_loss = 0.0
