@@ -245,9 +245,9 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     test_energy = np.array(attens_energy)
     test_labels = np.array(test_labels)
 
-    pred = (test_energy > thresh).astype(int)
+    pred = (test_energy > thresh)#.astype(int)
 
-    gt = test_labels.astype(int)
+    gt = test_labels#.astype(int)
 
     print("pred:   ", pred.shape)
     print("gt:     ", gt.shape)
