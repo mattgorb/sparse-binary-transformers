@@ -86,14 +86,15 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            attns.append(uniformity_metrics.cpu().detach().numpy())
-            losses.append(sample_loss.cpu().detach().numpy())
+            attns.extend(uniformity_metrics.cpu().detach().numpy())
+            losses.extend(sample_loss.cpu().detach().numpy())
 
 
             epoch_loss += loss.item()
             if i%1000==0:
                 print(i)
 
+    print(np.array(attns).shape)
     plt.clf()
     plt.plot(attns,losses, '.')
     plt.savefig(f'output/compare{epoch}.png')
