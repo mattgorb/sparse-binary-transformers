@@ -9,6 +9,8 @@ import time
 from utils.train_util import adjust_learning_rate, EarlyStopping
 from sklearn import metrics
 from metrics.pot.pot import pot_eval
+from itertools import groupby
+from operator import itemgetter
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
@@ -209,6 +211,10 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     # (3) evaluation on the test set
     test_labels = []
     attens_energy = []
+
+    anomaly_ind=[]
+    benign_ind=[]
+    sample_loss_dict={}
     for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
@@ -241,6 +247,23 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         cri = cri.detach().cpu().numpy()
         attens_energy.extend(cri)
         test_labels.extend(labels[:,-1].cpu().numpy())
+
+        for i, l in zip(index, cri):
+            sample_loss_dict[i.item()] = l.cpu().detach().numpy()
+
+        # first, specifically look at instances with no anomalies at all
+        normal_data = [i for i in range(labels.size(0)) if torch.sum(labels[i, :]) == 0]
+        if len(normal_data) > 0:
+            benign_ind.extend(index[normal_data].cpu().detach().numpy())
+
+        # examples with anomalies at forecast index
+        anomaly_data = [i for i in range(labels.size(0)) if labels[i, -1] == 1]
+        if len(anomaly_data) > 0:
+            anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
+
+
+
+
 
     test_energy = np.array(attens_energy)
     test_labels = np.array(test_labels)
@@ -289,7 +312,24 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
             recall, f_score))
 
 
-    precision, recall, thresholds = metrics.precision_recall_curve(gt, pred)
+
+    anomaly_dict={}
+    i=0
+    for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
+        anomaly_dict[i]=list(map(itemgetter(1), g))
+        i+=1
+
+    anomaly_final_vals=[]
+    for key,val in anomaly_dict.items():
+        sample_losses=[sample_loss_dict.get(key) for key in val]
+        anomaly_final_vals.append(max(sample_losses))
+
+    benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
+
+    labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
+    scores=benign_final_vals+anomaly_final_vals
+
+    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     #print(f'PR Curve : {metrics.auc(recall, precision)}')
     numerator = 2 * recall * precision
     denom = recall + precision
@@ -299,7 +339,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
 
-    result, updated_preds = pot_eval(np.array(val_energy), np.array(test_energy), np.array(test_labels),args=args)
+    result, updated_preds = pot_eval(np.array(val_energy), np.array(scores), np.array(labels),args=args)
     print(result)
     #result={}
     '''result['base_roc']=metrics.roc_auc_score(labels, scores)
