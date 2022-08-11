@@ -30,18 +30,18 @@ def validation(model, vali_loader, optimizer, criterion, device,args):
         for u in range(len(prior)):
             series_loss += (torch.mean(my_kl_loss(series[u], (
                     prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                           args.window_size-1)).detach())) + torch.mean(
+                                                                                           args.window_size)).detach())) + torch.mean(
                 my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)).detach(),
+                                                                                            args.window_size)).detach(),
                     series[u])))
             prior_loss += (torch.mean(
                 my_kl_loss((prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                                   args.window_size-1)),
+                                                                                                   args.window_size)),
                            series[u].detach())) + torch.mean(
                 my_kl_loss(series[u].detach(),
                            (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                                   args.window_size-1)))))
+                                                                                                   args.window_size)))))
         series_loss = series_loss / len(prior)
         prior_loss = prior_loss / len(prior)
 
@@ -80,26 +80,22 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
         for u in range(len(prior)):
             series_loss += (torch.mean(my_kl_loss(series[u], (
                     prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                           args.window_size-1)).detach())) + torch.mean(
+                                                                                           args.window_size)).detach())) + torch.mean(
                 my_kl_loss((prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                                   args.window_size-1)).detach(),
+                                                                                                   args.window_size)).detach(),
                            series[u])))
+
             prior_loss += (torch.mean(my_kl_loss(
                 (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                        args.window_size-1)),
+                                                                                        args.window_size)),
                 series[u].detach())) + torch.mean(
                 my_kl_loss(series[u].detach(), (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)))))
+                                                                                               args.window_size)))))
         series_loss = series_loss / len(series)
         prior_loss = prior_loss / len(prior)
 
         rec_loss = criterion(output[:,-1,:], input[:,-1,:])
-
-        print(output)
-        print(series_loss)
-        print(prior_loss)
-        print(rec_loss)
 
         loss1_list.append((rec_loss - args.k * series_loss).item())
         loss1 = rec_loss - args.k * series_loss
@@ -157,18 +153,18 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
             if u == 0:
                 series_loss = my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss = my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
             else:
                 series_loss += my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss += my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
 
         metric = torch.softmax((-series_loss - prior_loss), dim=-1)
@@ -193,18 +189,18 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
             if u == 0:
                 series_loss = my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss = my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
             else:
                 series_loss += my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss += my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
         # Metric
         metric = torch.softmax((-series_loss - prior_loss), dim=-1)
@@ -233,18 +229,18 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
             if u == 0:
                 series_loss = my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss = my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
             else:
                 series_loss += my_kl_loss(series[u], (
                         prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                               args.window_size-1)).detach()) * temperature
+                                                                                               args.window_size)).detach()) * temperature
                 prior_loss += my_kl_loss(
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
-                                                                                            args.window_size-1)),
+                                                                                            args.window_size)),
                     series[u].detach()) * temperature
         metric = torch.softmax((-series_loss - prior_loss), dim=-1)
 
