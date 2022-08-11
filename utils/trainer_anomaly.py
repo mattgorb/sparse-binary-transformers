@@ -215,7 +215,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     anomaly_ind=[]
     benign_ind=[]
     sample_loss_dict={}
-    for i, (input_data, labels,index) in enumerate(test_dataloader):
+    for a, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
@@ -248,8 +248,8 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         attens_energy.extend(cri)
         test_labels.extend(labels[:,-1].cpu().numpy())
 
-        for i, l in zip(index, cri):
-            sample_loss_dict[i.item()] = l.cpu().detach().numpy()
+        for j, l in zip(index, cri):
+            sample_loss_dict[j.item()] = l.cpu().detach().numpy()
 
         # first, specifically look at instances with no anomalies at all
         normal_data = [i for i in range(labels.size(0)) if torch.sum(labels[i, :]) == 0]
