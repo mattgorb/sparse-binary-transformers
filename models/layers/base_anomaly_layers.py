@@ -49,9 +49,11 @@ class AnomalyAttention(nn.Module):
                 self.attn_mask[-1,-1]=0
                 self.attn_mask=self.attn_mask.to(self.args.device)
                 #attn_mask[-1,-1]=float('-inf')
+                self.attn_mask=self.attn_mask.to(torch.bool)
 
 
-            scores.masked_fill_(self.attn_mask, -np.inf)
+
+            scores.masked_fill_(self.attn_mask, float('-inf'))
         attn = scale * scores
 
 
