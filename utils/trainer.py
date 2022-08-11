@@ -92,10 +92,6 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             attns.extend(uniformity_metrics.cpu().detach().numpy())
             losses.extend(sample_loss.cpu().detach().numpy())
 
-            print(uniformity_metrics.size())
-            print(sample_loss.size())
-            sys.exit()
-
             epoch_loss += loss.item()
             if i%1000==0:
                 print(i)
