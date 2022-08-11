@@ -169,7 +169,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels,index) in enumerate(val_dataloader):
+    for i, (input_data, labels) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
