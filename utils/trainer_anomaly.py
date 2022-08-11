@@ -269,11 +269,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     test_labels = np.array(test_labels)
 
     pred = (test_energy > thresh)#.astype(int)
-
     gt = test_labels#.astype(int)
-
-    print("pred:   ", pred.shape)
-    print("gt:     ", gt.shape)
 
     # detection adjustment
     anomaly_state = False
@@ -299,8 +295,7 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
 
     pred = np.array(pred)
     gt = np.array(gt)
-    print("pred: ", pred.shape)
-    print("gt:   ", gt.shape)
+
 
 
     accuracy = accuracy_score(gt, pred)
@@ -341,6 +336,11 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
 
     result, updated_preds = pot_eval(np.array(val_energy), np.array(scores), np.array(labels),args=args)
     print(result)
+
+    print('energies:')
+    print(np.mean(train_energy))
+    print(np.mean(val_energy))
+    print(np.mean(test_energy))
     #result={}
     '''result['base_roc']=metrics.roc_auc_score(labels, scores)
     result['base_pr']=metrics.auc(recall, precision)
