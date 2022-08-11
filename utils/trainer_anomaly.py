@@ -353,4 +353,4 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
 
     print(result)'''
     #sys.exit()
-    return accuracy, precision, recall, f_score
+    return None
