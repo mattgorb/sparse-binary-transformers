@@ -160,6 +160,10 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
         metric = torch.softmax((-series_loss - prior_loss), dim=-1)
 
+        print(loss.size())
+
+        print(metric.size())
+        sys.exit()
         cri = metric * loss
         cri = cri.detach().cpu().numpy()
         attens_energy.append(cri)
