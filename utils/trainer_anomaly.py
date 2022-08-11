@@ -287,5 +287,5 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,
             recall, f_score))
-    sys.exit()
+    #sys.exit()
     return accuracy, precision, recall, f_score
