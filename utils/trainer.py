@@ -10,21 +10,19 @@ from metrics.pot.pot import pot_eval
 from utils.train_util import adjust_learning_rate
 
 
-def attention_uniformity(attention_list,):
+def attention_uniformity(attention_list,args):
     totals=None
+
     for att in attention_list:
-        x=(torch.norm(att[:, -1, :], dim=1) *
-         (torch.sqrt(torch.tensor(att[-1, -1, :].numel())) - 1)) / (
-                    torch.sqrt(torch.tensor(att[-1, -1, :].numel())) - 1)
-        if totals is None:
-            totals=x
-        else:
-            totals+=x
-        print(totals.size())
-    print(totals.size())
-    totals/=len(attention_list)
-    print(totals.size())
-    sys.exit()
+        for head in range(att.size(1)):
+            x=(torch.norm(att[:,head, -1, :], dim=1) *
+             (torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1)) / (
+                        torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1)
+            if totals is None:
+                totals=x
+            else:
+                totals+=x
+    totals/=(len(attention_list)*att.size(1))
     return totals
 
 
@@ -47,7 +45,7 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
 
         predictions, attention_list = model(data, )
 
-        uniformity_metrics=attention_uniformity(attention_list)
+        uniformity_metrics=attention_uniformity(attention_list,args)
 
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
@@ -85,7 +83,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             i+=1
             predictions, attention_list = model(data, )
 
-            uniformity_metrics = attention_uniformity(attention_list)
+            uniformity_metrics = attention_uniformity(attention_list,args)
             loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
 
