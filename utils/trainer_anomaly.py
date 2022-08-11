@@ -7,8 +7,8 @@ import numpy as np
 import os
 import time
 from utils.train_util import adjust_learning_rate, EarlyStopping
-
-
+from sklearn import metrics
+from metrics.pot.pot import pot_eval
 
 def my_kl_loss(p, q):
     res = p * (torch.log(p + 0.0001) - torch.log(q + 0.0001))
@@ -201,8 +201,8 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         attens_energy.extend(cri)
 
     #attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
-    test_energy = np.array(attens_energy)
-    combined_energy = np.concatenate([train_energy, test_energy], axis=0)
+    val_energy = np.array(attens_energy)
+    combined_energy = np.concatenate([train_energy, val_energy], axis=0)
     thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
     print("Threshold :", thresh)
 
@@ -287,5 +287,30 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,
             recall, f_score))
+
+
+    precision, recall, thresholds = metrics.precision_recall_curve(gt, pred)
+    #print(f'PR Curve : {metrics.auc(recall, precision)}')
+    numerator = 2 * recall * precision
+    denom = recall + precision
+    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
+    max_f1 = np.max(f1_scores)
+    max_f1_thresh = thresholds[np.argmax(f1_scores)]
+    print(f"max_f1_thresh: {max_f1_thresh}")
+    print(f"max_f1: {max_f1}")
+
+    result, updated_preds = pot_eval(np.array(val_energy), np.array(test_energy), np.array(test_labels),args=args)
+
+    #result={}
+    '''result['base_roc']=metrics.roc_auc_score(labels, scores)
+    result['base_pr']=metrics.auc(recall, precision)
+    result['base_max_f1']=max_f1
+    result['base_max_f1_threshold']=max_f1_thresh
+
+    result['total_anomalies']=len(anomaly_final_vals)
+    result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
+    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
+
+    print(result)'''
     #sys.exit()
     return accuracy, precision, recall, f_score

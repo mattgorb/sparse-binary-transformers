@@ -108,9 +108,6 @@ class SMAP(object):
         self.test_data = np.load(f'{data_path}SMAP_MSL/test/{entity}.npy',)
         self.test = self.scaler.transform(self.test_data)
 
-        print(self.test.shape)
-        print(self.train.shape)
-        #sys.exit()
 
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
