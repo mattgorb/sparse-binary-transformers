@@ -158,7 +158,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
                                                                                             args.window_size)),
                     series[u].detach()) * temperature
 
-        metric = torch.softmax((-series_loss - prior_loss), dim=-1)
+        metric =torch.squeeze( torch.softmax((-series_loss - prior_loss), dim=-1))
 
 
         cri = metric * loss
