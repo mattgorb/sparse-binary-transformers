@@ -159,15 +159,10 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
                     series[u].detach()) * temperature
 
         metric =torch.squeeze( torch.softmax((-series_loss - prior_loss), dim=-1))
-
-
         cri = metric * loss
 
         cri = cri.detach().cpu().numpy()
         attens_energy.extend(cri)
-
-    print(np.array(attens_energy).shape)
-    sys.exit()
 
     attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
     train_energy = np.array(attens_energy)
@@ -200,12 +195,12 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
                                                                                             args.window_size)),
                     series[u].detach()) * temperature
         # Metric
-        metric = torch.softmax((-series_loss - prior_loss), dim=-1)
+        metric =torch.squeeze( torch.softmax((-series_loss - prior_loss), dim=-1))
         cri = metric * loss
         cri = cri.detach().cpu().numpy()
-        attens_energy.append(cri)
+        attens_energy.extend(cri)
 
-    attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
+    #attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
     test_energy = np.array(attens_energy)
     combined_energy = np.concatenate([train_energy, test_energy], axis=0)
     thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
@@ -240,15 +235,13 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
                     (prior[u] / torch.unsqueeze(torch.sum(prior[u], dim=-1), dim=-1).repeat(1, 1, 1,
                                                                                             args.window_size)),
                     series[u].detach()) * temperature
-        metric = torch.softmax((-series_loss - prior_loss), dim=-1)
 
+        metric =torch.squeeze( torch.softmax((-series_loss - prior_loss), dim=-1))
         cri = metric * loss
         cri = cri.detach().cpu().numpy()
-        attens_energy.append(cri)
-        test_labels.append(labels)
+        attens_energy.extend(cri)
+        test_labels.extend(labels)
 
-    attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
-    test_labels = np.concatenate(test_labels, axis=0).reshape(-1)
     test_energy = np.array(attens_energy)
     test_labels = np.array(test_labels)
 
