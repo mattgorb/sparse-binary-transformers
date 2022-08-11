@@ -211,10 +211,11 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
     for i, (input_data, labels,index) in enumerate(test_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
-
-        loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
-        print(loss.size())
+        print(output[:,-1,:].size())
+        print(input[:,-1,:].size())
         sys.exit()
+        loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
+
 
         series_loss = 0.0
         prior_loss = 0.0
