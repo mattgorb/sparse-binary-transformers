@@ -241,6 +241,9 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
         cri = cri.detach().cpu().numpy()
         attens_energy.extend(cri)
         test_labels.extend(labels)
+        print(test_labels)
+        print(np)
+        sys.exit()
 
     test_energy = np.array(attens_energy)
     test_labels = np.array(test_labels)
