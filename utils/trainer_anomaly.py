@@ -255,9 +255,6 @@ def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, 
     # detection adjustment
     anomaly_state = False
     for i in range(len(gt)):
-        print(gt[i])
-        print(pred[i])
-        sys.exit()
         if gt[i] == 1 and pred[i] == 1 and not anomaly_state:
             anomaly_state = True
             for j in range(i, 0, -1):
