@@ -73,6 +73,7 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
 
 
 
+
         # calculate Association discrepancy
         series_loss = 0.0
         prior_loss = 0.0
@@ -94,6 +95,11 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
         prior_loss = prior_loss / len(prior)
 
         rec_loss = criterion(output[:,-1,:], input[:,-1,:])
+
+        print(output)
+        print(series_loss)
+        print(prior_loss)
+        print(rec_loss)
 
         loss1_list.append((rec_loss - args.k * series_loss).item())
         loss1 = rec_loss - args.k * series_loss
