@@ -84,11 +84,14 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             uniformity_metrics = attention_uniformity(attention_list)
             loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
+
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
             attns.extend(uniformity_metrics.cpu().detach().numpy())
             losses.extend(sample_loss.cpu().detach().numpy())
 
+            print(uniformity_metrics.size())
+            print(sample_loss.size())
 
             epoch_loss += loss.item()
             if i%1000==0:
