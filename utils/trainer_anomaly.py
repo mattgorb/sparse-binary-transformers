@@ -163,14 +163,6 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
         cri = metric * loss
 
-
-
-        print(loss.size())
-
-        print(metric.size())
-        print(cri.size())
-        sys.exit()
-
         cri = cri.detach().cpu().numpy()
         attens_energy.append(cri)
 
