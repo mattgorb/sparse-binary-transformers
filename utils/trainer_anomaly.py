@@ -121,7 +121,7 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
     return train_loss
 
 
-def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
+def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, args, ent):
     '''self.model.load_state_dict(
         torch.load(
             os.path.join(str(self.model_save_path), str(self.dataset) + '_checkpoint.pth')))'''
@@ -134,7 +134,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent):
 
     # (1) stastic on the train set
     attens_energy = []
-    for i, (input_data, labels,index) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(train_loader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
