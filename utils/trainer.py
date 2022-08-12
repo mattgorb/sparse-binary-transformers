@@ -28,8 +28,10 @@ def attention_uniformity(attention_list,args):
 
 def train(model, iterator, optimizer, criterion, device,args,epoch):
     epoch_loss = 0
-
+    sample_criterion=torch.nn.MSELoss(reduction='none')
     model.train()
+    attns=[]
+    losses=[]
     i=0
     for batch in iterator:
         optimizer.zero_grad()
@@ -46,9 +48,14 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         predictions, attention_list = model(data,train_mode=True )
 
         uniformity_metrics=attention_uniformity(attention_list,args)
-        #print(torch.mean(uniformity_metrics))
+        attns.extend(uniformity_metrics.cpu().detach().numpy())
 
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])#+torch.mean(uniformity_metrics)
+
+        sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+        sample_loss = sample_loss.mean(dim=1)
+        losses.extend(sample_loss.cpu().detach().numpy())
+
 
         loss.backward()
         optimizer.step()
@@ -57,6 +64,12 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
             print(i)
     #if epoch>20:
         #adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
+    plt.clf()
+    plt.plot([attns[i] for i in range(len(attns))],[losses[i] for i in range(len(losses))], '.')
+    plt.xlim(0,1)
+    #plt.ylim(0,10000)
+    plt.savefig(f'output/compare_train{epoch}.png')
+
     return epoch_loss / iterator.dataset.__len__()
 
 
