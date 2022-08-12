@@ -158,6 +158,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
             for i,l,j in zip(index, sample_loss, uniformity_metrics):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
+                print(j)
+                sys.exit()
                 sample_attn_dict[i.item()]=j.cpu.detach().numpy()
 
             #first, specifically look at instances with no anomalies at all
