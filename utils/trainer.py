@@ -46,8 +46,9 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         predictions, attention_list = model(data, )
 
         uniformity_metrics=attention_uniformity(attention_list,args)
+        #print(uniformity_metrics)
 
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
+        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])+torch.mean(uniformity_metrics)
 
         loss.backward()
         optimizer.step()
