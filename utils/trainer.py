@@ -217,6 +217,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) ],[benign_final_vals[i] for i in range(len(benign_final_vals))], '.',label='benign')
     plt.plot([attn_vals[i] for i in range(len(attn_vals))],[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))], '.',)
     plt.xlim(0,1)
+    plt.ylim(0,10000)
     plt.legend()
     plt.savefig(f'output/compare_test{epoch}.png')
 
