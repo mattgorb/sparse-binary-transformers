@@ -210,10 +210,13 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
     #print(np.array(attns).shape)
     plt.clf()
-    plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000],
-             [benign_final_vals[i] for i in range(len(benign_final_vals))if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000], '.',label='benign')
-    plt.plot([attn_vals[i] for i in range(len(attn_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000],
-             [anomaly_final_vals[i] for i in range(len(anomaly_final_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000], '.',)
+    #plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000],
+             #[benign_final_vals[i] for i in range(len(benign_final_vals))if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000], '.',label='benign')
+    #plt.plot([attn_vals[i] for i in range(len(attn_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000],
+             #[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000], '.',)
+    plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) ],[benign_final_vals[i] for i in range(len(benign_final_vals))], '.',label='benign')
+    plt.plot([attn_vals[i] for i in range(len(attn_vals))],[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))], '.',)
+    plt.xlim(0,1)
     plt.legend()
     plt.savefig(f'output/compare_test{epoch}.png')
 
