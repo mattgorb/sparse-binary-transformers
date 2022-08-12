@@ -96,10 +96,10 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             if i%1000==0:
                 print(i)
 
-    print(np.array(attns).shape)
+    '''print(np.array(attns).shape)
     plt.clf()
     plt.plot([attns[i] for i in range(len(attns)) if losses[i]<20],[losses[i] for i in range(len(losses)) if losses[i]<20], '.')
-    plt.savefig(f'output/compare{epoch}.png')
+    plt.savefig(f'output/compare{epoch}.png')'''
 
     return epoch_loss / iterator.dataset.__len__()
 
@@ -158,9 +158,9 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
             for i,l,j in zip(index, sample_loss, uniformity_metrics):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
-                print(j)
+                print(j.item())
                 sys.exit()
-                sample_attn_dict[i.item()]=j.cpu.detach().numpy()
+                sample_attn_dict[i.item()]=j.item()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
