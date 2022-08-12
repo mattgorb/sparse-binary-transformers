@@ -47,7 +47,6 @@ def main():
 
 
     for ent in range(2,3):
-
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
@@ -62,13 +61,13 @@ def main():
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
+            #model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
             #model=TranAD_Basic(feats=input_dim)
-            from utils.trainer import train,test,test_forecast,validation
+            #from utils.trainer import train,test,test_forecast,validation
 
-            #from models.base.dense_anomaly_ts import AnomalyTransformer
-            #model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
-            #from utils.trainer_anomaly import train, test, validation
+            from models.base.dense_anomaly_ts import AnomalyTransformer
+            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
+            from utils.trainer_anomaly import train, test, validation
 
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
