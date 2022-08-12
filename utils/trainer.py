@@ -104,7 +104,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
     return epoch_loss / iterator.dataset.__len__()
 
 
-def test(model, iterator,val_iterator, criterion, device,args, entity):
+def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
     sample_criterion=torch.nn.MSELoss(reduction='none')
 
@@ -114,6 +114,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
     anomaly_ind=[]
     benign_ind=[]
     sample_loss_dict={}
+    sample_attn_dict={}
 
     val_losses=[]
 
@@ -129,7 +130,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
 
             data = data.to(device)
             data_base = data_base.to(device)
-            predictions = model(data)
+            predictions, attention_list = model(data, )
+            #uniformity_metrics = attention_uniformity(attention_list,args)
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
@@ -146,15 +148,17 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
             batch_num += 1
 
             #full loss
-            predictions = model(data)
+            predictions, attention_list = model(data, )
+            uniformity_metrics = attention_uniformity(attention_list,args)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-            for i,l in zip(index, sample_loss):
+            for i,l,j in zip(index, sample_loss, uniformity_metrics):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
+                sample_attn_dict[i.item()]=j.cpu.detach().numpy()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
@@ -193,12 +197,27 @@ def test(model, iterator,val_iterator, criterion, device,args, entity):
         i+=1
 
     anomaly_final_vals=[]
+    attn_vals=[]
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
+        sample_attn=[sample_attn_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
+        attn_vals.append(sample_attn[sample_losses.index(max(sample_losses))])
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
+    benign_attn_vals=[sample_attn_dict.get(key) for key in benign_ind]
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
+
+    #print(np.array(attns).shape)
+    plt.clf()
+    plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals))],[benign_final_vals[i] for i in range(len(benign_final_vals))], '.',label='benign')
+    plt.plot([attn_vals[i] for i in range(len(attn_vals))],[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))], '.',label='benign')
+    plt.legend()
+    plt.savefig(f'output/compare_test{epoch}.png')
+
+
+    return
+
     scores=benign_final_vals+anomaly_final_vals
 
     if args.save_scores:
