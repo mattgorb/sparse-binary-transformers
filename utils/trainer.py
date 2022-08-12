@@ -43,7 +43,7 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
 
         i+=1
 
-        predictions, attention_list = model(data, )
+        predictions, attention_list = model(data,train_mode=True )
 
         uniformity_metrics=attention_uniformity(attention_list,args)
         #print(torch.mean(uniformity_metrics))
