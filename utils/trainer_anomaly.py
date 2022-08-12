@@ -136,7 +136,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, ep
 
     # (1) stastic on the train set
     attens_energy = []
-    for i, (input_data, labels) in enumerate(train_loader):
+    for i, (input_data, labels) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
