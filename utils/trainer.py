@@ -220,7 +220,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     plt.xlim(0,1)
     plt.ylim(0,10000)
     plt.legend()
-    plt.savefig(f'output/compare_test{epoch}.png')
+    plt.savefig(f'output/compare_test_without{epoch}.png')
 
 
     return
