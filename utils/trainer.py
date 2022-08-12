@@ -46,7 +46,7 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         predictions, attention_list = model(data, )
 
         uniformity_metrics=attention_uniformity(attention_list,args)
-        print(torch.mean(uniformity_metrics))
+        #print(torch.mean(uniformity_metrics))
 
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])+torch.mean(uniformity_metrics)
 
@@ -97,10 +97,10 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             if i%1000==0:
                 print(i)
 
-    '''print(np.array(attns).shape)
+    print(np.array(attns).shape)
     plt.clf()
     plt.plot([attns[i] for i in range(len(attns)) if losses[i]<20],[losses[i] for i in range(len(losses)) if losses[i]<20], '.')
-    plt.savefig(f'output/compare{epoch}.png')'''
+    plt.savefig(f'output/compare{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
