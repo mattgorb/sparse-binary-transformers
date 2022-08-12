@@ -19,7 +19,7 @@ def my_kl_loss(p, q):
 
 
 
-def validation(model, vali_loader, optimizer, criterion, device,args):
+def validation(model, vali_loader, optimizer, criterion, device,args, epoch):
     model.eval()
 
     loss_1 = []
@@ -123,7 +123,7 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
     return train_loss
 
 
-def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, args, ent):
+def test(model, test_dataloader,val_dataloader,train_loader, criterion, device, args, ent, epoch):
     '''self.model.load_state_dict(
         torch.load(
             os.path.join(str(self.model_save_path), str(self.dataset) + '_checkpoint.pth')))'''
