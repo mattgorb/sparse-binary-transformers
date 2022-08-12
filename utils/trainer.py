@@ -205,7 +205,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
         sample_losses=[sample_loss_dict.get(key) for key in val]
         sample_attn=[sample_attn_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
-        attn_vals.append(sample_attn[sample_losses.index(max(sample_losses))])
+        attn_vals.append(max(sample_attn))
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
     benign_attn_vals=[sample_attn_dict.get(key) for key in benign_ind]
