@@ -90,8 +90,8 @@ class TSTransformerModel(nn.Module):
                 size=src.size(1)
                 mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
-                #mask[-1,:]=0
-                mask[-1,-1]=float('-inf')
+                mask[-1,:]=0
+                #mask[-1,-1]=float('-inf')
                 self.src_mask = mask.to(self.args.device)
 
         else:
