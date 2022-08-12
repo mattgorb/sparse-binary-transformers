@@ -16,7 +16,7 @@ def attention_uniformity(attention_list,args):
     for att in attention_list:
         for head in range(att.size(1)):
             x=(torch.norm(att[:,head, -1, :], dim=1) *
-             (torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1)) / (
+             torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1) / (
                         torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1)
             if totals is None:
                 totals=x
