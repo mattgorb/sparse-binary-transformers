@@ -12,6 +12,7 @@ import pandas as pd
 import ast
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
 import pickle
+from  sklearn.model_selection import train_test_split
 
 class SMD(object):
     def __init__(self, data_path,entity, win_size, step, mode,forecast):
@@ -32,8 +33,10 @@ class SMD(object):
         self.test = self.scaler.transform(self.test_data)
 
         data_len = len(self.train)
-        self.val = self.train[(int)(data_len * 0.8):]
-        self.train = self.train[:(int)(data_len * 0.8)]
+        #self.val = self.train[(int)(data_len * 0.8):]
+        #self.train = self.train[:(int)(data_len * 0.8)]
+
+        self.train, self.test, _, _= train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.2, random_state=1)
 
 
         self.test_labels = np.genfromtxt(f'{data_path}SMD_raw/labels/{entity}',
