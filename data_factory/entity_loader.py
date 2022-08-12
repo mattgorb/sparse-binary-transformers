@@ -33,10 +33,10 @@ class SMD(object):
         self.test = self.scaler.transform(self.test_data)
 
         data_len = len(self.train)
-        #self.val = self.train[(int)(data_len * 0.8):]
-        #self.train = self.train[:(int)(data_len * 0.8)]
+        self.val = self.train[(int)(data_len * 0.8):]
+        self.train = self.train[:(int)(data_len * 0.8)]
 
-        self.train, self.val, _, _= train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
+        #self.train, self.val, _, _= train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
 
         self.test_labels = np.genfromtxt(f'{data_path}SMD_raw/labels/{entity}',
@@ -58,13 +58,14 @@ class SMD(object):
                 print(train_set)
             #print(len([i for i in self.test[:,i] if i not in train_set]))
         sys.exit()'''
-        '''import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt
         for feat in range(self.train.shape[1]):
             plt.clf()
             plt.plot([i for i in range(self.train.shape[0])],self.train[:,feat],label='train')
             plt.plot([i for i in range(self.test.shape[0])],self.test[:,feat],label='test')
             plt.legend()
-            plt.show()'''
+            plt.show()
+        sys.exit()
     def __len__(self):
 
         if self.mode == "train":
@@ -126,10 +127,10 @@ class SMAP(object):
                 print(train_set)
         sys.exit()'''
         #sys.exit()
-        '''print(self.train.shape)
+        print(self.train.shape)
         print(self.test.shape)
 
-        import matplotlib.pyplot as plt
+        '''import matplotlib.pyplot as plt
         for feat in range(self.train.shape[1]):
             plt.clf()
             plt.plot([i for i in range(self.data.shape[0])],self.data[:,feat],label='traini')
