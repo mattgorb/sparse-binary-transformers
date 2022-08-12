@@ -58,14 +58,14 @@ class SMD(object):
                 print(train_set)
             #print(len([i for i in self.test[:,i] if i not in train_set]))
         sys.exit()'''
-        import matplotlib.pyplot as plt
+        '''import matplotlib.pyplot as plt
         for feat in range(self.train.shape[1]):
             plt.clf()
             plt.plot([i for i in range(self.train.shape[0])],self.train[:,feat],label='train')
             plt.plot([i for i in range(self.test.shape[0])],self.test[:,feat],label='test')
             plt.legend()
             plt.show()
-        sys.exit()
+        sys.exit()'''
     def __len__(self):
 
         if self.mode == "train":
