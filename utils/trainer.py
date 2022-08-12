@@ -97,9 +97,11 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             if i%1000==0:
                 print(i)
 
-    print(np.array(attns).shape)
+    #print(np.array(attns).shape)
     plt.clf()
-    plt.plot([attns[i] for i in range(len(attns)) if losses[i]<20],[losses[i] for i in range(len(losses)) if losses[i]<20], '.')
+    plt.plot([attns[i] for i in range(len(attns))],[losses[i] for i in range(len(losses))], '.')
+    plt.xlim(0,1)
+    #plt.ylim(0,10000)
     plt.savefig(f'output/compare{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
@@ -220,7 +222,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     plt.xlim(0,1)
     plt.ylim(0,10000)
     plt.legend()
-    plt.savefig(f'output/compare_test_without{epoch}.png')
+    plt.savefig(f'output/compare_test{epoch}.png')
 
     return
 
