@@ -104,7 +104,7 @@ def main():
                     #if args.forecast:
                         #test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
                     #else:
-                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent,epoch)
+                test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent,epoch)
             else:
                 val_loss=None
                 test_loss=None
