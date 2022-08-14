@@ -289,7 +289,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,recall, f_score))
 
-    sys.exit()
+    #sys.exit()
 
 
     '''anomaly_dict={}
