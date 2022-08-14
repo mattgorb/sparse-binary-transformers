@@ -257,6 +257,8 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
         if len(anomaly_data) > 0:
             anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
 
+    test_energy=np.array(attens_energy)
+
     anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
