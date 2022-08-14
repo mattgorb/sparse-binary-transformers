@@ -60,10 +60,10 @@ def main():
 
     input_dim=train_dataloader.dataset.train.shape[1]
 
-    dmodel = input_dim*4
+    dmodel = input_dim*2
 
     if args.model_type=='Dense':
-        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=8, nlayers=2, args=args).to(device)
+        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
         from utils.trainer import train,test,test_forecast,validation
 
     else:
