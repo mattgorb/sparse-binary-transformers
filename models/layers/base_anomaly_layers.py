@@ -40,9 +40,6 @@ class AnomalyAttention(nn.Module):
                 #attn_mask = TriangularCausalMask(B, L, device=queries.device)
 
                 size=queries.size(1)
-                #print(attn_mask.mask)
-                #print(queries.size())
-                #sys.exit()
                 self.attn_mask=torch.eye(size,)
                 #attn_mask=attn_mask.masked_fill(attn_mask == 0, float('-inf'))
                 self.attn_mask[-1,:]=1

@@ -259,7 +259,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     test_energy=np.array(attens_energy)
 
-    anomaly_dict={}
+    '''anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
@@ -276,6 +276,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     combined_energy = np.concatenate([combined_energy, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
     print(anomaly_ratio)
+    
 
     thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
     print("Threshold :", thresh)
@@ -283,7 +284,48 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
 
-    pred = (scores > thresh)
+    pred = (scores > thresh)'''
+
+
+    combined_energy = np.concatenate([combined_energy, test_energy], axis=0)
+
+    anomaly_ratio=np.count_nonzero(test_labels)/len(test_labels)
+    print(anomaly_ratio)
+    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
+    pred = (test_energy > thresh).astype(int)
+
+    gt = test_labels.astype(int)
+
+    print("pred:   ", pred.shape)
+    print("gt:     ", gt.shape)
+
+    # detection adjustment
+    anomaly_state = False
+    for i in range(len(gt)):
+        if gt[i] == 1 and pred[i] == 1 and not anomaly_state:
+            anomaly_state = True
+            for j in range(i, 0, -1):
+                if gt[j] == 0:
+                    break
+                else:
+                    if pred[j] == 0:
+                        pred[j] = 1
+            for j in range(i, len(gt)):
+                if gt[j] == 0:
+                    break
+                else:
+                    if pred[j] == 0:
+                        pred[j] = 1
+        elif gt[i] == 0:
+            anomaly_state = False
+        if anomaly_state:
+            pred[i] = 1
+
+    pred = np.array(pred)
+    gt = np.array(gt)
+    #print("pred: ", pred.shape)
+    #print("gt:   ", gt.shape)
+
 
     accuracy = accuracy_score(labels, pred)
     precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
