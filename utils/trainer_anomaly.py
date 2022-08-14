@@ -294,7 +294,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
     pred = (test_energy > thresh).astype(int)
 
-    gt = test_labels#.astype(int)
+    gt = np.array(test_labels)
 
     print("pred:   ", pred.shape)
     print("gt:     ", gt.shape)
