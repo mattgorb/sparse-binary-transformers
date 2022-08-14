@@ -190,7 +190,7 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     print(f"max_f1: {max_f1}")
 
 
-    combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
+    '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
     print(anomaly_ratio)
     thresh = np.percentile(val_losses, 100 - anomaly_ratio)
@@ -201,7 +201,7 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))
+            accuracy, precision,recall, f_score))'''
 
     '''result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
