@@ -259,7 +259,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     test_energy=np.array(attens_energy)
 
-    anomaly_dict={}
+    '''anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
@@ -290,10 +290,10 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))
+            accuracy, precision,recall, f_score))'''
 
 
-    '''combined_energy = np.concatenate([combined_energy, test_energy], axis=0)
+    combined_energy = np.concatenate([combined_energy, test_energy], axis=0)
 
     anomaly_ratio=np.count_nonzero(test_labels)/len(test_labels)
     print(anomaly_ratio)
@@ -337,7 +337,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     precision, recall, f_score, support = precision_recall_fscore_support(gt, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))'''
+            accuracy, precision,recall, f_score))
 
     #sys.exit()
 
