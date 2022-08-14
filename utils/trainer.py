@@ -295,7 +295,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             data_base = data_base.to(device)
 
             # full loss
-            predictions = model(data)
+            predictions, attention_list = model(data, )
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss += loss
