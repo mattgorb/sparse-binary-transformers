@@ -53,6 +53,7 @@ def main():
 
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
+        sys.exit()
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
@@ -119,5 +120,5 @@ def main():
 
 if __name__ == "__main__":
     print(args)
-    sys.exit()
+
     main()
