@@ -28,11 +28,9 @@ def attention_uniformity(attention_list,args):
 
 def train(model, iterator, optimizer, criterion, device,args,epoch):
     epoch_loss = 0
-    sample_criterion=torch.nn.MSELoss(reduction='none')
     model.train()
-    attns=[]
     losses=[]
-    i=0
+
     for batch in iterator:
         optimizer.zero_grad()
         data_base, _=batch
@@ -43,32 +41,15 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         data=data.to(device)
         data_base=data_base.to(device)
 
-        i+=1
+        predictions, _ = model(data )
 
-        predictions, attention_list = model(data,train_mode=True )
-
-        #uniformity_metrics=attention_uniformity(attention_list,args)
-        #attns.extend(uniformity_metrics.cpu().detach().numpy())
-
-        loss = criterion(predictions[:,-1,:], data_base[:,-1,:])#+torch.mean(uniformity_metrics)
-
-        sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+        sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
-        losses.extend(sample_loss.cpu().detach().numpy())
+        batch_loss=torch.sum(sample_loss)
+        epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
-
-        loss.backward()
+        batch_loss.backward()
         optimizer.step()
-        epoch_loss += loss.item()
-        if i%1000==0:
-            print(i)
-    #if epoch>20:
-        #adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
-    #plt.clf()
-    #plt.plot([attns[i] for i in range(len(attns))],[losses[i] for i in range(len(losses))], '.')
-    #plt.xlim(0,1)
-    #plt.ylim(0,10000)
-    #plt.savefig(f'output/compare_train{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
@@ -78,11 +59,9 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
     epoch_loss = 0
 
     model.eval()
-    i=0
-    sample_criterion=torch.nn.MSELoss(reduction='none')
+
 
     losses=[]
-    attns=[]
     with torch.no_grad():
         for batch in iterator:
 
@@ -94,21 +73,13 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             data=data.to(device)
             data_base=data_base.to(device)
 
-            i+=1
+
             predictions, attention_list = model(data, )
 
-            #uniformity_metrics = attention_uniformity(attention_list,args)
-            loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
-
-
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            #attns.extend(uniformity_metrics.cpu().detach().numpy())
-            losses.extend(sample_loss.cpu().detach().numpy())
+            epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
-            epoch_loss += loss.item()
-            if i%1000==0:
-                print(i)
 
 
 
@@ -116,8 +87,6 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
 
 
 def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
-
-    sample_criterion=torch.nn.MSELoss(reduction='none')
 
     epoch_loss=0
     batch_num=0
@@ -141,9 +110,9 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
             data = data.to(device)
             data_base = data_base.to(device)
-            predictions, attention_list = model(data, )
-            #uniformity_metrics = attention_uniformity(attention_list,args)
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+            predictions, _ = model(data, )
+
+            sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
@@ -160,16 +129,14 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
             #full loss
             predictions, attention_list = model(data, )
-            #uniformity_metrics = attention_uniformity(attention_list,args)
-            loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            epoch_loss+=loss
 
-            sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
+
+            sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
+            epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
             for i,l in zip(index, sample_loss,):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
-                #sample_attn_dict[i.item()]=j.item()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
@@ -185,21 +152,6 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
             labels.extend(label.cpu().detach().numpy())
 
-    if args.save_graphs:
-        preds=np.array(preds)
-        actual=np.array(actual)
-        s=preds.shape[1]
-
-        for x in range(s):
-            plt.clf()
-            plt.plot([t for t in range(preds.shape[0])], preds[:,x], label='preds')
-            plt.plot([t for t in range(actual.shape[0])], actual[:,x],':', label='actual')
-            #for a in iterator.dataset.anomalies:
-                #plt.axvspan(a[0], a[1], facecolor='red', alpha=0.5)
-
-            plt.legend()
-            plt.savefig(f'output/bin_{x}.png')
-
 
     anomaly_dict={}
     i=0
@@ -208,31 +160,19 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
         i+=1
 
     anomaly_final_vals=[]
-    attn_vals=[]
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
-        sample_attn=[sample_attn_dict.get(key) for key in val]
         anomaly_final_vals.append(max(sample_losses))
-        attn_vals.append(max(sample_attn))
+
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
-    benign_attn_vals=[sample_attn_dict.get(key) for key in benign_ind]
+
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
 
-    #print(np.array(attns).shape)
-    #@plt.clf()
-    #plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000],
-             #[benign_final_vals[i] for i in range(len(benign_final_vals))if benign_attn_vals[i]>0.8 and benign_final_vals[i]<1000], '.',label='benign')
-    #plt.plot([attn_vals[i] for i in range(len(attn_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000],
-             #[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))if attn_vals[i]>0.8 and anomaly_final_vals[i]<1000], '.',)
-    '''plt.plot([benign_attn_vals[i] for i in range(len(benign_attn_vals)) ],[benign_final_vals[i] for i in range(len(benign_final_vals))], '.',label='benign')
-    plt.plot([attn_vals[i] for i in range(len(attn_vals))],[anomaly_final_vals[i] for i in range(len(anomaly_final_vals))], '.',)
-    plt.xlim(0,1)
-    plt.ylim(0,1000)
-    plt.legend()
-    plt.savefig(f'output/compare_test{epoch}.png')'''
-
-    return epoch_loss / iterator.dataset.__len__()
+    anomaly_ratio=np.count_nonzero(labels)/len(labels)
+    print(anomaly_ratio)
+    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
+    pred = (test_energy > thresh).astype(int)
 
     scores=benign_final_vals+anomaly_final_vals
 
@@ -262,13 +202,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     result['total_anomalies']=len(anomaly_final_vals)
     result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
     result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
-    #result['min_anomaly_loss']=min(anomaly_final_vals)
-    #result['max_val_loss']=max(val_losses)
-    #result['max_benign_test_loss']=max(benign_final_vals)
-    #result['count_benign_gt_max_val']=len([i for i in benign_final_vals if i>max(val_losses)])
-    #result['count_anomaly_lt_max_val']=len([i for i in anomaly_final_vals if i<max(val_losses)])
-    #result['count_anomaly_gt_max_val']=len([i for i in anomaly_final_vals if i>max(val_losses)])
-    #result['benign_loss']=np.mean(np.array(benign_final_vals))
+
     print(result)
 
     return epoch_loss / iterator.dataset.__len__()
@@ -295,13 +229,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             data_base = data_base.to(device)
 
             # full loss
-            predictions, attention_list = model(data, )
+            predictions, _ = model(data, )
 
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            epoch_loss += loss
+            sample_loss = sample_loss.mean(dim=1)
+            epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
-
-
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())

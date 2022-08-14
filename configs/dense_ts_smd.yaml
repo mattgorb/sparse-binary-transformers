@@ -19,6 +19,3 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
-
-k: 3
-anormly_ratio: .01

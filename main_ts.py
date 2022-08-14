@@ -48,7 +48,7 @@ def main():
     if args.dataset=='SMD':
         entities=28
 
-    for ent in range(entities):
+    for ent in range(1,entities):
     #ent=args.entity
 
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
@@ -75,7 +75,7 @@ def main():
         print(f'The model has {count_parameters(model):,} trainable parameters')
 
         optimizer = optim.Adam(model.parameters(),lr=1e-4)
-        criterion = nn.MSELoss(reduction='sum')
+        criterion = nn.MSELoss(reduction='none')
         best_loss = float('inf')
 
         if args.evaluate:
