@@ -35,11 +35,6 @@ class SMD(object):
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
         self.train = self.train[:(int)(data_len * 0.8)]
-        '''print(self.train[:,9])
-        print(np.mean(self.train[:,9]))
-        print(np.std(self.train[:,9]))
-        print(np.max(self.train[:,9]))
-        sys.exit()'''
         #self.train, self.val, _, _= train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
 
@@ -47,6 +42,10 @@ class SMD(object):
                              dtype=np.int,
                              delimiter=',')
 
+        print(f'train size: {self.train.shape}')
+        print(f'val size: {self.val.shape}')
+        print(f'test size: {self.test.shape}')
+        sys.exit()
 
         if forecast:
             filter_anomalies=np.argwhere(self.test_labels==0)

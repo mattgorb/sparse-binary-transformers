@@ -203,6 +203,11 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     val_energy = np.array(attens_energy)
     combined_energy = np.concatenate([train_energy, val_energy], axis=0)
 
+    print(train_energy.shape)
+    print(val_energy.shape)
+    print(combined_energy)
+    print(combined_energy.shape)
+    sys.exit()
 
     # (3) evaluation on the test set
     test_labels = []
@@ -270,8 +275,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
-    print(combined_energy)
-    print(combined_energy.shape)
+
 
 
     thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
