@@ -4,75 +4,6 @@
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_factory/entity_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_factory/entity_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_12.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_14.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_17.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_18.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_20.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_21.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_22.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_23.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_24.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_25.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_26.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_28.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_31.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_33.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_35.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_36.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_37.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/bin_9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_test0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_test10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_test7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_test8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_test9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train10.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/compare_train9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/trainer_anomaly.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer_anomaly.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +67,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="22007000" />
+      <workItem from="1660263049974" duration="22071000" />
     </task>
     <servers />
   </component>

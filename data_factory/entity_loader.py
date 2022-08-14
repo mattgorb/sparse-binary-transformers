@@ -35,11 +35,11 @@ class SMD(object):
         data_len = len(self.train)
         self.val = self.train[(int)(data_len * 0.8):]
         self.train = self.train[:(int)(data_len * 0.8)]
-        print(self.train[:,9])
+        '''print(self.train[:,9])
         print(np.mean(self.train[:,9]))
         print(np.std(self.train[:,9]))
         print(np.max(self.train[:,9]))
-        sys.exit()
+        sys.exit()'''
         #self.train, self.val, _, _= train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
 
@@ -62,7 +62,7 @@ class SMD(object):
                 print(train_set)
             #print(len([i for i in self.test[:,i] if i not in train_set]))
         sys.exit()'''
-        import matplotlib.pyplot as plt
+        '''import matplotlib.pyplot as plt
         for feat in range(self.train.shape[1]):
             plt.clf()
             plt.plot([i for i in range(self.train.shape[0])],self.train[:,feat],label='train')
@@ -71,7 +71,7 @@ class SMD(object):
             plt.legend()
             print(feat)
             plt.show()
-        sys.exit()
+        sys.exit()'''
     def __len__(self):
 
         if self.mode == "train":
