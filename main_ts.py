@@ -101,6 +101,7 @@ def main():
             else:
                 val_loss=None
                 test_loss=None
+            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
         else:
             val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
             if val_loss < best_loss:
@@ -110,10 +111,7 @@ def main():
             else:
                 val_loss=None
                 test_loss=None
-
-        end_time = time.time()
-        epoch_mins, epoch_secs = epoch_time(start_time, end_time)
-        print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
+            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
 
 
 
