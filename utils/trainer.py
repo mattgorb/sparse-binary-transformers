@@ -178,7 +178,7 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
         df = pd.DataFrame({'scores': scores, 'labels':labels})
         df.to_csv('output/scores.csv')
     
-    #print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
+    print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     #print(f'PR Curve : {metrics.auc(recall, precision)}')
     numerator = 2 * recall * precision
