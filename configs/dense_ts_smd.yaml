@@ -4,7 +4,7 @@ dataset: SMD
 
 weight_seed: 0
 score_seed: 0
-gpu: 2
+gpu: 0
 batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
@@ -19,3 +19,6 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
+
+k: 3
+anormly_ratio: .01
