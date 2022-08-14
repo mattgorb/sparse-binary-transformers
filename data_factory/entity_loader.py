@@ -120,30 +120,12 @@ class SMAP(object):
 
 
         data_len = len(self.train)
-        #self.val = self.train[(int)(data_len * 0.8):]
-        #self.train = self.train[:(int)(data_len * 0.8)]
-        self.train, self.val, _, _ = train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15,
-                                                      random_state=1)
+        self.val = self.train[(int)(data_len * 0.75):]
+        self.train = self.train[:(int)(data_len * 0.75)]
+        #self.train, self.val, _, _ = train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
-        #print(self.train.shape)
-        '''for i in range(self.train.shape[1]):
-            print(f'{i}: {len(set(self.train[:, i]))}')
-            train_set = set(self.train[:, i])
-            if len(train_set) < 50:
-                print(train_set)
-        sys.exit()'''
-        #sys.exit()
-        print(self.train.shape)
-        print(self.test.shape)
 
-        '''import matplotlib.pyplot as plt
-        for feat in range(self.train.shape[1]):
-            plt.clf()
-            plt.plot([i for i in range(self.data.shape[0])],self.data[:,feat],label='traini')
-            plt.plot([i for i in range(self.test_data.shape[0])],self.test_data[:,feat],label='t')
-            plt.legend()
-            plt.show()
-        sys.exit()'''
+
 
         entities=pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
         anomalies=entities[entities['chan_id']==entity]['anomaly_sequences'].values[0]
@@ -191,7 +173,7 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
         print(f'Dataset: {entities[entity]}')
-        print(entities)
+        #print(entities)
 
         dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'SMAP':
@@ -200,7 +182,12 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         entities=entities['chan_id'].values
         print(f'Dataset: {entities[entity]}')
         #print(entities)
-
+    elif dataset == 'MSL':
+        entities = pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
+        entities = entities[entities['spacecraft'] == 'MSL']
+        entities = entities['chan_id'].values
+        print(f'Dataset: {entities[entity]}')
+        # print(entities)
         dataset = SMAP(data_path,entities[entity], win_size, step, mode, forecast)
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,

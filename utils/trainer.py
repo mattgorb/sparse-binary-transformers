@@ -188,6 +188,10 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     max_f1_thresh = thresholds[np.argmax(f1_scores)]
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
+    print(f'TP: {len([i for i in anomaly_final_vals if i>=max_f1_thresh])} '
+          f'TN: {len([i for i in benign_final_vals if i<max_f1_thresh])}, '
+          f'FP: {len([i for i in benign_final_vals if i>=max_f1_thresh])}, '
+          f'FN: {len([i for i in anomaly_final_vals if i<max_f1_thresh])}')
 
 
     '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)

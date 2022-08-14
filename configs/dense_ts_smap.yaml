@@ -1,13 +1,12 @@
-#weight_init: kaiming_normal
-#score_init: None
-dataset: SMD
+
+dataset: SMAP
 
 weight_seed: 0
 score_seed: 0
 gpu: 0
 batch_size: 128
 model_type: 'Dense'
-#weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
+
 epochs: 50
 weight_file: dense_ts_smd
 
