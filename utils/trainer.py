@@ -8,7 +8,8 @@ from operator import itemgetter
 import pandas as pd
 from metrics.pot.pot import pot_eval
 from utils.train_util import adjust_learning_rate
-
+from sklearn.metrics import precision_recall_fscore_support
+from sklearn.metrics import accuracy_score
 
 def attention_uniformity(attention_list,args):
     totals=None
@@ -86,7 +87,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
     return epoch_loss / iterator.dataset.__len__()
 
 
-def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
+def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
     epoch_loss=0
     batch_num=0
@@ -169,10 +170,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
 
-    '''anomaly_ratio=np.count_nonzero(labels)/len(labels)
-    print(anomaly_ratio)
-    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
-    pred = (test_energy > thresh).astype(int)'''
+
 
     scores=benign_final_vals+anomaly_final_vals
 
@@ -191,7 +189,21 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     print(f"max_f1_thresh: {max_f1_thresh}")
     print(f"max_f1: {max_f1}")
 
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
+
+    combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
+    anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
+    print(anomaly_ratio)
+    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
+    print("Threshold :", thresh)
+    pred = (scores > thresh)
+
+    accuracy = accuracy_score(labels, pred)
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
+                                                                          average='binary')
+    print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
+            accuracy, precision,recall, f_score))
+
+    '''result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
     #result={}
     result['base_roc']=metrics.roc_auc_score(labels, scores)
@@ -203,7 +215,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
     result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
 
-    print(result)
+    print(result)'''
 
     return epoch_loss / iterator.dataset.__len__()
 
