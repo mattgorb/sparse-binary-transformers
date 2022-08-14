@@ -91,7 +91,7 @@ class SMD(object):
             return np.float32(self.train[index:index + self.win_size]), np.zeros_like(self.train[index:index + self.win_size])
             #return np.float32(self.train[index:index + self.win_size]), None
         elif (self.mode == 'val'):
-            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size])
+            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size]), index
         elif (self.mode == 'test'):
             return np.float32(self.test[index:index + self.win_size]), np.float32(
                 self.test_labels[index:index + self.win_size]), index
