@@ -202,8 +202,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     #attens_energy = np.concatenate(attens_energy, axis=0).reshape(-1)
     val_energy = np.array(attens_energy)
     combined_energy = np.concatenate([train_energy, val_energy], axis=0)
-    thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
-    print("Threshold :", thresh)
+
 
     # (3) evaluation on the test set
     test_labels = []
@@ -264,13 +263,27 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
         anomaly_dict[i]=list(map(itemgetter(1), g))
         i+=1
 
+    anomaly_final_vals=[]
+    for key,val in anomaly_dict.items():
+        sample_losses=[sample_loss_dict.get(key) for key in val]
+        anomaly_final_vals.append(max(sample_losses))
+
+    benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
+
+    print(combined_energy)
+    print(combined_energy.shape)
+
+
+    thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
+    print("Threshold :", thresh)
+
     print(anomaly_dict)
     sys.exit()
 
     test_energy = np.array(attens_energy)
     test_labels = np.array(test_labels)
 
-    pred = (test_energy > thresh)#.astype(int)
+    '''pred = (test_energy > thresh)#.astype(int)
     gt = test_labels#.astype(int)
 
     # detection adjustment
@@ -297,16 +310,14 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     pred = np.array(pred)
     gt = np.array(gt)
-
+    '''
 
 
     accuracy = accuracy_score(gt, pred)
     precision, recall, f_score, support = precision_recall_fscore_support(gt, pred,
                                                                           average='binary')
-    print(
-        "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,
-            recall, f_score))
+    print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
+            accuracy, precision,recall, f_score))
 
 
 
