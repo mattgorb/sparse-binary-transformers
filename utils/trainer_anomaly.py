@@ -73,9 +73,6 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
 
         output, series, prior, _ = model(input)
 
-
-
-
         # calculate Association discrepancy
         series_loss = 0.0
         prior_loss = 0.0
