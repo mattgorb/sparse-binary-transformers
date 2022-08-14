@@ -20,7 +20,7 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-from utils.trainer import train,test,test_forecast,validation,test_anomaly_detection
+from utils.trainer import train,test_forecast,validation,test_anomaly_detection
 from metrics.evaluate import evaluate_flops_memory_size
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
