@@ -47,8 +47,8 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
 
         predictions, attention_list = model(data,train_mode=True )
 
-        uniformity_metrics=attention_uniformity(attention_list,args)
-        attns.extend(uniformity_metrics.cpu().detach().numpy())
+        #uniformity_metrics=attention_uniformity(attention_list,args)
+        #attns.extend(uniformity_metrics.cpu().detach().numpy())
 
         loss = criterion(predictions[:,-1,:], data_base[:,-1,:])#+torch.mean(uniformity_metrics)
 
@@ -64,11 +64,11 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
             print(i)
     #if epoch>20:
         #adjust_learning_rate(optimizer, epoch + 1, optimizer.param_groups[0]["lr"])
-    plt.clf()
-    plt.plot([attns[i] for i in range(len(attns))],[losses[i] for i in range(len(losses))], '.')
-    plt.xlim(0,1)
+    #plt.clf()
+    #plt.plot([attns[i] for i in range(len(attns))],[losses[i] for i in range(len(losses))], '.')
+    #plt.xlim(0,1)
     #plt.ylim(0,10000)
-    plt.savefig(f'output/compare_train{epoch}.png')
+    #plt.savefig(f'output/compare_train{epoch}.png')
 
     return epoch_loss / iterator.dataset.__len__()
 
@@ -97,13 +97,13 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
             i+=1
             predictions, attention_list = model(data, )
 
-            uniformity_metrics = attention_uniformity(attention_list,args)
+            #uniformity_metrics = attention_uniformity(attention_list,args)
             loss = criterion(predictions[:,-1,:], data_base[:,-1,:])
 
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            attns.extend(uniformity_metrics.cpu().detach().numpy())
+            #attns.extend(uniformity_metrics.cpu().detach().numpy())
             losses.extend(sample_loss.cpu().detach().numpy())
 
             epoch_loss += loss.item()
@@ -160,16 +160,16 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
             #full loss
             predictions, attention_list = model(data, )
-            uniformity_metrics = attention_uniformity(attention_list,args)
+            #uniformity_metrics = attention_uniformity(attention_list,args)
             loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             epoch_loss+=loss
 
             sample_loss = sample_criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-            for i,l,j in zip(index, sample_loss, uniformity_metrics):
+            for i,l in zip(index, sample_loss,):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
-                sample_attn_dict[i.item()]=j.item()
+                #sample_attn_dict[i.item()]=j.item()
 
             #first, specifically look at instances with no anomalies at all
             normal_data=[i for i in range(label.size(0)) if torch.sum(label[i,:])==0 ]
