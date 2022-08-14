@@ -45,7 +45,7 @@ class SMD(object):
         print(f'train size: {self.train.shape}')
         print(f'val size: {self.val.shape}')
         print(f'test size: {self.test.shape}')
-        sys.exit()
+
 
         if forecast:
             filter_anomalies=np.argwhere(self.test_labels==0)
