@@ -53,7 +53,7 @@ def main():
 
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
-        sys.exit()
+
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                             dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
         val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
@@ -87,7 +87,7 @@ def main():
         print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
-
+        sys.exit()
         for epoch in range(args.epochs):
             #print(f'\nEpoch {epoch}: ')
             start_time = time.time()
