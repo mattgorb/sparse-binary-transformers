@@ -168,7 +168,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels, index) in enumerate(test_dataloader):
+    for i, (input_data, labels, index) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
@@ -203,11 +203,6 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     val_energy = np.array(attens_energy)
     combined_energy = np.concatenate([train_energy, val_energy], axis=0)
 
-    print(train_energy.shape)
-    print(val_energy.shape)
-    print(combined_energy)
-    print(combined_energy.shape)
-    sys.exit()
 
     # (3) evaluation on the test set
     test_labels = []
@@ -276,53 +271,25 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
 
 
+    combined_energy = np.concatenate([combined_energy, benign_final_vals,anomaly_final_vals], axis=0)
+    anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
+    print(anomaly_ratio)
 
-
-    thresh = np.percentile(combined_energy, 100 - args.anormly_ratio)
+    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
     print("Threshold :", thresh)
 
-    print(anomaly_dict)
-    sys.exit()
+    labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
+    scores=benign_final_vals+anomaly_final_vals
 
-    test_energy = np.array(attens_energy)
-    test_labels = np.array(test_labels)
-
-    '''pred = (test_energy > thresh)#.astype(int)
-    gt = test_labels#.astype(int)
-
-    # detection adjustment
-    anomaly_state = False
-    for i in range(len(gt)):
-        if gt[i] == 1 and pred[i] == 1 and not anomaly_state:
-            anomaly_state = True
-            for j in range(i, 0, -1):
-                if gt[j] == 0:
-                    break
-                else:
-                    if pred[j] == 0:
-                        pred[j] = 1
-            for j in range(i, len(gt)):
-                if gt[j] == 0:
-                    break
-                else:
-                    if pred[j] == 0:
-                        pred[j] = 1
-        elif gt[i] == 0:
-            anomaly_state = False
-        if anomaly_state:
-            pred[i] = 1
-
-    pred = np.array(pred)
-    gt = np.array(gt)
-    '''
-
+    pred = (scores > thresh)
 
     accuracy = accuracy_score(gt, pred)
-    precision, recall, f_score, support = precision_recall_fscore_support(gt, pred,
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,recall, f_score))
 
+    sys.exit()
 
 
     '''anomaly_dict={}
