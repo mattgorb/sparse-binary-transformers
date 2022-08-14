@@ -107,7 +107,7 @@ def main():
                 if val_loss < best_loss:
                     best_loss = val_loss
                     torch.save(model.state_dict(), weight_file)
-                    test_loss = test(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
+                    test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent,epoch)
                 else:
                     val_loss=None
                     test_loss=None
