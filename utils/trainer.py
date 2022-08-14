@@ -103,7 +103,7 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     labels=[]
     with torch.no_grad():
         for batch in val_iterator:
-            data_base, label = batch
+            data_base, label, index = batch
             data = torch.clone(data_base)
             if args.forecast:
                 data[:, -1:, :] = 0
