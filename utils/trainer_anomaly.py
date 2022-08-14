@@ -259,7 +259,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     test_energy=np.array(attens_energy)
 
-    '''anomaly_dict={}
+    anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
@@ -279,21 +279,33 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     
 
     thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
-    print("Threshold :", thresh)
+
 
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
 
+    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
+    #print(f'PR Curve : {metrics.auc(recall, precision)}')
+    numerator = 2 * recall * precision
+    denom = recall + precision
+    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
+    max_f1 = np.max(f1_scores)
+    max_f1_thresh = thresholds[np.argmax(f1_scores)]
+    print(f"max_f1_thresh: {max_f1_thresh}")
+    print(f"max_f1: {max_f1}")
+
+
+    print("Threshold :", thresh)
     pred = (scores > thresh)
 
     accuracy = accuracy_score(labels, pred)
     precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))'''
+            accuracy, precision,recall, f_score))
 
 
-    combined_energy = np.concatenate([combined_energy, test_energy], axis=0)
+    '''combined_energy = np.concatenate([combined_energy, test_energy], axis=0)
 
     anomaly_ratio=np.count_nonzero(test_labels)/len(test_labels)
     print(anomaly_ratio)
@@ -337,7 +349,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     precision, recall, f_score, support = precision_recall_fscore_support(gt, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))
+            accuracy, precision,recall, f_score))'''
 
     #sys.exit()
 
