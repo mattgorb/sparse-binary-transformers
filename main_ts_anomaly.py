@@ -1,6 +1,6 @@
 import torch
 from torchtext.datasets import IMDB
-from models.base.dense_transformer_ts import TSTransformerModel
+from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
@@ -22,7 +22,7 @@ from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
-from utils.trainer import train,test, validation,test_forecast
+#from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
 
 
@@ -46,8 +46,7 @@ def main():
         weight_file_base = 'weights/' + args.weight_file
 
 
-    for ent in range(1):
-
+    for ent in range(1,4):
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
         train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
@@ -57,13 +56,15 @@ def main():
         test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
 
-        #continue
         input_dim=train_dataloader.dataset.train.shape[1]
 
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=4, nhid=16, nlayers=8, args=args).to(device)
+            from models.base.dense_anomaly_ts import AnomalyTransformer
+            model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
+            from utils.trainer_anomaly import train, test, validation
+
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
 
@@ -81,24 +82,20 @@ def main():
 
         print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-
+        print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
 
         test_loss=None
         for epoch in range(args.epochs):
             #print(f'\nEpoch {epoch}: ')
             start_time = time.time()
 
-            train_loss = train(model, train_dataloader, optimizer, criterion, device,args)
-            val_loss = validation(model, val_dataloader, optimizer, criterion, device,args)
+            train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
+            val_loss = validation(model, val_dataloader, optimizer, criterion, device,args, epoch)
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
-                if epoch>10:
-                    if args.forecast:
-                        test_loss = test_forecast(model, test_dataloader,train_dataloader, criterion, device, args, ent)
-                    else:
-                        test_loss = test(model, test_dataloader,val_dataloader, criterion, device, args, ent)
+                test_loss = test(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
             else:
                 val_loss=None
                 test_loss=None

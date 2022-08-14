@@ -106,9 +106,6 @@ class SMAP(object):
         self.step = step
         self.win_size = win_size
         self.scaler = StandardScaler()
-        #self.scaler=MinMaxScaler()
-
-
 
         self.data = np.load(f'{data_path}SMAP_MSL/train/{entity}.npy',)
 
