@@ -20,7 +20,7 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-
+from utils.trainer import train,test,test_forecast,validation,test_anomaly_detection
 from metrics.evaluate import evaluate_flops_memory_size
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
@@ -67,7 +67,7 @@ def main():
 
         if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-            from utils.trainer import train,test,test_forecast,validation,test_anomaly_detection
+
 
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
