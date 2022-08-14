@@ -190,10 +190,10 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     print(f"max_f1: {max_f1}")
 
 
-    combined_energy = np.concatenate([benign_final_vals,anomaly_final_vals], axis=0)
+    combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
     print(anomaly_ratio)
-    thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
+    thresh = np.percentile(val_losses, 100 - anomaly_ratio)
     print("Threshold :", thresh)
     pred = (scores > thresh)
 
