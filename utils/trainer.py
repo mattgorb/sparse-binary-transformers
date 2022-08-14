@@ -65,7 +65,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
     with torch.no_grad():
         for batch in iterator:
 
-            data_base, _=batch
+            data_base, _, _=batch
 
             data=torch.clone(data_base)
             if args.forecast:
