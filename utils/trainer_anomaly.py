@@ -327,8 +327,8 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
     #print("gt:   ", gt.shape)
 
 
-    accuracy = accuracy_score(labels, pred)
-    precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
+    accuracy = accuracy_score(gt, pred)
+    precision, recall, f_score, support = precision_recall_fscore_support(gt, pred,
                                                                           average='binary')
     print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,recall, f_score))
