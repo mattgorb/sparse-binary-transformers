@@ -169,10 +169,10 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
 
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
 
-    anomaly_ratio=np.count_nonzero(labels)/len(labels)
+    '''anomaly_ratio=np.count_nonzero(labels)/len(labels)
     print(anomaly_ratio)
     thresh = np.percentile(combined_energy, 100 - anomaly_ratio)
-    pred = (test_energy > thresh).astype(int)
+    pred = (test_energy > thresh).astype(int)'''
 
     scores=benign_final_vals+anomaly_final_vals
 
@@ -188,8 +188,8 @@ def test(model, iterator,val_iterator, criterion, device,args, entity, epoch):
     f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
     max_f1 = np.max(f1_scores)
     max_f1_thresh = thresholds[np.argmax(f1_scores)]
-    #print(f"max_f1_thresh: {max_f1_thresh}")
-    #print(f"max_f1: {max_f1}")
+    print(f"max_f1_thresh: {max_f1_thresh}")
+    print(f"max_f1: {max_f1}")
 
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
