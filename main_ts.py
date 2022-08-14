@@ -85,7 +85,6 @@ def main():
     print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
 
-    test_loss=None
     for epoch in range(args.epochs):
         #print(f'\nEpoch {epoch}: ')
         start_time = time.time()
@@ -99,7 +98,6 @@ def main():
 
                 test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
             else:
-                val_loss=None
                 test_loss=None
             print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
         else:
