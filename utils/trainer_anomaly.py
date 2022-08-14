@@ -24,7 +24,7 @@ def validation(model, vali_loader, optimizer, criterion, device,args, epoch):
 
     loss_1 = []
     loss_2 = []
-    for i, (input_data, _) in enumerate(vali_loader):
+    for i, (input_data, _,_) in enumerate(vali_loader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         series_loss = 0.0
@@ -168,7 +168,7 @@ def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, devi
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels) in enumerate(val_dataloader):
+    for i, (input_data, labels,_) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
