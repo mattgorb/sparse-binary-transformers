@@ -93,7 +93,7 @@ def main():
         train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
 
         if args.forecast:
-            if train_loss < best_val_loss:
+            if train_loss < best_loss:
                 best_loss = train_loss
                 torch.save(model.state_dict(), weight_file)
 
@@ -103,8 +103,8 @@ def main():
                 test_loss=None
         else:
             val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
-            if val_loss < best_val_loss:
-                best_val_loss = val_loss
+            if val_loss < best_loss:
+                best_loss = val_loss
                 torch.save(model.state_dict(), weight_file)
                 test_loss = test(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
             else:
