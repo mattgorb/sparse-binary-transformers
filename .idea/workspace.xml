@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/dense_ts_smd.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_smd.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="30755000" />
+      <workItem from="1660263049974" duration="30874000" />
     </task>
     <servers />
   </component>
@@ -125,7 +124,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main_ts.py</url>
-          <line>82</line>
+          <line>83</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
