@@ -120,7 +120,7 @@ def train(model, train_loader, optimizer, criterion, device,args,epoch):
     return train_loss
 
 
-def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, epoch):
+def test(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent, epoch):
     '''self.model.load_state_dict(
         torch.load(
             os.path.join(str(self.model_save_path), str(self.dataset) + '_checkpoint.pth')))'''
@@ -133,7 +133,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, ep
 
     # (1) stastic on the train set
     attens_energy = []
-    for i, (input_data, labels) in enumerate(val_dataloader):
+    for i, (input_data, labels) in enumerate(train_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
         loss = torch.mean(criterion(input[:,-1,:], output[:,-1,:]), dim=-1)
@@ -168,7 +168,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, ep
 
     # (2) find the threshold
     attens_energy = []
-    for i, (input_data, labels,index) in enumerate(test_dataloader):
+    for i, (input_data, labels,index) in enumerate(val_dataloader):
         input = input_data.float().to(args.device)
         output, series, prior, _ = model(input)
 
@@ -305,7 +305,7 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, ep
 
 
 
-    anomaly_dict={}
+    '''anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
@@ -332,9 +332,9 @@ def test(model, test_dataloader,val_dataloader, criterion, device, args, ent, ep
     print(f"max_f1: {max_f1}")
 
     result, updated_preds = pot_eval(np.array(val_energy), np.array(scores), np.array(labels),args=args)
-    print(result)
+    print(result)'''
 
-    print('energies:')
+    print('energies train val test:')
     print(np.mean(train_energy))
     print(np.mean(val_energy))
     print(np.mean(test_energy))
