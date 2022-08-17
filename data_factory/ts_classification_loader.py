@@ -216,7 +216,7 @@ class TSRegressionArchive(BaseData):
         if np.sum(horiz_diffs) > 0:  # if any row (sample) has varying length across dimensions
 
             df = df.applymap(subsample)  # TODO: this addresses a very specific case (PPGDalia)
-        print('here3')
+
         #if self.config['subsample_factor']:
         #    df = df.applymap(lambda x: subsample(x, limit=0, factor=self.config['subsample_factor']))
 
@@ -292,6 +292,8 @@ def get_classification_ds(dataset,root_dir, args):
                               shuffle=True,pin_memory=True,)
     test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size,
                               shuffle=True,pin_memory=True,)
+    print(all_data.feature_df.shape)
+    print(test_data.feature_df.shape)
 
     for batch in train_loader:
         data, label, index=batch
