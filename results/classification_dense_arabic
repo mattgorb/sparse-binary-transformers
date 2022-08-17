@@ -1,0 +1,59 @@
+(transformers) luffy:~/sparse-binary-transformers$  python3 main_ts_classification.py --config=configs/dense_ts_classification_arabic.yaml
+=> Reading YAML config from configs/dense_ts_classification_arabic.yaml
+Namespace(batch_norm=True, batch_size=8, config='configs/dense_ts_classification_arabic.yaml', conv_type=None, data='/s/luffy/b/nobackup/mgorb/data', dataset='SpokenArabicDigits', dmodel=128, entity=None, epochs=50, evaluate=False, freeze_weights=False, gpu=2, layer_norm=False, log_dir=None, lr=0.1, model_type='Dense', name=None, nhid=256, num_classes=10, optimizer='sgd', pos_enc='Learnable', pretrained=None, print_freq=50, resume='', save_every=-1, save_graphs=False, save_scores=False, score_init=None, score_seed=0, seed=0, set='ImageNet', weight_file='dense_ts_smd', weight_init=None, weight_seed=0, window_size=None, workers=20)
+5279 samples may be used for training
+1320 samples will be used for validation
+2199 samples will be used for testing
+=> Freezing model weights
+The model has 498,706 trainable parameters
+Train acc: 0.6192640692898721 | Val acc: 0.8643939393939394 | Test acc: 0.8599350651827725
+Train acc: 0.8216720779736837 | Val acc: 0.9159090909090909 | Test acc: 0.8990259742736817
+Train acc: 0.8739989177747206 | Val acc: 0.9424242424242424 | Test acc: 0.9227272727272727
+Train acc: 0.8982954545454546 | Val acc: 0.9621212121212122 | Test acc: 0.9276623379100453
+Train acc: 0.9104166666666667 | Val acc: 0.9553030303030303 | Test acc: 0.9276623379100453
+Train acc: 0.9325487014019128 | Val acc: 0.975 | Test acc: 0.945
+Train acc: 0.9390151515151515 | Val acc: 0.9863636363636363 | Test acc: 0.9572727272727273
+Train acc: 0.9514880953413067 | Val acc: 0.9840909090909091 | Test acc: 0.9609090909090909
+Train acc: 0.9539502165534279 | Val acc: 0.9863636363636363 | Test acc: 0.9631818181818181
+Train acc: 0.9624458874716904 | Val acc: 0.9893939393939394 | Test acc: 0.965
+Train acc: 0.9662878787878788 | Val acc: 0.990909090909091 | Test acc: 0.9690909090909091
+Train acc: 0.9695075757575757 | Val acc: 0.9878787878787879 | Test acc: 0.9690909090909091
+Train acc: 0.9712121212121212 | Val acc: 0.9924242424242424 | Test acc: 0.9672727272727273
+Train acc: 0.9774621212121212 | Val acc: 0.9893939393939394 | Test acc: 0.9672727272727273
+Train acc: 0.9763257575757576 | Val acc: 0.9901515151515151 | Test acc: 0.9672727272727273
+Train acc: 0.9799242424242425 | Val acc: 0.9939393939393939 | Test acc: 0.9694805197282271
+Train acc: 0.9839015151515151 | Val acc: 0.9916666666666667 | Test acc: 0.9663636363636363
+Train acc: 0.9833333333333333 | Val acc: 0.9946969696969697 | Test acc: 0.9663636363636363
+Train acc: 0.9818181818181818 | Val acc: 0.9924242424242424 | Test acc: 0.9663636363636363
+Train acc: 0.9852272727272727 | Val acc: 0.9901515151515151 | Test acc: 0.9663636363636363
+Train acc: 0.9859848484848485 | Val acc: 0.9931818181818182 | Test acc: 0.9663636363636363
+Train acc: 0.9833333333333333 | Val acc: 0.9901515151515151 | Test acc: 0.9663636363636363
+Train acc: 0.9869318181818182 | Val acc: 0.9962121212121212 | Test acc: 0.9690909090909091
+Train acc: 0.987310606060606 | Val acc: 0.9924242424242424 | Test acc: 0.9690909090909091
+Train acc: 0.9886363636363636 | Val acc: 0.9946969696969697 | Test acc: 0.9731818181818181
+Train acc: 0.9890151515151515 | Val acc: 0.9946969696969697 | Test acc: 0.9790909090909091
+Train acc: 0.9880681818181818 | Val acc: 0.9893939393939394 | Test acc: 0.9790909090909091
+Train acc: 0.9914772727272727 | Val acc: 0.9924242424242424 | Test acc: 0.9704545454545455
+Train acc: 0.990719696969697 | Val acc: 0.9931818181818182 | Test acc: 0.9704545454545455
+Train acc: 0.9933712121212122 | Val acc: 0.9939393939393939 | Test acc: 0.9704545454545455
+Train acc: 0.990909090909091 | Val acc: 0.9946969696969697 | Test acc: 0.9704545454545455
+Train acc: 0.9912878787878788 | Val acc: 0.9924242424242424 | Test acc: 0.9704545454545455
+Train acc: 0.9914772727272727 | Val acc: 0.9946969696969697 | Test acc: 0.9799350651827725
+Train acc: 0.9931818181818182 | Val acc: 0.9946969696969697 | Test acc: 0.9799350651827725
+Train acc: 0.9962121212121212 | Val acc: 0.9924242424242424 | Test acc: 0.9799350651827725
+Train acc: 0.9910984848484848 | Val acc: 0.9954545454545455 | Test acc: 0.9799350651827725
+Train acc: 0.9946969696969697 | Val acc: 0.9946969696969697 | Test acc: 0.9799350651827725
+Train acc: 0.9946969696969697 | Val acc: 0.9954545454545455 | Test acc: 0.9799350651827725
+Train acc: 0.993560606060606 | Val acc: 0.9924242424242424 | Test acc: 0.9799350651827725
+Train acc: 0.9946969696969697 | Val acc: 0.9924242424242424 | Test acc: 0.9799350651827725
+Train acc: 0.9960227272727272 | Val acc: 0.9946969696969697 | Test acc: 0.9799350651827725
+Train acc: 0.993560606060606 | Val acc: 0.9946969696969697 | Test acc: 0.9799350651827725
+Train acc: 0.9958333333333333 | Val acc: 0.9916666666666667 | Test acc: 0.9799350651827725
+Train acc: 0.9954545454545455 | Val acc: 0.9924242424242424 | Test acc: 0.9799350651827725
+Train acc: 0.9962121212121212 | Val acc: 0.9931818181818182 | Test acc: 0.9799350651827725
+Train acc: 0.9948863636363636 | Val acc: 0.9931818181818182 | Test acc: 0.9799350651827725
+Train acc: 0.9986742424242424 | Val acc: 0.9939393939393939 | Test acc: 0.9799350651827725
+Train acc: 0.9967803030303031 | Val acc: 0.9939393939393939 | Test acc: 0.975
+Train acc: 0.9967803030303031 | Val acc: 0.9939393939393939 | Test acc: 0.975
+Train acc: 0.993560606060606 | Val acc: 0.9939393939393939 | Test acc: 0.975
+(transformers) luffy:~/sparse-binary-transformers$
