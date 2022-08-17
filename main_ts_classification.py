@@ -70,13 +70,13 @@ def main():
     best_loss = float('inf')
 
     for epoch in range(args.epochs):
-        train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
+        train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device,args.dataset)
 
-        val_loss, val_acc=test(model, val_dataloader, criterion, device)
+        val_loss, val_acc=test(model, val_dataloader, criterion, device,args.dataset)
         if val_loss < best_loss:
             best_loss = val_loss
             torch.save(model.state_dict(), weight_file)
-            test_loss, test_acc = test(model, test_dataloader, criterion, device)
+            test_loss, test_acc = test(model, test_dataloader, criterion, device,args.dataset)
         else:
             val_loss=None
             test_loss=None
