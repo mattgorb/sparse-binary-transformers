@@ -4,3 +4,4 @@ data/
 .data/
 .idea/
 .vector_cache/
+weights/
