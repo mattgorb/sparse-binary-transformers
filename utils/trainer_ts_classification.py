@@ -29,7 +29,7 @@ def train(model, iterator, optimizer, criterion, device,dataset):
             data, label, index=batch
 
         label=label[:,0].long().to(device)
-        data=data.to(device)
+        data=data.float().to(device)
         predictions,_ = model(data,pad_mask=pad_mask)
 
         loss = criterion(predictions, label)
@@ -62,7 +62,7 @@ def test(model, iterator, criterion, device,dataset):
                 data, label, index = batch
 
             label = label[:, 0].long().to(device)
-            data = data.to(device)
+            data = data.float().to(device)
             predictions, _ = model(data, pad_mask=pad_mask)
 
             loss = criterion(predictions, label)
