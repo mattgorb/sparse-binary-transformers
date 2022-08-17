@@ -249,7 +249,9 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'FaceDetection':
         all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
-
+    elif dataset == 'InsectWingbeat':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
 
     # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
     # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
