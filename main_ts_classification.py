@@ -55,12 +55,9 @@ def main():
     weight_file = weight_file_base + f'classification_ds_{args.dataset}_ws_{args.window_size}.pt'
 
 
-    dmodel = input_dim*2
-    #print(dmodel)
-    #sys.exit()
     if args.model_type=='Dense':
-        model = TSClassificationTransformer(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=args.nhid,
-                                            nlayers=2, args=args,classification_labels=classification_labels).to(device)
+        model = TSClassificationTransformer(input_dim=input_dim, ninp=args.dmodel, nhead=2, nhid=args.nhid,
+                                            nlayers=4, args=args,classification_labels=classification_labels).to(device)
         model=model.double()
     #else:
         #model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
@@ -68,7 +65,7 @@ def main():
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
-    optimizer = optim.Adam(model.parameters(),lr=1e-3)
+    optimizer = optim.Adam(model.parameters(),lr=1e-4)
     criterion = nn.CrossEntropyLoss()
     best_loss = float('inf')
 
