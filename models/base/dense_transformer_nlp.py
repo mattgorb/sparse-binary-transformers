@@ -10,7 +10,8 @@ class TransformerModel(nn.Module):
         super(TransformerModel, self).__init__()
         try:
             from torch.nn import TransformerEncoder
-            from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
+            #from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
+            from torch.nn import TransformerEncoderLayer
         except:
             raise ImportError('TransformerEncoder module does not exist in PyTorch 1.1 or lower.')
         self.model_type = 'Transformer'
@@ -57,5 +58,7 @@ class TransformerModel(nn.Module):
         src = self.pos_encoder(src)
         output = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
         output = self.decoder(output)
+
         output = output.mean(dim=0)
+
         return F.log_softmax(output, dim=-1)

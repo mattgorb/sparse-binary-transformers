@@ -1,25 +1,11 @@
-import torch
-from torchtext.datasets import IMDB
-from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
-from models.layers.sparse_type import SubnetLinBiprop
-from collections import Counter
-import torchtext
-from torchtext.data.utils import get_tokenizer
-from torch.utils.data import DataLoader
-from torch.nn.utils.rnn import pad_sequence
 from utils.model_utils import *
-from torchtext.data.functional import to_map_style_dataset
 import time
 from torch import optim
 from args import args
 import warnings
 from utils.model_size import *
 warnings.filterwarnings("ignore")
-from torch.quantization import *
-from utils.model_size import get_model_complexity_info
-from metrics.flops import flops
-from metrics.memory_size import memory, model_size
 
 from metrics.evaluate import evaluate_flops_memory_size
 #from utils.trainer import train,test, validation,test_forecast
@@ -42,7 +28,7 @@ def main():
         root_dir='/s/luffy/b/nobackup/mgorb/data/'
         weight_file_base='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
     else:
-        root_dir='data/'
+        root_dir= '../data/'
         weight_file_base = 'weights/' + args.weight_file
 
 
@@ -61,9 +47,9 @@ def main():
         dmodel = input_dim*4
 
         if args.model_type=='Dense':
-            from models.base.dense_anomaly_ts import AnomalyTransformer
+            from old.dense_anomaly_ts import AnomalyTransformer
             model = AnomalyTransformer(win_size=args.window_size, enc_in=input_dim, c_out=input_dim,e_layers=2, args=args).to(device)
-            from utils.trainer_anomaly import train, test, validation
+            from old_anomaly_transformer.trainer_anomaly import train, test, validation
 
         else:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)

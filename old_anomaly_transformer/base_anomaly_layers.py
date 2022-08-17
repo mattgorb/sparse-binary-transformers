@@ -66,13 +66,7 @@ class AnomalyAttention(nn.Module):
 
 
         series = self.dropout(torch.softmax(attn, dim=-1))
-        '''print(attn_mask.mask)
-        print(window_size)
-        print(prior.size())
-        print(queries.size())
-        print(attn.size())'''
-        #sys.exit()
-        #print(series.size())
+
 
 
 

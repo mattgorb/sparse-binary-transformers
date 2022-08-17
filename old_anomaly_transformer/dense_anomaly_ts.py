@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
-from models.layers.base_anomaly_layers import AnomalyAttention, AttentionLayer
+from old.base_anomaly_layers import AnomalyAttention, AttentionLayer
 
 
 class PositionalEmbedding(nn.Module):

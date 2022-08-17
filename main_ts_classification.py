@@ -1,6 +1,6 @@
 import torch
 from torchtext.datasets import IMDB
-from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
+from models.base.dense_transformer_ts_classification import TSClassificationTransformer
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
@@ -20,10 +20,11 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-from utils.trainer import train,test_forecast,validation,test_anomaly_detection
+from utils.trainer_ts_classification import train,test
+
 from metrics.evaluate import evaluate_flops_memory_size
 #from utils.trainer import train,test, validation,test_forecast
-from data_factory.entity_loader import get_entity_dataset
+from data_factory.ts_classification_loader import get_classification_ds
 
 
 
@@ -48,67 +49,42 @@ def main():
     if args.dataset=='SMD':
         entities=28
 
-    for ent in range(1,entities):
-    #ent=args.entity
-
-        weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_classification_ws_{args.window_size}.pt'
-        print(f'\n\n\nEntity {ent}')
-
-        train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
-                                            dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
-        val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
-                                          dataset=args.dataset, entity=ent, forecast=args.forecast)
-        test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
-                                           win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
-
-        input_dim=train_dataloader.dataset.train.shape[1]
-
-        dmodel = input_dim*2
-
-        if args.model_type=='Dense':
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
+    train_dataloader,val_dataloader, test_dataloader, classification_labels, input_dim =get_classification_ds(args.dataset,root_dir, args)
 
 
+    weight_file = weight_file_base + f'classification_ds_{args.dataset}_ws_{args.window_size}.pt'
+
+
+    dmodel = input_dim*2
+    #print(dmodel)
+    #sys.exit()
+    if args.model_type=='Dense':
+        model = TSClassificationTransformer(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=args.nhid,
+                                            nlayers=2, args=args,classification_labels=classification_labels).to(device)
+        model=model.double()
+    #else:
+        #model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+
+    freeze_model_weights(model)
+    print(f'The model has {count_parameters(model):,} trainable parameters')
+
+    optimizer = optim.Adam(model.parameters(),lr=1e-4)
+    criterion = nn.CrossEntropyLoss()
+    best_loss = float('inf')
+
+    for epoch in range(args.epochs):
+        train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device)
+
+        val_loss, val_acc=test(model, val_dataloader, criterion, device)
+        if val_loss < best_loss:
+            best_loss = val_loss
+            torch.save(model.state_dict(), weight_file)
+            test_loss, test_acc = test(model, test_dataloader, criterion, device)
         else:
-            model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
-
-        freeze_model_weights(model)
-        print(f'The model has {count_parameters(model):,} trainable parameters')
-
-        optimizer = optim.Adam(model.parameters(),lr=1e-4)
-        criterion = nn.MSELoss(reduction='none')
-        best_loss = float('inf')
-
-        if args.evaluate:
-            evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
-            return
-
-
-        print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
-        print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-        print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
-        for epoch in range(args.epochs):
-            train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
-
-            if args.forecast:
-                if train_loss < best_loss:
-                    best_loss = train_loss
-                    torch.save(model.state_dict(), weight_file)
-
-                    test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
-                else:
-                    test_loss=None
-                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
-            else:
-                val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
-                if val_loss < best_loss:
-                    best_loss = val_loss
-                    torch.save(model.state_dict(), weight_file)
-                    test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader, criterion, device, args, ent,epoch)
-                else:
-                    val_loss=None
-                    test_loss=None
-                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
+            val_loss=None
+            test_loss=None
+        #print(f'Dataset: {args.dataset} Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}\n')
+        print(f'Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
 
 
 
