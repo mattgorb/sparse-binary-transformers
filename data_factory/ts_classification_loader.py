@@ -286,7 +286,7 @@ def get_classification_ds(dataset,root_dir, args):
     val_dataset = ClassiregressionDataset(val_data, val_indices)
     test_dataset=ClassiregressionDataset(test_data,test_indices)
 
-    train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
+    train_loader = DataLoader(dataset=train_dataset, batch_size=1,
                               shuffle=True,pin_memory=True,)
     val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size,
                               shuffle=True,pin_memory=True,)
@@ -297,9 +297,10 @@ def get_classification_ds(dataset,root_dir, args):
 
     for batch in train_loader:
         data, label, index=batch
-        args.window_size=data.size(1)
-        break
-
+        #args.window_size=data.size(1)
+        print(data.size())
+        #reak
+    sys.exit()
     input_dim=all_data.feature_df.shape[1]
 
     return train_loader,val_loader, test_loader, unique_labels,input_dim
