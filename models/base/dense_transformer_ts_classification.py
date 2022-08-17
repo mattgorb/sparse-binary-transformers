@@ -49,7 +49,7 @@ class TSClassificationTransformer(nn.Module):
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
-    def forward(self, src, has_src_mask=False, has_pad_mask=False, ):
+    def forward(self, src, has_src_mask=False, pad_mask=None, ):
         if has_src_mask:
             device = src.device
             #if self.src_mask is None or self.src_mask.size(0) != len(src):
@@ -64,13 +64,9 @@ class TSClassificationTransformer(nn.Module):
 
         else:
             self.src_mask = None
-        if has_pad_mask:
-            device = src.device
-            #if self.pad_mask is None or self.src_mask.size(0) != len(src):
-            mask = (src == 0).t()#.unsqueeze(1).repeat(1, src.size(1), 1).unsqueeze(1)
-            self.pad_mask = mask.to(device)
-        else:
-            self.pad_mask = None
+        if pad_mask:
+            self.pad_mask = pad_mask.to(device)
+
 
 
         src = src.permute(1, 0, 2)

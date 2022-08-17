@@ -13,22 +13,24 @@ from sklearn.metrics import accuracy_score
 from metrics.accuracy import binary_accuracy
 
 
-def train(model, iterator, optimizer, criterion, device):
+def train(model, iterator, optimizer, criterion, device,dataset):
     epoch_loss = 0
     epoch_acc = 0
 
     model.train()
     i=0
-    #print(len(iterator))
+    pad_mask=None
     for batch in iterator:
         optimizer.zero_grad()
-        data, label, index=batch
+
+        if dataset=='InsectWingbeat':
+            data, label,pad_mask, index=batch
+        else:
+            data, label, index=batch
+
         label=label[:,0].long().to(device)
         data=data.to(device)
-
-        i+=1
-
-        predictions,_ = model(data)
+        predictions,_ = model(data,pad_mask)
 
         loss = criterion(predictions, label)
         loss.backward()
@@ -45,18 +47,23 @@ def train(model, iterator, optimizer, criterion, device):
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 
 
-def test(model, iterator, criterion, device):
+def test(model, iterator, criterion, device,dataset):
     epoch_loss = 0
     epoch_acc = 0
 
     model.eval()
 
     with torch.no_grad():
+        pad_mask = None
         for batch in iterator:
-            data, label, index = batch
-            label=label[:,0].long().to(device)
+            if dataset == 'InsectWingbeat':
+                data, label, pad_mask, index = batch
+            else:
+                data, label, index = batch
+
+            label = label[:, 0].long().to(device)
             data = data.to(device)
-            predictions,_ = model(data)
+            predictions, _ = model(data, pad_mask)
 
             loss = criterion(predictions, label)
 
