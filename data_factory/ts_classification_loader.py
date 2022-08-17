@@ -15,6 +15,8 @@ from torch.utils.data import Dataset
 import torch
 from torch.utils.data import DataLoader
 
+import datetime
+
 class Normalizer(object):
     """
     Normalizes dataframe across ALL contained rows (time steps). Different from per-sample normalization.
@@ -200,12 +202,12 @@ class TSRegressionArchive(BaseData):
         return all_df, labels_df
 
     def load_single(self, filepath):
-        print('here')
+        print(datetime.datetime.now())
         df, labels = load_data.load_from_tsfile_to_dataframe(filepath, return_separate_X_and_y=True, replace_missing_vals_with='NaN')
         labels = pd.Series(labels, dtype="category")
         self.class_names = labels.cat.categories
         labels_df = pd.DataFrame(labels.cat.codes, dtype=np.int8)  # int8-32 gives an error when using nn.CrossEntropyLoss
-        print('here2')
+        print(datetime.datetime.now())
 
         lengths = df.applymap(lambda x: len(x)).values  # (num_samples, num_dimensions) array containing the length of each series
         horiz_diffs = np.abs(lengths - np.expand_dims(lengths[:, 0], -1))
