@@ -176,7 +176,7 @@ class TSRegressionArchive(BaseData):
             all_df: a single (possibly concatenated) dataframe with all data corresponding to specified files
             labels_df: dataframe containing label(s) for each sample
         """
-        print('here')
+
         # Select paths for training and evaluation
         if file_list is None:
             data_paths = glob.glob(os.path.join(root_dir, '*'))  # list of all paths
@@ -194,18 +194,18 @@ class TSRegressionArchive(BaseData):
         input_paths = [p for p in selected_paths if os.path.isfile(p) and p.endswith('.ts')]
         if len(input_paths) == 0:
             raise Exception("No .ts files found using pattern: '{}'".format(pattern))
-        print('here2')
+
         all_df, labels_df = self.load_single(input_paths[0])  # a single file contains dataset
-        print('here3')
+
         return all_df, labels_df
 
     def load_single(self, filepath):
-
+        print('here')
         df, labels = load_data.load_from_tsfile_to_dataframe(filepath, return_separate_X_and_y=True, replace_missing_vals_with='NaN')
         labels = pd.Series(labels, dtype="category")
         self.class_names = labels.cat.categories
         labels_df = pd.DataFrame(labels.cat.codes, dtype=np.int8)  # int8-32 gives an error when using nn.CrossEntropyLoss
-
+        print('here2')
 
         lengths = df.applymap(lambda x: len(x)).values  # (num_samples, num_dimensions) array containing the length of each series
         horiz_diffs = np.abs(lengths - np.expand_dims(lengths[:, 0], -1))
@@ -214,7 +214,7 @@ class TSRegressionArchive(BaseData):
         if np.sum(horiz_diffs) > 0:  # if any row (sample) has varying length across dimensions
 
             df = df.applymap(subsample)  # TODO: this addresses a very specific case (PPGDalia)
-
+        print('here3')
         #if self.config['subsample_factor']:
         #    df = df.applymap(lambda x: subsample(x, limit=0, factor=self.config['subsample_factor']))
 
@@ -273,13 +273,13 @@ def get_classification_ds(dataset,root_dir, args):
     print("{} samples will be used for validation".format(len(val_indices)))
     print("{} samples will be used for testing".format(len(test_indices)))
 
-    print('here4')
+
 
     normalizer = Normalizer('standardization')
     all_data.feature_df.loc[train_indices] = normalizer.normalize(all_data.feature_df.loc[train_indices])
     all_data.feature_df.loc[val_indices] = normalizer.normalize(val_data.feature_df.loc[val_indices])
     test_data.feature_df.loc[test_indices] = normalizer.normalize(test_data.feature_df.loc[test_indices])
-    print('here5')
+
     train_dataset = ClassiregressionDataset(all_data, train_indices)
     val_dataset = ClassiregressionDataset(val_data, val_indices)
     test_dataset=ClassiregressionDataset(test_data,test_indices)
