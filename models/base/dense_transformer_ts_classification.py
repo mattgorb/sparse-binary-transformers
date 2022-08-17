@@ -65,6 +65,7 @@ class TSClassificationTransformer(nn.Module):
         else:
             self.src_mask = None
         if pad_mask is not None:
+            device = src.device
             self.pad_mask = pad_mask.to(device)
 
 
