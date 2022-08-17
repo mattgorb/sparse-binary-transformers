@@ -30,7 +30,7 @@ def train(model, iterator, optimizer, criterion, device,dataset):
 
         label=label[:,0].long().to(device)
         data=data.to(device)
-        predictions,_ = model(data,pad_mask)
+        predictions,_ = model(data,pad_mask=pad_mask)
 
         loss = criterion(predictions, label)
         loss.backward()
@@ -63,7 +63,7 @@ def test(model, iterator, criterion, device,dataset):
 
             label = label[:, 0].long().to(device)
             data = data.to(device)
-            predictions, _ = model(data, pad_mask)
+            predictions, _ = model(data, pad_mask=pad_mask)
 
             loss = criterion(predictions, label)
 
