@@ -355,8 +355,9 @@ def get_classification_ds(dataset,root_dir, args):
 
     for batch in train_loader:
         data, label,padding, index=batch
-        #args.window_size=data.size(1)
-        print(data.size())
+        args.window_size=data.size(1)
+        #print(data.size())
+        break
 
     input_dim=all_data.feature_df.shape[1]
 
