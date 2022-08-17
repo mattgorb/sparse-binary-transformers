@@ -11,7 +11,7 @@ model_type: 'Dense'
 epochs: 50
 weight_file: dense_ts_smd
 
-nhid: 128
+nhid: 256
 dmodel: 128
 save_scores: False
 layer_norm: False
