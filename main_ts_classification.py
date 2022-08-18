@@ -56,8 +56,8 @@ def main():
 
 
     if args.model_type=='Dense':
-        model = TSClassificationTransformer(input_dim=input_dim, ninp=args.dmodel, nhead=2, nhid=args.nhid,
-                                            nlayers=2, args=args,classification_labels=classification_labels).to(device)
+        model = TSClassificationTransformer(input_dim=input_dim, ninp=args.dmodel, nhead=args.n_head, nhid=args.nhid,
+                                            nlayers=args.n_layers, args=args,classification_labels=classification_labels).to(device)
         model=model.float()
     #else:
         #model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)

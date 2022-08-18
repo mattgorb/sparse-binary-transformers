@@ -13,6 +13,8 @@ weight_file: dense_ts_smd
 
 nhid: 256
 dmodel: 128
+n_layers: 2
+n_head: 2
 save_scores: False
 layer_norm: False
 batch_norm: True

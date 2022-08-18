@@ -325,10 +325,10 @@ def get_classification_ds(dataset,root_dir, args):
 
 
 
-    '''normalizer = Normalizer('standardization')
+    normalizer = Normalizer('standardization')
     all_data.feature_df.loc[train_indices] = normalizer.normalize(all_data.feature_df.loc[train_indices])
     all_data.feature_df.loc[val_indices] = normalizer.normalize(val_data.feature_df.loc[val_indices])
-    test_data.feature_df.loc[test_indices] = normalizer.normalize(test_data.feature_df.loc[test_indices])'''
+    test_data.feature_df.loc[test_indices] = normalizer.normalize(test_data.feature_df.loc[test_indices])
 
     train_dataset = ClassiregressionDataset(all_data, train_indices)
     val_dataset = ClassiregressionDataset(val_data, val_indices)
