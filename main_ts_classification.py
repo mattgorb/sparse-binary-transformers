@@ -73,6 +73,7 @@ def main():
         train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device,args.dataset)
 
         val_loss, val_acc=test(model, val_dataloader, criterion, device,args.dataset)
+        test_loss, test_acc = test(model, test_dataloader, criterion, device, args.dataset)
         if val_acc > best_acc:
             best_acc = val_loss
             torch.save(model.state_dict(), weight_file)
@@ -81,7 +82,7 @@ def main():
             val_loss=None
             test_loss=None
             val_acc=None
-            test_acc=None
+            #test_acc=None
         #print(f'Dataset: {args.dataset} Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}\n')
         print(f'Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
 
