@@ -363,7 +363,7 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, padding, index = batch
             args.window_size = data.size(1)
-            #print(data.size())
+            print(data.size())
             break
         #sys.exit()
     else:
@@ -376,7 +376,7 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, index = batch
             args.window_size = data.size(1)
-            #print(data.size())
+            print(data.size())
             break
         #sys.exit()
     print(all_data.feature_df.shape)
