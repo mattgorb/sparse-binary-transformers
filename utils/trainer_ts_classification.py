@@ -67,10 +67,13 @@ def test(model, iterator, criterion, device,dataset):
             predictions, _ = model(data, pad_mask=pad_mask)
 
             loss = criterion(predictions, label)
+            print('here')
+            print(predictions)
+            print(label)
 
             acc = binary_accuracy(predictions, label)
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
-
+    sys.exit()
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
