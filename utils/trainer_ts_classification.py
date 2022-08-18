@@ -30,11 +30,11 @@ def train(model, iterator, optimizer, criterion, device,dataset):
 
         label=label[:,0].long().to(device)
         print(data.dtype)
-        data=data.float().to(device)
+        data=data.double().to(device)
         #print(data)
         print(data.dtype)
 
-        data=data.double().to(device)
+        data=data.float().to(device)
         #print(data)
         print(data.dtype)
 
