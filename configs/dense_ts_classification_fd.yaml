@@ -5,7 +5,7 @@ dataset: FaceDetection
 weight_seed: 0
 score_seed: 0
 gpu: 2
-batch_size: 8
+batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
 epochs: 400
