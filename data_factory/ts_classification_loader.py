@@ -342,6 +342,11 @@ def get_classification_ds(dataset,root_dir, args):
                                   shuffle=True,pin_memory=True,collate_fn = lambda x: collate_superv(x, max_len=30))
         test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size,
                                   shuffle=True,pin_memory=True,collate_fn = lambda x: collate_superv(x, max_len=30))
+        for batch in train_loader:
+            data, label, padding, index = batch
+            args.window_size = data.size(1)
+            # print(data.size())
+            break
     else:
         train_loader = DataLoader(dataset=train_dataset, batch_size=1,
                                   shuffle=True, pin_memory=True, )
@@ -349,15 +354,16 @@ def get_classification_ds(dataset,root_dir, args):
                                 shuffle=True, pin_memory=True, )
         test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size,
                                  shuffle=True, pin_memory=True, )
+        for batch in train_loader:
+            data, label, index = batch
+            args.window_size = data.size(1)
+            # print(data.size())
+            break
 
     print(all_data.feature_df.shape)
     print(test_data.feature_df.shape)
 
-    for batch in train_loader:
-        data, label,padding, index=batch
-        args.window_size=data.size(1)
-        #print(data.size())
-        break
+
 
     input_dim=all_data.feature_df.shape[1]
 
