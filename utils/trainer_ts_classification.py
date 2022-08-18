@@ -67,9 +67,7 @@ def test(model, iterator, criterion, device,dataset):
             predictions, _ = model(data, pad_mask=pad_mask)
 
             loss = criterion(predictions, label)
-            print('here')
-            print(predictions)
-            print(label)
+
 
             acc = binary_accuracy(predictions, label)
 

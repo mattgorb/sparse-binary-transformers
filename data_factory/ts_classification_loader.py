@@ -302,21 +302,36 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'InsectWingbeat':
         all_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TEST', n_proc=-1, )
+    if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat':
+        # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
+        # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
+        val_ratio=0.2
+        val_data=all_data
+        labels = all_data.labels_df.values.flatten()
+        unique_labels=len(set(labels))
 
-    # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
-    # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
-    val_ratio=0.2
-    val_data=all_data
-    labels = all_data.labels_df.values.flatten()
-    unique_labels=len(set(labels))
+        splitter = model_selection.StratifiedShuffleSplit(n_splits=1, test_size=val_ratio,
+                                                          random_state=1)
+        train_indices, val_indices = zip(*splitter.split(X=np.zeros(len(all_data.all_IDs)), y=labels))
+        test_indices = test_data.all_IDs
 
-    splitter = model_selection.StratifiedShuffleSplit(n_splits=1, test_size=val_ratio,
-                                                      random_state=1)
-    train_indices, val_indices = zip(*splitter.split(X=np.zeros(len(all_data.all_IDs)), y=labels))
-    test_indices = test_data.all_IDs
+        train_indices = train_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
+        val_indices = val_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
+    else:
+        # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
+        # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
+        val_ratio=0.2
+        val_data=test_data
+        labels = test_data.labels_df.values.flatten()
+        unique_labels=len(set(labels))
 
-    train_indices = train_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
-    val_indices = val_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
+        splitter = model_selection.StratifiedShuffleSplit(n_splits=1, test_size=val_ratio,
+                                                          random_state=1)
+        test_indices, val_indices = zip(*splitter.split(X=np.zeros(len(test_data.all_IDs)), y=labels))
+        train_indices = all_data.all_IDs
+
+        test_indices = test_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
+        val_indices = val_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
 
 
     print(("{} samples may be used for training".format(len(train_indices))))
