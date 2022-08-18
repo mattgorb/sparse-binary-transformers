@@ -1,0 +1,2576 @@
+(transformers) luffy:~/sparse-binary-transformers$ python3 main_ts.py --config=configs/dense_ts_smap_forecast.yaml
+=> Reading YAML config from configs/dense_ts_smap_forecast.yaml
+Namespace(batch_norm=False, batch_size=128, config='configs/dense_ts_smap_forecast.yaml', conv_type=None, data='/s/luffy/b/nobackup/mgorb/data', dataset='SMAP', entity=None, epochs=50, evaluate=False, forecast=True, freeze_weights=False, gpu=1, layer_norm=True, log_dir=None, lr=0.1, model_type='Dense', name=None, num_classes=10, optimizer='sgd', pos_enc='Standard', pretrained=None, print_freq=50, resume='', save_every=-1, save_graphs=False, save_scores=False, score_init=None, score_seed=0, seed=0, set='ImageNet', weight_file='dense_ts_smd', weight_init=None, weight_seed=0, window_size=200, workers=20)
+
+
+
+Entity 0
+Dataset: P-1
+Dataset: P-1
+Dataset: P-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.265625
+number of test batches: 59.015625
+number of test batches: 4.046875
+Entity: 0 | Epoch: 0 | Train loss: 0.6953834403180417 |  Test loss: 0.8604861573211877
+Entity: 0 | Epoch: 1 | Train loss: 0.6592260368612567 |  Test loss: 0.85036100507588
+Entity: 0 | Epoch: 2 | Train loss: 0.6531409605500597 |  Test loss: 0.8464626537628731
+Entity: 0 | Epoch: 3 | Train loss: 0.6515102655280804 |  Test loss: 0.844832267385681
+Entity: 0 | Epoch: 4 | Train loss: 0.6507456698145111 |  Test loss: 0.8443697924549515
+Entity: 0 | Epoch: 5 | Train loss: 0.6502774334136119 |  Test loss: 0.8438838028374154
+Entity: 0 | Epoch: 6 | Train loss: 0.6498530970241955 |  Test loss: 0.8432573717928934
+Entity: 0 | Epoch: 7 | Train loss: 0.6495479753225691 |  Test loss: 0.8431216432249109
+Entity: 0 | Epoch: 8 | Train loss: 0.6492597398947745 |  Test loss: 0.8429257246417544
+Entity: 0 | Epoch: 9 | Train loss: 0.6489999914034713 |  Test loss: 0.8426375907619257
+Entity: 0 | Epoch: 10 | Train loss: 0.6487186786851168 |  Test loss: 0.8427019027029398
+Entity: 0 | Epoch: 11 | Train loss: 0.6484593881290318 |  Test loss: 0.8425208721849277
+Entity: 0 | Epoch: 12 | Train loss: 0.6481543036955604 |  Test loss: 0.842451120349201
+Entity: 0 | Epoch: 13 | Train loss: 0.647878550925314 |  Test loss: 0.8422333156423909
+Entity: 0 | Epoch: 14 | Train loss: 0.6474336827909736 |  Test loss: 0.8419410707213301
+Entity: 0 | Epoch: 15 | Train loss: 0.6470641308304917 |  Test loss: 0.8415410938244816
+Entity: 0 | Epoch: 16 | Train loss: 0.6467348063276926 |  Test loss: 0.8415435375214256
+Entity: 0 | Epoch: 17 | Train loss: 0.6460479847369992 |  Test loss: 0.841232475580137
+Entity: 0 | Epoch: 18 | Train loss: 0.6454084202525193 |  Test loss: 0.8403027410543448
+Entity: 0 | Epoch: 19 | Train loss: 0.6445331277755664 |  Test loss: 0.8397418896642488
+Entity: 0 | Epoch: 20 | Train loss: 0.6435807283816167 |  Test loss: 0.8388563678977458
+Entity: 0 | Epoch: 21 | Train loss: 0.6422905151130767 |  Test loss: 0.8404702172258646
+Entity: 0 | Epoch: 22 | Train loss: 0.6414799804831669 |  Test loss: 0.8369641698551684
+Entity: 0 | Epoch: 23 | Train loss: 0.6374315686982426 |  Test loss: 0.833570384972416
+Entity: 0 | Epoch: 24 | Train loss: 0.6329759923195964 |  Test loss: 0.8320330831664524
+Entity: 0 | Epoch: 25 | Train loss: 0.6264082369510896 |  Test loss: 0.8273723319920794
+Entity: 0 | Epoch: 26 | Train loss: 0.6179040114913887 |  Test loss: 0.8170685501918412
+Entity: 0 | Epoch: 27 | Train loss: 0.6090932366791626 |  Test loss: 0.8155207335769152
+Entity: 0 | Epoch: 28 | Train loss: 0.595944443663383 |  Test loss: 0.8574874211393987
+Entity: 0 | Epoch: 29 | Train loss: 0.5941499034060783 |  Test loss: 0.8436853923784519
+Entity: 0 | Epoch: 30 | Train loss: 0.5836927676715191 |  Test loss: 0.807741209717187
+Entity: 0 | Epoch: 31 | Train loss: 0.5767028506143645 |  Test loss: 0.7930057892646878
+Entity: 0 | Epoch: 32 | Train loss: 0.5789926723711013 |  Test loss: None
+Entity: 0 | Epoch: 33 | Train loss: 0.5770949679176026 |  Test loss: None
+Entity: 0 | Epoch: 34 | Train loss: 0.5728947152687474 |  Test loss: 0.8174307630226577
+Entity: 0 | Epoch: 35 | Train loss: 0.5716891826406654 |  Test loss: 0.7891438052711763
+Entity: 0 | Epoch: 36 | Train loss: 0.5692166919324799 |  Test loss: 0.7867665619878853
+Entity: 0 | Epoch: 37 | Train loss: 0.5675046061488067 |  Test loss: 0.7937811676841625
+Entity: 0 | Epoch: 38 | Train loss: 0.5662829743102699 |  Test loss: 0.7834444671822532
+Entity: 0 | Epoch: 39 | Train loss: 0.565624167437035 |  Test loss: 0.778041794307307
+Entity: 0 | Epoch: 40 | Train loss: 0.564326576663297 |  Test loss: 0.7803535039768587
+Entity: 0 | Epoch: 41 | Train loss: 0.5644563889747463 |  Test loss: None
+Entity: 0 | Epoch: 42 | Train loss: 0.566137926641112 |  Test loss: None
+Entity: 0 | Epoch: 43 | Train loss: 0.5626974726213045 |  Test loss: 0.7769478929330663
+Entity: 0 | Epoch: 44 | Train loss: 0.5693857117852495 |  Test loss: None
+Entity: 0 | Epoch: 45 | Train loss: 0.5651558986032085 |  Test loss: None
+Entity: 0 | Epoch: 46 | Train loss: 0.5656187340027715 |  Test loss: None
+Entity: 0 | Epoch: 47 | Train loss: 0.5617553586821966 |  Test loss: 0.7773129084708464
+Entity: 0 | Epoch: 48 | Train loss: 0.5605211230989249 |  Test loss: 0.7785223121772804
+Entity: 0 | Epoch: 49 | Train loss: 0.559515320366828 |  Test loss: 0.7714485764543033
+
+
+
+Entity 1
+Dataset: S-1
+Dataset: S-1
+Dataset: S-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.9453125
+number of test batches: 52.2109375
+number of test batches: 3.9453125
+Entity: 1 | Epoch: 0 | Train loss: 0.8400350099257147 |  Test loss: 0.8473063774001185
+Entity: 1 | Epoch: 1 | Train loss: 0.7794976994839253 |  Test loss: 0.8416913790757409
+Entity: 1 | Epoch: 2 | Train loss: 0.7681628061780755 |  Test loss: 0.8414496838530101
+Entity: 1 | Epoch: 3 | Train loss: 0.7651523525684963 |  Test loss: 0.8407685423952223
+Entity: 1 | Epoch: 4 | Train loss: 0.764163823776878 |  Test loss: 0.8404722723445975
+Entity: 1 | Epoch: 5 | Train loss: 0.7635200495952891 |  Test loss: 0.8401553926380849
+Entity: 1 | Epoch: 6 | Train loss: 0.7630810174931345 |  Test loss: 0.8399857155683608
+Entity: 1 | Epoch: 7 | Train loss: 0.7628411741998344 |  Test loss: 0.8398297334477158
+Entity: 1 | Epoch: 8 | Train loss: 0.7625380318360652 |  Test loss: 0.8394091048268694
+Entity: 1 | Epoch: 9 | Train loss: 0.7623357260604601 |  Test loss: 0.8393946107993326
+Entity: 1 | Epoch: 10 | Train loss: 0.7619668839794379 |  Test loss: 0.8390773538241882
+Entity: 1 | Epoch: 11 | Train loss: 0.7616374490620015 |  Test loss: 0.8390341799116076
+Entity: 1 | Epoch: 12 | Train loss: 0.7613842395001363 |  Test loss: 0.8388314426314123
+Entity: 1 | Epoch: 13 | Train loss: 0.7609109249943551 |  Test loss: 0.8384241919079335
+Entity: 1 | Epoch: 14 | Train loss: 0.7606180502219594 |  Test loss: 0.838318961537858
+Entity: 1 | Epoch: 15 | Train loss: 0.7605720970797184 |  Test loss: 0.8382340329819091
+Entity: 1 | Epoch: 16 | Train loss: 0.7594259757445361 |  Test loss: 0.8378494042903185
+Entity: 1 | Epoch: 17 | Train loss: 0.7590093773658744 |  Test loss: 0.8375654859929391
+Entity: 1 | Epoch: 18 | Train loss: 0.7578553491273493 |  Test loss: 0.8371298507187921
+Entity: 1 | Epoch: 19 | Train loss: 0.7566611370401846 |  Test loss: 0.8371992828084691
+Entity: 1 | Epoch: 20 | Train loss: 0.7561056540107625 |  Test loss: 0.836048623111726
+Entity: 1 | Epoch: 21 | Train loss: 0.7540248589998163 |  Test loss: 0.8356697344617678
+Entity: 1 | Epoch: 22 | Train loss: 0.7531135272715676 |  Test loss: 0.8354442507176116
+Entity: 1 | Epoch: 23 | Train loss: 0.7519029232381731 |  Test loss: 0.8335959706566122
+Entity: 1 | Epoch: 24 | Train loss: 0.7492627292497583 |  Test loss: 0.8321222974448511
+Entity: 1 | Epoch: 25 | Train loss: 0.7474659891011387 |  Test loss: 0.8325701265531307
+Entity: 1 | Epoch: 26 | Train loss: 0.7439016008343581 |  Test loss: 0.831767917974013
+Entity: 1 | Epoch: 27 | Train loss: 0.7397397659252599 |  Test loss: 0.8256158485934876
+Entity: 1 | Epoch: 28 | Train loss: 0.7386398333374564 |  Test loss: 0.8211910925510496
+Entity: 1 | Epoch: 29 | Train loss: 0.7296542745362042 |  Test loss: 0.8113420543067231
+Entity: 1 | Epoch: 30 | Train loss: 0.7211036559791191 |  Test loss: 0.8137270189323785
+Entity: 1 | Epoch: 31 | Train loss: 0.7161339337582628 |  Test loss: 0.8044471332932462
+Entity: 1 | Epoch: 32 | Train loss: 0.7170943921053139 |  Test loss: None
+Entity: 1 | Epoch: 33 | Train loss: 0.7033557301320007 |  Test loss: 0.7972310315706942
+Entity: 1 | Epoch: 34 | Train loss: 0.6973774118745243 |  Test loss: 0.7960151177508259
+Entity: 1 | Epoch: 35 | Train loss: 0.6894116659842965 |  Test loss: 0.7881264874352013
+Entity: 1 | Epoch: 36 | Train loss: 0.6873414370290238 |  Test loss: 0.7881164079513585
+Entity: 1 | Epoch: 37 | Train loss: 0.6838487698529812 |  Test loss: 0.7868747668562106
+Entity: 1 | Epoch: 38 | Train loss: 0.6787440129017805 |  Test loss: 0.8028891427018264
+Entity: 1 | Epoch: 39 | Train loss: 0.6789558345595081 |  Test loss: None
+Entity: 1 | Epoch: 40 | Train loss: 0.6770958275749882 |  Test loss: 0.8229508876081298
+Entity: 1 | Epoch: 41 | Train loss: 0.6815211736965657 |  Test loss: None
+Entity: 1 | Epoch: 42 | Train loss: 0.6887095709722265 |  Test loss: None
+Entity: 1 | Epoch: 43 | Train loss: 0.6799992606006329 |  Test loss: None
+Entity: 1 | Epoch: 44 | Train loss: 0.675619101861148 |  Test loss: 0.8122763515957216
+Entity: 1 | Epoch: 45 | Train loss: 0.6687995651503172 |  Test loss: 0.8173301242015297
+Entity: 1 | Epoch: 46 | Train loss: 0.6687633492465395 |  Test loss: 0.8000838545547558
+Entity: 1 | Epoch: 47 | Train loss: 0.6724597763718518 |  Test loss: None
+Entity: 1 | Epoch: 48 | Train loss: 0.6693099768926286 |  Test loss: None
+Entity: 1 | Epoch: 49 | Train loss: 0.662251492841992 |  Test loss: 0.8243006103621372
+
+
+
+Entity 2
+Dataset: E-1
+Dataset: E-1
+Dataset: E-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 61.0
+number of test batches: 4.0625
+Entity: 2 | Epoch: 0 | Train loss: 0.7708977150065558 |  Test loss: 0.8469039438077464
+Entity: 2 | Epoch: 1 | Train loss: 0.7641039908901617 |  Test loss: 0.8447685883022271
+Entity: 2 | Epoch: 2 | Train loss: 0.7632465268010084 |  Test loss: 0.8439267741587873
+Entity: 2 | Epoch: 3 | Train loss: 0.7627106576378704 |  Test loss: 0.8433295632067781
+Entity: 2 | Epoch: 4 | Train loss: 0.7624386380084467 |  Test loss: 0.8430786948507795
+Entity: 2 | Epoch: 5 | Train loss: 0.7621579295936591 |  Test loss: 0.8429042427084193
+Entity: 2 | Epoch: 6 | Train loss: 0.7619364536804508 |  Test loss: 0.8425988698879686
+Entity: 2 | Epoch: 7 | Train loss: 0.7616950105590632 |  Test loss: 0.8423926128146167
+Entity: 2 | Epoch: 8 | Train loss: 0.761406729204048 |  Test loss: 0.8420559586169055
+Entity: 2 | Epoch: 9 | Train loss: 0.761075909163955 |  Test loss: 0.8415928492107644
+Entity: 2 | Epoch: 10 | Train loss: 0.7607088069878138 |  Test loss: 0.8411073830587646
+Entity: 2 | Epoch: 11 | Train loss: 0.7602449013186353 |  Test loss: 0.8408772250816513
+Entity: 2 | Epoch: 12 | Train loss: 0.7597698590300065 |  Test loss: 0.8399666795650353
+Entity: 2 | Epoch: 13 | Train loss: 0.7588214741535104 |  Test loss: 0.8392272519628302
+Entity: 2 | Epoch: 14 | Train loss: 0.7578129393390703 |  Test loss: 0.8381207925267518
+Entity: 2 | Epoch: 15 | Train loss: 0.7563146864035528 |  Test loss: 0.8357687442241093
+Entity: 2 | Epoch: 16 | Train loss: 0.7542885081699993 |  Test loss: 0.8337689389868711
+Entity: 2 | Epoch: 17 | Train loss: 0.7524864060642692 |  Test loss: 0.8341424153168471
+Entity: 2 | Epoch: 18 | Train loss: 0.7479022257148802 |  Test loss: 0.823847584770276
+Entity: 2 | Epoch: 19 | Train loss: 0.7415107941399899 |  Test loss: 0.8204856560350611
+Entity: 2 | Epoch: 20 | Train loss: 0.7355901681281132 |  Test loss: 0.8310811715236364
+Entity: 2 | Epoch: 21 | Train loss: 0.729870165375356 |  Test loss: 0.8005742672069643
+Entity: 2 | Epoch: 22 | Train loss: 0.7168005661462191 |  Test loss: 0.7925958098861604
+Entity: 2 | Epoch: 23 | Train loss: 0.7049780207237095 |  Test loss: 0.8388942396142878
+Entity: 2 | Epoch: 24 | Train loss: 0.7014184286023195 |  Test loss: 0.7940846816412747
+Entity: 2 | Epoch: 25 | Train loss: 0.690134872188459 |  Test loss: 0.7694533725152723
+Entity: 2 | Epoch: 26 | Train loss: 0.6821116294967823 |  Test loss: 0.7682289115108478
+Entity: 2 | Epoch: 27 | Train loss: 0.6777381532987086 |  Test loss: 0.7710124061071278
+Entity: 2 | Epoch: 28 | Train loss: 0.6721122859379073 |  Test loss: 0.7660777411871375
+Entity: 2 | Epoch: 29 | Train loss: 0.6711245406098303 |  Test loss: 0.7569727702563306
+Entity: 2 | Epoch: 30 | Train loss: 0.6623210893777004 |  Test loss: 0.7631475672918336
+Entity: 2 | Epoch: 31 | Train loss: 0.6578903913500894 |  Test loss: 0.7619801580668606
+Entity: 2 | Epoch: 32 | Train loss: 0.6540820709256246 |  Test loss: 0.7555863953231332
+Entity: 2 | Epoch: 33 | Train loss: 0.6481694180852192 |  Test loss: 0.7544702081009745
+Entity: 2 | Epoch: 34 | Train loss: 0.6460177980528489 |  Test loss: 0.7715292196058167
+Entity: 2 | Epoch: 35 | Train loss: 0.6438365225119478 |  Test loss: 0.7491585120384116
+Entity: 2 | Epoch: 36 | Train loss: 0.6402685524527535 |  Test loss: 0.7485986548220703
+Entity: 2 | Epoch: 37 | Train loss: 0.6358759569710986 |  Test loss: 0.7521500000595831
+Entity: 2 | Epoch: 38 | Train loss: 0.6369993364421784 |  Test loss: None
+Entity: 2 | Epoch: 39 | Train loss: 0.6343480385929032 |  Test loss: 0.7372705051697827
+Entity: 2 | Epoch: 40 | Train loss: 0.6395090177133727 |  Test loss: None
+Entity: 2 | Epoch: 41 | Train loss: 0.6345597915645993 |  Test loss: None
+Entity: 2 | Epoch: 42 | Train loss: 0.628476577250249 |  Test loss: 0.7612781592156702
+Entity: 2 | Epoch: 43 | Train loss: 0.6262507978276758 |  Test loss: 0.7626980022137734
+Entity: 2 | Epoch: 44 | Train loss: 0.6266094500643239 |  Test loss: None
+Entity: 2 | Epoch: 45 | Train loss: 0.6225998993814514 |  Test loss: 0.7351060398572232
+Entity: 2 | Epoch: 46 | Train loss: 0.6261111520365598 |  Test loss: None
+Entity: 2 | Epoch: 47 | Train loss: 0.6229651895870232 |  Test loss: None
+Entity: 2 | Epoch: 48 | Train loss: 0.6279036990618714 |  Test loss: None
+Entity: 2 | Epoch: 49 | Train loss: 0.6277602785925038 |  Test loss: None
+
+
+
+Entity 3
+Dataset: E-2
+Dataset: E-2
+Dataset: E-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 54.171875
+number of test batches: 4.0625
+Entity: 3 | Epoch: 0 | Train loss: 0.7998552771940903 |  Test loss: 0.7540177261421027
+Entity: 3 | Epoch: 1 | Train loss: 0.788556295930769 |  Test loss: 0.7509127079616659
+Entity: 3 | Epoch: 2 | Train loss: 0.7872140152740995 |  Test loss: 0.7496447863487097
+Entity: 3 | Epoch: 3 | Train loss: 0.7864750377406196 |  Test loss: 0.748780191804354
+Entity: 3 | Epoch: 4 | Train loss: 0.7859343952309265 |  Test loss: 0.7481523083128895
+Entity: 3 | Epoch: 5 | Train loss: 0.7854416100184757 |  Test loss: 0.7474707591526497
+Entity: 3 | Epoch: 6 | Train loss: 0.7849956423500363 |  Test loss: 0.7471395355470192
+Entity: 3 | Epoch: 7 | Train loss: 0.7845709326439442 |  Test loss: 0.746411066258756
+Entity: 3 | Epoch: 8 | Train loss: 0.7841256132130796 |  Test loss: 0.7459273186154091
+Entity: 3 | Epoch: 9 | Train loss: 0.7837019616966041 |  Test loss: 0.745234515868987
+Entity: 3 | Epoch: 10 | Train loss: 0.7832524320481307 |  Test loss: 0.7444452537510258
+Entity: 3 | Epoch: 11 | Train loss: 0.7826285978370555 |  Test loss: 0.7439578316066987
+Entity: 3 | Epoch: 12 | Train loss: 0.7820499799100264 |  Test loss: 0.7432473972977067
+Entity: 3 | Epoch: 13 | Train loss: 0.7814781272071128 |  Test loss: 0.7422474608792422
+Entity: 3 | Epoch: 14 | Train loss: 0.7806241201065784 |  Test loss: 0.7414793672398305
+Entity: 3 | Epoch: 15 | Train loss: 0.7795372866022837 |  Test loss: 0.740645523621844
+Entity: 3 | Epoch: 16 | Train loss: 0.7781657362342527 |  Test loss: 0.7394645406130271
+Entity: 3 | Epoch: 17 | Train loss: 0.7765530382943511 |  Test loss: 0.7386519475392281
+Entity: 3 | Epoch: 18 | Train loss: 0.7742113719656303 |  Test loss: 0.740552004498358
+Entity: 3 | Epoch: 19 | Train loss: 0.7706701717372718 |  Test loss: 0.7308276534868547
+Entity: 3 | Epoch: 20 | Train loss: 0.7631132546082918 |  Test loss: 0.7316337602284665
+Entity: 3 | Epoch: 21 | Train loss: 0.7510659411384448 |  Test loss: 0.7177638350941169
+Entity: 3 | Epoch: 22 | Train loss: 0.7384005466078133 |  Test loss: 0.6992908658383665
+Entity: 3 | Epoch: 23 | Train loss: 0.7297862924438216 |  Test loss: 0.7111200665195401
+Entity: 3 | Epoch: 24 | Train loss: 0.7339627786879832 |  Test loss: None
+Entity: 3 | Epoch: 25 | Train loss: 0.7166727088725584 |  Test loss: 0.6761629129316694
+Entity: 3 | Epoch: 26 | Train loss: 0.7094348667324901 |  Test loss: 0.675150256888726
+Entity: 3 | Epoch: 27 | Train loss: 0.7078377740546153 |  Test loss: 0.672968479370376
+Entity: 3 | Epoch: 28 | Train loss: 0.7012437023013374 |  Test loss: 0.6722111828311776
+Entity: 3 | Epoch: 29 | Train loss: 0.6976154574975894 |  Test loss: 0.6737057124940643
+Entity: 3 | Epoch: 30 | Train loss: 0.6927214490732639 |  Test loss: 0.6645851893059443
+Entity: 3 | Epoch: 31 | Train loss: 0.6885588009402213 |  Test loss: 0.6652470981545495
+Entity: 3 | Epoch: 32 | Train loss: 0.684428911053692 |  Test loss: 0.6679184939407815
+Entity: 3 | Epoch: 33 | Train loss: 0.6837027053863086 |  Test loss: 0.6805384558150903
+Entity: 3 | Epoch: 34 | Train loss: 0.6794497963836373 |  Test loss: 0.6582237210281444
+Entity: 3 | Epoch: 35 | Train loss: 0.6799798330633037 |  Test loss: None
+Entity: 3 | Epoch: 36 | Train loss: 0.6753536711852018 |  Test loss: 0.6556477936038461
+Entity: 3 | Epoch: 37 | Train loss: 0.6715625382602282 |  Test loss: 0.6537583452094203
+Entity: 3 | Epoch: 38 | Train loss: 0.6690649018697179 |  Test loss: 0.651746942232757
+Entity: 3 | Epoch: 39 | Train loss: 0.6675972013889897 |  Test loss: 0.6609515839569772
+Entity: 3 | Epoch: 40 | Train loss: 0.6660190868899416 |  Test loss: 0.6667865106898646
+Entity: 3 | Epoch: 41 | Train loss: 0.6655021107834004 |  Test loss: 0.6544083340397965
+Entity: 3 | Epoch: 42 | Train loss: 0.6619433383218593 |  Test loss: 0.6473540599663885
+Entity: 3 | Epoch: 43 | Train loss: 0.6591672668297067 |  Test loss: 0.6473408538194445
+Entity: 3 | Epoch: 44 | Train loss: 0.6558819365232105 |  Test loss: 0.6503427382876488
+Entity: 3 | Epoch: 45 | Train loss: 0.6587108088770706 |  Test loss: None
+Entity: 3 | Epoch: 46 | Train loss: 0.6530272575524726 |  Test loss: 0.643980610016017
+Entity: 3 | Epoch: 47 | Train loss: 0.6499994196580979 |  Test loss: 0.6490262035065546
+Entity: 3 | Epoch: 48 | Train loss: 0.6507318461471836 |  Test loss: None
+Entity: 3 | Epoch: 49 | Train loss: 0.6496906285478297 |  Test loss: 0.6426524761347816
+
+
+
+Entity 4
+Dataset: E-3
+Dataset: E-3
+Dataset: E-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 38.234375
+number of test batches: 4.0625
+Entity: 4 | Epoch: 0 | Train loss: 0.794754247609716 |  Test loss: 0.778757156449585
+Entity: 4 | Epoch: 1 | Train loss: 0.7834672885253189 |  Test loss: 0.7736164541843419
+Entity: 4 | Epoch: 2 | Train loss: 0.7791026384484175 |  Test loss: 0.7708024700960288
+Entity: 4 | Epoch: 3 | Train loss: 0.7763357169403485 |  Test loss: 0.7676303431929018
+Entity: 4 | Epoch: 4 | Train loss: 0.7741648258840931 |  Test loss: 0.765227534629118
+Entity: 4 | Epoch: 5 | Train loss: 0.7722162252738691 |  Test loss: 0.762953954978058
+Entity: 4 | Epoch: 6 | Train loss: 0.7701156709466738 |  Test loss: 0.7608486914613213
+Entity: 4 | Epoch: 7 | Train loss: 0.7677943519753765 |  Test loss: 0.759053932570924
+Entity: 4 | Epoch: 8 | Train loss: 0.7653237050836336 |  Test loss: 0.7567130671885725
+Entity: 4 | Epoch: 9 | Train loss: 0.7627389809002681 |  Test loss: 0.7543070256459312
+Entity: 4 | Epoch: 10 | Train loss: 0.7601947743170039 |  Test loss: 0.7523040960757779
+Entity: 4 | Epoch: 11 | Train loss: 0.7570323049261862 |  Test loss: 0.7493208158653802
+Entity: 4 | Epoch: 12 | Train loss: 0.7519889928058398 |  Test loss: 0.7498476669622155
+Entity: 4 | Epoch: 13 | Train loss: 0.7489957066533175 |  Test loss: 0.7465128871648071
+Entity: 4 | Epoch: 14 | Train loss: 0.745526575259104 |  Test loss: 0.7483423362844266
+Entity: 4 | Epoch: 15 | Train loss: 0.7434543465929372 |  Test loss: 0.7464576101467874
+Entity: 4 | Epoch: 16 | Train loss: 0.7407546939865249 |  Test loss: 0.7456683494795401
+Entity: 4 | Epoch: 17 | Train loss: 0.7393652036073333 |  Test loss: 0.7448525568900201
+Entity: 4 | Epoch: 18 | Train loss: 0.7364238459317546 |  Test loss: 0.7432543905953375
+Entity: 4 | Epoch: 19 | Train loss: 0.7350074259207907 |  Test loss: 0.7430172001692251
+Entity: 4 | Epoch: 20 | Train loss: 0.7326500133373679 |  Test loss: 0.7413733456606189
+Entity: 4 | Epoch: 21 | Train loss: 0.73084369820153 |  Test loss: 0.7408506941462222
+Entity: 4 | Epoch: 22 | Train loss: 0.7279762422770489 |  Test loss: 0.7410797116131737
+Entity: 4 | Epoch: 23 | Train loss: 0.7264770056151937 |  Test loss: 0.7402586256547903
+Entity: 4 | Epoch: 24 | Train loss: 0.7242882011543808 |  Test loss: 0.7401610467744132
+Entity: 4 | Epoch: 25 | Train loss: 0.7221304444657943 |  Test loss: 0.7393048552223123
+Entity: 4 | Epoch: 26 | Train loss: 0.7208557830866882 |  Test loss: 0.7401518443563523
+Entity: 4 | Epoch: 27 | Train loss: 0.7198620951197547 |  Test loss: 0.7367988597422551
+Entity: 4 | Epoch: 28 | Train loss: 0.7184586956671781 |  Test loss: 0.7387474462282486
+Entity: 4 | Epoch: 29 | Train loss: 0.7180184395140398 |  Test loss: 0.7393922103783832
+Entity: 4 | Epoch: 30 | Train loss: 0.7151259121159567 |  Test loss: 0.7416792553330127
+Entity: 4 | Epoch: 31 | Train loss: 0.7151191807898446 |  Test loss: 0.7377204423340468
+Entity: 4 | Epoch: 32 | Train loss: 0.71279844765157 |  Test loss: 0.7363865860934871
+Entity: 4 | Epoch: 33 | Train loss: 0.7121722059711643 |  Test loss: 0.7426374425233987
+Entity: 4 | Epoch: 34 | Train loss: 0.7092767882198856 |  Test loss: 0.7383624522964685
+Entity: 4 | Epoch: 35 | Train loss: 0.7083443588251723 |  Test loss: 0.7419870366333411
+Entity: 4 | Epoch: 36 | Train loss: 0.7050451436419781 |  Test loss: 0.7391052696244934
+Entity: 4 | Epoch: 37 | Train loss: 0.7051480477170933 |  Test loss: None
+Entity: 4 | Epoch: 38 | Train loss: 0.7019084932705464 |  Test loss: 0.7374188029816231
+Entity: 4 | Epoch: 39 | Train loss: 0.7006350697136997 |  Test loss: 0.7312974169223497
+Entity: 4 | Epoch: 40 | Train loss: 0.698921561369682 |  Test loss: 0.7395818286602243
+Entity: 4 | Epoch: 41 | Train loss: 0.6973027843247852 |  Test loss: 0.73492847635554
+Entity: 4 | Epoch: 42 | Train loss: 0.6946738748863454 |  Test loss: 0.7313957259417153
+Entity: 4 | Epoch: 43 | Train loss: 0.6917479365569901 |  Test loss: 0.7283973790866395
+Entity: 4 | Epoch: 44 | Train loss: 0.6886659037646106 |  Test loss: 0.7330329033089443
+Entity: 4 | Epoch: 45 | Train loss: 0.685967282727432 |  Test loss: 0.7288464411555861
+Entity: 4 | Epoch: 46 | Train loss: 0.6841014220399487 |  Test loss: 0.7269578158747978
+Entity: 4 | Epoch: 47 | Train loss: 0.6780160065506329 |  Test loss: 0.7201668109458227
+Entity: 4 | Epoch: 48 | Train loss: 0.6735686378498866 |  Test loss: 0.7237978698560394
+Entity: 4 | Epoch: 49 | Train loss: 0.671877052731888 |  Test loss: 0.7212563942491005
+
+
+
+Entity 5
+Dataset: E-4
+Dataset: E-4
+Dataset: E-4
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 41.734375
+number of test batches: 4.0625
+Entity: 5 | Epoch: 0 | Train loss: 0.7899607596719371 |  Test loss: 0.7555238660568229
+Entity: 5 | Epoch: 1 | Train loss: 0.7862814358977259 |  Test loss: 0.7540390422424444
+Entity: 5 | Epoch: 2 | Train loss: 0.7848675497161338 |  Test loss: 0.7535671013120848
+Entity: 5 | Epoch: 3 | Train loss: 0.7838440147532645 |  Test loss: 0.7528479143762244
+Entity: 5 | Epoch: 4 | Train loss: 0.782938656668958 |  Test loss: 0.7522662760080913
+Entity: 5 | Epoch: 5 | Train loss: 0.7821095867776217 |  Test loss: 0.7515092512521033
+Entity: 5 | Epoch: 6 | Train loss: 0.7810533589474401 |  Test loss: 0.7513006622437388
+Entity: 5 | Epoch: 7 | Train loss: 0.7799383547413639 |  Test loss: 0.7506709646111211
+Entity: 5 | Epoch: 8 | Train loss: 0.7786269989273302 |  Test loss: 0.7491438628962407
+Entity: 5 | Epoch: 9 | Train loss: 0.7773363489248999 |  Test loss: 0.7503313269573622
+Entity: 5 | Epoch: 10 | Train loss: 0.7759909271813777 |  Test loss: 0.7463449090289381
+Entity: 5 | Epoch: 11 | Train loss: 0.7745145122349566 |  Test loss: 0.7475417806802748
+Entity: 5 | Epoch: 12 | Train loss: 0.7725131025704156 |  Test loss: 0.7474830602546437
+Entity: 5 | Epoch: 13 | Train loss: 0.7704093261099212 |  Test loss: 0.7400488093047618
+Entity: 5 | Epoch: 14 | Train loss: 0.768829486503893 |  Test loss: 0.7474688147839446
+Entity: 5 | Epoch: 15 | Train loss: 0.7659633810384845 |  Test loss: 0.737361945792173
+Entity: 5 | Epoch: 16 | Train loss: 0.7620214914941058 |  Test loss: 0.7431043001482837
+Entity: 5 | Epoch: 17 | Train loss: 0.7570440132762496 |  Test loss: 0.7377452106770271
+Entity: 5 | Epoch: 18 | Train loss: 0.7523073547507865 |  Test loss: 0.72858554665447
+Entity: 5 | Epoch: 19 | Train loss: 0.7464129247624256 |  Test loss: 0.7194751619074781
+Entity: 5 | Epoch: 20 | Train loss: 0.7390186651510053 |  Test loss: 0.7095496447962852
+Entity: 5 | Epoch: 21 | Train loss: 0.7323482210574462 |  Test loss: 0.7028879064905386
+Entity: 5 | Epoch: 22 | Train loss: 0.7233314170746836 |  Test loss: 0.6967729193050988
+Entity: 5 | Epoch: 23 | Train loss: 0.714556555525395 |  Test loss: 0.6961587892764678
+Entity: 5 | Epoch: 24 | Train loss: 0.7088393884074247 |  Test loss: 0.699709054590382
+Entity: 5 | Epoch: 25 | Train loss: 0.7015309303420434 |  Test loss: 0.6910359904219289
+Entity: 5 | Epoch: 26 | Train loss: 0.6954152486694511 |  Test loss: 0.6845842115043734
+Entity: 5 | Epoch: 27 | Train loss: 0.6892210081475074 |  Test loss: 0.682053424764532
+Entity: 5 | Epoch: 28 | Train loss: 0.6804660353987781 |  Test loss: 0.6847926815891137
+Entity: 5 | Epoch: 29 | Train loss: 0.6738626178563097 |  Test loss: 0.7423137446050532
+Entity: 5 | Epoch: 30 | Train loss: 0.6762745562673556 |  Test loss: None
+Entity: 5 | Epoch: 31 | Train loss: 0.6627149050258223 |  Test loss: 0.6704155254988179
+Entity: 5 | Epoch: 32 | Train loss: 0.6584620931799933 |  Test loss: 0.6733111960419382
+Entity: 5 | Epoch: 33 | Train loss: 0.6577953016171612 |  Test loss: 0.6683938929040988
+Entity: 5 | Epoch: 34 | Train loss: 0.6482211405427993 |  Test loss: 0.6661476567978613
+Entity: 5 | Epoch: 35 | Train loss: 0.6461929384072558 |  Test loss: 0.6734419921538435
+Entity: 5 | Epoch: 36 | Train loss: 0.6418789332916685 |  Test loss: 0.6640979334461288
+Entity: 5 | Epoch: 37 | Train loss: 0.6412137660373725 |  Test loss: 0.6622787634394347
+Entity: 5 | Epoch: 38 | Train loss: 0.6389485200577206 |  Test loss: 0.6632331045272831
+Entity: 5 | Epoch: 39 | Train loss: 0.6346623382041687 |  Test loss: 0.6561457152657497
+Entity: 5 | Epoch: 40 | Train loss: 0.6313661405587407 |  Test loss: 0.6609120881811787
+Entity: 5 | Epoch: 41 | Train loss: 0.620854786072373 |  Test loss: 0.6581746692625949
+Entity: 5 | Epoch: 42 | Train loss: 0.6177730523365815 |  Test loss: 0.649079865427652
+Entity: 5 | Epoch: 43 | Train loss: 0.6160128254419649 |  Test loss: 0.654227554692457
+Entity: 5 | Epoch: 44 | Train loss: 0.6111952702050354 |  Test loss: 0.646816793231007
+Entity: 5 | Epoch: 45 | Train loss: 0.6094492808096016 |  Test loss: 0.6406384581843247
+Entity: 5 | Epoch: 46 | Train loss: 0.6115094743056071 |  Test loss: None
+Entity: 5 | Epoch: 47 | Train loss: 0.6020788039433609 |  Test loss: 0.6431969319201576
+Entity: 5 | Epoch: 48 | Train loss: 0.6025540967462394 |  Test loss: None
+Entity: 5 | Epoch: 49 | Train loss: 0.6046470382094041 |  Test loss: None
+
+
+
+Entity 6
+Dataset: E-5
+Dataset: E-5
+Dataset: E-5
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 60.7265625
+number of test batches: 4.0625
+Entity: 6 | Epoch: 0 | Train loss: 0.872543433633614 |  Test loss: 0.7571090900267546
+Entity: 6 | Epoch: 1 | Train loss: 0.7990645532667333 |  Test loss: 0.7535655759991362
+Entity: 6 | Epoch: 2 | Train loss: 0.793065834991938 |  Test loss: 0.7521691587681953
+Entity: 6 | Epoch: 3 | Train loss: 0.7905458810092996 |  Test loss: 0.7512987059039565
+Entity: 6 | Epoch: 4 | Train loss: 0.7892929027769334 |  Test loss: 0.7507459771461211
+Entity: 6 | Epoch: 5 | Train loss: 0.7885371791769047 |  Test loss: 0.7504068012349308
+Entity: 6 | Epoch: 6 | Train loss: 0.7879496474617294 |  Test loss: 0.7501682452356013
+Entity: 6 | Epoch: 7 | Train loss: 0.7876077417740408 |  Test loss: 0.7499605954051591
+Entity: 6 | Epoch: 8 | Train loss: 0.7872332464010283 |  Test loss: 0.7498671335168183
+Entity: 6 | Epoch: 9 | Train loss: 0.7870743317833665 |  Test loss: 0.7498785461514041
+Entity: 6 | Epoch: 10 | Train loss: 0.7868085534121765 |  Test loss: 0.7497714649097851
+Entity: 6 | Epoch: 11 | Train loss: 0.7865573816381547 |  Test loss: 0.7496785101194221
+Entity: 6 | Epoch: 12 | Train loss: 0.7863205857974078 |  Test loss: 0.7496363158337772
+Entity: 6 | Epoch: 13 | Train loss: 0.7861916902265986 |  Test loss: 0.7495634104483403
+Entity: 6 | Epoch: 14 | Train loss: 0.7858792009839446 |  Test loss: 0.749439640980787
+Entity: 6 | Epoch: 15 | Train loss: 0.7855899610100504 |  Test loss: 0.749444118478837
+Entity: 6 | Epoch: 16 | Train loss: 0.7849125356698523 |  Test loss: 0.7492783084869958
+Entity: 6 | Epoch: 17 | Train loss: 0.7835179364897918 |  Test loss: 0.7493096077957979
+Entity: 6 | Epoch: 18 | Train loss: 0.7824212066563112 |  Test loss: 0.7491669948069521
+Entity: 6 | Epoch: 19 | Train loss: 0.7813167904883775 |  Test loss: 0.7491512752352999
+Entity: 6 | Epoch: 20 | Train loss: 0.780746902124386 |  Test loss: 0.749004293154352
+Entity: 6 | Epoch: 21 | Train loss: 0.7790221757806686 |  Test loss: 0.7489468377370101
+Entity: 6 | Epoch: 22 | Train loss: 0.7778389342452342 |  Test loss: 0.7489405423116225
+Entity: 6 | Epoch: 23 | Train loss: 0.7760613968025665 |  Test loss: 0.7488054619314006
+Entity: 6 | Epoch: 24 | Train loss: 0.7745640133697616 |  Test loss: 0.7485634404592789
+Entity: 6 | Epoch: 25 | Train loss: 0.7731730423791676 |  Test loss: 0.7484983742523652
+Entity: 6 | Epoch: 26 | Train loss: 0.7713275341792222 |  Test loss: 0.7480403622540717
+Entity: 6 | Epoch: 27 | Train loss: 0.7694081533804764 |  Test loss: 0.747562294267118
+Entity: 6 | Epoch: 28 | Train loss: 0.7686577895732254 |  Test loss: 0.747242391990641
+Entity: 6 | Epoch: 29 | Train loss: 0.7676881486911099 |  Test loss: 0.7465473530993152
+Entity: 6 | Epoch: 30 | Train loss: 0.7645954455315535 |  Test loss: 0.7454674274302446
+Entity: 6 | Epoch: 31 | Train loss: 0.7630253969862753 |  Test loss: 0.7451415341741477
+Entity: 6 | Epoch: 32 | Train loss: 0.7614419802700226 |  Test loss: 0.7437459957248603
+Entity: 6 | Epoch: 33 | Train loss: 0.7592273512874179 |  Test loss: 0.7423752839032274
+Entity: 6 | Epoch: 34 | Train loss: 0.758215434909133 |  Test loss: 0.7414798809716908
+Entity: 6 | Epoch: 35 | Train loss: 0.7548968362460408 |  Test loss: 0.7409623720933898
+Entity: 6 | Epoch: 36 | Train loss: 0.7533044207156921 |  Test loss: 0.7386381894923173
+Entity: 6 | Epoch: 37 | Train loss: 0.7500860158810202 |  Test loss: 0.7358431645883964
+Entity: 6 | Epoch: 38 | Train loss: 0.7468688052489746 |  Test loss: 0.7360545726994482
+Entity: 6 | Epoch: 39 | Train loss: 0.744761024802277 |  Test loss: 0.7275076964117874
+Entity: 6 | Epoch: 40 | Train loss: 0.7384200648708763 |  Test loss: 0.7229203783369694
+Entity: 6 | Epoch: 41 | Train loss: 0.7347934865174169 |  Test loss: 0.7171918724771016
+Entity: 6 | Epoch: 42 | Train loss: 0.7267898958955644 |  Test loss: 0.7157389716889996
+Entity: 6 | Epoch: 43 | Train loss: 0.7188304245096574 |  Test loss: 0.700388364551159
+Entity: 6 | Epoch: 44 | Train loss: 0.7114022292096966 |  Test loss: 0.6971205309409505
+Entity: 6 | Epoch: 45 | Train loss: 0.696530185552428 |  Test loss: 0.6774729008947571
+Entity: 6 | Epoch: 46 | Train loss: 0.6861865813630081 |  Test loss: 0.6723929297053614
+Entity: 6 | Epoch: 47 | Train loss: 0.681832737105718 |  Test loss: 0.6751637167333123
+Entity: 6 | Epoch: 48 | Train loss: 0.6786293787948255 |  Test loss: 0.677504755981947
+Entity: 6 | Epoch: 49 | Train loss: 0.6768592424659837 |  Test loss: 0.6622828902811027
+
+
+
+Entity 7
+Dataset: E-6
+Dataset: E-6
+Dataset: E-6
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 62.765625
+number of test batches: 4.0625
+Entity: 7 | Epoch: 0 | Train loss: 0.7695147419785511 |  Test loss: 0.8444683838492403
+Entity: 7 | Epoch: 1 | Train loss: 0.7663500710561567 |  Test loss: 0.8425114158182763
+Entity: 7 | Epoch: 2 | Train loss: 0.7654865641222924 |  Test loss: 0.8417037376131002
+Entity: 7 | Epoch: 3 | Train loss: 0.7650344115453868 |  Test loss: 0.8414080269491443
+Entity: 7 | Epoch: 4 | Train loss: 0.7646842922350126 |  Test loss: 0.8411470531557615
+Entity: 7 | Epoch: 5 | Train loss: 0.7644256725318122 |  Test loss: 0.8407192224636674
+Entity: 7 | Epoch: 6 | Train loss: 0.764190806518784 |  Test loss: 0.8405074480491189
+Entity: 7 | Epoch: 7 | Train loss: 0.7639457886867529 |  Test loss: 0.8402706218883396
+Entity: 7 | Epoch: 8 | Train loss: 0.7637612246737189 |  Test loss: 0.8401057383690316
+Entity: 7 | Epoch: 9 | Train loss: 0.7634864803707722 |  Test loss: 0.8398432820175703
+Entity: 7 | Epoch: 10 | Train loss: 0.7632111790685021 |  Test loss: 0.8395005949450514
+Entity: 7 | Epoch: 11 | Train loss: 0.7627881264380578 |  Test loss: 0.8392783027643768
+Entity: 7 | Epoch: 12 | Train loss: 0.7622877373360097 |  Test loss: 0.8389988034247206
+Entity: 7 | Epoch: 13 | Train loss: 0.7619220282350267 |  Test loss: 0.8389083654010812
+Entity: 7 | Epoch: 14 | Train loss: 0.761699967354308 |  Test loss: 0.8386167473482111
+Entity: 7 | Epoch: 15 | Train loss: 0.7607715560626999 |  Test loss: 0.8382240460003512
+Entity: 7 | Epoch: 16 | Train loss: 0.7600958933607124 |  Test loss: 0.837813836404194
+Entity: 7 | Epoch: 17 | Train loss: 0.7596774972984758 |  Test loss: 0.8374885379945716
+Entity: 7 | Epoch: 18 | Train loss: 0.759968426306637 |  Test loss: None
+Entity: 7 | Epoch: 19 | Train loss: 0.7590618923905172 |  Test loss: 0.8365463951065276
+Entity: 7 | Epoch: 20 | Train loss: 0.7576398670169696 |  Test loss: 0.8359515322336497
+Entity: 7 | Epoch: 21 | Train loss: 0.7563651804318081 |  Test loss: 0.8349531535417415
+Entity: 7 | Epoch: 22 | Train loss: 0.7545150111172805 |  Test loss: 0.8338378212092301
+Entity: 7 | Epoch: 23 | Train loss: 0.752676641769061 |  Test loss: 0.8346264796152424
+Entity: 7 | Epoch: 24 | Train loss: 0.7523170654756987 |  Test loss: 0.8333029859162008
+Entity: 7 | Epoch: 25 | Train loss: 0.7496546015314454 |  Test loss: 0.8304804672916921
+Entity: 7 | Epoch: 26 | Train loss: 0.746206605270486 |  Test loss: 0.8285030270640094
+Entity: 7 | Epoch: 27 | Train loss: 0.7432700341919019 |  Test loss: 0.8256188353398242
+Entity: 7 | Epoch: 28 | Train loss: 0.7379451533836522 |  Test loss: 0.8220165084331081
+Entity: 7 | Epoch: 29 | Train loss: 0.7326088011336076 |  Test loss: 0.8183960590269774
+Entity: 7 | Epoch: 30 | Train loss: 0.7254333719805985 |  Test loss: 0.8114733564103237
+Entity: 7 | Epoch: 31 | Train loss: 0.7153874664222917 |  Test loss: 0.8049721184903039
+Entity: 7 | Epoch: 32 | Train loss: 0.7054539403441001 |  Test loss: 0.8131371236182391
+Entity: 7 | Epoch: 33 | Train loss: 0.6980406204860999 |  Test loss: 0.7857776542095682
+Entity: 7 | Epoch: 34 | Train loss: 0.6930149311040604 |  Test loss: 0.7898767092609957
+Entity: 7 | Epoch: 35 | Train loss: 0.6871720317094254 |  Test loss: 0.7781888098644021
+Entity: 7 | Epoch: 36 | Train loss: 0.6815473132390215 |  Test loss: 0.8082888510127444
+Entity: 7 | Epoch: 37 | Train loss: 0.6770732881392029 |  Test loss: 0.7724975645873481
+Entity: 7 | Epoch: 38 | Train loss: 0.6718086691805499 |  Test loss: 0.7870287070301576
+Entity: 7 | Epoch: 39 | Train loss: 0.6740423943641909 |  Test loss: None
+Entity: 7 | Epoch: 40 | Train loss: 0.6747393942309772 |  Test loss: None
+Entity: 7 | Epoch: 41 | Train loss: 0.6613807126165757 |  Test loss: 0.7599678829880968
+Entity: 7 | Epoch: 42 | Train loss: 0.6573612330278277 |  Test loss: 0.7488791810581461
+Entity: 7 | Epoch: 43 | Train loss: 0.6531964613024943 |  Test loss: 0.7577186717938346
+Entity: 7 | Epoch: 44 | Train loss: 0.6499548041039593 |  Test loss: 0.7618652600987563
+Entity: 7 | Epoch: 45 | Train loss: 0.6528098762101893 |  Test loss: None
+Entity: 7 | Epoch: 46 | Train loss: 0.6462263400848166 |  Test loss: 0.7402665945280414
+Entity: 7 | Epoch: 47 | Train loss: 0.6456910105013498 |  Test loss: 0.7363340816012799
+Entity: 7 | Epoch: 48 | Train loss: 0.641457516911834 |  Test loss: 0.7480746675708081
+Entity: 7 | Epoch: 49 | Train loss: 0.6356141414201096 |  Test loss: 0.7360757003762186
+
+
+
+Entity 8
+Dataset: E-7
+Dataset: E-7
+Dataset: E-7
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.65625
+number of test batches: 61.1640625
+number of test batches: 3.8515625
+Entity: 8 | Epoch: 0 | Train loss: 0.831115722665186 |  Test loss: 0.7702524196507662
+Entity: 8 | Epoch: 1 | Train loss: 0.7921063816433014 |  Test loss: 0.7676367768394415
+Entity: 8 | Epoch: 2 | Train loss: 0.7870303935615588 |  Test loss: 0.7657469683052862
+Entity: 8 | Epoch: 3 | Train loss: 0.7855459337186282 |  Test loss: 0.764922678111684
+Entity: 8 | Epoch: 4 | Train loss: 0.7847209099296933 |  Test loss: 0.7642776875002933
+Entity: 8 | Epoch: 5 | Train loss: 0.784185005569342 |  Test loss: 0.7637540512807047
+Entity: 8 | Epoch: 6 | Train loss: 0.783861336414454 |  Test loss: 0.7634264432558786
+Entity: 8 | Epoch: 7 | Train loss: 0.7835287162160346 |  Test loss: 0.7633597105552592
+Entity: 8 | Epoch: 8 | Train loss: 0.783316224105537 |  Test loss: 0.7629870558667619
+Entity: 8 | Epoch: 9 | Train loss: 0.7831945686237708 |  Test loss: 0.7627969556969816
+Entity: 8 | Epoch: 10 | Train loss: 0.7829772896323997 |  Test loss: 0.763009015856118
+Entity: 8 | Epoch: 11 | Train loss: 0.7827470852518832 |  Test loss: 0.7625611643958647
+Entity: 8 | Epoch: 12 | Train loss: 0.7825858434493433 |  Test loss: 0.7622031481260279
+Entity: 8 | Epoch: 13 | Train loss: 0.7823214617901361 |  Test loss: 0.7622815458289145
+Entity: 8 | Epoch: 14 | Train loss: 0.7821284522459324 |  Test loss: 0.7619939595498674
+Entity: 8 | Epoch: 15 | Train loss: 0.7819524554045263 |  Test loss: 0.7619848023782698
+Entity: 8 | Epoch: 16 | Train loss: 0.7817299655918628 |  Test loss: 0.7616061125419142
+Entity: 8 | Epoch: 17 | Train loss: 0.7814919425398985 |  Test loss: 0.7616740588748612
+Entity: 8 | Epoch: 18 | Train loss: 0.7813479667539392 |  Test loss: 0.7615258287389065
+Entity: 8 | Epoch: 19 | Train loss: 0.7810506693619702 |  Test loss: 0.7614766224939187
+Entity: 8 | Epoch: 20 | Train loss: 0.7807032080408909 |  Test loss: 0.7609465269043165
+Entity: 8 | Epoch: 21 | Train loss: 0.7805253386741746 |  Test loss: 0.7603729705101457
+Entity: 8 | Epoch: 22 | Train loss: 0.7800272323771008 |  Test loss: 0.760461443944496
+Entity: 8 | Epoch: 23 | Train loss: 0.7796772295779892 |  Test loss: 0.7595705073477953
+Entity: 8 | Epoch: 24 | Train loss: 0.7787626298846426 |  Test loss: 0.7595367971769936
+Entity: 8 | Epoch: 25 | Train loss: 0.778262964558047 |  Test loss: 0.758706102752208
+Entity: 8 | Epoch: 26 | Train loss: 0.7769923951766734 |  Test loss: 0.7572229679024063
+Entity: 8 | Epoch: 27 | Train loss: 0.7760879568733783 |  Test loss: 0.7552562319403457
+Entity: 8 | Epoch: 28 | Train loss: 0.7719084894481196 |  Test loss: 0.7593133188179613
+Entity: 8 | Epoch: 29 | Train loss: 0.7673276685106792 |  Test loss: 0.7463512261630495
+Entity: 8 | Epoch: 30 | Train loss: 0.764000264381412 |  Test loss: 0.7425426918678892
+Entity: 8 | Epoch: 31 | Train loss: 0.7561166605059264 |  Test loss: 0.7393791523552358
+Entity: 8 | Epoch: 32 | Train loss: 0.7449334485144583 |  Test loss: 0.7388397938643656
+Entity: 8 | Epoch: 33 | Train loss: 0.7315172880149778 |  Test loss: 0.7288773255517166
+Entity: 8 | Epoch: 34 | Train loss: 0.7232563252955961 |  Test loss: 0.7166945762180442
+Entity: 8 | Epoch: 35 | Train loss: 0.7097188991952195 |  Test loss: 0.7154594498892404
+Entity: 8 | Epoch: 36 | Train loss: 0.7016477886572985 |  Test loss: 0.7140039957910549
+Entity: 8 | Epoch: 37 | Train loss: 0.6929435744928295 |  Test loss: 0.7128251123584006
+Entity: 8 | Epoch: 38 | Train loss: 0.6833530755116364 |  Test loss: 0.7094080730853319
+Entity: 8 | Epoch: 39 | Train loss: 0.6740294536595532 |  Test loss: 0.7022461041120499
+Entity: 8 | Epoch: 40 | Train loss: 0.6675110194250755 |  Test loss: 0.7000104479593722
+Entity: 8 | Epoch: 41 | Train loss: 0.6591036434891994 |  Test loss: 0.6974884952790658
+Entity: 8 | Epoch: 42 | Train loss: 0.6540206687458888 |  Test loss: 0.6962586870978059
+Entity: 8 | Epoch: 43 | Train loss: 0.6507906441902941 |  Test loss: 0.6938669433671807
+Entity: 8 | Epoch: 44 | Train loss: 0.6455340751072963 |  Test loss: 0.6926236449784277
+Entity: 8 | Epoch: 45 | Train loss: 0.6441155171321172 |  Test loss: 0.6906592958261075
+Entity: 8 | Epoch: 46 | Train loss: 0.6479449357024766 |  Test loss: None
+Entity: 8 | Epoch: 47 | Train loss: 0.6501299013246669 |  Test loss: None
+Entity: 8 | Epoch: 48 | Train loss: 0.6363171453134461 |  Test loss: 0.6878167712762498
+Entity: 8 | Epoch: 49 | Train loss: 0.632710982041348 |  Test loss: 0.6864282285405463
+
+
+
+Entity 9
+Dataset: E-8
+Dataset: E-8
+Dataset: E-8
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 60.2265625
+number of test batches: 4.0625
+Entity: 9 | Epoch: 0 | Train loss: 0.7997597063311889 |  Test loss: 0.7593211101797911
+Entity: 9 | Epoch: 1 | Train loss: 0.7863419726956635 |  Test loss: 0.757633734236543
+Entity: 9 | Epoch: 2 | Train loss: 0.7835844242698228 |  Test loss: 0.75644061575787
+Entity: 9 | Epoch: 3 | Train loss: 0.7819891028657403 |  Test loss: 0.7555911133997142
+Entity: 9 | Epoch: 4 | Train loss: 0.7809715339277243 |  Test loss: 0.7547803212172137
+Entity: 9 | Epoch: 5 | Train loss: 0.7801488817850014 |  Test loss: 0.7539260984290964
+Entity: 9 | Epoch: 6 | Train loss: 0.7793342004786721 |  Test loss: 0.7532285667203653
+Entity: 9 | Epoch: 7 | Train loss: 0.7783583920591568 |  Test loss: 0.7522706158638287
+Entity: 9 | Epoch: 8 | Train loss: 0.7776172191902463 |  Test loss: 0.751490908739372
+Entity: 9 | Epoch: 9 | Train loss: 0.7767882993910462 |  Test loss: 0.7512234488502145
+Entity: 9 | Epoch: 10 | Train loss: 0.776465617111713 |  Test loss: 0.749078279819626
+Entity: 9 | Epoch: 11 | Train loss: 0.7753708110571059 |  Test loss: 0.7482082977640228
+Entity: 9 | Epoch: 12 | Train loss: 0.774279205710152 |  Test loss: 0.7476429283618927
+Entity: 9 | Epoch: 13 | Train loss: 0.7734394078152445 |  Test loss: 0.7465352568094834
+Entity: 9 | Epoch: 14 | Train loss: 0.7725433951025182 |  Test loss: 0.7459066779245265
+Entity: 9 | Epoch: 15 | Train loss: 0.7712347170860716 |  Test loss: 0.7439901417515312
+Entity: 9 | Epoch: 16 | Train loss: 0.7694252169111325 |  Test loss: 0.7430438504554331
+Entity: 9 | Epoch: 17 | Train loss: 0.7676951902747459 |  Test loss: 0.7416094358544797
+Entity: 9 | Epoch: 18 | Train loss: 0.764518074447061 |  Test loss: 0.7404339348861518
+Entity: 9 | Epoch: 19 | Train loss: 0.7619263629980233 |  Test loss: 0.7376007260611424
+Entity: 9 | Epoch: 20 | Train loss: 0.7589106533125195 |  Test loss: 0.7364445410203189
+Entity: 9 | Epoch: 21 | Train loss: 0.756776108882599 |  Test loss: 0.7324695021057358
+Entity: 9 | Epoch: 22 | Train loss: 0.754933037897762 |  Test loss: 0.7335421199193941
+Entity: 9 | Epoch: 23 | Train loss: 0.7518919787374421 |  Test loss: 0.728554115517853
+Entity: 9 | Epoch: 24 | Train loss: 0.7480831230026005 |  Test loss: 0.7304613326891111
+Entity: 9 | Epoch: 25 | Train loss: 0.7442609069134793 |  Test loss: 0.7214620831324002
+Entity: 9 | Epoch: 26 | Train loss: 0.7401966453292312 |  Test loss: 0.7234557701552359
+Entity: 9 | Epoch: 27 | Train loss: 0.7374279267368458 |  Test loss: 0.7356233704011315
+Entity: 9 | Epoch: 28 | Train loss: 0.730518304211995 |  Test loss: 0.7231506800887963
+Entity: 9 | Epoch: 29 | Train loss: 0.7280380266020074 |  Test loss: 0.7379947883829188
+Entity: 9 | Epoch: 30 | Train loss: 0.7218613398021411 |  Test loss: 0.7115591835226112
+Entity: 9 | Epoch: 31 | Train loss: 0.7148910715226892 |  Test loss: 0.7134165090065485
+Entity: 9 | Epoch: 32 | Train loss: 0.7085017526989128 |  Test loss: 0.7001852589883268
+Entity: 9 | Epoch: 33 | Train loss: 0.7020239394243655 |  Test loss: 0.6976092245559602
+Entity: 9 | Epoch: 34 | Train loss: 0.6972409923205138 |  Test loss: 0.6882035594926073
+Entity: 9 | Epoch: 35 | Train loss: 0.6934838262178735 |  Test loss: 0.6793478947535802
+Entity: 9 | Epoch: 36 | Train loss: 0.6927190779994019 |  Test loss: 0.6782825558697089
+Entity: 9 | Epoch: 37 | Train loss: 0.6843732933556586 |  Test loss: 0.7286162807006173
+Entity: 9 | Epoch: 38 | Train loss: 0.6788240233328127 |  Test loss: 0.6781107523483045
+Entity: 9 | Epoch: 39 | Train loss: 0.6764562638728923 |  Test loss: 0.6776096719563401
+Entity: 9 | Epoch: 40 | Train loss: 0.6714417227939465 |  Test loss: 0.6748232338165577
+Entity: 9 | Epoch: 41 | Train loss: 0.668498565192686 |  Test loss: 0.6992057001688339
+Entity: 9 | Epoch: 42 | Train loss: 0.6654595296326264 |  Test loss: 0.6776281094026322
+Entity: 9 | Epoch: 43 | Train loss: 0.6610364903415534 |  Test loss: 0.6984819317429076
+Entity: 9 | Epoch: 44 | Train loss: 0.6573352275054536 |  Test loss: 0.6659698218774373
+Entity: 9 | Epoch: 45 | Train loss: 0.6583820700008727 |  Test loss: None
+Entity: 9 | Epoch: 46 | Train loss: 0.6553396629618614 |  Test loss: 0.6676074387675796
+Entity: 9 | Epoch: 47 | Train loss: 0.6532901137745322 |  Test loss: 0.6662602763681207
+Entity: 9 | Epoch: 48 | Train loss: 0.64824494794219 |  Test loss: 0.667360142349767
+Entity: 9 | Epoch: 49 | Train loss: 0.6456579576590935 |  Test loss: 0.6604053460751087
+
+
+
+Entity 10
+Dataset: E-9
+Dataset: E-9
+Dataset: E-9
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 60.5546875
+number of test batches: 4.0625
+Entity: 10 | Epoch: 0 | Train loss: 0.7662138219267054 |  Test loss: 0.8590553512581839
+Entity: 10 | Epoch: 1 | Train loss: 0.7604363026401523 |  Test loss: 0.8549278462592226
+Entity: 10 | Epoch: 2 | Train loss: 0.7585530737681049 |  Test loss: 0.8529966698422168
+Entity: 10 | Epoch: 3 | Train loss: 0.7575524112095638 |  Test loss: 0.8521629448406971
+Entity: 10 | Epoch: 4 | Train loss: 0.7566871782061548 |  Test loss: 0.8519396067596972
+Entity: 10 | Epoch: 5 | Train loss: 0.7558760537328769 |  Test loss: 0.8515358827506694
+Entity: 10 | Epoch: 6 | Train loss: 0.7550673013752592 |  Test loss: 0.8510793236299203
+Entity: 10 | Epoch: 7 | Train loss: 0.7542021563742309 |  Test loss: 0.8501666178425344
+Entity: 10 | Epoch: 8 | Train loss: 0.7533224394754031 |  Test loss: 0.850297107662146
+Entity: 10 | Epoch: 9 | Train loss: 0.7522068420472574 |  Test loss: 0.8490566772623704
+Entity: 10 | Epoch: 10 | Train loss: 0.7506339172880184 |  Test loss: 0.8486992748131832
+Entity: 10 | Epoch: 11 | Train loss: 0.7478467570902894 |  Test loss: 0.847931557141531
+Entity: 10 | Epoch: 12 | Train loss: 0.7456267619676584 |  Test loss: 0.8464883722364902
+Entity: 10 | Epoch: 13 | Train loss: 0.7428845996436264 |  Test loss: 0.8460295573163491
+Entity: 10 | Epoch: 14 | Train loss: 0.7405762228373514 |  Test loss: 0.8450531129187976
+Entity: 10 | Epoch: 15 | Train loss: 0.737955596447181 |  Test loss: 0.843242435841463
+Entity: 10 | Epoch: 16 | Train loss: 0.7355381233484617 |  Test loss: 0.8396988221121808
+Entity: 10 | Epoch: 17 | Train loss: 0.7322353240017 |  Test loss: 0.838546326996472
+Entity: 10 | Epoch: 18 | Train loss: 0.7288476917921204 |  Test loss: 0.8370982439149744
+Entity: 10 | Epoch: 19 | Train loss: 0.7253171924254572 |  Test loss: 0.8307088261649299
+Entity: 10 | Epoch: 20 | Train loss: 0.7215955692267387 |  Test loss: 0.8281555334106088
+Entity: 10 | Epoch: 21 | Train loss: 0.7168635231252684 |  Test loss: 0.8255884094020495
+Entity: 10 | Epoch: 22 | Train loss: 0.7122697141544171 |  Test loss: 0.8322632949082898
+Entity: 10 | Epoch: 23 | Train loss: 0.7085660632894546 |  Test loss: 0.8171335251106379
+Entity: 10 | Epoch: 24 | Train loss: 0.701755634454383 |  Test loss: 0.8191411022275973
+Entity: 10 | Epoch: 25 | Train loss: 0.6960143534922782 |  Test loss: 0.8149200398421201
+Entity: 10 | Epoch: 26 | Train loss: 0.6908441454321811 |  Test loss: 0.8028102359573285
+Entity: 10 | Epoch: 27 | Train loss: 0.685300610704129 |  Test loss: 0.8121102660258587
+Entity: 10 | Epoch: 28 | Train loss: 0.6780963465996676 |  Test loss: 0.7925019174384383
+Entity: 10 | Epoch: 29 | Train loss: 0.6727228292893638 |  Test loss: 0.787066924057077
+Entity: 10 | Epoch: 30 | Train loss: 0.6633750899720994 |  Test loss: 0.7803870081552304
+Entity: 10 | Epoch: 31 | Train loss: 0.6574037660488251 |  Test loss: 0.7723921282073626
+Entity: 10 | Epoch: 32 | Train loss: 0.6555408176281775 |  Test loss: 0.7650443138912894
+Entity: 10 | Epoch: 33 | Train loss: 0.6471193359535169 |  Test loss: 0.7640918596996926
+Entity: 10 | Epoch: 34 | Train loss: 0.641345531122203 |  Test loss: 0.7571739568948173
+Entity: 10 | Epoch: 35 | Train loss: 0.6389171742323349 |  Test loss: 0.7527940090620318
+Entity: 10 | Epoch: 36 | Train loss: 0.6339855749392882 |  Test loss: 0.7511591043350143
+Entity: 10 | Epoch: 37 | Train loss: 0.6322552302568362 |  Test loss: 0.7467104837423764
+Entity: 10 | Epoch: 38 | Train loss: 0.6285815162902546 |  Test loss: 0.7431673099859976
+Entity: 10 | Epoch: 39 | Train loss: 0.6285930817414608 |  Test loss: None
+Entity: 10 | Epoch: 40 | Train loss: 0.6223988014761577 |  Test loss: 0.7472310737008229
+Entity: 10 | Epoch: 41 | Train loss: 0.6263021780653115 |  Test loss: None
+Entity: 10 | Epoch: 42 | Train loss: 0.618436159665473 |  Test loss: 0.7365676164492749
+Entity: 10 | Epoch: 43 | Train loss: 0.6174174737527358 |  Test loss: 0.7412349225312937
+Entity: 10 | Epoch: 44 | Train loss: 0.6141777745603669 |  Test loss: 0.7377385527092534
+Entity: 10 | Epoch: 45 | Train loss: 0.6133461791818857 |  Test loss: 0.732205454315632
+Entity: 10 | Epoch: 46 | Train loss: 0.6083245127950082 |  Test loss: 0.731214171650712
+Entity: 10 | Epoch: 47 | Train loss: 0.6044901306631651 |  Test loss: 0.7287089024074913
+Entity: 10 | Epoch: 48 | Train loss: 0.6022021204641811 |  Test loss: 0.7304158334096428
+Entity: 10 | Epoch: 49 | Train loss: 0.598167990062419 |  Test loss: 0.7295818944569104
+
+
+
+Entity 11
+Dataset: E-10
+Dataset: E-10
+Dataset: E-10
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 62.3671875
+number of test batches: 4.0625
+Entity: 11 | Epoch: 0 | Train loss: 0.8209577673000796 |  Test loss: 0.8529563649485891
+Entity: 11 | Epoch: 1 | Train loss: 0.7726817841508559 |  Test loss: 0.8468316529519283
+Entity: 11 | Epoch: 2 | Train loss: 0.7682197955817136 |  Test loss: 0.8442506198556378
+Entity: 11 | Epoch: 3 | Train loss: 0.7665362141969405 |  Test loss: 0.8430983482358547
+Entity: 11 | Epoch: 4 | Train loss: 0.7656395619069891 |  Test loss: 0.8423820853734819
+Entity: 11 | Epoch: 5 | Train loss: 0.7651131666246421 |  Test loss: 0.8419209383428097
+Entity: 11 | Epoch: 6 | Train loss: 0.764737191744985 |  Test loss: 0.8416269364623497
+Entity: 11 | Epoch: 7 | Train loss: 0.7644629600172749 |  Test loss: 0.8412911226471457
+Entity: 11 | Epoch: 8 | Train loss: 0.7642159695451965 |  Test loss: 0.8411128948227717
+Entity: 11 | Epoch: 9 | Train loss: 0.7640232417086253 |  Test loss: 0.8409248741057057
+Entity: 11 | Epoch: 10 | Train loss: 0.7638511548274938 |  Test loss: 0.8407319824712781
+Entity: 11 | Epoch: 11 | Train loss: 0.7637460270022252 |  Test loss: 0.8405517471309465
+Entity: 11 | Epoch: 12 | Train loss: 0.7636069416866771 |  Test loss: 0.8403246692023598
+Entity: 11 | Epoch: 13 | Train loss: 0.7634287904967003 |  Test loss: 0.8401864862499329
+Entity: 11 | Epoch: 14 | Train loss: 0.7633237173324641 |  Test loss: 0.8401089320675685
+Entity: 11 | Epoch: 15 | Train loss: 0.7631538831733395 |  Test loss: 0.8398759901917611
+Entity: 11 | Epoch: 16 | Train loss: 0.7629624096353596 |  Test loss: 0.8398117275407108
+Entity: 11 | Epoch: 17 | Train loss: 0.762807319328493 |  Test loss: 0.8396508113696025
+Entity: 11 | Epoch: 18 | Train loss: 0.7625224222685686 |  Test loss: 0.8394374139320392
+Entity: 11 | Epoch: 19 | Train loss: 0.7622090633930069 |  Test loss: 0.839260777232882
+Entity: 11 | Epoch: 20 | Train loss: 0.7619904334010671 |  Test loss: 0.8390839985034501
+Entity: 11 | Epoch: 21 | Train loss: 0.7616695053694884 |  Test loss: 0.8389500076882541
+Entity: 11 | Epoch: 22 | Train loss: 0.7619106045677041 |  Test loss: None
+Entity: 11 | Epoch: 23 | Train loss: 0.7617934427300126 |  Test loss: None
+Entity: 11 | Epoch: 24 | Train loss: 0.7615774721049761 |  Test loss: 0.8386030836066661
+Entity: 11 | Epoch: 25 | Train loss: 0.7611728337669403 |  Test loss: 0.8382509189048926
+Entity: 11 | Epoch: 26 | Train loss: 0.760577723033232 |  Test loss: 0.8376914063468576
+Entity: 11 | Epoch: 27 | Train loss: 0.7597226467278159 |  Test loss: 0.837377918081788
+Entity: 11 | Epoch: 28 | Train loss: 0.758998639925326 |  Test loss: 0.8373141797904212
+Entity: 11 | Epoch: 29 | Train loss: 0.7580919002011722 |  Test loss: 0.8358281722435584
+Entity: 11 | Epoch: 30 | Train loss: 0.7575599704964124 |  Test loss: 0.8344764340525637
+Entity: 11 | Epoch: 31 | Train loss: 0.7549221190234304 |  Test loss: 0.8326532824466435
+Entity: 11 | Epoch: 32 | Train loss: 0.7531652251115943 |  Test loss: 0.8294378681663567
+Entity: 11 | Epoch: 33 | Train loss: 0.7492396922615756 |  Test loss: 0.8399408927384334
+Entity: 11 | Epoch: 34 | Train loss: 0.7431888061846436 |  Test loss: 0.8247118607915651
+Entity: 11 | Epoch: 35 | Train loss: 0.7308028835862665 |  Test loss: 0.8062937697610603
+Entity: 11 | Epoch: 36 | Train loss: 0.7135049174428081 |  Test loss: 0.7785179806362766
+Entity: 11 | Epoch: 37 | Train loss: 0.6970965682258069 |  Test loss: 0.7643541578946706
+Entity: 11 | Epoch: 38 | Train loss: 0.6885666126677558 |  Test loss: 0.7533348585958055
+Entity: 11 | Epoch: 39 | Train loss: 0.6795718908597411 |  Test loss: 0.7600098666999167
+Entity: 11 | Epoch: 40 | Train loss: 0.6696843459149727 |  Test loss: 0.7402929242928692
+Entity: 11 | Epoch: 41 | Train loss: 0.6606916382605904 |  Test loss: 0.7369884464965882
+Entity: 11 | Epoch: 42 | Train loss: 0.6503493320923869 |  Test loss: 0.7362273717030453
+Entity: 11 | Epoch: 43 | Train loss: 0.6403587622406456 |  Test loss: 0.7389086625005943
+Entity: 11 | Epoch: 44 | Train loss: 0.6342817994190988 |  Test loss: 0.750138540464328
+Entity: 11 | Epoch: 45 | Train loss: 0.6411859498940151 |  Test loss: None
+Entity: 11 | Epoch: 46 | Train loss: 0.6205781693093964 |  Test loss: 0.728142461106808
+Entity: 11 | Epoch: 47 | Train loss: 0.615125000161803 |  Test loss: 0.7302934920822736
+Entity: 11 | Epoch: 48 | Train loss: 0.6084515676700644 |  Test loss: 0.7425943635162324
+Entity: 11 | Epoch: 49 | Train loss: 0.6107226039692807 |  Test loss: None
+
+
+
+Entity 12
+Dataset: E-11
+Dataset: E-11
+Dataset: E-11
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 62.6484375
+number of test batches: 4.0625
+Entity: 12 | Epoch: 0 | Train loss: 0.8155401428553218 |  Test loss: 0.8423487429435437
+Entity: 12 | Epoch: 1 | Train loss: 0.7737119543727259 |  Test loss: 0.8389127467472393
+Entity: 12 | Epoch: 2 | Train loss: 0.7685590330758417 |  Test loss: 0.838311608436589
+Entity: 12 | Epoch: 3 | Train loss: 0.7667254730137255 |  Test loss: 0.8375444081397011
+Entity: 12 | Epoch: 4 | Train loss: 0.765784043353051 |  Test loss: 0.8371607214498978
+Entity: 12 | Epoch: 5 | Train loss: 0.7653214052186481 |  Test loss: 0.8367058984469622
+Entity: 12 | Epoch: 6 | Train loss: 0.7650018415812935 |  Test loss: 0.8367917838649681
+Entity: 12 | Epoch: 7 | Train loss: 0.7647320896025975 |  Test loss: 0.8364013098896697
+Entity: 12 | Epoch: 8 | Train loss: 0.7644125600792088 |  Test loss: 0.8363088197540491
+Entity: 12 | Epoch: 9 | Train loss: 0.7642198482195713 |  Test loss: 0.8364318102239989
+Entity: 12 | Epoch: 10 | Train loss: 0.7640320539674056 |  Test loss: 0.8362278876038125
+Entity: 12 | Epoch: 11 | Train loss: 0.7638257780093319 |  Test loss: 0.8360116987345884
+Entity: 12 | Epoch: 12 | Train loss: 0.7636678296302882 |  Test loss: 0.83607753542825
+Entity: 12 | Epoch: 13 | Train loss: 0.7635537581736868 |  Test loss: 0.8360241266791351
+Entity: 12 | Epoch: 14 | Train loss: 0.7633809195612843 |  Test loss: 0.8356178330687376
+Entity: 12 | Epoch: 15 | Train loss: 0.763177594397103 |  Test loss: 0.835586868172798
+Entity: 12 | Epoch: 16 | Train loss: 0.7631631112505435 |  Test loss: 0.8350156130699011
+Entity: 12 | Epoch: 17 | Train loss: 0.7629689388514059 |  Test loss: 0.8354970167928304
+Entity: 12 | Epoch: 18 | Train loss: 0.7628099813881539 |  Test loss: 0.8350352732858692
+Entity: 12 | Epoch: 19 | Train loss: 0.7624693427139855 |  Test loss: 0.8350652780240545
+Entity: 12 | Epoch: 20 | Train loss: 0.7623166041591262 |  Test loss: 0.8348764357909274
+Entity: 12 | Epoch: 21 | Train loss: 0.7620888026098588 |  Test loss: 0.8345939181422671
+Entity: 12 | Epoch: 22 | Train loss: 0.7619024092331529 |  Test loss: 0.8342150796061525
+Entity: 12 | Epoch: 23 | Train loss: 0.7616099986314241 |  Test loss: 0.834237579557185
+Entity: 12 | Epoch: 24 | Train loss: 0.7616420306436413 |  Test loss: None
+Entity: 12 | Epoch: 25 | Train loss: 0.7614208436713611 |  Test loss: 0.8338260318510807
+Entity: 12 | Epoch: 26 | Train loss: 0.7609524181625825 |  Test loss: 0.8337399998930498
+Entity: 12 | Epoch: 27 | Train loss: 0.7605183956854767 |  Test loss: 0.8329139978875622
+Entity: 12 | Epoch: 28 | Train loss: 0.7604575898526806 |  Test loss: 0.8330214655993936
+Entity: 12 | Epoch: 29 | Train loss: 0.7601938515359878 |  Test loss: 0.8328499640696324
+Entity: 12 | Epoch: 30 | Train loss: 0.7595246813098463 |  Test loss: 0.8325563446439516
+Entity: 12 | Epoch: 31 | Train loss: 0.7589165716298989 |  Test loss: 0.832082009788316
+Entity: 12 | Epoch: 32 | Train loss: 0.7585945468937636 |  Test loss: 0.8316391910533779
+Entity: 12 | Epoch: 33 | Train loss: 0.7582654329862598 |  Test loss: 0.8310550334075323
+Entity: 12 | Epoch: 34 | Train loss: 0.7574984010907688 |  Test loss: 0.8303889579641132
+Entity: 12 | Epoch: 35 | Train loss: 0.7568420969087593 |  Test loss: 0.8301872762636496
+Entity: 12 | Epoch: 36 | Train loss: 0.7558998848496917 |  Test loss: 0.8290756136555082
+Entity: 12 | Epoch: 37 | Train loss: 0.7548158968518469 |  Test loss: 0.8280424999091058
+Entity: 12 | Epoch: 38 | Train loss: 0.7538209574686705 |  Test loss: 0.8267877059737937
+Entity: 12 | Epoch: 39 | Train loss: 0.7523742836035255 |  Test loss: 0.8254268744584317
+Entity: 12 | Epoch: 40 | Train loss: 0.7507337290092789 |  Test loss: 0.8226863321669113
+Entity: 12 | Epoch: 41 | Train loss: 0.7479042190944358 |  Test loss: 0.8226576112658501
+Entity: 12 | Epoch: 42 | Train loss: 0.744401535563342 |  Test loss: 0.8209805369198035
+Entity: 12 | Epoch: 43 | Train loss: 0.7398353980343352 |  Test loss: 0.81159020682367
+Entity: 12 | Epoch: 44 | Train loss: 0.7323267421951252 |  Test loss: 0.810621909944054
+Entity: 12 | Epoch: 45 | Train loss: 0.722684689446552 |  Test loss: 0.7854696208772322
+Entity: 12 | Epoch: 46 | Train loss: 0.7049968639550236 |  Test loss: 0.7746477918036712
+Entity: 12 | Epoch: 47 | Train loss: 0.6916042442725763 |  Test loss: 0.7615321486274926
+Entity: 12 | Epoch: 48 | Train loss: 0.6825765821052838 |  Test loss: 0.7498792557699534
+Entity: 12 | Epoch: 49 | Train loss: 0.6724187753718033 |  Test loss: 0.7527029649081389
+
+
+
+Entity 13
+Dataset: E-12
+Dataset: E-12
+Dataset: E-12
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 60.3828125
+number of test batches: 4.0625
+Entity: 13 | Epoch: 0 | Train loss: 0.7969184610194393 |  Test loss: 0.8420185570031977
+Entity: 13 | Epoch: 1 | Train loss: 0.7719330751242078 |  Test loss: 0.8400197730542949
+Entity: 13 | Epoch: 2 | Train loss: 0.7677979333763372 |  Test loss: 0.8399283076564853
+Entity: 13 | Epoch: 3 | Train loss: 0.7664292198178188 |  Test loss: 0.8400024592231673
+Entity: 13 | Epoch: 4 | Train loss: 0.7656225641258061 |  Test loss: 0.8398909222585365
+Entity: 13 | Epoch: 5 | Train loss: 0.7648069147866371 |  Test loss: 0.8398603516809929
+Entity: 13 | Epoch: 6 | Train loss: 0.7639763273564832 |  Test loss: 0.8400013077825021
+Entity: 13 | Epoch: 7 | Train loss: 0.7629745053051382 |  Test loss: 0.8399521156429098
+Entity: 13 | Epoch: 8 | Train loss: 0.7621100315928687 |  Test loss: 0.8401147288270294
+Entity: 13 | Epoch: 9 | Train loss: 0.7610139751350697 |  Test loss: 0.8397980622875576
+Entity: 13 | Epoch: 10 | Train loss: 0.7598427658339925 |  Test loss: 0.8400727935386105
+Entity: 13 | Epoch: 11 | Train loss: 0.7585367503490451 |  Test loss: 0.8400147562846542
+Entity: 13 | Epoch: 12 | Train loss: 0.7575233578976548 |  Test loss: 0.8397378461041416
+Entity: 13 | Epoch: 13 | Train loss: 0.7562302179967186 |  Test loss: 0.8399353860161052
+Entity: 13 | Epoch: 14 | Train loss: 0.7543595263991049 |  Test loss: 0.8396581787401094
+Entity: 13 | Epoch: 15 | Train loss: 0.7523332810428526 |  Test loss: 0.8401341189666149
+Entity: 13 | Epoch: 16 | Train loss: 0.7512313244351166 |  Test loss: 0.8396382900348937
+Entity: 13 | Epoch: 17 | Train loss: 0.7491429088171572 |  Test loss: 0.8395921634223599
+Entity: 13 | Epoch: 18 | Train loss: 0.7463374518637298 |  Test loss: 0.8395002612879929
+Entity: 13 | Epoch: 19 | Train loss: 0.7441416207691465 |  Test loss: 0.8393984500676966
+Entity: 13 | Epoch: 20 | Train loss: 0.7419753215712857 |  Test loss: 0.8393765193410218
+Entity: 13 | Epoch: 21 | Train loss: 0.7399379925431722 |  Test loss: 0.839354340531505
+Entity: 13 | Epoch: 22 | Train loss: 0.7383459804817198 |  Test loss: 0.8392785487983089
+Entity: 13 | Epoch: 23 | Train loss: 0.7362410454991825 |  Test loss: 0.83886916402799
+Entity: 13 | Epoch: 24 | Train loss: 0.7354396001183979 |  Test loss: 0.8389455917900285
+Entity: 13 | Epoch: 25 | Train loss: 0.7320484040889471 |  Test loss: 0.8391048963539876
+Entity: 13 | Epoch: 26 | Train loss: 0.7300473753647992 |  Test loss: 0.8388394032927373
+Entity: 13 | Epoch: 27 | Train loss: 0.728263368247533 |  Test loss: 0.8387200525890176
+Entity: 13 | Epoch: 28 | Train loss: 0.728196859151144 |  Test loss: 0.8390191426679778
+Entity: 13 | Epoch: 29 | Train loss: 0.7254321344638699 |  Test loss: 0.8394360518871018
+Entity: 13 | Epoch: 30 | Train loss: 0.7223755330916456 |  Test loss: 0.8397217820076128
+Entity: 13 | Epoch: 31 | Train loss: 0.7210391817956555 |  Test loss: 0.8397720264199261
+Entity: 13 | Epoch: 32 | Train loss: 0.7182407046858297 |  Test loss: 0.8394180061349359
+Entity: 13 | Epoch: 33 | Train loss: 0.7150341399479657 |  Test loss: 0.8405069291824475
+Entity: 13 | Epoch: 34 | Train loss: 0.7120079637433839 |  Test loss: 0.8403542967334103
+Entity: 13 | Epoch: 35 | Train loss: 0.7096956290661034 |  Test loss: 0.8393767685163767
+Entity: 13 | Epoch: 36 | Train loss: 0.7045537086550564 |  Test loss: 0.8408085684560669
+Entity: 13 | Epoch: 37 | Train loss: 0.705236977191965 |  Test loss: None
+Entity: 13 | Epoch: 38 | Train loss: 0.7022733862606847 |  Test loss: 0.8387049647818248
+Entity: 13 | Epoch: 39 | Train loss: 0.696024827878181 |  Test loss: 0.8380821572383865
+Entity: 13 | Epoch: 40 | Train loss: 0.6947061473869586 |  Test loss: 0.8386361202690751
+Entity: 13 | Epoch: 41 | Train loss: 0.6911655727811918 |  Test loss: 0.8367127997979809
+Entity: 13 | Epoch: 42 | Train loss: 0.6873496444620268 |  Test loss: 0.8365560487664949
+Entity: 13 | Epoch: 43 | Train loss: 0.69017135856331 |  Test loss: None
+Entity: 13 | Epoch: 44 | Train loss: 0.687081890690321 |  Test loss: 0.8358942328432861
+Entity: 13 | Epoch: 45 | Train loss: 0.685047631538283 |  Test loss: 0.8349523563546917
+Entity: 13 | Epoch: 46 | Train loss: 0.6907864844276835 |  Test loss: None
+Entity: 13 | Epoch: 47 | Train loss: 0.6794821054330191 |  Test loss: 0.8332232145843311
+Entity: 13 | Epoch: 48 | Train loss: 0.6780836740297227 |  Test loss: 0.833266588987317
+Entity: 13 | Epoch: 49 | Train loss: 0.675203978953579 |  Test loss: 0.8315298064576032
+
+
+
+Entity 14
+Dataset: E-13
+Dataset: E-13
+Dataset: E-13
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 63.875
+number of test batches: 4.0625
+Entity: 14 | Epoch: 0 | Train loss: 0.8280057983929101 |  Test loss: 1.0827452395039683
+Entity: 14 | Epoch: 1 | Train loss: 0.757317993263429 |  Test loss: 1.076917261401048
+Entity: 14 | Epoch: 2 | Train loss: 0.7450785747871791 |  Test loss: 1.0756334428997854
+Entity: 14 | Epoch: 3 | Train loss: 0.7419713574480645 |  Test loss: 1.0752920196534923
+Entity: 14 | Epoch: 4 | Train loss: 0.7406244204598194 |  Test loss: 1.0754563873848664
+Entity: 14 | Epoch: 5 | Train loss: 0.739865575639569 |  Test loss: 1.0752653761874311
+Entity: 14 | Epoch: 6 | Train loss: 0.7393245866408154 |  Test loss: 1.0753193527818299
+Entity: 14 | Epoch: 7 | Train loss: 0.738899222433529 |  Test loss: 1.074609296876364
+Entity: 14 | Epoch: 8 | Train loss: 0.7386166871078692 |  Test loss: 1.0746384622242589
+Entity: 14 | Epoch: 9 | Train loss: 0.7383166290924181 |  Test loss: 1.0745221349267433
+Entity: 14 | Epoch: 10 | Train loss: 0.7381076525283825 |  Test loss: 1.0741079265036835
+Entity: 14 | Epoch: 11 | Train loss: 0.7377429879840691 |  Test loss: 1.0738804855169013
+Entity: 14 | Epoch: 12 | Train loss: 0.7375320444220905 |  Test loss: 1.0734883073574075
+Entity: 14 | Epoch: 13 | Train loss: 0.7372389006837062 |  Test loss: 1.0727905951368695
+Entity: 14 | Epoch: 14 | Train loss: 0.7370311048209706 |  Test loss: 1.0723242481597342
+Entity: 14 | Epoch: 15 | Train loss: 0.7367657182424576 |  Test loss: 1.0717607071587385
+Entity: 14 | Epoch: 16 | Train loss: 0.736625356196749 |  Test loss: 1.0713284452660725
+Entity: 14 | Epoch: 17 | Train loss: 0.7364315449744843 |  Test loss: 1.0710226427871161
+Entity: 14 | Epoch: 18 | Train loss: 0.7361365064090042 |  Test loss: 1.0710887313712962
+Entity: 14 | Epoch: 19 | Train loss: 0.7357784722275956 |  Test loss: 1.0703992888725435
+Entity: 14 | Epoch: 20 | Train loss: 0.7353601567304636 |  Test loss: 1.0700807522230136
+Entity: 14 | Epoch: 21 | Train loss: 0.7352237593206786 |  Test loss: 1.0695918494477294
+Entity: 14 | Epoch: 22 | Train loss: 0.7346368424076473 |  Test loss: 1.0696037132615366
+Entity: 14 | Epoch: 23 | Train loss: 0.7343975624948625 |  Test loss: 1.06926026807095
+Entity: 14 | Epoch: 24 | Train loss: 0.7340803492505446 |  Test loss: 1.0693638983863192
+Entity: 14 | Epoch: 25 | Train loss: 0.7335851809000407 |  Test loss: 1.0694073184572446
+Entity: 14 | Epoch: 26 | Train loss: 0.7331286245890494 |  Test loss: 1.0686630657229286
+Entity: 14 | Epoch: 27 | Train loss: 0.7328851623617455 |  Test loss: 1.0687238751731527
+Entity: 14 | Epoch: 28 | Train loss: 0.7321744432948454 |  Test loss: 1.0686437892942475
+Entity: 14 | Epoch: 29 | Train loss: 0.7311959493297095 |  Test loss: 1.0680889867819272
+Entity: 14 | Epoch: 30 | Train loss: 0.7305865522231717 |  Test loss: 1.0686243063340393
+Entity: 14 | Epoch: 31 | Train loss: 0.730108777324346 |  Test loss: 1.0688287313597706
+Entity: 14 | Epoch: 32 | Train loss: 0.7294451353301731 |  Test loss: 1.0676860719274444
+Entity: 14 | Epoch: 33 | Train loss: 0.7279344826765662 |  Test loss: 1.0675317925580132
+Entity: 14 | Epoch: 34 | Train loss: 0.7269118623879302 |  Test loss: 1.0673059433161354
+Entity: 14 | Epoch: 35 | Train loss: 0.7266985725207559 |  Test loss: 1.0679654793348163
+Entity: 14 | Epoch: 36 | Train loss: 0.7253584933481464 |  Test loss: 1.066943729095734
+Entity: 14 | Epoch: 37 | Train loss: 0.7237003453655586 |  Test loss: 1.0665766883820582
+Entity: 14 | Epoch: 38 | Train loss: 0.7231691368100024 |  Test loss: 1.0674363479412232
+Entity: 14 | Epoch: 39 | Train loss: 0.7227442591375082 |  Test loss: 1.0648378992041287
+Entity: 14 | Epoch: 40 | Train loss: 0.7207442900626825 |  Test loss: 1.067039542965806
+Entity: 14 | Epoch: 41 | Train loss: 0.7205814570986799 |  Test loss: 1.0652797855812912
+Entity: 14 | Epoch: 42 | Train loss: 0.7181908889041682 |  Test loss: 1.064684970354518
+Entity: 14 | Epoch: 43 | Train loss: 0.7160955627011706 |  Test loss: 1.064807973177029
+Entity: 14 | Epoch: 44 | Train loss: 0.7177772397070895 |  Test loss: None
+Entity: 14 | Epoch: 45 | Train loss: 0.7161556990342025 |  Test loss: None
+Entity: 14 | Epoch: 46 | Train loss: 0.7161212916205618 |  Test loss: None
+Entity: 14 | Epoch: 47 | Train loss: 0.7115289007247027 |  Test loss: 1.0630326583121832
+Entity: 14 | Epoch: 48 | Train loss: 0.710828373929229 |  Test loss: 1.0639538588038144
+Entity: 14 | Epoch: 49 | Train loss: 0.7113892767587867 |  Test loss: None
+
+
+
+Entity 15
+Dataset: A-1
+Dataset: A-1
+Dataset: A-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 65.2734375
+number of test batches: 4.0625
+Entity: 15 | Epoch: 0 | Train loss: 0.8492142761116658 |  Test loss: 0.6757542453777905
+Entity: 15 | Epoch: 1 | Train loss: 0.7990471998552735 |  Test loss: 0.6711809775398041
+Entity: 15 | Epoch: 2 | Train loss: 0.7920424666683361 |  Test loss: 0.6703734330403117
+Entity: 15 | Epoch: 3 | Train loss: 0.7887180869315504 |  Test loss: 0.6691303531030336
+Entity: 15 | Epoch: 4 | Train loss: 0.7868901276352759 |  Test loss: 0.6688795533783447
+Entity: 15 | Epoch: 5 | Train loss: 0.7858578657740917 |  Test loss: 0.6695672256119836
+Entity: 15 | Epoch: 6 | Train loss: 0.7851235218906814 |  Test loss: 0.6692496926416285
+Entity: 15 | Epoch: 7 | Train loss: 0.7844411430015628 |  Test loss: 0.6686717027404274
+Entity: 15 | Epoch: 8 | Train loss: 0.7842621688930583 |  Test loss: 0.6699442358436779
+Entity: 15 | Epoch: 9 | Train loss: 0.7837579480334356 |  Test loss: 0.6689796086902229
+Entity: 15 | Epoch: 10 | Train loss: 0.7831688021110105 |  Test loss: 0.6698307524471042
+Entity: 15 | Epoch: 11 | Train loss: 0.7826411059800992 |  Test loss: 0.6698277058903701
+Entity: 15 | Epoch: 12 | Train loss: 0.7820361246065027 |  Test loss: 0.6701077300750722
+Entity: 15 | Epoch: 13 | Train loss: 0.7817355164455022 |  Test loss: 0.6703181314085108
+Entity: 15 | Epoch: 14 | Train loss: 0.7812787382849207 |  Test loss: 0.6707223218185111
+Entity: 15 | Epoch: 15 | Train loss: 0.7812943003173651 |  Test loss: None
+Entity: 15 | Epoch: 16 | Train loss: 0.7804520668884816 |  Test loss: 0.6715321442560078
+Entity: 15 | Epoch: 17 | Train loss: 0.7805019965138742 |  Test loss: None
+Entity: 15 | Epoch: 18 | Train loss: 0.7799438771406872 |  Test loss: 0.6710918788762333
+Entity: 15 | Epoch: 19 | Train loss: 0.7792241499954075 |  Test loss: 0.6721813747175754
+Entity: 15 | Epoch: 20 | Train loss: 0.7783624782412294 |  Test loss: 0.6732277244884664
+Entity: 15 | Epoch: 21 | Train loss: 0.7781485314281391 |  Test loss: 0.6744713879154566
+Entity: 15 | Epoch: 22 | Train loss: 0.7773441903872833 |  Test loss: 0.673467711215982
+Entity: 15 | Epoch: 23 | Train loss: 0.776897634646133 |  Test loss: 0.6758621158078313
+Entity: 15 | Epoch: 24 | Train loss: 0.7760781646221496 |  Test loss: 0.6764216650456477
+Entity: 15 | Epoch: 25 | Train loss: 0.7757164746480139 |  Test loss: 0.677611177196153
+Entity: 15 | Epoch: 26 | Train loss: 0.7751077207727167 |  Test loss: 0.6786193294898392
+Entity: 15 | Epoch: 27 | Train loss: 0.774680195676581 |  Test loss: 0.6795121310189223
+Entity: 15 | Epoch: 28 | Train loss: 0.7735019975489158 |  Test loss: 0.6815422834864316
+Entity: 15 | Epoch: 29 | Train loss: 0.7730330730341755 |  Test loss: 0.6822640613813956
+Entity: 15 | Epoch: 30 | Train loss: 0.7721470699403244 |  Test loss: 0.6849859454310857
+Entity: 15 | Epoch: 31 | Train loss: 0.7709693708148195 |  Test loss: 0.685126092705804
+Entity: 15 | Epoch: 32 | Train loss: 0.7699934324449195 |  Test loss: 0.6880013779074383
+Entity: 15 | Epoch: 33 | Train loss: 0.7686238635849322 |  Test loss: 0.6882283640846324
+Entity: 15 | Epoch: 34 | Train loss: 0.7683968569779275 |  Test loss: 0.6936681716165577
+Entity: 15 | Epoch: 35 | Train loss: 0.7669308031662082 |  Test loss: 0.6953500025350458
+Entity: 15 | Epoch: 36 | Train loss: 0.7667953776214652 |  Test loss: 0.6980179979734552
+Entity: 15 | Epoch: 37 | Train loss: 0.7647047931508978 |  Test loss: 0.7037310763566683
+Entity: 15 | Epoch: 38 | Train loss: 0.7635354020685071 |  Test loss: 0.7073444582521915
+Entity: 15 | Epoch: 39 | Train loss: 0.7620618213623838 |  Test loss: 0.709769475318563
+Entity: 15 | Epoch: 40 | Train loss: 0.7615737499959044 |  Test loss: 0.7154393993550912
+Entity: 15 | Epoch: 41 | Train loss: 0.7592956295569561 |  Test loss: 0.7194280299161059
+Entity: 15 | Epoch: 42 | Train loss: 0.7573114125575985 |  Test loss: 0.7261736416401199
+Entity: 15 | Epoch: 43 | Train loss: 0.7546615544065111 |  Test loss: 0.7310696023587997
+Entity: 15 | Epoch: 44 | Train loss: 0.7586148067686365 |  Test loss: None
+Entity: 15 | Epoch: 45 | Train loss: 0.7666800034793132 |  Test loss: None
+Entity: 15 | Epoch: 46 | Train loss: 0.7596167230137567 |  Test loss: None
+Entity: 15 | Epoch: 47 | Train loss: 0.7569286736251064 |  Test loss: None
+Entity: 15 | Epoch: 48 | Train loss: 0.755673139694869 |  Test loss: None
+Entity: 15 | Epoch: 49 | Train loss: 0.7542224763460191 |  Test loss: 0.7457513201408661
+
+
+
+Entity 16
+Dataset: D-1
+Dataset: D-1
+Dataset: D-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.125
+number of test batches: 39.453125
+number of test batches: 4.0078125
+Entity: 16 | Epoch: 0 | Train loss: 0.7590149292464499 |  Test loss: 0.8574099052937059
+Entity: 16 | Epoch: 1 | Train loss: 0.7546198581555119 |  Test loss: 0.8560671165592779
+Entity: 16 | Epoch: 2 | Train loss: 0.7537805024007228 |  Test loss: 0.8552260908387151
+Entity: 16 | Epoch: 3 | Train loss: 0.7532819000145897 |  Test loss: 0.8548757424124209
+Entity: 16 | Epoch: 4 | Train loss: 0.7529620096310665 |  Test loss: 0.8544492072572833
+Entity: 16 | Epoch: 5 | Train loss: 0.7525687046553016 |  Test loss: 0.8540363873901539
+Entity: 16 | Epoch: 6 | Train loss: 0.7521590026757441 |  Test loss: 0.8534836770265888
+Entity: 16 | Epoch: 7 | Train loss: 0.7516900650985646 |  Test loss: 0.8526059105977793
+Entity: 16 | Epoch: 8 | Train loss: 0.7513037297974748 |  Test loss: 0.8517991448761659
+Entity: 16 | Epoch: 9 | Train loss: 0.75068534226811 |  Test loss: 0.851435428851994
+Entity: 16 | Epoch: 10 | Train loss: 0.7500362626405833 |  Test loss: 0.8504872127757435
+Entity: 16 | Epoch: 11 | Train loss: 0.7493633752879263 |  Test loss: 0.8485153779808657
+Entity: 16 | Epoch: 12 | Train loss: 0.7478171370044151 |  Test loss: 0.8485915607738274
+Entity: 16 | Epoch: 13 | Train loss: 0.7462684252176218 |  Test loss: 0.8493391252494985
+Entity: 16 | Epoch: 14 | Train loss: 0.7446681293129752 |  Test loss: 0.8468378306771347
+Entity: 16 | Epoch: 15 | Train loss: 0.7399311760596331 |  Test loss: 0.8343248085697956
+Entity: 16 | Epoch: 16 | Train loss: 0.733007815938774 |  Test loss: 0.8402359767128907
+Entity: 16 | Epoch: 17 | Train loss: 0.722704609764609 |  Test loss: 0.8330109944007927
+Entity: 16 | Epoch: 18 | Train loss: 0.712836134734069 |  Test loss: 0.7965896410575285
+Entity: 16 | Epoch: 19 | Train loss: 0.6966719344397333 |  Test loss: 0.8087254807082519
+Entity: 16 | Epoch: 20 | Train loss: 0.6913913362119529 |  Test loss: 0.7770588543678164
+Entity: 16 | Epoch: 21 | Train loss: 0.6787322556443872 |  Test loss: 0.7717922801418742
+Entity: 16 | Epoch: 22 | Train loss: 0.6709038366799095 |  Test loss: 0.7922166380241557
+Entity: 16 | Epoch: 23 | Train loss: 0.6869526933259302 |  Test loss: None
+Entity: 16 | Epoch: 24 | Train loss: 0.6688903211388681 |  Test loss: 0.7659761569558935
+Entity: 16 | Epoch: 25 | Train loss: 0.6592140660880034 |  Test loss: 0.7671758818551789
+Entity: 16 | Epoch: 26 | Train loss: 0.6536129787029104 |  Test loss: 0.7889676456562957
+Entity: 16 | Epoch: 27 | Train loss: 0.6636461633575546 |  Test loss: None
+Entity: 16 | Epoch: 28 | Train loss: 0.658416004452786 |  Test loss: None
+Entity: 16 | Epoch: 29 | Train loss: 0.6482289676353179 |  Test loss: 0.7706551023179822
+Entity: 16 | Epoch: 30 | Train loss: 0.6518307504909688 |  Test loss: None
+Entity: 16 | Epoch: 31 | Train loss: 0.645934583656158 |  Test loss: 0.7645378346413331
+Entity: 16 | Epoch: 32 | Train loss: 0.6425273577362292 |  Test loss: 0.760096402734892
+Entity: 16 | Epoch: 33 | Train loss: 0.6431076294242949 |  Test loss: None
+Entity: 16 | Epoch: 34 | Train loss: 0.6429052662697509 |  Test loss: None
+Entity: 16 | Epoch: 35 | Train loss: 0.6547307845043675 |  Test loss: None
+Entity: 16 | Epoch: 36 | Train loss: 0.6524868306754616 |  Test loss: None
+Entity: 16 | Epoch: 37 | Train loss: 0.6403794796997393 |  Test loss: 0.7472612903694864
+Entity: 16 | Epoch: 38 | Train loss: 0.6331405944929579 |  Test loss: 0.7671962437450479
+Entity: 16 | Epoch: 39 | Train loss: 0.6302057102696358 |  Test loss: 0.7437063548477915
+Entity: 16 | Epoch: 40 | Train loss: 0.6289877367203753 |  Test loss: 0.7417076348511368
+Entity: 16 | Epoch: 41 | Train loss: 0.6280823553270615 |  Test loss: 0.7652397472747251
+Entity: 16 | Epoch: 42 | Train loss: 0.6195894946905347 |  Test loss: 0.743853786820455
+Entity: 16 | Epoch: 43 | Train loss: 0.6201915487716569 |  Test loss: None
+Entity: 16 | Epoch: 44 | Train loss: 0.6178166554107385 |  Test loss: 0.7540858926825211
+Entity: 16 | Epoch: 45 | Train loss: 0.6147909690481649 |  Test loss: 0.7551644796661698
+Entity: 16 | Epoch: 46 | Train loss: 0.6203197294376908 |  Test loss: None
+Entity: 16 | Epoch: 47 | Train loss: 0.6107905194679735 |  Test loss: 0.7559004568791682
+Entity: 16 | Epoch: 48 | Train loss: 0.6143818513369034 |  Test loss: None
+Entity: 16 | Epoch: 49 | Train loss: 0.6032566893553556 |  Test loss: 0.7534845678510642
+
+
+
+Entity 17
+Dataset: P-2
+Dataset: P-2
+Dataset: P-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.9609375
+number of test batches: 52.9921875
+number of test batches: 3.953125
+Entity: 17 | Epoch: 0 | Train loss: 0.7615691773087642 |  Test loss: 0.848092331065108
+Entity: 17 | Epoch: 1 | Train loss: 0.7585807319477629 |  Test loss: 0.8465555999391222
+Entity: 17 | Epoch: 2 | Train loss: 0.7579323352657394 |  Test loss: 0.8460548206052113
+Entity: 17 | Epoch: 3 | Train loss: 0.7576897395643413 |  Test loss: 0.8457382026316208
+Entity: 17 | Epoch: 4 | Train loss: 0.7574420328852636 |  Test loss: 0.8454844356761149
+Entity: 17 | Epoch: 5 | Train loss: 0.7571860676470843 |  Test loss: 0.8453435717157931
+Entity: 17 | Epoch: 6 | Train loss: 0.7568768107402807 |  Test loss: 0.8450805056368998
+Entity: 17 | Epoch: 7 | Train loss: 0.7566996010258678 |  Test loss: 0.8448975718959342
+Entity: 17 | Epoch: 8 | Train loss: 0.7560089214721952 |  Test loss: 0.8443476722756099
+Entity: 17 | Epoch: 9 | Train loss: 0.7550207941839107 |  Test loss: 0.84409881417415
+Entity: 17 | Epoch: 10 | Train loss: 0.7533939577629376 |  Test loss: 0.8435861528354142
+Entity: 17 | Epoch: 11 | Train loss: 0.75223541661669 |  Test loss: 0.8441381471180044
+Entity: 17 | Epoch: 12 | Train loss: 0.7505189488824292 |  Test loss: 0.8432150642855071
+Entity: 17 | Epoch: 13 | Train loss: 0.7485090662290004 |  Test loss: 0.8420241245955759
+Entity: 17 | Epoch: 14 | Train loss: 0.7465943080900777 |  Test loss: 0.8420664018991849
+Entity: 17 | Epoch: 15 | Train loss: 0.7436188534748384 |  Test loss: 0.8420594645693544
+Entity: 17 | Epoch: 16 | Train loss: 0.7421939143147466 |  Test loss: 0.8403794576796766
+Entity: 17 | Epoch: 17 | Train loss: 0.7383645047941889 |  Test loss: 0.8405567340795761
+Entity: 17 | Epoch: 18 | Train loss: 0.7376749738973052 |  Test loss: 0.8389122466162848
+Entity: 17 | Epoch: 19 | Train loss: 0.7356320663951046 |  Test loss: 0.8414979944016652
+Entity: 17 | Epoch: 20 | Train loss: 0.7350310083765624 |  Test loss: 0.8368572817927616
+Entity: 17 | Epoch: 21 | Train loss: 0.730409507164075 |  Test loss: 0.8362014909190211
+Entity: 17 | Epoch: 22 | Train loss: 0.7266173531332931 |  Test loss: 0.8352244461650993
+Entity: 17 | Epoch: 23 | Train loss: 0.7239128902267578 |  Test loss: 0.8350355358566103
+Entity: 17 | Epoch: 24 | Train loss: 0.7199588269953355 |  Test loss: 0.8373703606051242
+Entity: 17 | Epoch: 25 | Train loss: 0.7174435957789654 |  Test loss: 0.8330940238831439
+Entity: 17 | Epoch: 26 | Train loss: 0.7159578191799746 |  Test loss: 0.8381416852330134
+Entity: 17 | Epoch: 27 | Train loss: 0.7131407249607048 |  Test loss: 0.8368002242379244
+Entity: 17 | Epoch: 28 | Train loss: 0.7073671385633709 |  Test loss: 0.8409237719781462
+Entity: 17 | Epoch: 29 | Train loss: 0.7079033357925305 |  Test loss: None
+Entity: 17 | Epoch: 30 | Train loss: 0.698987233127144 |  Test loss: 0.8159140591599827
+Entity: 17 | Epoch: 31 | Train loss: 0.6973774764397457 |  Test loss: 0.8278577016508244
+Entity: 17 | Epoch: 32 | Train loss: 0.6928281535861367 |  Test loss: 0.8279704740804734
+Entity: 17 | Epoch: 33 | Train loss: 0.6883370997801219 |  Test loss: 0.8080588930420828
+Entity: 17 | Epoch: 34 | Train loss: 0.6853778403485802 |  Test loss: 0.8201431916454225
+Entity: 17 | Epoch: 35 | Train loss: 0.6791639333226726 |  Test loss: 0.8050895510710732
+Entity: 17 | Epoch: 36 | Train loss: 0.6762735910776896 |  Test loss: 0.8056055680865223
+Entity: 17 | Epoch: 37 | Train loss: 0.6722315920341769 |  Test loss: 0.8086159935441023
+Entity: 17 | Epoch: 38 | Train loss: 0.66579031669401 |  Test loss: 0.8102235611916516
+Entity: 17 | Epoch: 39 | Train loss: 0.6649120986431244 |  Test loss: 0.7992848388895782
+Entity: 17 | Epoch: 40 | Train loss: 0.6597457842838734 |  Test loss: 0.8049757128720367
+Entity: 17 | Epoch: 41 | Train loss: 0.6608635430603578 |  Test loss: None
+Entity: 17 | Epoch: 42 | Train loss: 0.6588341384131569 |  Test loss: 0.7825498033025976
+Entity: 17 | Epoch: 43 | Train loss: 0.6540384996294557 |  Test loss: 0.7906820106756296
+Entity: 17 | Epoch: 44 | Train loss: 0.6465541234124432 |  Test loss: 0.7870943590546793
+Entity: 17 | Epoch: 45 | Train loss: 0.6452490643869269 |  Test loss: 0.7802954330978724
+Entity: 17 | Epoch: 46 | Train loss: 0.644887988215468 |  Test loss: 0.7830043113845669
+Entity: 17 | Epoch: 47 | Train loss: 0.6411672679114085 |  Test loss: 0.7916211301107475
+Entity: 17 | Epoch: 48 | Train loss: 0.6424311591985856 |  Test loss: None
+Entity: 17 | Epoch: 49 | Train loss: 0.6380707613256937 |  Test loss: 0.7895563958652627
+
+
+
+Entity 18
+Dataset: P-3
+Dataset: P-3
+Dataset: P-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.1640625
+number of test batches: 54.3515625
+number of test batches: 4.015625
+Entity: 18 | Epoch: 0 | Train loss: 0.8063772805601297 |  Test loss: 0.7601427999415692
+Entity: 18 | Epoch: 1 | Train loss: 0.7881687107951308 |  Test loss: 0.7570534171826471
+Entity: 18 | Epoch: 2 | Train loss: 0.7836542144486857 |  Test loss: 0.755548972089264
+Entity: 18 | Epoch: 3 | Train loss: 0.7814611332555336 |  Test loss: 0.7547624627824018
+Entity: 18 | Epoch: 4 | Train loss: 0.7795631667577011 |  Test loss: 0.7542281240145114
+Entity: 18 | Epoch: 5 | Train loss: 0.7782272574266765 |  Test loss: 0.7537727118487894
+Entity: 18 | Epoch: 6 | Train loss: 0.7770921827074656 |  Test loss: 0.753436845908456
+Entity: 18 | Epoch: 7 | Train loss: 0.7762059158166235 |  Test loss: 0.7531536493653337
+Entity: 18 | Epoch: 8 | Train loss: 0.7746091761397431 |  Test loss: 0.7528905772752625
+Entity: 18 | Epoch: 9 | Train loss: 0.773467620975774 |  Test loss: 0.752499006583504
+Entity: 18 | Epoch: 10 | Train loss: 0.772003437706693 |  Test loss: 0.7522666024602225
+Entity: 18 | Epoch: 11 | Train loss: 0.7707493308142772 |  Test loss: 0.7519329695089028
+Entity: 18 | Epoch: 12 | Train loss: 0.7685501576583144 |  Test loss: 0.7515826912430126
+Entity: 18 | Epoch: 13 | Train loss: 0.767000849907167 |  Test loss: 0.7512827220659137
+Entity: 18 | Epoch: 14 | Train loss: 0.7655249901887439 |  Test loss: 0.7509356462197371
+Entity: 18 | Epoch: 15 | Train loss: 0.7642859189335923 |  Test loss: 0.75046548119054
+Entity: 18 | Epoch: 16 | Train loss: 0.7622266484866862 |  Test loss: 0.7500163082047892
+Entity: 18 | Epoch: 17 | Train loss: 0.76024978970058 |  Test loss: 0.7495136986983078
+Entity: 18 | Epoch: 18 | Train loss: 0.7585947448872356 |  Test loss: 0.7489142667154278
+Entity: 18 | Epoch: 19 | Train loss: 0.757016962613874 |  Test loss: 0.7482974019720571
+Entity: 18 | Epoch: 20 | Train loss: 0.7554802284189747 |  Test loss: 0.7475769421890204
+Entity: 18 | Epoch: 21 | Train loss: 0.7535319228007399 |  Test loss: 0.7466986194100768
+Entity: 18 | Epoch: 22 | Train loss: 0.7519808895550073 |  Test loss: 0.7457755211095691
+Entity: 18 | Epoch: 23 | Train loss: 0.750212816824769 |  Test loss: 0.7448465594630471
+Entity: 18 | Epoch: 24 | Train loss: 0.7481307505789735 |  Test loss: 0.7435985462203738
+Entity: 18 | Epoch: 25 | Train loss: 0.7455628468136369 |  Test loss: 0.7421494961828573
+Entity: 18 | Epoch: 26 | Train loss: 0.7430685421069033 |  Test loss: 0.7408059312552504
+Entity: 18 | Epoch: 27 | Train loss: 0.7400317356097889 |  Test loss: 0.739197507531451
+Entity: 18 | Epoch: 28 | Train loss: 0.7379372592618145 |  Test loss: 0.7376019394728228
+Entity: 18 | Epoch: 29 | Train loss: 0.7350686663648498 |  Test loss: 0.7364845809976096
+Entity: 18 | Epoch: 30 | Train loss: 0.7322204353427922 |  Test loss: 0.7350135153568991
+Entity: 18 | Epoch: 31 | Train loss: 0.7296364918976853 |  Test loss: 0.7332352042172814
+Entity: 18 | Epoch: 32 | Train loss: 0.7269881646581174 |  Test loss: 0.7320269945943692
+Entity: 18 | Epoch: 33 | Train loss: 0.7252309934410283 |  Test loss: 0.730765086421127
+Entity: 18 | Epoch: 34 | Train loss: 0.7234862303070528 |  Test loss: 0.7294735912186482
+Entity: 18 | Epoch: 35 | Train loss: 0.721122109926642 |  Test loss: 0.7285641960488045
+Entity: 18 | Epoch: 36 | Train loss: 0.7183516039827331 |  Test loss: 0.7279030596493138
+Entity: 18 | Epoch: 37 | Train loss: 0.7170370379198939 |  Test loss: 0.7275277388858308
+Entity: 18 | Epoch: 38 | Train loss: 0.7144227116539046 |  Test loss: 0.7266124433181919
+Entity: 18 | Epoch: 39 | Train loss: 0.7126788864699602 |  Test loss: 0.726379663909963
+Entity: 18 | Epoch: 40 | Train loss: 0.7111713246764814 |  Test loss: 0.7264270965745564
+Entity: 18 | Epoch: 41 | Train loss: 0.7082881632165975 |  Test loss: 0.7257398890842347
+Entity: 18 | Epoch: 42 | Train loss: 0.7066647038775381 |  Test loss: 0.7250745750670158
+Entity: 18 | Epoch: 43 | Train loss: 0.7046654766287783 |  Test loss: 0.7257385906738008
+Entity: 18 | Epoch: 44 | Train loss: 0.703285992388805 |  Test loss: 0.7264379064211847
+Entity: 18 | Epoch: 45 | Train loss: 0.700816105378025 |  Test loss: 0.7235016266847979
+Entity: 18 | Epoch: 46 | Train loss: 0.70152423913926 |  Test loss: None
+Entity: 18 | Epoch: 47 | Train loss: 0.6960072658742773 |  Test loss: 0.7230024283864184
+Entity: 18 | Epoch: 48 | Train loss: 0.6944122014961664 |  Test loss: 0.7244848246787627
+Entity: 18 | Epoch: 49 | Train loss: 0.6918620641666212 |  Test loss: 0.7218823692016666
+
+
+
+Entity 19
+Dataset: D-2
+Dataset: D-2
+Dataset: D-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 32.6328125
+number of test batches: 4.0625
+Entity: 19 | Epoch: 0 | Train loss: 0.8123591984147016 |  Test loss: 0.6636758194770664
+Entity: 19 | Epoch: 1 | Train loss: 0.7934019680629123 |  Test loss: 0.6617806669467917
+Entity: 19 | Epoch: 2 | Train loss: 0.7916576267685741 |  Test loss: 0.6611321531701833
+Entity: 19 | Epoch: 3 | Train loss: 0.7911316101448801 |  Test loss: 0.660789137501986
+Entity: 19 | Epoch: 4 | Train loss: 0.7906966841599087 |  Test loss: 0.6606340391167368
+Entity: 19 | Epoch: 5 | Train loss: 0.7904183164505022 |  Test loss: 0.6605395755551469
+Entity: 19 | Epoch: 6 | Train loss: 0.7901450484534915 |  Test loss: 0.6604032395694118
+Entity: 19 | Epoch: 7 | Train loss: 0.7899609421912048 |  Test loss: 0.6602653791805586
+Entity: 19 | Epoch: 8 | Train loss: 0.7896469665434668 |  Test loss: 0.6600364668617168
+Entity: 19 | Epoch: 9 | Train loss: 0.7893438538403383 |  Test loss: 0.65983699124593
+Entity: 19 | Epoch: 10 | Train loss: 0.7889799762156089 |  Test loss: 0.6596344648717114
+Entity: 19 | Epoch: 11 | Train loss: 0.7885732186692102 |  Test loss: 0.6592284562710959
+Entity: 19 | Epoch: 12 | Train loss: 0.7880996724557398 |  Test loss: 0.658922098748959
+Entity: 19 | Epoch: 13 | Train loss: 0.787511498749028 |  Test loss: 0.6581112403995716
+Entity: 19 | Epoch: 14 | Train loss: 0.7869188991883693 |  Test loss: 0.6584011638322129
+Entity: 19 | Epoch: 15 | Train loss: 0.7862333244824667 |  Test loss: 0.6564584302321936
+Entity: 19 | Epoch: 16 | Train loss: 0.7844831082798844 |  Test loss: 0.6550432437439807
+Entity: 19 | Epoch: 17 | Train loss: 0.7824978671364524 |  Test loss: 0.6532053204539877
+Entity: 19 | Epoch: 18 | Train loss: 0.7799398337543125 |  Test loss: 0.6490196763824385
+Entity: 19 | Epoch: 19 | Train loss: 0.7756581181859864 |  Test loss: 0.6461547026446519
+Entity: 19 | Epoch: 20 | Train loss: 0.7688110928207978 |  Test loss: 0.6383059282545358
+Entity: 19 | Epoch: 21 | Train loss: 0.7601870905701784 |  Test loss: 0.630437039800633
+Entity: 19 | Epoch: 22 | Train loss: 0.7516243456316427 |  Test loss: 0.6258734496543183
+Entity: 19 | Epoch: 23 | Train loss: 0.7428245819993412 |  Test loss: 0.6184035931781042
+Entity: 19 | Epoch: 24 | Train loss: 0.7389701995452775 |  Test loss: 0.6144797982556226
+Entity: 19 | Epoch: 25 | Train loss: 0.734190800726207 |  Test loss: 0.6157496589802367
+Entity: 19 | Epoch: 26 | Train loss: 0.7279805313237486 |  Test loss: 0.6109653136882116
+Entity: 19 | Epoch: 27 | Train loss: 0.7237617355857784 |  Test loss: 0.6106089433432387
+Entity: 19 | Epoch: 28 | Train loss: 0.7202872309763678 |  Test loss: 0.611531837361802
+Entity: 19 | Epoch: 29 | Train loss: 0.7185971680790725 |  Test loss: 0.6105457864762194
+Entity: 19 | Epoch: 30 | Train loss: 0.7156484764443214 |  Test loss: 0.6106323387917095
+Entity: 19 | Epoch: 31 | Train loss: 0.716714547054987 |  Test loss: None
+Entity: 19 | Epoch: 32 | Train loss: 0.7142961493667752 |  Test loss: 0.6107612105556585
+Entity: 19 | Epoch: 33 | Train loss: 0.7137585859902545 |  Test loss: 0.6112204666894215
+Entity: 19 | Epoch: 34 | Train loss: 0.7099511474630515 |  Test loss: 0.6090989360656329
+Entity: 19 | Epoch: 35 | Train loss: 0.7095162072094818 |  Test loss: 0.6097254362505807
+Entity: 19 | Epoch: 36 | Train loss: 0.7093381838487551 |  Test loss: 0.6154495577468949
+Entity: 19 | Epoch: 37 | Train loss: 0.7149809136929118 |  Test loss: None
+Entity: 19 | Epoch: 38 | Train loss: 0.7127980547798833 |  Test loss: None
+Entity: 19 | Epoch: 39 | Train loss: 0.7044484988528207 |  Test loss: 0.6092701102145769
+Entity: 19 | Epoch: 40 | Train loss: 0.7048485328683306 |  Test loss: None
+Entity: 19 | Epoch: 41 | Train loss: 0.7017238721011233 |  Test loss: 0.6070588496016661
+Entity: 19 | Epoch: 42 | Train loss: 0.7007296450032225 |  Test loss: 0.6081095165138741
+Entity: 19 | Epoch: 43 | Train loss: 0.6991746373302351 |  Test loss: 0.6082393731124914
+Entity: 19 | Epoch: 44 | Train loss: 0.699866589555922 |  Test loss: None
+Entity: 19 | Epoch: 45 | Train loss: 0.7008779001177814 |  Test loss: None
+Entity: 19 | Epoch: 46 | Train loss: 0.6990916504182233 |  Test loss: 0.6070291867783033
+Entity: 19 | Epoch: 47 | Train loss: 0.695559627468946 |  Test loss: 0.6064349099445211
+Entity: 19 | Epoch: 48 | Train loss: 0.6963493664040972 |  Test loss: None
+Entity: 19 | Epoch: 49 | Train loss: 0.6940135897055556 |  Test loss: 0.6054930960900562
+
+
+
+Entity 20
+Dataset: D-3
+Dataset: D-3
+Dataset: D-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.3125
+number of test batches: 40.34375
+number of test batches: 4.0625
+Entity: 20 | Epoch: 0 | Train loss: 0.731228802738027 |  Test loss: 0.7850486296157424
+Entity: 20 | Epoch: 1 | Train loss: 0.7178483375709276 |  Test loss: 0.78052521286389
+Entity: 20 | Epoch: 2 | Train loss: 0.7133457494110857 |  Test loss: 0.7775610599810114
+Entity: 20 | Epoch: 3 | Train loss: 0.710019246906004 |  Test loss: 0.7731638124140983
+Entity: 20 | Epoch: 4 | Train loss: 0.7070527433075618 |  Test loss: 0.7687948525166856
+Entity: 20 | Epoch: 5 | Train loss: 0.7045093362875359 |  Test loss: 0.7647080016967196
+Entity: 20 | Epoch: 6 | Train loss: 0.7021862632861094 |  Test loss: 0.7606287425097364
+Entity: 20 | Epoch: 7 | Train loss: 0.700349969740919 |  Test loss: 0.7572337800708527
+Entity: 20 | Epoch: 8 | Train loss: 0.6989551032522732 |  Test loss: 0.7542856973309356
+Entity: 20 | Epoch: 9 | Train loss: 0.6975577986485572 |  Test loss: 0.750668748246076
+Entity: 20 | Epoch: 10 | Train loss: 0.6964966297890915 |  Test loss: 0.7484104306078874
+Entity: 20 | Epoch: 11 | Train loss: 0.69555174431488 |  Test loss: 0.7446935143035192
+Entity: 20 | Epoch: 12 | Train loss: 0.6948784216506673 |  Test loss: 0.7431740214331792
+Entity: 20 | Epoch: 13 | Train loss: 0.6940640705799189 |  Test loss: 0.7421364057701654
+Entity: 20 | Epoch: 14 | Train loss: 0.693382664666302 |  Test loss: 0.7387788611500022
+Entity: 20 | Epoch: 15 | Train loss: 0.6927185883940369 |  Test loss: 0.7388809729851066
+Entity: 20 | Epoch: 16 | Train loss: 0.6919622127888534 |  Test loss: 0.7376476783448687
+Entity: 20 | Epoch: 17 | Train loss: 0.6913812984356048 |  Test loss: 0.7358075203338208
+Entity: 20 | Epoch: 18 | Train loss: 0.6909241558142881 |  Test loss: 0.7360103185825909
+Entity: 20 | Epoch: 19 | Train loss: 0.6896504230982605 |  Test loss: 0.7345117909583048
+Entity: 20 | Epoch: 20 | Train loss: 0.6887720289777927 |  Test loss: 0.7341406237799675
+Entity: 20 | Epoch: 21 | Train loss: 0.6875573663896292 |  Test loss: 0.7341380553821532
+Entity: 20 | Epoch: 22 | Train loss: 0.6865818044175489 |  Test loss: 0.7337323362562949
+Entity: 20 | Epoch: 23 | Train loss: 0.6852909570239123 |  Test loss: 0.7337519716256513
+Entity: 20 | Epoch: 24 | Train loss: 0.6844228089889226 |  Test loss: 0.7342965997594337
+Entity: 20 | Epoch: 25 | Train loss: 0.6828774998289989 |  Test loss: 0.7338193442779951
+Entity: 20 | Epoch: 26 | Train loss: 0.6814315349614362 |  Test loss: 0.7325806904217014
+Entity: 20 | Epoch: 27 | Train loss: 0.6796791986410259 |  Test loss: 0.7327910025550339
+Entity: 20 | Epoch: 28 | Train loss: 0.6773755447014843 |  Test loss: 0.7321291986906614
+Entity: 20 | Epoch: 29 | Train loss: 0.6748261760369095 |  Test loss: 0.7297660615953366
+Entity: 20 | Epoch: 30 | Train loss: 0.6701847438549633 |  Test loss: 0.7303491668529415
+Entity: 20 | Epoch: 31 | Train loss: 0.6674270722727595 |  Test loss: 0.7366916316042009
+Entity: 20 | Epoch: 32 | Train loss: 0.6647239114926434 |  Test loss: 0.7371548549397491
+Entity: 20 | Epoch: 33 | Train loss: 0.6586226888155987 |  Test loss: 0.7224582005180239
+Entity: 20 | Epoch: 34 | Train loss: 0.6584446999458216 |  Test loss: 0.7201461513804344
+Entity: 20 | Epoch: 35 | Train loss: 0.6519859844201591 |  Test loss: 0.7150897013824971
+Entity: 20 | Epoch: 36 | Train loss: 0.6450863306458127 |  Test loss: 0.7182957982026542
+Entity: 20 | Epoch: 37 | Train loss: 0.6397651835518167 |  Test loss: 0.7060638520938273
+Entity: 20 | Epoch: 38 | Train loss: 0.6341361618503377 |  Test loss: 0.7359836866528404
+Entity: 20 | Epoch: 39 | Train loss: 0.6352639822618399 |  Test loss: None
+Entity: 20 | Epoch: 40 | Train loss: 0.6267535452114428 |  Test loss: 0.6941694080077399
+Entity: 20 | Epoch: 41 | Train loss: 0.6226514214092665 |  Test loss: 0.7189975428368108
+Entity: 20 | Epoch: 42 | Train loss: 0.6223039253526937 |  Test loss: 0.7075433961805314
+Entity: 20 | Epoch: 43 | Train loss: 0.6143112129547244 |  Test loss: 0.6863583182566799
+Entity: 20 | Epoch: 44 | Train loss: 0.6139015205332782 |  Test loss: 0.6794047538235856
+Entity: 20 | Epoch: 45 | Train loss: 0.6121087338516432 |  Test loss: 0.6781138731408506
+Entity: 20 | Epoch: 46 | Train loss: 0.6027668717120089 |  Test loss: 0.6736139845425406
+Entity: 20 | Epoch: 47 | Train loss: 0.5979073880891297 |  Test loss: 0.6726479366242599
+Entity: 20 | Epoch: 48 | Train loss: 0.5943101748354894 |  Test loss: 0.6993991397052574
+Entity: 20 | Epoch: 49 | Train loss: 0.5953402224905571 |  Test loss: None
+
+
+
+Entity 21
+Dataset: D-4
+Dataset: D-4
+Dataset: D-4
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.03125
+number of test batches: 39.2578125
+number of test batches: 3.9765625
+Entity: 21 | Epoch: 0 | Train loss: 0.7292207276522183 |  Test loss: 0.8250510948024002
+Entity: 21 | Epoch: 1 | Train loss: 0.7203444774434931 |  Test loss: 0.8099312662697729
+Entity: 21 | Epoch: 2 | Train loss: 0.7173267007425908 |  Test loss: 0.8023146336609114
+Entity: 21 | Epoch: 3 | Train loss: 0.7153142631836158 |  Test loss: 0.7968748812591163
+Entity: 21 | Epoch: 4 | Train loss: 0.7135357325325435 |  Test loss: 0.7921031941467629
+Entity: 21 | Epoch: 5 | Train loss: 0.7114209813789973 |  Test loss: 0.7882203088747612
+Entity: 21 | Epoch: 6 | Train loss: 0.7090895923944636 |  Test loss: 0.7846375844992097
+Entity: 21 | Epoch: 7 | Train loss: 0.7062665041005568 |  Test loss: 0.7813629048834381
+Entity: 21 | Epoch: 8 | Train loss: 0.7034094920972451 |  Test loss: 0.7774386510165127
+Entity: 21 | Epoch: 9 | Train loss: 0.7007321156561375 |  Test loss: 0.7733488059685015
+Entity: 21 | Epoch: 10 | Train loss: 0.6983243507011687 |  Test loss: 0.7689684410387383
+Entity: 21 | Epoch: 11 | Train loss: 0.6966615269926769 |  Test loss: 0.764675352554073
+Entity: 21 | Epoch: 12 | Train loss: 0.6953879421472302 |  Test loss: 0.7604982853228545
+Entity: 21 | Epoch: 13 | Train loss: 0.694405018787622 |  Test loss: 0.7563103495462119
+Entity: 21 | Epoch: 14 | Train loss: 0.6935135976879968 |  Test loss: 0.7540030603924646
+Entity: 21 | Epoch: 15 | Train loss: 0.6928360893162598 |  Test loss: 0.7523234386531332
+Entity: 21 | Epoch: 16 | Train loss: 0.6922781743179899 |  Test loss: 0.7506536821887805
+Entity: 21 | Epoch: 17 | Train loss: 0.6917714747516032 |  Test loss: 0.7499973247585222
+Entity: 21 | Epoch: 18 | Train loss: 0.6914393461499123 |  Test loss: 0.7492686944642271
+Entity: 21 | Epoch: 19 | Train loss: 0.6910332433163942 |  Test loss: 0.7489486097638113
+Entity: 21 | Epoch: 20 | Train loss: 0.6908732410292809 |  Test loss: 0.7479396463245563
+Entity: 21 | Epoch: 21 | Train loss: 0.6900829003267998 |  Test loss: 0.747795396570431
+Entity: 21 | Epoch: 22 | Train loss: 0.6900411278005543 |  Test loss: 0.7464158952470379
+Entity: 21 | Epoch: 23 | Train loss: 0.6896322491247664 |  Test loss: 0.7465591038154595
+Entity: 21 | Epoch: 24 | Train loss: 0.6889202038059495 |  Test loss: 0.7456326128362379
+Entity: 21 | Epoch: 25 | Train loss: 0.6886764862840867 |  Test loss: 0.7456628723373757
+Entity: 21 | Epoch: 26 | Train loss: 0.6882616249929626 |  Test loss: 0.7448759095538371
+Entity: 21 | Epoch: 27 | Train loss: 0.6877836772882556 |  Test loss: 0.7446324306600571
+Entity: 21 | Epoch: 28 | Train loss: 0.6869362165687679 |  Test loss: 0.744436882780261
+Entity: 21 | Epoch: 29 | Train loss: 0.6864594610627226 |  Test loss: 0.7440471909409627
+Entity: 21 | Epoch: 30 | Train loss: 0.6854823385183787 |  Test loss: 0.7427054621015762
+Entity: 21 | Epoch: 31 | Train loss: 0.6849009405607125 |  Test loss: 0.7475899907564543
+Entity: 21 | Epoch: 32 | Train loss: 0.6835431653005216 |  Test loss: 0.7415892227199697
+Entity: 21 | Epoch: 33 | Train loss: 0.6819941949357304 |  Test loss: 0.7407803656752926
+Entity: 21 | Epoch: 34 | Train loss: 0.6800308263356741 |  Test loss: 0.7546062924238636
+Entity: 21 | Epoch: 35 | Train loss: 0.6756937789017714 |  Test loss: 0.7375518606046182
+Entity: 21 | Epoch: 36 | Train loss: 0.6697716238652405 |  Test loss: 0.7432766238919117
+Entity: 21 | Epoch: 37 | Train loss: 0.6616603172492631 |  Test loss: 0.7320876498368143
+Entity: 21 | Epoch: 38 | Train loss: 0.6489268760925367 |  Test loss: 0.7509636544642607
+Entity: 21 | Epoch: 39 | Train loss: 0.6366373621483513 |  Test loss: 0.722494953335766
+Entity: 21 | Epoch: 40 | Train loss: 0.6276556918251845 |  Test loss: 0.7255901688387826
+Entity: 21 | Epoch: 41 | Train loss: 0.6269164053520396 |  Test loss: 0.6976147278043677
+Entity: 21 | Epoch: 42 | Train loss: 0.6145910798492619 |  Test loss: 0.690371839976403
+Entity: 21 | Epoch: 43 | Train loss: 0.6116011679762338 |  Test loss: 0.681127723511345
+Entity: 21 | Epoch: 44 | Train loss: 0.6109608045351143 |  Test loss: 0.708516535912741
+Entity: 21 | Epoch: 45 | Train loss: 0.605804441449837 |  Test loss: 0.6783420322792264
+Entity: 21 | Epoch: 46 | Train loss: 0.6024194739658769 |  Test loss: 0.7161151131858394
+Entity: 21 | Epoch: 47 | Train loss: 0.5981519570539796 |  Test loss: 0.6756548502771568
+Entity: 21 | Epoch: 48 | Train loss: 0.6035304295477311 |  Test loss: None
+Entity: 21 | Epoch: 49 | Train loss: 0.5988768510265845 |  Test loss: None
+
+
+
+Entity 22
+Dataset: A-2
+Dataset: A-2
+Dataset: A-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.953125
+number of test batches: 59.3984375
+number of test batches: 3.609375
+Entity: 22 | Epoch: 0 | Train loss: 0.9307463654981298 |  Test loss: 0.6292175662530449
+Entity: 22 | Epoch: 1 | Train loss: 0.8550686397832742 |  Test loss: 0.6277182615599978
+Entity: 22 | Epoch: 2 | Train loss: 0.8374101478931851 |  Test loss: 0.6267862910670894
+Entity: 22 | Epoch: 3 | Train loss: 0.8321478618705209 |  Test loss: 0.6261469697281395
+Entity: 22 | Epoch: 4 | Train loss: 0.8299847381713008 |  Test loss: 0.6257212069974124
+Entity: 22 | Epoch: 5 | Train loss: 0.8286317090899136 |  Test loss: 0.6253502473106116
+Entity: 22 | Epoch: 6 | Train loss: 0.8276726808617973 |  Test loss: 0.6250634340899976
+Entity: 22 | Epoch: 7 | Train loss: 0.8269145036385315 |  Test loss: 0.6249596672334197
+Entity: 22 | Epoch: 8 | Train loss: 0.826422327431701 |  Test loss: 0.6248056963771517
+Entity: 22 | Epoch: 9 | Train loss: 0.8259549230902402 |  Test loss: 0.6246329829080667
+Entity: 22 | Epoch: 10 | Train loss: 0.8256799289685531 |  Test loss: 0.624525634128423
+Entity: 22 | Epoch: 11 | Train loss: 0.8253042455105589 |  Test loss: 0.6244747028948167
+Entity: 22 | Epoch: 12 | Train loss: 0.8249296466731294 |  Test loss: 0.6242645508065433
+Entity: 22 | Epoch: 13 | Train loss: 0.8244405317236018 |  Test loss: 0.62409063014988
+Entity: 22 | Epoch: 14 | Train loss: 0.8239910475772045 |  Test loss: 0.6239340245376999
+Entity: 22 | Epoch: 15 | Train loss: 0.823706421580829 |  Test loss: 0.6237353970986101
+Entity: 22 | Epoch: 16 | Train loss: 0.8233581185956201 |  Test loss: 0.6236302917137807
+Entity: 22 | Epoch: 17 | Train loss: 0.8226024754385047 |  Test loss: 0.6233529573048413
+Entity: 22 | Epoch: 18 | Train loss: 0.8220421902466177 |  Test loss: 0.6230631641180807
+Entity: 22 | Epoch: 19 | Train loss: 0.8215529513112525 |  Test loss: 0.6228641312391985
+Entity: 22 | Epoch: 20 | Train loss: 0.8207958726439738 |  Test loss: 0.622564207625402
+Entity: 22 | Epoch: 21 | Train loss: 0.8202361937482974 |  Test loss: 0.6222910154731823
+Entity: 22 | Epoch: 22 | Train loss: 0.8189992648231289 |  Test loss: 0.6218962770971385
+Entity: 22 | Epoch: 23 | Train loss: 0.8188772796906639 |  Test loss: 0.6215072043393275
+Entity: 22 | Epoch: 24 | Train loss: 0.8171443554738584 |  Test loss: 0.6211269243188944
+Entity: 22 | Epoch: 25 | Train loss: 0.8161281669013878 |  Test loss: 0.6206877465799322
+Entity: 22 | Epoch: 26 | Train loss: 0.8149547717624739 |  Test loss: 0.6199820254610859
+Entity: 22 | Epoch: 27 | Train loss: 0.8145623910579776 |  Test loss: 0.6194119319859973
+Entity: 22 | Epoch: 28 | Train loss: 0.8129446972255394 |  Test loss: 0.6187071444676359
+Entity: 22 | Epoch: 29 | Train loss: 0.8106887786282062 |  Test loss: 0.6179349714914313
+Entity: 22 | Epoch: 30 | Train loss: 0.8102259993775303 |  Test loss: 0.6171636611013572
+Entity: 22 | Epoch: 31 | Train loss: 0.8075721521631367 |  Test loss: 0.6162432604872529
+Entity: 22 | Epoch: 32 | Train loss: 0.806578252291409 |  Test loss: 0.6151479585821946
+Entity: 22 | Epoch: 33 | Train loss: 0.8044387939905441 |  Test loss: 0.6143031037227126
+Entity: 22 | Epoch: 34 | Train loss: 0.8031291084161731 |  Test loss: 0.6132371096178341
+Entity: 22 | Epoch: 35 | Train loss: 0.8003689016696287 |  Test loss: 0.6117055154651468
+Entity: 22 | Epoch: 36 | Train loss: 0.7983081205904459 |  Test loss: 0.6106009079784445
+Entity: 22 | Epoch: 37 | Train loss: 0.7981500193619556 |  Test loss: 0.6091386440181823
+Entity: 22 | Epoch: 38 | Train loss: 0.7957946098777742 |  Test loss: 0.6078205029278574
+Entity: 22 | Epoch: 39 | Train loss: 0.7920639266547813 |  Test loss: 0.6069284453040625
+Entity: 22 | Epoch: 40 | Train loss: 0.7901917727724602 |  Test loss: 0.6054004908134168
+Entity: 22 | Epoch: 41 | Train loss: 0.7889869818237087 |  Test loss: 0.6043561220620618
+Entity: 22 | Epoch: 42 | Train loss: 0.7861129028218394 |  Test loss: 0.6041027903395556
+Entity: 22 | Epoch: 43 | Train loss: 0.7849558601354031 |  Test loss: 0.6023924959152211
+Entity: 22 | Epoch: 44 | Train loss: 0.7829858143175124 |  Test loss: 0.6024625638995755
+Entity: 22 | Epoch: 45 | Train loss: 0.7792791138746757 |  Test loss: 0.6024726951319435
+Entity: 22 | Epoch: 46 | Train loss: 0.7771235578766453 |  Test loss: 0.600720089344203
+Entity: 22 | Epoch: 47 | Train loss: 0.7753750153895195 |  Test loss: 0.6012477606814153
+Entity: 22 | Epoch: 48 | Train loss: 0.774002641785164 |  Test loss: 0.601253937978753
+Entity: 22 | Epoch: 49 | Train loss: 0.7720116814471988 |  Test loss: 0.6013510821874
+
+
+
+Entity 23
+Dataset: A-3
+Dataset: A-3
+Dataset: A-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.46875
+number of test batches: 61.0859375
+number of test batches: 3.78125
+Entity: 23 | Epoch: 0 | Train loss: 0.9099291936156478 |  Test loss: 0.6650585983687443
+Entity: 23 | Epoch: 1 | Train loss: 0.8351041856734787 |  Test loss: 0.6276988294860733
+Entity: 23 | Epoch: 2 | Train loss: 0.8256914698786342 |  Test loss: 0.6241496758658654
+Entity: 23 | Epoch: 3 | Train loss: 0.8228045874707739 |  Test loss: 0.6227686567624554
+Entity: 23 | Epoch: 4 | Train loss: 0.8209345096452705 |  Test loss: 0.6220204574825657
+Entity: 23 | Epoch: 5 | Train loss: 0.8196128250520122 |  Test loss: 0.6215733455201565
+Entity: 23 | Epoch: 6 | Train loss: 0.8185066007003269 |  Test loss: 0.6211533603712547
+Entity: 23 | Epoch: 7 | Train loss: 0.8174392366681256 |  Test loss: 0.6208937330756429
+Entity: 23 | Epoch: 8 | Train loss: 0.8165152269852052 |  Test loss: 0.6209240237035412
+Entity: 23 | Epoch: 9 | Train loss: 0.8147933038633486 |  Test loss: 0.6208978630256
+Entity: 23 | Epoch: 10 | Train loss: 0.8137657391913155 |  Test loss: 0.620844998885685
+Entity: 23 | Epoch: 11 | Train loss: 0.812659505958876 |  Test loss: 0.6209890694272789
+Entity: 23 | Epoch: 12 | Train loss: 0.8108479515951103 |  Test loss: 0.6203904725026247
+Entity: 23 | Epoch: 13 | Train loss: 0.810049210518164 |  Test loss: 0.6208237203084364
+Entity: 23 | Epoch: 14 | Train loss: 0.8083920666533593 |  Test loss: 0.6203933799223713
+Entity: 23 | Epoch: 15 | Train loss: 0.8070590086251127 |  Test loss: 0.6206942607248432
+Entity: 23 | Epoch: 16 | Train loss: 0.8056052667410646 |  Test loss: 0.6203537836001247
+Entity: 23 | Epoch: 17 | Train loss: 0.8026630092808498 |  Test loss: 0.6211634715749643
+Entity: 23 | Epoch: 18 | Train loss: 0.801666023964002 |  Test loss: 0.6217866403643381
+Entity: 23 | Epoch: 19 | Train loss: 0.8002238488046062 |  Test loss: 0.6212414265340886
+Entity: 23 | Epoch: 20 | Train loss: 0.7983236614308977 |  Test loss: 0.6230751557491165
+Entity: 23 | Epoch: 21 | Train loss: 0.7947251442940524 |  Test loss: 0.6209938650920002
+Entity: 23 | Epoch: 22 | Train loss: 0.7925314237082027 |  Test loss: 0.6231084825732738
+Entity: 23 | Epoch: 23 | Train loss: 0.7903777448511753 |  Test loss: 0.6234644578946831
+Entity: 23 | Epoch: 24 | Train loss: 0.788797521351718 |  Test loss: 0.6235051381455596
+Entity: 23 | Epoch: 25 | Train loss: 0.7864418248656019 |  Test loss: 0.622040015110392
+Entity: 23 | Epoch: 26 | Train loss: 0.7842480970167436 |  Test loss: 0.6209687422653122
+Entity: 23 | Epoch: 27 | Train loss: 0.7818405393075568 |  Test loss: 0.6187169515520088
+Entity: 23 | Epoch: 28 | Train loss: 0.7785527131542338 |  Test loss: 0.6193000555292449
+Entity: 23 | Epoch: 29 | Train loss: 0.7749261843768747 |  Test loss: 0.6204108043058105
+Entity: 23 | Epoch: 30 | Train loss: 0.7724537116396955 |  Test loss: 0.6216560690086489
+Entity: 23 | Epoch: 31 | Train loss: 0.769691994567613 |  Test loss: 0.6199034693658598
+Entity: 23 | Epoch: 32 | Train loss: 0.7674125249011816 |  Test loss: 0.6188644873601777
+Entity: 23 | Epoch: 33 | Train loss: 0.7649088486099764 |  Test loss: 0.6191456010680615
+Entity: 23 | Epoch: 34 | Train loss: 0.7621532909347842 |  Test loss: 0.6194796308851993
+Entity: 23 | Epoch: 35 | Train loss: 0.7601415052759556 |  Test loss: 0.6178755420644976
+Entity: 23 | Epoch: 36 | Train loss: 0.7573226256327217 |  Test loss: 0.617732569532977
+Entity: 23 | Epoch: 37 | Train loss: 0.7551511909473752 |  Test loss: 0.6158924226818437
+Entity: 23 | Epoch: 38 | Train loss: 0.7526288427307912 |  Test loss: 0.6150763697445023
+Entity: 23 | Epoch: 39 | Train loss: 0.7511123122585048 |  Test loss: 0.6148914200723294
+Entity: 23 | Epoch: 40 | Train loss: 0.7485841069220652 |  Test loss: 0.6146115888610544
+Entity: 23 | Epoch: 41 | Train loss: 0.7461442407477068 |  Test loss: 0.6113470271691557
+Entity: 23 | Epoch: 42 | Train loss: 0.7429289894810119 |  Test loss: 0.6101713315044984
+Entity: 23 | Epoch: 43 | Train loss: 0.7396082694945981 |  Test loss: 0.6094180120959539
+Entity: 23 | Epoch: 44 | Train loss: 0.7370955546358379 |  Test loss: 0.606739446832529
+Entity: 23 | Epoch: 45 | Train loss: 0.734018698310556 |  Test loss: 0.6037456140841919
+Entity: 23 | Epoch: 46 | Train loss: 0.7294265485160479 |  Test loss: 0.6022650841815966
+Entity: 23 | Epoch: 47 | Train loss: 0.7251641098907736 |  Test loss: 0.6014302379340087
+Entity: 23 | Epoch: 48 | Train loss: 0.7207625212859902 |  Test loss: 0.597258981765625
+Entity: 23 | Epoch: 49 | Train loss: 0.7179218078269493 |  Test loss: 0.5950095229608984
+
+
+
+Entity 24
+Dataset: A-4
+Dataset: A-4
+Dataset: A-4
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.1953125
+number of test batches: 60.6953125
+number of test batches: 3.6953125
+Entity: 24 | Epoch: 0 | Train loss: 0.9295115403464012 |  Test loss: 0.6316223519029249
+Entity: 24 | Epoch: 1 | Train loss: 0.8500968846125988 |  Test loss: 0.6300173825357921
+Entity: 24 | Epoch: 2 | Train loss: 0.8347415185574981 |  Test loss: 0.6291307088294821
+Entity: 24 | Epoch: 3 | Train loss: 0.8293217579974093 |  Test loss: 0.62860655715693
+Entity: 24 | Epoch: 4 | Train loss: 0.8267029614049898 |  Test loss: 0.6281816120600096
+Entity: 24 | Epoch: 5 | Train loss: 0.8250688079029043 |  Test loss: 0.6277995626097564
+Entity: 24 | Epoch: 6 | Train loss: 0.8245948148798043 |  Test loss: 0.6275745980189542
+Entity: 24 | Epoch: 7 | Train loss: 0.8243179120180794 |  Test loss: 0.6274371646447048
+Entity: 24 | Epoch: 8 | Train loss: 0.8240764140067893 |  Test loss: 0.6272332634123132
+Entity: 24 | Epoch: 9 | Train loss: 0.8237993853944766 |  Test loss: 0.6271111052089526
+Entity: 24 | Epoch: 10 | Train loss: 0.8235427705600784 |  Test loss: 0.6269460136886
+Entity: 24 | Epoch: 11 | Train loss: 0.8233273503251156 |  Test loss: 0.626841773359739
+Entity: 24 | Epoch: 12 | Train loss: 0.8231310941254332 |  Test loss: 0.6267380645778227
+Entity: 24 | Epoch: 13 | Train loss: 0.8229271241432454 |  Test loss: 0.6266702940140164
+Entity: 24 | Epoch: 14 | Train loss: 0.8226519358704706 |  Test loss: 0.6265363869302557
+Entity: 24 | Epoch: 15 | Train loss: 0.8224803603545906 |  Test loss: 0.6264180268296857
+Entity: 24 | Epoch: 16 | Train loss: 0.822243578244056 |  Test loss: 0.6263788366930493
+Entity: 24 | Epoch: 17 | Train loss: 0.8219505562634096 |  Test loss: 0.6262100110338493
+Entity: 24 | Epoch: 18 | Train loss: 0.821742229537816 |  Test loss: 0.62604804200772
+Entity: 24 | Epoch: 19 | Train loss: 0.8216861183122087 |  Test loss: 0.6259739973895394
+Entity: 24 | Epoch: 20 | Train loss: 0.8216612052887957 |  Test loss: 0.6258033017054925
+Entity: 24 | Epoch: 21 | Train loss: 0.8212067714031739 |  Test loss: 0.6255854637879902
+Entity: 24 | Epoch: 22 | Train loss: 0.8208316624386007 |  Test loss: 0.6253865707122246
+Entity: 24 | Epoch: 23 | Train loss: 0.8205741351612843 |  Test loss: 0.6252346433793642
+Entity: 24 | Epoch: 24 | Train loss: 0.8204265321273281 |  Test loss: 0.6250203600543183
+Entity: 24 | Epoch: 25 | Train loss: 0.8200430553180951 |  Test loss: 0.6247212975689586
+Entity: 24 | Epoch: 26 | Train loss: 0.8202852383030432 |  Test loss: None
+Entity: 24 | Epoch: 27 | Train loss: 0.8193599428401324 |  Test loss: 0.6241190520136856
+Entity: 24 | Epoch: 28 | Train loss: 0.8191436756828705 |  Test loss: 0.6237756590620785
+Entity: 24 | Epoch: 29 | Train loss: 0.8184691980516002 |  Test loss: 0.623402477795333
+Entity: 24 | Epoch: 30 | Train loss: 0.8178920144318763 |  Test loss: 0.6230351856927413
+Entity: 24 | Epoch: 31 | Train loss: 0.8172757921030004 |  Test loss: 0.6226335259914462
+Entity: 24 | Epoch: 32 | Train loss: 0.816720624809524 |  Test loss: 0.6221201752546789
+Entity: 24 | Epoch: 33 | Train loss: 0.8165510546351462 |  Test loss: 0.6214539417701657
+Entity: 24 | Epoch: 34 | Train loss: 0.8136065586018502 |  Test loss: 0.6210061398198943
+Entity: 24 | Epoch: 35 | Train loss: 0.8106633119785366 |  Test loss: 0.6204327136538056
+Entity: 24 | Epoch: 36 | Train loss: 0.8087992834810929 |  Test loss: 0.6196389242486898
+Entity: 24 | Epoch: 37 | Train loss: 0.8075716680907078 |  Test loss: 0.6189392044171533
+Entity: 24 | Epoch: 38 | Train loss: 0.8052679381062147 |  Test loss: 0.6180274547934217
+Entity: 24 | Epoch: 39 | Train loss: 0.8032562389086171 |  Test loss: 0.6171660002923509
+Entity: 24 | Epoch: 40 | Train loss: 0.8016777853463531 |  Test loss: 0.6155985994953623
+Entity: 24 | Epoch: 41 | Train loss: 0.7998217612394246 |  Test loss: 0.6141116742741702
+Entity: 24 | Epoch: 42 | Train loss: 0.7966584183729828 |  Test loss: 0.6121874867089833
+Entity: 24 | Epoch: 43 | Train loss: 0.7938269329809338 |  Test loss: 0.6101188671403027
+Entity: 24 | Epoch: 44 | Train loss: 0.790654590872081 |  Test loss: 0.6070631395485921
+Entity: 24 | Epoch: 45 | Train loss: 0.7865929830569239 |  Test loss: 0.5995164505633315
+Entity: 24 | Epoch: 46 | Train loss: 0.7829133939804241 |  Test loss: 0.595497050892609
+Entity: 24 | Epoch: 47 | Train loss: 0.7793375570567947 |  Test loss: 0.5928197932965171
+Entity: 24 | Epoch: 48 | Train loss: 0.7750979441215002 |  Test loss: 0.5929212126906481
+Entity: 24 | Epoch: 49 | Train loss: 0.7701743357588297 |  Test loss: 0.5863784386955564
+
+
+
+Entity 25
+Dataset: G-1
+Dataset: G-1
+Dataset: G-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 14.9609375
+number of test batches: 63.65625
+number of test batches: 3.9453125
+Entity: 25 | Epoch: 0 | Train loss: 0.836062728507595 |  Test loss: 0.6345800900001927
+Entity: 25 | Epoch: 1 | Train loss: 0.817812826225714 |  Test loss: 0.6325871662227529
+Entity: 25 | Epoch: 2 | Train loss: 0.8137953104932766 |  Test loss: 0.6319470635698279
+Entity: 25 | Epoch: 3 | Train loss: 0.8120938143145789 |  Test loss: 0.6310280902809141
+Entity: 25 | Epoch: 4 | Train loss: 0.8111065150036747 |  Test loss: 0.6292180089372219
+Entity: 25 | Epoch: 5 | Train loss: 0.8105302777676296 |  Test loss: 0.6268979803612916
+Entity: 25 | Epoch: 6 | Train loss: 0.8099435624717577 |  Test loss: 0.6259222437397088
+Entity: 25 | Epoch: 7 | Train loss: 0.8089890049026389 |  Test loss: 0.6241409349596442
+Entity: 25 | Epoch: 8 | Train loss: 0.8079104081739723 |  Test loss: 0.6235960053999235
+Entity: 25 | Epoch: 9 | Train loss: 0.8067977621042541 |  Test loss: 0.6221659836903362
+Entity: 25 | Epoch: 10 | Train loss: 0.8054522917540282 |  Test loss: 0.6211861157697616
+Entity: 25 | Epoch: 11 | Train loss: 0.8039430753515143 |  Test loss: 0.6190627285712721
+Entity: 25 | Epoch: 12 | Train loss: 0.80267391935983 |  Test loss: 0.6179779290673462
+Entity: 25 | Epoch: 13 | Train loss: 0.8010405441624533 |  Test loss: 0.6160049632339194
+Entity: 25 | Epoch: 14 | Train loss: 0.7992466517104025 |  Test loss: 0.6136772728608091
+Entity: 25 | Epoch: 15 | Train loss: 0.7977185793279357 |  Test loss: 0.6135271726305237
+Entity: 25 | Epoch: 16 | Train loss: 0.7962396258308355 |  Test loss: 0.6117407194126655
+Entity: 25 | Epoch: 17 | Train loss: 0.7941013682497466 |  Test loss: 0.6076494324472871
+Entity: 25 | Epoch: 18 | Train loss: 0.7924476459024197 |  Test loss: 0.6059937196165913
+Entity: 25 | Epoch: 19 | Train loss: 0.790872646900813 |  Test loss: 0.6044951312133287
+Entity: 25 | Epoch: 20 | Train loss: 0.7887609619798027 |  Test loss: 0.6050513636468365
+Entity: 25 | Epoch: 21 | Train loss: 0.7858925980819734 |  Test loss: 0.6038875002856597
+Entity: 25 | Epoch: 22 | Train loss: 0.7838894992658271 |  Test loss: 0.6074385944643234
+Entity: 25 | Epoch: 23 | Train loss: 0.7811376769810565 |  Test loss: 0.6106978049409566
+Entity: 25 | Epoch: 24 | Train loss: 0.7784923581177899 |  Test loss: 0.6181460242275849
+Entity: 25 | Epoch: 25 | Train loss: 0.7753842841566349 |  Test loss: 0.6220770373645396
+Entity: 25 | Epoch: 26 | Train loss: 0.7721303350586376 |  Test loss: 0.6258722532429908
+Entity: 25 | Epoch: 27 | Train loss: 0.7695062822256208 |  Test loss: 0.6383141261626883
+Entity: 25 | Epoch: 28 | Train loss: 0.7673687602770235 |  Test loss: 0.6576018856377295
+Entity: 25 | Epoch: 29 | Train loss: 0.764419864587408 |  Test loss: 0.6553108986042956
+Entity: 25 | Epoch: 30 | Train loss: 0.7612905037771746 |  Test loss: 0.6841669269975754
+Entity: 25 | Epoch: 31 | Train loss: 0.7573915706120684 |  Test loss: 0.6782456360609814
+Entity: 25 | Epoch: 32 | Train loss: 0.7540171710881295 |  Test loss: 0.7270902286090031
+Entity: 25 | Epoch: 33 | Train loss: 0.749712378625313 |  Test loss: 0.7761352619561966
+Entity: 25 | Epoch: 34 | Train loss: 0.745301272307204 |  Test loss: 0.7930702822817729
+Entity: 25 | Epoch: 35 | Train loss: 0.744035427212258 |  Test loss: 0.8378726685290584
+Entity: 25 | Epoch: 36 | Train loss: 0.7411797687159632 |  Test loss: 0.9021188249571783
+Entity: 25 | Epoch: 37 | Train loss: 0.7367745426809293 |  Test loss: 0.9743874942330588
+Entity: 25 | Epoch: 38 | Train loss: 0.7334764633630463 |  Test loss: 0.9626277271621299
+Entity: 25 | Epoch: 39 | Train loss: 0.73231737124916 |  Test loss: 1.0440692471395625
+Entity: 25 | Epoch: 40 | Train loss: 0.728115679086952 |  Test loss: 1.120149834703027
+Entity: 25 | Epoch: 41 | Train loss: 0.7240594687932427 |  Test loss: 1.2732711271336763
+Entity: 25 | Epoch: 42 | Train loss: 0.7215326174662032 |  Test loss: 1.3474947803128179
+Entity: 25 | Epoch: 43 | Train loss: 0.7178902632341655 |  Test loss: 1.45477958498246
+Entity: 25 | Epoch: 44 | Train loss: 0.7171253172324499 |  Test loss: 1.5964085284804943
+Entity: 25 | Epoch: 45 | Train loss: 0.7110885533459202 |  Test loss: 1.5165106460894688
+Entity: 25 | Epoch: 46 | Train loss: 0.7175343555563638 |  Test loss: None
+Entity: 25 | Epoch: 47 | Train loss: 0.7188855660316965 |  Test loss: None
+Entity: 25 | Epoch: 48 | Train loss: 0.704226738025675 |  Test loss: 1.681148797863781
+Entity: 25 | Epoch: 49 | Train loss: 0.7012499045016483 |  Test loss: 1.7088516040659039
+
+
+
+Entity 26
+Dataset: G-2
+Dataset: G-2
+Dataset: G-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 12.953125
+number of test batches: 55.625
+number of test batches: 3.28125
+Entity: 26 | Epoch: 0 | Train loss: 0.6799266568505271 |  Test loss: 1.0594194394447618
+Entity: 26 | Epoch: 1 | Train loss: 0.6667053037827477 |  Test loss: 1.0562203899735496
+Entity: 26 | Epoch: 2 | Train loss: 0.6646878274272233 |  Test loss: 1.0551131512792338
+Entity: 26 | Epoch: 3 | Train loss: 0.6638225277310599 |  Test loss: 1.0548965500091159
+Entity: 26 | Epoch: 4 | Train loss: 0.6634036060546236 |  Test loss: 1.0549284623403634
+Entity: 26 | Epoch: 5 | Train loss: 0.6631431743801449 |  Test loss: 1.0550111664946944
+Entity: 26 | Epoch: 6 | Train loss: 0.6629726947841332 |  Test loss: 1.0550013653845305
+Entity: 26 | Epoch: 7 | Train loss: 0.6628432765151447 |  Test loss: 1.0549657377015267
+Entity: 26 | Epoch: 8 | Train loss: 0.6627206150577173 |  Test loss: 1.054955795753215
+Entity: 26 | Epoch: 9 | Train loss: 0.662599972671682 |  Test loss: 1.0550294737730708
+Entity: 26 | Epoch: 10 | Train loss: 0.6624696248394085 |  Test loss: 1.0548959352741285
+Entity: 26 | Epoch: 11 | Train loss: 0.6623542059754416 |  Test loss: 1.0549165424669074
+Entity: 26 | Epoch: 12 | Train loss: 0.6622875194920202 |  Test loss: 1.0548163679472746
+Entity: 26 | Epoch: 13 | Train loss: 0.6621204570589634 |  Test loss: 1.0547556208490971
+Entity: 26 | Epoch: 14 | Train loss: 0.6619025114418172 |  Test loss: 1.054785484146504
+Entity: 26 | Epoch: 15 | Train loss: 0.6617363903882708 |  Test loss: 1.0544052581835006
+Entity: 26 | Epoch: 16 | Train loss: 0.6614987737891254 |  Test loss: 1.0541746168397368
+Entity: 26 | Epoch: 17 | Train loss: 0.6613066664248687 |  Test loss: 1.0540953095470156
+Entity: 26 | Epoch: 18 | Train loss: 0.6609981088057628 |  Test loss: 1.053392389948879
+Entity: 26 | Epoch: 19 | Train loss: 0.6605838321001056 |  Test loss: 1.0531637615036398
+Entity: 26 | Epoch: 20 | Train loss: 0.6598051035197045 |  Test loss: 1.0528173105214678
+Entity: 26 | Epoch: 21 | Train loss: 0.658952096337284 |  Test loss: 1.051133694626125
+Entity: 26 | Epoch: 22 | Train loss: 0.6566847863020678 |  Test loss: 1.0483799289335451
+Entity: 26 | Epoch: 23 | Train loss: 0.6545850727195988 |  Test loss: 1.0472046608548788
+Entity: 26 | Epoch: 24 | Train loss: 0.6527620614433282 |  Test loss: 1.044009685863386
+Entity: 26 | Epoch: 25 | Train loss: 0.6462209701116238 |  Test loss: 1.0369431676775482
+Entity: 26 | Epoch: 26 | Train loss: 0.6394879965539078 |  Test loss: 1.0348394587004026
+Entity: 26 | Epoch: 27 | Train loss: 0.630664838161443 |  Test loss: 1.027247169999672
+Entity: 26 | Epoch: 28 | Train loss: 0.6265487561632337 |  Test loss: 1.019892992240022
+Entity: 26 | Epoch: 29 | Train loss: 0.6220001279130978 |  Test loss: 1.0421041411403122
+Entity: 26 | Epoch: 30 | Train loss: 0.6242342078343508 |  Test loss: None
+Entity: 26 | Epoch: 31 | Train loss: 0.61326614384308 |  Test loss: 1.0342351844340252
+Entity: 26 | Epoch: 32 | Train loss: 0.6123587259418495 |  Test loss: 1.0236793601968592
+Entity: 26 | Epoch: 33 | Train loss: 0.6090942344553707 |  Test loss: 1.030071979783298
+Entity: 26 | Epoch: 34 | Train loss: 0.6049057736211912 |  Test loss: 1.0201812921202786
+Entity: 26 | Epoch: 35 | Train loss: 0.6031435975662109 |  Test loss: 1.0383114446009998
+Entity: 26 | Epoch: 36 | Train loss: 0.6044118624334044 |  Test loss: None
+Entity: 26 | Epoch: 37 | Train loss: 0.5984717973820957 |  Test loss: 0.9984403814410879
+Entity: 26 | Epoch: 38 | Train loss: 0.5951846795404033 |  Test loss: 1.0108123410681618
+Entity: 26 | Epoch: 39 | Train loss: 0.5938157969478386 |  Test loss: 1.0070004717740675
+Entity: 26 | Epoch: 40 | Train loss: 0.5914213791812165 |  Test loss: 1.0025038292176933
+Entity: 26 | Epoch: 41 | Train loss: 0.5927104997169591 |  Test loss: None
+Entity: 26 | Epoch: 42 | Train loss: 0.590160667440299 |  Test loss: 1.0017481056385718
+Entity: 26 | Epoch: 43 | Train loss: 0.5853148553823345 |  Test loss: 1.0034624515084682
+Entity: 26 | Epoch: 44 | Train loss: 0.5822724013944467 |  Test loss: 1.001077913261196
+Entity: 26 | Epoch: 45 | Train loss: 0.5871361497153058 |  Test loss: None
+Entity: 26 | Epoch: 46 | Train loss: 0.5751798564667304 |  Test loss: 0.9999235997347915
+Entity: 26 | Epoch: 47 | Train loss: 0.5739385576395484 |  Test loss: 1.0141619086625897
+Entity: 26 | Epoch: 48 | Train loss: 0.5710513366768822 |  Test loss: 1.0075722664386766
+Entity: 26 | Epoch: 49 | Train loss: 0.5702099063596182 |  Test loss: 0.9950446645973161
+
+
+
+Entity 27
+Dataset: D-5
+Dataset: D-5
+Dataset: D-5
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.4375
+number of test batches: 57.6328125
+number of test batches: 3.4453125
+Entity: 27 | Epoch: 0 | Train loss: 0.6689769212806295 |  Test loss: 0.8703732114209204
+Entity: 27 | Epoch: 1 | Train loss: 0.6236115779446135 |  Test loss: 0.8668123380093077
+Entity: 27 | Epoch: 2 | Train loss: 0.6203126992521331 |  Test loss: 0.8651671330877443
+Entity: 27 | Epoch: 3 | Train loss: 0.6185098629044152 |  Test loss: 0.8641004496192783
+Entity: 27 | Epoch: 4 | Train loss: 0.6171738442499191 |  Test loss: 0.8632926073922119
+Entity: 27 | Epoch: 5 | Train loss: 0.6160857491476764 |  Test loss: 0.862742967903614
+Entity: 27 | Epoch: 6 | Train loss: 0.6150526503566652 |  Test loss: 0.8621895983350588
+Entity: 27 | Epoch: 7 | Train loss: 0.613917082539478 |  Test loss: 0.8617951447553848
+Entity: 27 | Epoch: 8 | Train loss: 0.6127722620909903 |  Test loss: 0.8612759428905522
+Entity: 27 | Epoch: 9 | Train loss: 0.6115517122291981 |  Test loss: 0.8608576885958851
+Entity: 27 | Epoch: 10 | Train loss: 0.6102163986963501 |  Test loss: 0.8603508312111539
+Entity: 27 | Epoch: 11 | Train loss: 0.6087980820396699 |  Test loss: 0.8599500251034288
+Entity: 27 | Epoch: 12 | Train loss: 0.6073620655205707 |  Test loss: 0.8596355422587892
+Entity: 27 | Epoch: 13 | Train loss: 0.6059256470708047 |  Test loss: 0.8592962391226808
+Entity: 27 | Epoch: 14 | Train loss: 0.6045074198070134 |  Test loss: 0.8590042669739988
+Entity: 27 | Epoch: 15 | Train loss: 0.60307759532575 |  Test loss: 0.858947888295464
+Entity: 27 | Epoch: 16 | Train loss: 0.6018352517446633 |  Test loss: 0.8587907611977419
+Entity: 27 | Epoch: 17 | Train loss: 0.600610712038483 |  Test loss: 0.8590859196438135
+Entity: 27 | Epoch: 18 | Train loss: 0.5994999675654135 |  Test loss: 0.8594615226083534
+Entity: 27 | Epoch: 19 | Train loss: 0.598559599262554 |  Test loss: 0.859405925037031
+Entity: 27 | Epoch: 20 | Train loss: 0.5975124249245625 |  Test loss: 0.859695171151741
+Entity: 27 | Epoch: 21 | Train loss: 0.5966295018786738 |  Test loss: 0.860033308419815
+Entity: 27 | Epoch: 22 | Train loss: 0.5957061748902942 |  Test loss: 0.8600476563585048
+Entity: 27 | Epoch: 23 | Train loss: 0.5947610146165717 |  Test loss: 0.8603020930227712
+Entity: 27 | Epoch: 24 | Train loss: 0.5940028634095608 |  Test loss: 0.8602553224254424
+Entity: 27 | Epoch: 25 | Train loss: 0.5931041977352052 |  Test loss: 0.8609855192208709
+Entity: 27 | Epoch: 26 | Train loss: 0.5920920471590402 |  Test loss: 0.8608829996964626
+Entity: 27 | Epoch: 27 | Train loss: 0.5911622558514652 |  Test loss: 0.8612626847935642
+Entity: 27 | Epoch: 28 | Train loss: 0.5900721161382619 |  Test loss: 0.8612044501686448
+Entity: 27 | Epoch: 29 | Train loss: 0.588680931618762 |  Test loss: 0.8618943745147885
+Entity: 27 | Epoch: 30 | Train loss: 0.5872764789937931 |  Test loss: 0.8614752738105129
+Entity: 27 | Epoch: 31 | Train loss: 0.585256714980811 |  Test loss: 0.8619520676189235
+Entity: 27 | Epoch: 32 | Train loss: 0.5839374414964601 |  Test loss: 0.8627186596368243
+Entity: 27 | Epoch: 33 | Train loss: 0.5811606913485543 |  Test loss: 0.8620686183352015
+Entity: 27 | Epoch: 34 | Train loss: 0.5792393134295031 |  Test loss: 0.8632935704431093
+Entity: 27 | Epoch: 35 | Train loss: 0.5772081766320869 |  Test loss: 0.8627430810033431
+Entity: 27 | Epoch: 36 | Train loss: 0.5754138774652748 |  Test loss: 0.8632018834335599
+Entity: 27 | Epoch: 37 | Train loss: 0.5727615450763381 |  Test loss: 0.8620907563944252
+Entity: 27 | Epoch: 38 | Train loss: 0.5735464595539799 |  Test loss: None
+Entity: 27 | Epoch: 39 | Train loss: 0.5723273352660282 |  Test loss: 0.8627778444325134
+Entity: 27 | Epoch: 40 | Train loss: 0.5681762625736747 |  Test loss: 0.8634937817638406
+Entity: 27 | Epoch: 41 | Train loss: 0.5662079803691635 |  Test loss: 0.8627601052347207
+Entity: 27 | Epoch: 42 | Train loss: 0.5640926315450532 |  Test loss: 0.8606714888511736
+Entity: 27 | Epoch: 43 | Train loss: 0.5613590361921355 |  Test loss: 0.8604897014784063
+Entity: 27 | Epoch: 44 | Train loss: 0.5585352892437841 |  Test loss: 0.8633592013256992
+Entity: 27 | Epoch: 45 | Train loss: 0.5625080129133029 |  Test loss: None
+Entity: 27 | Epoch: 46 | Train loss: 0.5559554676592978 |  Test loss: 0.8627738939025893
+Entity: 27 | Epoch: 47 | Train loss: 0.5564502942323045 |  Test loss: None
+Entity: 27 | Epoch: 48 | Train loss: 0.5523932151429404 |  Test loss: 0.8612665771781266
+Entity: 27 | Epoch: 49 | Train loss: 0.5510609094926622 |  Test loss: 0.8585508771181579
+
+
+
+Entity 28
+Dataset: D-6
+Dataset: D-6
+Dataset: D-6
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.6328125
+number of test batches: 59.3984375
+number of test batches: 3.5078125
+Entity: 28 | Epoch: 0 | Train loss: 0.6416169036809558 |  Test loss: 0.8671571094094711
+Entity: 28 | Epoch: 1 | Train loss: 0.6260300278770378 |  Test loss: 0.8630677048938311
+Entity: 28 | Epoch: 2 | Train loss: 0.6234363061127741 |  Test loss: 0.8615678829827527
+Entity: 28 | Epoch: 3 | Train loss: 0.6217442994440951 |  Test loss: 0.8603733515694638
+Entity: 28 | Epoch: 4 | Train loss: 0.6204368415536802 |  Test loss: 0.8593667728208287
+Entity: 28 | Epoch: 5 | Train loss: 0.6193064249817143 |  Test loss: 0.8587856586640887
+Entity: 28 | Epoch: 6 | Train loss: 0.6181213378682092 |  Test loss: 0.8585119213543849
+Entity: 28 | Epoch: 7 | Train loss: 0.6169463555165766 |  Test loss: 0.8590567778227622
+Entity: 28 | Epoch: 8 | Train loss: 0.6155401705468025 |  Test loss: 0.8583510212583637
+Entity: 28 | Epoch: 9 | Train loss: 0.614090679234753 |  Test loss: 0.8580193159695225
+Entity: 28 | Epoch: 10 | Train loss: 0.6124486168894522 |  Test loss: 0.8578436982492296
+Entity: 28 | Epoch: 11 | Train loss: 0.6105027258614969 |  Test loss: 0.8573627703924785
+Entity: 28 | Epoch: 12 | Train loss: 0.6083486383273813 |  Test loss: 0.857483450387644
+Entity: 28 | Epoch: 13 | Train loss: 0.6055806171842837 |  Test loss: 0.856473087866216
+Entity: 28 | Epoch: 14 | Train loss: 0.6026547728661437 |  Test loss: 0.8554335102700278
+Entity: 28 | Epoch: 15 | Train loss: 0.5990411542868375 |  Test loss: 0.8531050706730289
+Entity: 28 | Epoch: 16 | Train loss: 0.5969106678175806 |  Test loss: 0.8546948535201909
+Entity: 28 | Epoch: 17 | Train loss: 0.5928715562608018 |  Test loss: 0.8512033517192427
+Entity: 28 | Epoch: 18 | Train loss: 0.5905701898406647 |  Test loss: 0.8484013936542523
+Entity: 28 | Epoch: 19 | Train loss: 0.5876934042870251 |  Test loss: 0.8513704799115658
+Entity: 28 | Epoch: 20 | Train loss: 0.5846202269890333 |  Test loss: 0.8518729132324258
+Entity: 28 | Epoch: 21 | Train loss: 0.5811407808080998 |  Test loss: 0.8528310986534425
+Entity: 28 | Epoch: 22 | Train loss: 0.5781023252336441 |  Test loss: 0.8568966880488419
+Entity: 28 | Epoch: 23 | Train loss: 0.575608226469315 |  Test loss: 0.8482542071213535
+Entity: 28 | Epoch: 24 | Train loss: 0.57323032487931 |  Test loss: 0.8596277223736097
+Entity: 28 | Epoch: 25 | Train loss: 0.5702324542756003 |  Test loss: 0.8627163350264768
+Entity: 28 | Epoch: 26 | Train loss: 0.566975610815042 |  Test loss: 0.8609090956272287
+Entity: 28 | Epoch: 27 | Train loss: 0.5643405826933106 |  Test loss: 0.8667838316035347
+Entity: 28 | Epoch: 28 | Train loss: 0.5585992731486199 |  Test loss: 0.8543467093736166
+Entity: 28 | Epoch: 29 | Train loss: 0.5568523816181278 |  Test loss: 0.8677236476336463
+Entity: 28 | Epoch: 30 | Train loss: 0.5525193093472659 |  Test loss: 0.8600018000414799
+Entity: 28 | Epoch: 31 | Train loss: 0.5506687653056188 |  Test loss: 0.8704634219271137
+Entity: 28 | Epoch: 32 | Train loss: 0.5496530693467375 |  Test loss: 0.8497413437116584
+Entity: 28 | Epoch: 33 | Train loss: 0.5432438276218448 |  Test loss: 0.8602731713770011
+Entity: 28 | Epoch: 34 | Train loss: 0.5414248817266741 |  Test loss: 0.8596166709260621
+Entity: 28 | Epoch: 35 | Train loss: 0.5392168477073547 |  Test loss: 0.8607985803148064
+Entity: 28 | Epoch: 36 | Train loss: 0.5356690431020374 |  Test loss: 0.8517421793155289
+Entity: 28 | Epoch: 37 | Train loss: 0.5325566706150893 |  Test loss: 0.8654459981550618
+Entity: 28 | Epoch: 38 | Train loss: 0.5324003720499927 |  Test loss: 0.8647139412745054
+Entity: 28 | Epoch: 39 | Train loss: 0.5296651076962424 |  Test loss: 0.8468392942404636
+Entity: 28 | Epoch: 40 | Train loss: 0.5294434575482744 |  Test loss: 0.8602893713982008
+Entity: 28 | Epoch: 41 | Train loss: 0.5238029191996315 |  Test loss: 0.8551010396170797
+Entity: 28 | Epoch: 42 | Train loss: 0.5220367044189753 |  Test loss: 0.8599003813652641
+Entity: 28 | Epoch: 43 | Train loss: 0.5175328032517229 |  Test loss: 0.8767287285707036
+Entity: 28 | Epoch: 44 | Train loss: 0.5215388120356867 |  Test loss: None
+Entity: 28 | Epoch: 45 | Train loss: 0.5169539012368448 |  Test loss: 0.861519659773959
+Entity: 28 | Epoch: 46 | Train loss: 0.5135940511281306 |  Test loss: 0.8586068112768216
+Entity: 28 | Epoch: 47 | Train loss: 0.5139768270818372 |  Test loss: None
+Entity: 28 | Epoch: 48 | Train loss: 0.508817928251717 |  Test loss: 0.8526491541187289
+Entity: 28 | Epoch: 49 | Train loss: 0.5096551076825948 |  Test loss: None
+
+
+
+Entity 29
+Dataset: D-7
+Dataset: D-7
+Dataset: D-7
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.5703125
+number of test batches: 37.03125
+number of test batches: 3.484375
+Entity: 29 | Epoch: 0 | Train loss: 0.7800921434906531 |  Test loss: 0.8210100823796183
+Entity: 29 | Epoch: 1 | Train loss: 0.7751728602785297 |  Test loss: 0.8191906807342787
+Entity: 29 | Epoch: 2 | Train loss: 0.7737400597760268 |  Test loss: 0.8187372238529771
+Entity: 29 | Epoch: 3 | Train loss: 0.7730336137626387 |  Test loss: 0.8187241859550299
+Entity: 29 | Epoch: 4 | Train loss: 0.7725591276079056 |  Test loss: 0.8183611721435202
+Entity: 29 | Epoch: 5 | Train loss: 0.7719764442590028 |  Test loss: 0.8181893451331442
+Entity: 29 | Epoch: 6 | Train loss: 0.7716566057254871 |  Test loss: 0.8179816043112978
+Entity: 29 | Epoch: 7 | Train loss: 0.7702656801635582 |  Test loss: 0.817828593600224
+Entity: 29 | Epoch: 8 | Train loss: 0.7707599663767035 |  Test loss: None
+Entity: 29 | Epoch: 9 | Train loss: 0.7695257674718236 |  Test loss: 0.8171390285840751
+Entity: 29 | Epoch: 10 | Train loss: 0.7689323695092347 |  Test loss: 0.8167595659203059
+Entity: 29 | Epoch: 11 | Train loss: 0.766305444432904 |  Test loss: 0.8162095270959051
+Entity: 29 | Epoch: 12 | Train loss: 0.7649494733835132 |  Test loss: 0.8159764596373845
+Entity: 29 | Epoch: 13 | Train loss: 0.7638499361275769 |  Test loss: 0.8150888624822412
+Entity: 29 | Epoch: 14 | Train loss: 0.7617296035142554 |  Test loss: 0.8142403496111923
+Entity: 29 | Epoch: 15 | Train loss: 0.7597021812451902 |  Test loss: 0.8130806069591421
+Entity: 29 | Epoch: 16 | Train loss: 0.7576473818177215 |  Test loss: 0.8115951048957827
+Entity: 29 | Epoch: 17 | Train loss: 0.7558592829159496 |  Test loss: 0.8113262752288193
+Entity: 29 | Epoch: 18 | Train loss: 0.7529127349643809 |  Test loss: 0.807424984095543
+Entity: 29 | Epoch: 19 | Train loss: 0.7494776687380001 |  Test loss: 0.8048482259522473
+Entity: 29 | Epoch: 20 | Train loss: 0.7464778934638662 |  Test loss: 0.8076392848727465
+Entity: 29 | Epoch: 21 | Train loss: 0.743698582897916 |  Test loss: 0.7999601314426922
+Entity: 29 | Epoch: 22 | Train loss: 0.7379177396639294 |  Test loss: 0.7985239309486369
+Entity: 29 | Epoch: 23 | Train loss: 0.7335245769299893 |  Test loss: 0.7963108691953816
+Entity: 29 | Epoch: 24 | Train loss: 0.730190588262953 |  Test loss: 0.7824328938095033
+Entity: 29 | Epoch: 25 | Train loss: 0.7263975364023902 |  Test loss: 0.7789322118378754
+Entity: 29 | Epoch: 26 | Train loss: 0.7251003424666643 |  Test loss: 0.7769753985512049
+Entity: 29 | Epoch: 27 | Train loss: 0.723066439738384 |  Test loss: 0.7793915185311521
+Entity: 29 | Epoch: 28 | Train loss: 0.7158904174542071 |  Test loss: 0.7777254197291295
+Entity: 29 | Epoch: 29 | Train loss: 0.711915870224663 |  Test loss: 0.7705928403338639
+Entity: 29 | Epoch: 30 | Train loss: 0.7098455881978994 |  Test loss: 0.7689385357184436
+Entity: 29 | Epoch: 31 | Train loss: 0.7053280614869922 |  Test loss: 0.7598448218367972
+Entity: 29 | Epoch: 32 | Train loss: 0.700970368060041 |  Test loss: 0.7552925832436479
+Entity: 29 | Epoch: 33 | Train loss: 0.6985036370545656 |  Test loss: 0.7508665208142008
+Entity: 29 | Epoch: 34 | Train loss: 0.6943923639908066 |  Test loss: 0.7538997896209844
+Entity: 29 | Epoch: 35 | Train loss: 0.7083173425987183 |  Test loss: None
+Entity: 29 | Epoch: 36 | Train loss: 0.6922799415456664 |  Test loss: 0.7492089717922473
+Entity: 29 | Epoch: 37 | Train loss: 0.6880503103112755 |  Test loss: 0.745796908098252
+Entity: 29 | Epoch: 38 | Train loss: 0.6869561274796799 |  Test loss: 0.7440452566412131
+Entity: 29 | Epoch: 39 | Train loss: 0.6839262889268544 |  Test loss: 0.7413322421604133
+Entity: 29 | Epoch: 40 | Train loss: 0.6827309779778861 |  Test loss: 0.7544867664577143
+Entity: 29 | Epoch: 41 | Train loss: 0.6813087280996243 |  Test loss: 0.7365281490570941
+Entity: 29 | Epoch: 42 | Train loss: 0.6798576541388677 |  Test loss: 0.7348828350403659
+Entity: 29 | Epoch: 43 | Train loss: 0.6801592393149742 |  Test loss: None
+Entity: 29 | Epoch: 44 | Train loss: 0.6770456756334983 |  Test loss: 0.7549089859814003
+Entity: 29 | Epoch: 45 | Train loss: 0.6742177557706336 |  Test loss: 0.7343936814681727
+Entity: 29 | Epoch: 46 | Train loss: 0.6706884737290328 |  Test loss: 0.7324608675869299
+Entity: 29 | Epoch: 47 | Train loss: 0.6745526034058038 |  Test loss: None
+Entity: 29 | Epoch: 48 | Train loss: 0.6729467557956988 |  Test loss: None
+Entity: 29 | Epoch: 49 | Train loss: 0.6701469110745468 |  Test loss: 0.7456795342807917
+
+
+
+Entity 30
+Dataset: F-1
+Dataset: F-1
+Dataset: F-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.2421875
+number of test batches: 64.7109375
+number of test batches: 4.046875
+Entity: 30 | Epoch: 0 | Train loss: 0.7472931612855819 |  Test loss: 0.760126637981694
+Entity: 30 | Epoch: 1 | Train loss: 0.7302498045300579 |  Test loss: 0.7565216640276569
+Entity: 30 | Epoch: 2 | Train loss: 0.7283219282273328 |  Test loss: 0.7555500081880557
+Entity: 30 | Epoch: 3 | Train loss: 0.7275354130788377 |  Test loss: 0.7550114605029232
+Entity: 30 | Epoch: 4 | Train loss: 0.727103251810145 |  Test loss: 0.7546877381733428
+Entity: 30 | Epoch: 5 | Train loss: 0.7267612042960481 |  Test loss: 0.7545472787455817
+Entity: 30 | Epoch: 6 | Train loss: 0.7264901053166157 |  Test loss: 0.7543534989752825
+Entity: 30 | Epoch: 7 | Train loss: 0.7263039005619556 |  Test loss: 0.7542046047675218
+Entity: 30 | Epoch: 8 | Train loss: 0.7259903760098956 |  Test loss: 0.7541142653019445
+Entity: 30 | Epoch: 9 | Train loss: 0.7258006467907353 |  Test loss: 0.753982775970488
+Entity: 30 | Epoch: 10 | Train loss: 0.7255526875388708 |  Test loss: 0.7537770687304005
+Entity: 30 | Epoch: 11 | Train loss: 0.7252490327854391 |  Test loss: 0.7535855943610367
+Entity: 30 | Epoch: 12 | Train loss: 0.7249133230183658 |  Test loss: 0.7534426077121589
+Entity: 30 | Epoch: 13 | Train loss: 0.7245555051417686 |  Test loss: 0.7531957460754339
+Entity: 30 | Epoch: 14 | Train loss: 0.7242420514618767 |  Test loss: 0.7528471639487734
+Entity: 30 | Epoch: 15 | Train loss: 0.7236002839821033 |  Test loss: 0.7525369559403897
+Entity: 30 | Epoch: 16 | Train loss: 0.7230499409948753 |  Test loss: 0.7518690035473483
+Entity: 30 | Epoch: 17 | Train loss: 0.722070223162536 |  Test loss: 0.7517187190332008
+Entity: 30 | Epoch: 18 | Train loss: 0.7212477564651315 |  Test loss: 0.7506784935909752
+Entity: 30 | Epoch: 19 | Train loss: 0.7191514671717635 |  Test loss: 0.749765326876668
+Entity: 30 | Epoch: 20 | Train loss: 0.7167179317722935 |  Test loss: 0.7487758634482514
+Entity: 30 | Epoch: 21 | Train loss: 0.714623330423999 |  Test loss: 0.7478662560348719
+Entity: 30 | Epoch: 22 | Train loss: 0.7117005164273416 |  Test loss: 0.7448118600372268
+Entity: 30 | Epoch: 23 | Train loss: 0.7090552981192487 |  Test loss: 0.7423793554349181
+Entity: 30 | Epoch: 24 | Train loss: 0.7064168469756956 |  Test loss: 0.7392936249400227
+Entity: 30 | Epoch: 25 | Train loss: 0.7011667459013121 |  Test loss: 0.7350954804380702
+Entity: 30 | Epoch: 26 | Train loss: 0.6986944185693279 |  Test loss: 0.735102565372974
+Entity: 30 | Epoch: 27 | Train loss: 0.6933534939745694 |  Test loss: 0.7249599212019175
+Entity: 30 | Epoch: 28 | Train loss: 0.6829013520186297 |  Test loss: 0.7203158572110308
+Entity: 30 | Epoch: 29 | Train loss: 0.676691538173331 |  Test loss: 0.747277474072654
+Entity: 30 | Epoch: 30 | Train loss: 0.6694094692951194 |  Test loss: 0.7214979111013797
+Entity: 30 | Epoch: 31 | Train loss: 0.6615292032234712 |  Test loss: 0.7310880420978529
+Entity: 30 | Epoch: 32 | Train loss: 0.6525459902107797 |  Test loss: 0.6993793304038727
+Entity: 30 | Epoch: 33 | Train loss: 0.6634197478552685 |  Test loss: None
+Entity: 30 | Epoch: 34 | Train loss: 0.6518429440763879 |  Test loss: 0.715713655047072
+Entity: 30 | Epoch: 35 | Train loss: 0.6425047715606005 |  Test loss: 0.7113746338084332
+Entity: 30 | Epoch: 36 | Train loss: 0.6370950075350215 |  Test loss: 0.714823009465591
+Entity: 30 | Epoch: 37 | Train loss: 0.6305744712480149 |  Test loss: 0.7055392059777111
+Entity: 30 | Epoch: 38 | Train loss: 0.6298172369181416 |  Test loss: 0.7067806789598474
+Entity: 30 | Epoch: 39 | Train loss: 0.627732213424745 |  Test loss: 0.7152589400825684
+Entity: 30 | Epoch: 40 | Train loss: 0.6209859465396147 |  Test loss: 0.7247000131504359
+Entity: 30 | Epoch: 41 | Train loss: 0.6164368452293763 |  Test loss: 0.7003732890953241
+Entity: 30 | Epoch: 42 | Train loss: 0.6130890477234369 |  Test loss: 0.6890070058960956
+Entity: 30 | Epoch: 43 | Train loss: 0.6077491158872761 |  Test loss: 0.7404210643751122
+Entity: 30 | Epoch: 44 | Train loss: 0.6139184036569002 |  Test loss: None
+Entity: 30 | Epoch: 45 | Train loss: 0.6108725075520478 |  Test loss: None
+Entity: 30 | Epoch: 46 | Train loss: 0.6072329329493824 |  Test loss: 0.7189707693187196
+Entity: 30 | Epoch: 47 | Train loss: 0.6064885013020989 |  Test loss: 0.6838023470198685
+Entity: 30 | Epoch: 48 | Train loss: 0.6043142131135929 |  Test loss: 0.7007433392177606
+Entity: 30 | Epoch: 49 | Train loss: 0.6028605667952504 |  Test loss: 0.7345871226430573
+
+
+
+Entity 31
+Dataset: P-4
+Dataset: P-4
+Dataset: P-4
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.71875
+number of test batches: 55.78125
+number of test batches: 3.5390625
+Entity: 31 | Epoch: 0 | Train loss: 0.720260266195516 |  Test loss: 0.8592106015822351
+Entity: 31 | Epoch: 1 | Train loss: 0.7025980315391814 |  Test loss: 0.854596098395636
+Entity: 31 | Epoch: 2 | Train loss: 0.6994549948743338 |  Test loss: 0.8535186694585462
+Entity: 31 | Epoch: 3 | Train loss: 0.6984908100204852 |  Test loss: 0.8529971393018501
+Entity: 31 | Epoch: 4 | Train loss: 0.697952350213326 |  Test loss: 0.8523926467328409
+Entity: 31 | Epoch: 5 | Train loss: 0.6976562061173107 |  Test loss: 0.852056615124508
+Entity: 31 | Epoch: 6 | Train loss: 0.6973503108586107 |  Test loss: 0.8519418011018575
+Entity: 31 | Epoch: 7 | Train loss: 0.6971795248675982 |  Test loss: 0.8516068047377184
+Entity: 31 | Epoch: 8 | Train loss: 0.6969106273305579 |  Test loss: 0.8512043144438769
+Entity: 31 | Epoch: 9 | Train loss: 0.6967092243803915 |  Test loss: 0.8509078047898234
+Entity: 31 | Epoch: 10 | Train loss: 0.6965237591523838 |  Test loss: 0.8504579324752224
+Entity: 31 | Epoch: 11 | Train loss: 0.6964347724864315 |  Test loss: 0.8501905716100407
+Entity: 31 | Epoch: 12 | Train loss: 0.6961234879906975 |  Test loss: 0.8495642111100108
+Entity: 31 | Epoch: 13 | Train loss: 0.695835308008456 |  Test loss: 0.8495001610508292
+Entity: 31 | Epoch: 14 | Train loss: 0.6956794633496137 |  Test loss: 0.8488273856663875
+Entity: 31 | Epoch: 15 | Train loss: 0.6954361257750057 |  Test loss: 0.8495685913894021
+Entity: 31 | Epoch: 16 | Train loss: 0.6951720706528745 |  Test loss: 0.8480089569246401
+Entity: 31 | Epoch: 17 | Train loss: 0.6946948844343339 |  Test loss: 0.8478767439377624
+Entity: 31 | Epoch: 18 | Train loss: 0.694153153321097 |  Test loss: 0.8468296560263529
+Entity: 31 | Epoch: 19 | Train loss: 0.6938466938363138 |  Test loss: 0.8460536123670753
+Entity: 31 | Epoch: 20 | Train loss: 0.693007294510243 |  Test loss: 0.845152389776233
+Entity: 31 | Epoch: 21 | Train loss: 0.6923337854234956 |  Test loss: 0.8447005788345407
+Entity: 31 | Epoch: 22 | Train loss: 0.6909688223977541 |  Test loss: 0.8429885934524354
+Entity: 31 | Epoch: 23 | Train loss: 0.689518806565413 |  Test loss: 0.8409056205006428
+Entity: 31 | Epoch: 24 | Train loss: 0.6879468503000282 |  Test loss: 0.8388308011628605
+Entity: 31 | Epoch: 25 | Train loss: 0.6851423198122802 |  Test loss: 0.8341678664906498
+Entity: 31 | Epoch: 26 | Train loss: 0.6799214504460819 |  Test loss: 0.8284174229848974
+Entity: 31 | Epoch: 27 | Train loss: 0.6723706096806935 |  Test loss: 0.8163404356488839
+Entity: 31 | Epoch: 28 | Train loss: 0.6643216344618063 |  Test loss: 0.8124338229542504
+Entity: 31 | Epoch: 29 | Train loss: 0.6646334582496624 |  Test loss: None
+Entity: 31 | Epoch: 30 | Train loss: 0.6570081183725834 |  Test loss: 0.8025366009688971
+Entity: 31 | Epoch: 31 | Train loss: 0.6455849378449569 |  Test loss: 0.7920688995413038
+Entity: 31 | Epoch: 32 | Train loss: 0.6412797399814048 |  Test loss: 0.7992264007528623
+Entity: 31 | Epoch: 33 | Train loss: 0.6351532754411386 |  Test loss: 0.7960920347251351
+Entity: 31 | Epoch: 34 | Train loss: 0.6349891288865491 |  Test loss: 0.7815316851532486
+Entity: 31 | Epoch: 35 | Train loss: 0.627312371977589 |  Test loss: 0.7963859586206534
+Entity: 31 | Epoch: 36 | Train loss: 0.625784357056761 |  Test loss: 0.7909152419008232
+Entity: 31 | Epoch: 37 | Train loss: 0.6324838983286957 |  Test loss: None
+Entity: 31 | Epoch: 38 | Train loss: 0.6261964102663102 |  Test loss: None
+Entity: 31 | Epoch: 39 | Train loss: 0.621117110271325 |  Test loss: 0.8013976149556019
+Entity: 31 | Epoch: 40 | Train loss: 0.6174139056617557 |  Test loss: 0.8226907778501502
+Entity: 31 | Epoch: 41 | Train loss: 0.6192395572381143 |  Test loss: None
+Entity: 31 | Epoch: 42 | Train loss: 0.6113312973500047 |  Test loss: 0.7906150973160909
+Entity: 31 | Epoch: 43 | Train loss: 0.6067563067464814 |  Test loss: 0.791117808274014
+Entity: 31 | Epoch: 44 | Train loss: 0.6085058475490145 |  Test loss: None
+Entity: 31 | Epoch: 45 | Train loss: 0.6049274120768606 |  Test loss: 0.7971523924189503
+Entity: 31 | Epoch: 46 | Train loss: 0.6048630980837344 |  Test loss: 0.7770898180970589
+Entity: 31 | Epoch: 47 | Train loss: 0.6064043739908174 |  Test loss: None
+Entity: 31 | Epoch: 48 | Train loss: 0.5978226222010098 |  Test loss: 0.8029923695738368
+Entity: 31 | Epoch: 49 | Train loss: 0.5949559144456691 |  Test loss: 0.8108373462460486
+
+
+
+Entity 32
+Dataset: G-3
+Dataset: G-3
+Dataset: G-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.8125
+number of test batches: 59.8125
+number of test batches: 3.5625
+Entity: 32 | Epoch: 0 | Train loss: 0.8457905255601534 |  Test loss: 0.5812849123112596
+Entity: 32 | Epoch: 1 | Train loss: 0.8429998376920853 |  Test loss: 0.580445731802141
+Entity: 32 | Epoch: 2 | Train loss: 0.8417912824205819 |  Test loss: 0.5800383058785085
+Entity: 32 | Epoch: 3 | Train loss: 0.8406946662185519 |  Test loss: 0.5797380750239092
+Entity: 32 | Epoch: 4 | Train loss: 0.8398942674786206 |  Test loss: 0.5794906798513246
+Entity: 32 | Epoch: 5 | Train loss: 0.8387923741510888 |  Test loss: 0.5795024213372942
+Entity: 32 | Epoch: 6 | Train loss: 0.8375430437230518 |  Test loss: 0.5795082775099824
+Entity: 32 | Epoch: 7 | Train loss: 0.8364088480377663 |  Test loss: 0.5794374358252083
+Entity: 32 | Epoch: 8 | Train loss: 0.8344945276263528 |  Test loss: 0.5792466824866113
+Entity: 32 | Epoch: 9 | Train loss: 0.8328504448891427 |  Test loss: 0.5794170033717692
+Entity: 32 | Epoch: 10 | Train loss: 0.8310876711154761 |  Test loss: 0.5791573132053345
+Entity: 32 | Epoch: 11 | Train loss: 0.8292595280958045 |  Test loss: 0.5790847365074513
+Entity: 32 | Epoch: 12 | Train loss: 0.8283850558484563 |  Test loss: 0.5793503166192717
+Entity: 32 | Epoch: 13 | Train loss: 0.8248085462545125 |  Test loss: 0.5791965554786944
+Entity: 32 | Epoch: 14 | Train loss: 0.8216014649551489 |  Test loss: 0.5792598628822976
+Entity: 32 | Epoch: 15 | Train loss: 0.8177745494184535 |  Test loss: 0.5788934302900248
+Entity: 32 | Epoch: 16 | Train loss: 0.8155022814782438 |  Test loss: 0.5789525990880895
+Entity: 32 | Epoch: 17 | Train loss: 0.8118393993894337 |  Test loss: 0.5790461278928999
+Entity: 32 | Epoch: 18 | Train loss: 0.8098890437260986 |  Test loss: 0.57863676931562
+Entity: 32 | Epoch: 19 | Train loss: 0.8131936392386031 |  Test loss: None
+Entity: 32 | Epoch: 20 | Train loss: 0.8065925734299362 |  Test loss: 0.5782549424268502
+Entity: 32 | Epoch: 21 | Train loss: 0.8042960484900377 |  Test loss: 0.5777464199018779
+Entity: 32 | Epoch: 22 | Train loss: 0.8019356294506128 |  Test loss: 0.5779054234899058
+Entity: 32 | Epoch: 23 | Train loss: 0.8003456676963556 |  Test loss: 0.5781477125026613
+Entity: 32 | Epoch: 24 | Train loss: 0.7978539611892438 |  Test loss: 0.576449267833755
+Entity: 32 | Epoch: 25 | Train loss: 0.7969168845700559 |  Test loss: 0.578403609482114
+Entity: 32 | Epoch: 26 | Train loss: 0.7949146024924408 |  Test loss: 0.5762691343746459
+Entity: 32 | Epoch: 27 | Train loss: 0.7955564648373636 |  Test loss: None
+Entity: 32 | Epoch: 28 | Train loss: 0.7911804092941833 |  Test loss: 0.5749714311861777
+Entity: 32 | Epoch: 29 | Train loss: 0.7908054415553512 |  Test loss: 0.576772582586528
+Entity: 32 | Epoch: 30 | Train loss: 0.7905168289766958 |  Test loss: 0.5737134566644958
+Entity: 32 | Epoch: 31 | Train loss: 0.7926840741441236 |  Test loss: None
+Entity: 32 | Epoch: 32 | Train loss: 0.7865138849268807 |  Test loss: 0.5732687157793216
+Entity: 32 | Epoch: 33 | Train loss: 0.7858332367247809 |  Test loss: 0.5692365612347586
+Entity: 32 | Epoch: 34 | Train loss: 0.7822717550922843 |  Test loss: 0.5745013658224867
+Entity: 32 | Epoch: 35 | Train loss: 0.7835919820154149 |  Test loss: None
+Entity: 32 | Epoch: 36 | Train loss: 0.7864947236424609 |  Test loss: None
+Entity: 32 | Epoch: 37 | Train loss: 0.7788798124719716 |  Test loss: 0.564154548845213
+Entity: 32 | Epoch: 38 | Train loss: 0.773020011391301 |  Test loss: 0.5687730523569738
+Entity: 32 | Epoch: 39 | Train loss: 0.768254180504794 |  Test loss: 0.5782596049940095
+Entity: 32 | Epoch: 40 | Train loss: 0.7660337462096145 |  Test loss: 0.565763913560914
+Entity: 32 | Epoch: 41 | Train loss: 0.7617487385940139 |  Test loss: 0.5774927101960393
+Entity: 32 | Epoch: 42 | Train loss: 0.7597870008377448 |  Test loss: 0.5737492842533373
+Entity: 32 | Epoch: 43 | Train loss: 0.7582785536411821 |  Test loss: 0.5602158558140856
+Entity: 32 | Epoch: 44 | Train loss: 0.7531508529033065 |  Test loss: 0.586697494583572
+Entity: 32 | Epoch: 45 | Train loss: 0.7482089320883419 |  Test loss: 0.5590486290112542
+Entity: 32 | Epoch: 46 | Train loss: 0.7442608122734012 |  Test loss: 0.5924825435846415
+Entity: 32 | Epoch: 47 | Train loss: 0.7441625033980799 |  Test loss: 0.5914495261712817
+Entity: 32 | Epoch: 48 | Train loss: 0.7398561717274286 |  Test loss: 0.5530793429760817
+Entity: 32 | Epoch: 49 | Train loss: 0.7363850912325478 |  Test loss: 0.5757674832321323
+
+
+
+Entity 33
+Dataset: T-1
+Dataset: T-1
+Dataset: T-1
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.28125
+number of test batches: 53.71875
+number of test batches: 4.0546875
+Entity: 33 | Epoch: 0 | Train loss: 0.04981205094741859 |  Test loss: 0.041622240649023035
+Entity: 33 | Epoch: 1 | Train loss: 0.04163363500268381 |  Test loss: 0.03826727160319474
+Entity: 33 | Epoch: 2 | Train loss: 0.03877079889080906 |  Test loss: 0.03642444010318826
+Entity: 33 | Epoch: 3 | Train loss: 0.03688464077519408 |  Test loss: 0.034630362956958725
+Entity: 33 | Epoch: 4 | Train loss: 0.03474398736733299 |  Test loss: 0.03241658334246601
+Entity: 33 | Epoch: 5 | Train loss: 0.0321824905700155 |  Test loss: 0.02962720084770337
+Entity: 33 | Epoch: 6 | Train loss: 0.028958653132271705 |  Test loss: 0.02597967719861983
+Entity: 33 | Epoch: 7 | Train loss: 0.024797647629373143 |  Test loss: 0.021487253780435478
+Entity: 33 | Epoch: 8 | Train loss: 0.019751543635233442 |  Test loss: 0.01616722296217729
+Entity: 33 | Epoch: 9 | Train loss: 0.014208201550932031 |  Test loss: 0.011023767226328984
+Entity: 33 | Epoch: 10 | Train loss: 0.009377578253261609 |  Test loss: 0.007005233980216416
+Entity: 33 | Epoch: 11 | Train loss: 0.005917673099772116 |  Test loss: 0.004246126665134967
+Entity: 33 | Epoch: 12 | Train loss: 0.0035307336766428124 |  Test loss: 0.0023107990566555857
+Entity: 33 | Epoch: 13 | Train loss: 0.0018963169181144012 |  Test loss: 0.0011996034303179185
+Entity: 33 | Epoch: 14 | Train loss: 0.0010480340212941804 |  Test loss: 0.0007147044966665549
+Entity: 33 | Epoch: 15 | Train loss: 0.0006991810955017698 |  Test loss: 0.0004963921265822866
+Entity: 33 | Epoch: 16 | Train loss: 0.0005447821632721565 |  Test loss: 0.0004078218226894931
+Entity: 33 | Epoch: 17 | Train loss: 0.0004782898694251054 |  Test loss: 0.0003433962759368596
+Entity: 33 | Epoch: 18 | Train loss: 0.0004412027727760079 |  Test loss: 0.00031871110030086213
+Entity: 33 | Epoch: 19 | Train loss: 0.0004162696813598884 |  Test loss: 0.00028568242295318365
+Entity: 33 | Epoch: 20 | Train loss: 0.000392994163595606 |  Test loss: 0.0002862618686727774
+Entity: 33 | Epoch: 21 | Train loss: 0.00038458094812379484 |  Test loss: 0.00026662459764366603
+Entity: 33 | Epoch: 22 | Train loss: 0.0003656173557047718 |  Test loss: 0.00026457161613843656
+Entity: 33 | Epoch: 23 | Train loss: 0.0003548264279973936 |  Test loss: 0.00023307224635114092
+Entity: 33 | Epoch: 24 | Train loss: 0.00034570915672869933 |  Test loss: 0.00022995586993684408
+Entity: 33 | Epoch: 25 | Train loss: 0.00034554468134986307 |  Test loss: 0.0002538792274744624
+Entity: 33 | Epoch: 26 | Train loss: 0.0003326847094260659 |  Test loss: 0.00022844031197366598
+Entity: 33 | Epoch: 27 | Train loss: 0.000316715233323638 |  Test loss: 0.0002169106359542989
+Entity: 33 | Epoch: 28 | Train loss: 0.000311255601903739 |  Test loss: 0.00020258056251288144
+Entity: 33 | Epoch: 29 | Train loss: 0.0002970802861301571 |  Test loss: 0.00018329940892705852
+Entity: 33 | Epoch: 30 | Train loss: 0.0002928108330589717 |  Test loss: 0.00021839158826091875
+Entity: 33 | Epoch: 31 | Train loss: 0.0002891637640299569 |  Test loss: 0.00018279621004214334
+Entity: 33 | Epoch: 32 | Train loss: 0.0002794532666779679 |  Test loss: 0.0001704004329552221
+Entity: 33 | Epoch: 33 | Train loss: 0.0002774254294606361 |  Test loss: 0.00017620308124795058
+Entity: 33 | Epoch: 34 | Train loss: 0.0002675332236186219 |  Test loss: 0.00016563580077905737
+Entity: 33 | Epoch: 35 | Train loss: 0.0002678200368325388 |  Test loss: None
+Entity: 33 | Epoch: 36 | Train loss: 0.00026773056400512595 |  Test loss: None
+Entity: 33 | Epoch: 37 | Train loss: 0.00027228046200460657 |  Test loss: None
+Entity: 33 | Epoch: 38 | Train loss: 0.0002714854708877214 |  Test loss: None
+Entity: 33 | Epoch: 39 | Train loss: 0.00025823884634947124 |  Test loss: 0.00019519244150315463
+Entity: 33 | Epoch: 40 | Train loss: 0.00025799697657113237 |  Test loss: 0.0001387030541060884
+Entity: 33 | Epoch: 41 | Train loss: 0.00025143193632408515 |  Test loss: 0.00020192360505826191
+Entity: 33 | Epoch: 42 | Train loss: 0.00025448370707912253 |  Test loss: None
+Entity: 33 | Epoch: 43 | Train loss: 0.00023629680499759694 |  Test loss: 0.00012849573540418696
+Entity: 33 | Epoch: 44 | Train loss: 0.00022816552989632417 |  Test loss: 0.0001639032978561767
+Entity: 33 | Epoch: 45 | Train loss: 0.00022745364042233213 |  Test loss: 0.00013932567421647726
+Entity: 33 | Epoch: 46 | Train loss: 0.00023162315153768927 |  Test loss: None
+Entity: 33 | Epoch: 47 | Train loss: 0.0002218000276525717 |  Test loss: 0.00020254189818276835
+Entity: 33 | Epoch: 48 | Train loss: 0.0002518224788459827 |  Test loss: None
+Entity: 33 | Epoch: 49 | Train loss: 0.00021897748793180504 |  Test loss: 0.00012711716756664805
+
+
+
+Entity 34
+Dataset: T-2
+Dataset: T-2
+Dataset: T-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.1640625
+number of test batches: 51.875
+number of test batches: 4.015625
+Entity: 34 | Epoch: 0 | Train loss: 0.5459427961389669 |  Test loss: 0.04915409423918228
+Entity: 34 | Epoch: 1 | Train loss: 0.5223610107138003 |  Test loss: 0.04264746282380147
+Entity: 34 | Epoch: 2 | Train loss: 0.5156471269718136 |  Test loss: 0.040861493801419055
+Entity: 34 | Epoch: 3 | Train loss: 0.5104650817091765 |  Test loss: 0.03993214025358753
+Entity: 34 | Epoch: 4 | Train loss: 0.5052687742410056 |  Test loss: 0.03932998905702157
+Entity: 34 | Epoch: 5 | Train loss: 0.4998120120249109 |  Test loss: 0.038801010864096465
+Entity: 34 | Epoch: 6 | Train loss: 0.49638399404702954 |  Test loss: 0.03828853590684356
+Entity: 34 | Epoch: 7 | Train loss: 0.4927330173420147 |  Test loss: 0.037804634382555095
+Entity: 34 | Epoch: 8 | Train loss: 0.49219714038989626 |  Test loss: 0.037329764504113384
+Entity: 34 | Epoch: 9 | Train loss: 0.48974668663635057 |  Test loss: 0.03685577485981263
+Entity: 34 | Epoch: 10 | Train loss: 0.4875891638588578 |  Test loss: 0.036355824845843925
+Entity: 34 | Epoch: 11 | Train loss: 0.4860706978695194 |  Test loss: 0.035831053119903825
+Entity: 34 | Epoch: 12 | Train loss: 0.4844546724262703 |  Test loss: 0.03528237185033957
+Entity: 34 | Epoch: 13 | Train loss: 0.48502024687264766 |  Test loss: None
+Entity: 34 | Epoch: 14 | Train loss: 0.48183361847205053 |  Test loss: 0.03396479248162427
+Entity: 34 | Epoch: 15 | Train loss: 0.48181689857080745 |  Test loss: 0.03333887031858679
+Entity: 34 | Epoch: 16 | Train loss: 0.4805467751010651 |  Test loss: 0.032299243493761204
+Entity: 34 | Epoch: 17 | Train loss: 0.47784648736643026 |  Test loss: 0.031237490982201598
+Entity: 34 | Epoch: 18 | Train loss: 0.4769436696763865 |  Test loss: 0.02999319699525508
+Entity: 34 | Epoch: 19 | Train loss: 0.4749147938516738 |  Test loss: 0.028534853161885202
+Entity: 34 | Epoch: 20 | Train loss: 0.47190407869040907 |  Test loss: 0.02680773968322081
+Entity: 34 | Epoch: 21 | Train loss: 0.4688808755186352 |  Test loss: 0.024980921682843698
+Entity: 34 | Epoch: 22 | Train loss: 0.4664086380365052 |  Test loss: 0.02266335218030722
+Entity: 34 | Epoch: 23 | Train loss: 0.4668110239626346 |  Test loss: None
+Entity: 34 | Epoch: 24 | Train loss: 0.4598805493126263 |  Test loss: 0.0179247427863116
+Entity: 34 | Epoch: 25 | Train loss: 0.4551773456003916 |  Test loss: 0.015903738928992293
+Entity: 34 | Epoch: 26 | Train loss: 0.45515278307130247 |  Test loss: 0.014288673042600562
+Entity: 34 | Epoch: 27 | Train loss: 0.4490941368751271 |  Test loss: 0.013198006802926144
+Entity: 34 | Epoch: 28 | Train loss: 0.4517384229337598 |  Test loss: None
+Entity: 34 | Epoch: 29 | Train loss: 0.44491314426808987 |  Test loss: 0.01228170919833172
+Entity: 34 | Epoch: 30 | Train loss: 0.444171884562123 |  Test loss: 0.01214823845125271
+Entity: 34 | Epoch: 31 | Train loss: 0.44233928760069835 |  Test loss: 0.011973606407057344
+Entity: 34 | Epoch: 32 | Train loss: 0.4423450994452136 |  Test loss: None
+Entity: 34 | Epoch: 33 | Train loss: 0.4421171904915171 |  Test loss: 0.011882832784262071
+Entity: 34 | Epoch: 34 | Train loss: 0.43810910973573897 |  Test loss: 0.01184574171525004
+Entity: 34 | Epoch: 35 | Train loss: 0.4388055802266778 |  Test loss: None
+Entity: 34 | Epoch: 36 | Train loss: 0.4390232004717065 |  Test loss: None
+Entity: 34 | Epoch: 37 | Train loss: 0.43083864845476233 |  Test loss: 0.011818346139642633
+Entity: 34 | Epoch: 38 | Train loss: 0.44124770332221375 |  Test loss: None
+Entity: 34 | Epoch: 39 | Train loss: 0.43583649674686126 |  Test loss: None
+Entity: 34 | Epoch: 40 | Train loss: 0.4350656245179712 |  Test loss: None
+Entity: 34 | Epoch: 41 | Train loss: 0.42811753902504274 |  Test loss: 0.011592825512403005
+Entity: 34 | Epoch: 42 | Train loss: 0.4271983371682456 |  Test loss: 0.011543563647477223
+Entity: 34 | Epoch: 43 | Train loss: 0.4246295622060929 |  Test loss: 0.011509359560021089
+Entity: 34 | Epoch: 44 | Train loss: 0.4245697600443523 |  Test loss: 0.011488917588298992
+Entity: 34 | Epoch: 45 | Train loss: 0.41946787470163654 |  Test loss: 0.011505529148484774
+Entity: 34 | Epoch: 46 | Train loss: 0.42262955782477923 |  Test loss: None
+Entity: 34 | Epoch: 47 | Train loss: 0.4217182180761457 |  Test loss: None
+Entity: 34 | Epoch: 48 | Train loss: 0.42122641672560396 |  Test loss: None
+Entity: 34 | Epoch: 49 | Train loss: 0.41452194314776014 |  Test loss: 0.01145132523072113
+
+
+
+Entity 35
+Dataset: D-8
+Dataset: D-8
+Dataset: D-8
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.6796875
+number of test batches: 59.5546875
+number of test batches: 3.5234375
+Entity: 35 | Epoch: 0 | Train loss: 0.44719449262390565 |  Test loss: 0.012838274240493774
+Entity: 35 | Epoch: 1 | Train loss: 0.4283400115842635 |  Test loss: 0.004293751437216997
+Entity: 35 | Epoch: 2 | Train loss: 0.42370563969912295 |  Test loss: 0.0022476427257061005
+Entity: 35 | Epoch: 3 | Train loss: 0.4216937244751292 |  Test loss: 0.0013570755254477262
+Entity: 35 | Epoch: 4 | Train loss: 0.4206053732885651 |  Test loss: 0.000888328067958355
+Entity: 35 | Epoch: 5 | Train loss: 0.4198104347699247 |  Test loss: 0.0006003938615322113
+Entity: 35 | Epoch: 6 | Train loss: 0.4195823532699277 |  Test loss: 0.00040987192187458277
+Entity: 35 | Epoch: 7 | Train loss: 0.4177633715532171 |  Test loss: 0.00027634325670078397
+Entity: 35 | Epoch: 8 | Train loss: 0.41690608489234954 |  Test loss: 0.00018649056437425315
+Entity: 35 | Epoch: 9 | Train loss: 0.41511481829525926 |  Test loss: 0.00012067271018167958
+Entity: 35 | Epoch: 10 | Train loss: 0.41298604031889213 |  Test loss: 7.593512418679893e-05
+Entity: 35 | Epoch: 11 | Train loss: 0.4129568947574173 |  Test loss: 4.933650416205637e-05
+Entity: 35 | Epoch: 12 | Train loss: 0.41104785480273026 |  Test loss: 2.8829725124523975e-05
+Entity: 35 | Epoch: 13 | Train loss: 0.4092749395276665 |  Test loss: 1.7845204638433643e-05
+Entity: 35 | Epoch: 14 | Train loss: 0.40789439937654853 |  Test loss: 1.0382372238382231e-05
+Entity: 35 | Epoch: 15 | Train loss: 0.40660541622021895 |  Test loss: 5.732904355681967e-06
+Entity: 35 | Epoch: 16 | Train loss: 0.40511081153956235 |  Test loss: 5.2191239774401765e-06
+Entity: 35 | Epoch: 17 | Train loss: 0.4044811433500724 |  Test loss: 5.185961526876781e-06
+Entity: 35 | Epoch: 18 | Train loss: 0.40406971255227375 |  Test loss: 4.2287210817448795e-06
+Entity: 35 | Epoch: 19 | Train loss: 0.40260750953546104 |  Test loss: 5.7088263929472305e-06
+Entity: 35 | Epoch: 20 | Train loss: 0.4015785935262312 |  Test loss: 6.781752290407894e-06
+Entity: 35 | Epoch: 21 | Train loss: 0.3990060849987294 |  Test loss: 7.076717793097487e-06
+Entity: 35 | Epoch: 22 | Train loss: 0.39925692571442645 |  Test loss: None
+Entity: 35 | Epoch: 23 | Train loss: 0.396346565064891 |  Test loss: 9.863892955763731e-06
+Entity: 35 | Epoch: 24 | Train loss: 0.393989581874601 |  Test loss: 8.016726496862248e-06
+Entity: 35 | Epoch: 25 | Train loss: 0.3918013593211477 |  Test loss: 1.142804012488341e-05
+Entity: 35 | Epoch: 26 | Train loss: 0.3898715824828436 |  Test loss: 1.050507853506133e-05
+Entity: 35 | Epoch: 27 | Train loss: 0.3888588047615478 |  Test loss: 1.143994177255081e-05
+Entity: 35 | Epoch: 28 | Train loss: 0.38593565425692067 |  Test loss: 1.0869857760553714e-05
+Entity: 35 | Epoch: 29 | Train loss: 0.3890525722718791 |  Test loss: None
+Entity: 35 | Epoch: 30 | Train loss: 0.3856731173747736 |  Test loss: 8.791851541900542e-06
+Entity: 35 | Epoch: 31 | Train loss: 0.38153447065177326 |  Test loss: 7.919324161775876e-06
+Entity: 35 | Epoch: 32 | Train loss: 0.38070265685838345 |  Test loss: 1.0148197361559141e-05
+Entity: 35 | Epoch: 33 | Train loss: 0.3847381635878212 |  Test loss: None
+Entity: 35 | Epoch: 34 | Train loss: 0.38007161266276707 |  Test loss: 8.471332876069937e-06
+Entity: 35 | Epoch: 35 | Train loss: 0.37804965157471343 |  Test loss: 8.455540410068352e-06
+Entity: 35 | Epoch: 36 | Train loss: 0.38215269944848995 |  Test loss: None
+Entity: 35 | Epoch: 37 | Train loss: 0.3784376204692547 |  Test loss: None
+Entity: 35 | Epoch: 38 | Train loss: 0.3769899141335481 |  Test loss: 1.1962594726355746e-05
+Entity: 35 | Epoch: 39 | Train loss: 0.3804811477067066 |  Test loss: None
+Entity: 35 | Epoch: 40 | Train loss: 0.37717605209105765 |  Test loss: None
+Entity: 35 | Epoch: 41 | Train loss: 0.37654197892784375 |  Test loss: 6.724025297444314e-06
+Entity: 35 | Epoch: 42 | Train loss: 0.37382852575880876 |  Test loss: 8.440718374913558e-06
+Entity: 35 | Epoch: 43 | Train loss: 0.37408629562960394 |  Test loss: None
+Entity: 35 | Epoch: 44 | Train loss: 0.37089292138640323 |  Test loss: 4.6913473852328025e-06
+Entity: 35 | Epoch: 45 | Train loss: 0.37541785111249015 |  Test loss: None
+Entity: 35 | Epoch: 46 | Train loss: 0.37054837206988445 |  Test loss: 3.611958845795016e-06
+Entity: 35 | Epoch: 47 | Train loss: 0.36870461969005197 |  Test loss: 3.5990010474051815e-06
+Entity: 35 | Epoch: 48 | Train loss: 0.370143518880935 |  Test loss: None
+Entity: 35 | Epoch: 49 | Train loss: 0.3726983644500957 |  Test loss: None
+
+
+
+Entity 36
+Dataset: D-9
+Dataset: D-9
+Dataset: D-9
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.5703125
+number of test batches: 47.265625
+number of test batches: 3.484375
+Entity: 36 | Epoch: 0 | Train loss: 0.5654667135393466 |  Test loss: 0.02985662780702114
+Entity: 36 | Epoch: 1 | Train loss: 0.5258308525138766 |  Test loss: 0.010568720288574696
+Entity: 36 | Epoch: 2 | Train loss: 0.5133394914908173 |  Test loss: 0.005088835954666138
+Entity: 36 | Epoch: 3 | Train loss: 0.506847017030481 |  Test loss: 0.003035103902220726
+Entity: 36 | Epoch: 4 | Train loss: 0.5032152294928705 |  Test loss: 0.00204446236602962
+Entity: 36 | Epoch: 5 | Train loss: 0.5012929873883742 |  Test loss: 0.0014357742620632052
+Entity: 36 | Epoch: 6 | Train loss: 0.49950114139306123 |  Test loss: 0.0010177323129028082
+Entity: 36 | Epoch: 7 | Train loss: 0.4987454321394258 |  Test loss: 0.0007068825070746243
+Entity: 36 | Epoch: 8 | Train loss: 0.49758690198068845 |  Test loss: 0.0004960166406817734
+Entity: 36 | Epoch: 9 | Train loss: 0.49576877003737896 |  Test loss: 0.0003304759447928518
+Entity: 36 | Epoch: 10 | Train loss: 0.494959150921112 |  Test loss: 0.00021645487868227065
+Entity: 36 | Epoch: 11 | Train loss: 0.49408221525990703 |  Test loss: 0.00013791717356070876
+Entity: 36 | Epoch: 12 | Train loss: 0.4935765482099162 |  Test loss: 8.655435522086918e-05
+Entity: 36 | Epoch: 13 | Train loss: 0.49262275152697 |  Test loss: 5.345336103346199e-05
+Entity: 36 | Epoch: 14 | Train loss: 0.4913160548914186 |  Test loss: 3.131294943159446e-05
+Entity: 36 | Epoch: 15 | Train loss: 0.4905117967055514 |  Test loss: 2.206802491855342e-05
+Entity: 36 | Epoch: 16 | Train loss: 0.48865696207863324 |  Test loss: 1.2085500202374533e-05
+Entity: 36 | Epoch: 17 | Train loss: 0.48782189203337 |  Test loss: 9.078228686121292e-06
+Entity: 36 | Epoch: 18 | Train loss: 0.4885354822494323 |  Test loss: None
+Entity: 36 | Epoch: 19 | Train loss: 0.48477800043553404 |  Test loss: 7.4263871283619665e-06
+Entity: 36 | Epoch: 20 | Train loss: 0.48065817439921726 |  Test loss: 3.6311623716756003e-06
+Entity: 36 | Epoch: 21 | Train loss: 0.47981076263688033 |  Test loss: 3.909060978912748e-06
+Entity: 36 | Epoch: 22 | Train loss: 0.48317258455199447 |  Test loss: None
+Entity: 36 | Epoch: 23 | Train loss: 0.479087201693018 |  Test loss: 7.128786364773987e-06
+Entity: 36 | Epoch: 24 | Train loss: 0.4768098002548048 |  Test loss: 5.242748102318728e-06
+Entity: 36 | Epoch: 25 | Train loss: 0.4757603197053682 |  Test loss: 2.8739268600475043e-06
+Entity: 36 | Epoch: 26 | Train loss: 0.47305926790360947 |  Test loss: 3.921807547158096e-06
+Entity: 36 | Epoch: 27 | Train loss: 0.47041208348381836 |  Test loss: 2.8121803552494384e-06
+Entity: 36 | Epoch: 28 | Train loss: 0.4673413929843894 |  Test loss: 2.990962229887373e-06
+Entity: 36 | Epoch: 29 | Train loss: 0.4629862817115494 |  Test loss: 2.1222367649897933e-06
+Entity: 36 | Epoch: 30 | Train loss: 0.4605903046658571 |  Test loss: 2.8425827167666284e-06
+Entity: 36 | Epoch: 31 | Train loss: 0.460493821888034 |  Test loss: 3.2211698908213293e-06
+Entity: 36 | Epoch: 32 | Train loss: 0.46059226721673513 |  Test loss: None
+Entity: 36 | Epoch: 33 | Train loss: 0.45588206936912645 |  Test loss: 2.817059112203424e-06
+Entity: 36 | Epoch: 34 | Train loss: 0.4520997636546136 |  Test loss: 4.554400220513344e-06
+Entity: 36 | Epoch: 35 | Train loss: 0.452879527950446 |  Test loss: None
+Entity: 36 | Epoch: 36 | Train loss: 0.44975858847369393 |  Test loss: 3.328143520775484e-06
+Entity: 36 | Epoch: 37 | Train loss: 0.45111565173361706 |  Test loss: None
+Entity: 36 | Epoch: 38 | Train loss: 0.4555199223541181 |  Test loss: None
+Entity: 36 | Epoch: 39 | Train loss: 0.444813760744366 |  Test loss: 3.258996002841741e-06
+Entity: 36 | Epoch: 40 | Train loss: 0.44539044107541514 |  Test loss: None
+Entity: 36 | Epoch: 41 | Train loss: 0.44614500328668555 |  Test loss: None
+Entity: 36 | Epoch: 42 | Train loss: 0.4391571643644815 |  Test loss: 3.339606337249279e-06
+Entity: 36 | Epoch: 43 | Train loss: 0.4337126066919961 |  Test loss: 3.146302333334461e-06
+Entity: 36 | Epoch: 44 | Train loss: 0.4322658725975741 |  Test loss: 4.899802661384456e-06
+Entity: 36 | Epoch: 45 | Train loss: 0.44069846669153223 |  Test loss: None
+Entity: 36 | Epoch: 46 | Train loss: 0.4372459872709121 |  Test loss: None
+Entity: 36 | Epoch: 47 | Train loss: 0.43360671151601227 |  Test loss: None
+Entity: 36 | Epoch: 48 | Train loss: 0.431766460958412 |  Test loss: 3.7763602449558675e-06
+Entity: 36 | Epoch: 49 | Train loss: 0.42573744342318576 |  Test loss: 3.645858896561549e-06
+
+
+
+Entity 37
+Dataset: F-2
+Dataset: F-2
+Dataset: F-2
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.1953125
+number of test batches: 42.7265625
+number of test batches: 4.03125
+Entity: 37 | Epoch: 0 | Train loss: 0.5507163945441841 |  Test loss: 0.04599419266415052
+Entity: 37 | Epoch: 1 | Train loss: 0.5231910716815299 |  Test loss: 0.041205446524617745
+Entity: 37 | Epoch: 2 | Train loss: 0.518016497994256 |  Test loss: 0.039888160303460665
+Entity: 37 | Epoch: 3 | Train loss: 0.5155920716241998 |  Test loss: 0.03931619885186719
+Entity: 37 | Epoch: 4 | Train loss: 0.5140790056149358 |  Test loss: 0.03898295788085377
+Entity: 37 | Epoch: 5 | Train loss: 0.5122889455700392 |  Test loss: 0.03877237027663514
+Entity: 37 | Epoch: 6 | Train loss: 0.5111380604840037 |  Test loss: 0.03864570717325492
+Entity: 37 | Epoch: 7 | Train loss: 0.5092100611541245 |  Test loss: 0.03854768242824722
+Entity: 37 | Epoch: 8 | Train loss: 0.5075042441562765 |  Test loss: 0.03847759081961771
+Entity: 37 | Epoch: 9 | Train loss: 0.5056264728963047 |  Test loss: 0.038442874361157744
+Entity: 37 | Epoch: 10 | Train loss: 0.5034280622763206 |  Test loss: 0.03844413003125808
+Entity: 37 | Epoch: 11 | Train loss: 0.5011471689852659 |  Test loss: 0.0384183177870028
+Entity: 37 | Epoch: 12 | Train loss: 0.4989614431809375 |  Test loss: 0.038416755142022814
+Entity: 37 | Epoch: 13 | Train loss: 0.49606704110362765 |  Test loss: 0.038406590057889815
+Entity: 37 | Epoch: 14 | Train loss: 0.4930543112430632 |  Test loss: 0.0384391875491971
+Entity: 37 | Epoch: 15 | Train loss: 0.49144448617759123 |  Test loss: 0.03841265643007833
+Entity: 37 | Epoch: 16 | Train loss: 0.48896669079276717 |  Test loss: 0.038413418583818276
+Entity: 37 | Epoch: 17 | Train loss: 0.48838487522496504 |  Test loss: 0.03839740935420773
+Entity: 37 | Epoch: 18 | Train loss: 0.48517109485889676 |  Test loss: 0.03839544280384335
+Entity: 37 | Epoch: 19 | Train loss: 0.48367558319498605 |  Test loss: 0.03841010335977902
+Entity: 37 | Epoch: 20 | Train loss: 0.4824369217337094 |  Test loss: 0.03839425806788574
+Entity: 37 | Epoch: 21 | Train loss: 0.4826255659916471 |  Test loss: None
+Entity: 37 | Epoch: 22 | Train loss: 0.47995334772662185 |  Test loss: 0.038396563086929
+Entity: 37 | Epoch: 23 | Train loss: 0.4785388804650215 |  Test loss: 0.038380665718426646
+Entity: 37 | Epoch: 24 | Train loss: 0.47700759870423687 |  Test loss: 0.03839177919801369
+Entity: 37 | Epoch: 25 | Train loss: 0.47697782928727955 |  Test loss: 0.03836447777063958
+Entity: 37 | Epoch: 26 | Train loss: 0.4759616467477878 |  Test loss: 0.03839790344748388
+Entity: 37 | Epoch: 27 | Train loss: 0.4727270965950649 |  Test loss: 0.03837004798100849
+Entity: 37 | Epoch: 28 | Train loss: 0.47149171339293566 |  Test loss: 0.038368475982051745
+Entity: 37 | Epoch: 29 | Train loss: 0.47010994602351464 |  Test loss: 0.03838764613159188
+Entity: 37 | Epoch: 30 | Train loss: 0.4694709929855422 |  Test loss: 0.03836150599949348
+Entity: 37 | Epoch: 31 | Train loss: 0.46784166502186664 |  Test loss: 0.038366072414096695
+Entity: 37 | Epoch: 32 | Train loss: 0.46692291077701564 |  Test loss: 0.03837782763950472
+Entity: 37 | Epoch: 33 | Train loss: 0.4657228654198299 |  Test loss: 0.03836746489844157
+Entity: 37 | Epoch: 34 | Train loss: 0.46504380345411656 |  Test loss: 0.038356762438348777
+Entity: 37 | Epoch: 35 | Train loss: 0.4630183119531361 |  Test loss: 0.03837415296994698
+Entity: 37 | Epoch: 36 | Train loss: 0.461501503098794 |  Test loss: 0.038375121828101176
+Entity: 37 | Epoch: 37 | Train loss: 0.46161222111208244 |  Test loss: None
+Entity: 37 | Epoch: 38 | Train loss: 0.45749119870082006 |  Test loss: 0.03834992543925746
+Entity: 37 | Epoch: 39 | Train loss: 0.4563115001419618 |  Test loss: 0.038371203263847374
+Entity: 37 | Epoch: 40 | Train loss: 0.45796339986126955 |  Test loss: None
+Entity: 37 | Epoch: 41 | Train loss: 0.4538663634827485 |  Test loss: 0.038375562712306334
+Entity: 37 | Epoch: 42 | Train loss: 0.45400577508638035 |  Test loss: None
+Entity: 37 | Epoch: 43 | Train loss: 0.452434171031245 |  Test loss: 0.0383712039460248
+Entity: 37 | Epoch: 44 | Train loss: 0.4520827723438796 |  Test loss: 0.03837606281763152
+Entity: 37 | Epoch: 45 | Train loss: 0.44918520300350623 |  Test loss: 0.0383479219270848
+Entity: 37 | Epoch: 46 | Train loss: 0.4484592408119864 |  Test loss: 0.03837108728360243
+Entity: 37 | Epoch: 47 | Train loss: 0.4447770542993742 |  Test loss: 0.038361196020813684
+Entity: 37 | Epoch: 48 | Train loss: 0.44229138684588 |  Test loss: 0.03837736171440755
+Entity: 37 | Epoch: 49 | Train loss: 0.4423462230916744 |  Test loss: None
+
+
+
+Entity 38
+Dataset: G-4
+Dataset: G-4
+Dataset: G-4
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.3828125
+number of test batches: 57.8203125
+number of test batches: 3.421875
+Entity: 38 | Epoch: 0 | Train loss: 0.42039209033835023 |  Test loss: 0.06407278128070375
+Entity: 38 | Epoch: 1 | Train loss: 0.3905745916866675 |  Test loss: 0.05117162296199771
+Entity: 38 | Epoch: 2 | Train loss: 0.38141705792329844 |  Test loss: 0.04657103003057987
+Entity: 38 | Epoch: 3 | Train loss: 0.37682210211356654 |  Test loss: 0.044444442301410245
+Entity: 38 | Epoch: 4 | Train loss: 0.37374805310231096 |  Test loss: 0.0431112120582905
+Entity: 38 | Epoch: 5 | Train loss: 0.37134145677059244 |  Test loss: 0.04216438051330172
+Entity: 38 | Epoch: 6 | Train loss: 0.3692361281002761 |  Test loss: 0.041334019565623104
+Entity: 38 | Epoch: 7 | Train loss: 0.3671921909190345 |  Test loss: 0.040550588128331316
+Entity: 38 | Epoch: 8 | Train loss: 0.3659721362859585 |  Test loss: 0.03977216275187728
+Entity: 38 | Epoch: 9 | Train loss: 0.36494102632280023 |  Test loss: 0.038930225203060394
+Entity: 38 | Epoch: 10 | Train loss: 0.36320462336756126 |  Test loss: 0.038106708836286717
+Entity: 38 | Epoch: 11 | Train loss: 0.3619353222588411 |  Test loss: 0.03719307549859155
+Entity: 38 | Epoch: 12 | Train loss: 0.3607865233165666 |  Test loss: 0.03616848627751753
+Entity: 38 | Epoch: 13 | Train loss: 0.35915719916129574 |  Test loss: 0.03515046459014557
+Entity: 38 | Epoch: 14 | Train loss: 0.3576814280594528 |  Test loss: 0.034031830217740304
+Entity: 38 | Epoch: 15 | Train loss: 0.35648931047193577 |  Test loss: 0.03280777998425951
+Entity: 38 | Epoch: 16 | Train loss: 0.3557675354083771 |  Test loss: 0.03152780231198968
+Entity: 38 | Epoch: 17 | Train loss: 0.3544291217721155 |  Test loss: 0.030096320959539513
+Entity: 38 | Epoch: 18 | Train loss: 0.3521597613167329 |  Test loss: 0.02869508793199069
+Entity: 38 | Epoch: 19 | Train loss: 0.35066762188546274 |  Test loss: 0.027011249519004295
+Entity: 38 | Epoch: 20 | Train loss: 0.349362314452558 |  Test loss: 0.025400899770057262
+Entity: 38 | Epoch: 21 | Train loss: 0.3469326177537735 |  Test loss: 0.023801045648575034
+Entity: 38 | Epoch: 22 | Train loss: 0.34573294135542904 |  Test loss: 0.02201189968647801
+Entity: 38 | Epoch: 23 | Train loss: 0.34379445508570167 |  Test loss: 0.020194830214519684
+Entity: 38 | Epoch: 24 | Train loss: 0.3414520941095623 |  Test loss: 0.0185793873301939
+Entity: 38 | Epoch: 25 | Train loss: 0.3388207521400294 |  Test loss: 0.01696419082095604
+Entity: 38 | Epoch: 26 | Train loss: 0.3382062116364865 |  Test loss: 0.01588101373031495
+Entity: 38 | Epoch: 27 | Train loss: 0.3346209127018764 |  Test loss: 0.014804702180187371
+Entity: 38 | Epoch: 28 | Train loss: 0.3325929606212967 |  Test loss: 0.014358195755710469
+Entity: 38 | Epoch: 29 | Train loss: 0.33044067457604603 |  Test loss: 0.013753449356265272
+Entity: 38 | Epoch: 30 | Train loss: 0.3314060747945752 |  Test loss: None
+Entity: 38 | Epoch: 31 | Train loss: 0.3270329644531069 |  Test loss: 0.012611243822421165
+Entity: 38 | Epoch: 32 | Train loss: 0.32599390064874223 |  Test loss: 0.01223088161578042
+Entity: 38 | Epoch: 33 | Train loss: 0.32474073020603417 |  Test loss: 0.01208978361235279
+Entity: 38 | Epoch: 34 | Train loss: 0.32203038395382083 |  Test loss: 0.011847159393874212
+Entity: 38 | Epoch: 35 | Train loss: 0.3258796747002133 |  Test loss: None
+Entity: 38 | Epoch: 36 | Train loss: 0.32021770047287057 |  Test loss: 0.011474480067677987
+Entity: 38 | Epoch: 37 | Train loss: 0.32012262776230105 |  Test loss: 0.011372856206069785
+Entity: 38 | Epoch: 38 | Train loss: 0.3256412354508467 |  Test loss: None
+Entity: 38 | Epoch: 39 | Train loss: 0.31963453226448746 |  Test loss: 0.011088943573697146
+Entity: 38 | Epoch: 40 | Train loss: 0.3131272885360014 |  Test loss: 0.01108525647368754
+Entity: 38 | Epoch: 41 | Train loss: 0.3098081731735804 |  Test loss: 0.010980501448223021
+Entity: 38 | Epoch: 42 | Train loss: 0.3069735640011319 |  Test loss: 0.01121922856914124
+Entity: 38 | Epoch: 43 | Train loss: 0.30286775600351323 |  Test loss: 0.01081143469614435
+Entity: 38 | Epoch: 44 | Train loss: 0.299796998815695 |  Test loss: 0.010745244051651927
+Entity: 38 | Epoch: 45 | Train loss: 0.300888894595694 |  Test loss: None
+Entity: 38 | Epoch: 46 | Train loss: 0.3032595017979893 |  Test loss: None
+Entity: 38 | Epoch: 47 | Train loss: 0.305207657341905 |  Test loss: None
+Entity: 38 | Epoch: 48 | Train loss: 0.29684623017910133 |  Test loss: 0.010363172202303417
+Entity: 38 | Epoch: 49 | Train loss: 0.29144282061792603 |  Test loss: 0.010328946266345654
+
+
+
+Entity 39
+Dataset: T-3
+Dataset: T-3
+Dataset: T-3
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 15.2890625
+number of test batches: 64.0234375
+number of test batches: 4.0546875
+Entity: 39 | Epoch: 0 | Train loss: 0.49818361707138326 |  Test loss: 0.04527521241718261
+Entity: 39 | Epoch: 1 | Train loss: 0.48459607710755837 |  Test loss: 0.04143044959550978
+Entity: 39 | Epoch: 2 | Train loss: 0.48167902617885433 |  Test loss: 0.039031708118665485
+Entity: 39 | Epoch: 3 | Train loss: 0.47962212539670585 |  Test loss: 0.03711368787835437
+Entity: 39 | Epoch: 4 | Train loss: 0.4779758783514546 |  Test loss: 0.035164546666744026
+Entity: 39 | Epoch: 5 | Train loss: 0.4762171916785594 |  Test loss: 0.03283349857490639
+Entity: 39 | Epoch: 6 | Train loss: 0.4737037584352401 |  Test loss: 0.030021486105845957
+Entity: 39 | Epoch: 7 | Train loss: 0.4709334208780348 |  Test loss: 0.02664770313667812
+Entity: 39 | Epoch: 8 | Train loss: 0.4677326418640552 |  Test loss: 0.02287393748026291
+Entity: 39 | Epoch: 9 | Train loss: 0.4642933262952586 |  Test loss: 0.018442111795944
+Entity: 39 | Epoch: 10 | Train loss: 0.4603296708542612 |  Test loss: 0.014048116738654077
+Entity: 39 | Epoch: 11 | Train loss: 0.4566528384259252 |  Test loss: 0.010149530771846554
+Entity: 39 | Epoch: 12 | Train loss: 0.45405364748097404 |  Test loss: 0.007049331515767254
+Entity: 39 | Epoch: 13 | Train loss: 0.45119411100782875 |  Test loss: 0.004836426118040199
+Entity: 39 | Epoch: 14 | Train loss: 0.4494155182444986 |  Test loss: 0.0034325319649727913
+Entity: 39 | Epoch: 15 | Train loss: 0.4480437088770721 |  Test loss: 0.002539011898235443
+Entity: 39 | Epoch: 16 | Train loss: 0.4469890787649616 |  Test loss: 0.0019312334312935788
+Entity: 39 | Epoch: 17 | Train loss: 0.44624765888323753 |  Test loss: 0.0016145737634409624
+Entity: 39 | Epoch: 18 | Train loss: 0.44593897168551483 |  Test loss: 0.0013720613729562216
+Entity: 39 | Epoch: 19 | Train loss: 0.44456840815718524 |  Test loss: 0.00125282557144212
+Entity: 39 | Epoch: 20 | Train loss: 0.44379156516597074 |  Test loss: 0.0011813607962303193
+Entity: 39 | Epoch: 21 | Train loss: 0.4440783569469875 |  Test loss: None
+Entity: 39 | Epoch: 22 | Train loss: 0.44218672993856073 |  Test loss: 0.0010759714738340681
+Entity: 39 | Epoch: 23 | Train loss: 0.4413484069388246 |  Test loss: 0.0010041072460117764
+Entity: 39 | Epoch: 24 | Train loss: 0.4418333746607557 |  Test loss: None
+Entity: 39 | Epoch: 25 | Train loss: 0.4392550538815094 |  Test loss: 0.0009368542782523353
+Entity: 39 | Epoch: 26 | Train loss: 0.4371553527111874 |  Test loss: 0.0009152870025376516
+Entity: 39 | Epoch: 27 | Train loss: 0.4356208377448434 |  Test loss: 0.0008817947126700348
+Entity: 39 | Epoch: 28 | Train loss: 0.4364001228119321 |  Test loss: None
+Entity: 39 | Epoch: 29 | Train loss: 0.4322980066499626 |  Test loss: 0.0009277255016766885
+Entity: 39 | Epoch: 30 | Train loss: 0.43106923952806186 |  Test loss: 0.0009598928572147836
+Entity: 39 | Epoch: 31 | Train loss: 0.4278879002547438 |  Test loss: 0.0008671062365703658
+Entity: 39 | Epoch: 32 | Train loss: 0.42686720456564725 |  Test loss: 0.0008309303096795355
+Entity: 39 | Epoch: 33 | Train loss: 0.4227878454021693 |  Test loss: 0.0008252980468269489
+Entity: 39 | Epoch: 34 | Train loss: 0.42068849576030803 |  Test loss: 0.0008292841090865479
+Entity: 39 | Epoch: 35 | Train loss: 0.41890731785389795 |  Test loss: 0.0008426662793760175
+Entity: 39 | Epoch: 36 | Train loss: 0.41253874451896294 |  Test loss: 0.0008311137414216275
+Entity: 39 | Epoch: 37 | Train loss: 0.4103500846105095 |  Test loss: 0.0008060893293893861
+Entity: 39 | Epoch: 38 | Train loss: 0.40886359935314925 |  Test loss: 0.0008227500974129224
+Entity: 39 | Epoch: 39 | Train loss: 0.40293141616718786 |  Test loss: 0.0008180726898109261
+Entity: 39 | Epoch: 40 | Train loss: 0.41138559733915414 |  Test loss: None
+Entity: 39 | Epoch: 41 | Train loss: 0.4112670849605016 |  Test loss: None
+Entity: 39 | Epoch: 42 | Train loss: 0.4000741249564614 |  Test loss: 0.0007507144315216488
+Entity: 39 | Epoch: 43 | Train loss: 0.40111731069778095 |  Test loss: None
+Entity: 39 | Epoch: 44 | Train loss: 0.39141552430894355 |  Test loss: 0.0007588439629828324
+Entity: 39 | Epoch: 45 | Train loss: 0.3976690016211629 |  Test loss: None
+Entity: 39 | Epoch: 46 | Train loss: 0.3939222009783372 |  Test loss: None
+Entity: 39 | Epoch: 47 | Train loss: 0.4044631107203725 |  Test loss: None
+Entity: 39 | Epoch: 48 | Train loss: 0.39363158605698073 |  Test loss: None
+Entity: 39 | Epoch: 49 | Train loss: 0.39888685820993347 |  Test loss: None
+
+
+
+Entity 40
+Dataset: D-11
+Dataset: D-11
+Dataset: D-11
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 13.734375
+number of test batches: 56.015625
+number of test batches: 3.5390625
+Entity: 40 | Epoch: 0 | Train loss: 0.29878922281797393 |  Test loss: 0.4599762513213863
+Entity: 40 | Epoch: 1 | Train loss: 0.22984908529916467 |  Test loss: 0.40166085963414994
+Entity: 40 | Epoch: 2 | Train loss: 0.2168882662134798 |  Test loss: 0.36041931061292065
+Entity: 40 | Epoch: 3 | Train loss: 0.20974512990014213 |  Test loss: 0.3326934174393976
+Entity: 40 | Epoch: 4 | Train loss: 0.2050022316802043 |  Test loss: 0.31389109509078084
+Entity: 40 | Epoch: 5 | Train loss: 0.20175790518511139 |  Test loss: 0.3017631345500483
+Entity: 40 | Epoch: 6 | Train loss: 0.19909374747969383 |  Test loss: 0.2923825407363721
+Entity: 40 | Epoch: 7 | Train loss: 0.19683682675957065 |  Test loss: 0.2856288103686921
+Entity: 40 | Epoch: 8 | Train loss: 0.19478062260366205 |  Test loss: 0.2795341635497069
+Entity: 40 | Epoch: 9 | Train loss: 0.19314634025821872 |  Test loss: 0.2742533245294563
+Entity: 40 | Epoch: 10 | Train loss: 0.19147865534630265 |  Test loss: 0.27059875399894007
+Entity: 40 | Epoch: 11 | Train loss: 0.1900975888472345 |  Test loss: 0.2679673786754113
+Entity: 40 | Epoch: 12 | Train loss: 0.18882342489540632 |  Test loss: 0.26538860850513113
+Entity: 40 | Epoch: 13 | Train loss: 0.18731709065808955 |  Test loss: 0.2632178238471744
+Entity: 40 | Epoch: 14 | Train loss: 0.18622841961996786 |  Test loss: 0.2600122144729491
+Entity: 40 | Epoch: 15 | Train loss: 0.18551144074771855 |  Test loss: 0.25702882665836524
+Entity: 40 | Epoch: 16 | Train loss: 0.18489261674395402 |  Test loss: 0.25348811665710236
+Entity: 40 | Epoch: 17 | Train loss: 0.1842733604796036 |  Test loss: 0.24978340593131698
+Entity: 40 | Epoch: 18 | Train loss: 0.18403868905740398 |  Test loss: 0.2463507012075541
+Entity: 40 | Epoch: 19 | Train loss: 0.1839217416115127 |  Test loss: 0.24306350702185506
+Entity: 40 | Epoch: 20 | Train loss: 0.1833841633197153 |  Test loss: 0.2396238897875708
+Entity: 40 | Epoch: 21 | Train loss: 0.18293381995380667 |  Test loss: 0.23677051935764337
+Entity: 40 | Epoch: 22 | Train loss: 0.1834542418101127 |  Test loss: None
+Entity: 40 | Epoch: 23 | Train loss: 0.18292774707609855 |  Test loss: 0.2309884477743908
+Entity: 40 | Epoch: 24 | Train loss: 0.18220104771126766 |  Test loss: 0.22835389305950526
+Entity: 40 | Epoch: 25 | Train loss: 0.18189616983961987 |  Test loss: 0.22560706915576464
+Entity: 40 | Epoch: 26 | Train loss: 0.18165568352755862 |  Test loss: 0.22309879137914437
+Entity: 40 | Epoch: 27 | Train loss: 0.18197691984145975 |  Test loss: None
+Entity: 40 | Epoch: 28 | Train loss: 0.18127233482815103 |  Test loss: 0.21817631301599621
+Entity: 40 | Epoch: 29 | Train loss: 0.1807863927453201 |  Test loss: 0.21612545777169812
+Entity: 40 | Epoch: 30 | Train loss: 0.18037469551427265 |  Test loss: 0.21404838249926142
+Entity: 40 | Epoch: 31 | Train loss: 0.18024707161398526 |  Test loss: 0.21263037857992234
+Entity: 40 | Epoch: 32 | Train loss: 0.17969976756660977 |  Test loss: 0.21029596734652192
+Entity: 40 | Epoch: 33 | Train loss: 0.17920222429427718 |  Test loss: 0.2092554983878241
+Entity: 40 | Epoch: 34 | Train loss: 0.17853312354752035 |  Test loss: 0.20707504072166963
+Entity: 40 | Epoch: 35 | Train loss: 0.18040212563447708 |  Test loss: None
+Entity: 40 | Epoch: 36 | Train loss: 0.1791518968957203 |  Test loss: None
+Entity: 40 | Epoch: 37 | Train loss: 0.1796492648337853 |  Test loss: None
+Entity: 40 | Epoch: 38 | Train loss: 0.17838093840234184 |  Test loss: 0.20126204357110375
+Entity: 40 | Epoch: 39 | Train loss: 0.17810978507433728 |  Test loss: 0.20054564199453553
+Entity: 40 | Epoch: 40 | Train loss: 0.17703194312106482 |  Test loss: 0.19914125952104858
+Entity: 40 | Epoch: 41 | Train loss: 0.1752167407839589 |  Test loss: 0.1976683395390479
+Entity: 40 | Epoch: 42 | Train loss: 0.17714986564656654 |  Test loss: None
+Entity: 40 | Epoch: 43 | Train loss: 0.17394051305298353 |  Test loss: 0.1964121407050039
+Entity: 40 | Epoch: 44 | Train loss: 0.17260022983358758 |  Test loss: 0.1962503002787926
+Entity: 40 | Epoch: 45 | Train loss: 0.17177593975795433 |  Test loss: 0.195731285901917
+Entity: 40 | Epoch: 46 | Train loss: 0.17127456917134895 |  Test loss: 0.1942868089471958
+Entity: 40 | Epoch: 47 | Train loss: 0.17153674773679403 |  Test loss: None
+Entity: 40 | Epoch: 48 | Train loss: 0.16772363761871315 |  Test loss: 0.1916352499062586
+Entity: 40 | Epoch: 49 | Train loss: 0.17230561385667328 |  Test loss: None
+
+
+
+Entity 41
+Dataset: D-12
+Dataset: D-12
+Dataset: D-12
+=> Freezing model weights
+The model has 92,087 trainable parameters
+number of training batches: 0.265625
+number of test batches: 38.890625
+number of test batches: -0.953125
+Traceback (most recent call last):
+  File "main_ts.py", line 121, in <module>
+    main()
+  File "main_ts.py", line 99, in main
+    test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
+  File "/s/chopin/l/grad/mgorb/sparse-binary-transformers/utils/trainer.py", line 237, in test_forecast
+    for batch in iterator:
+  File "/s/luffy/b/nobackup/mgorb/anaconda/envs/transformers/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 530, in __next__
+    data = self._next_data()
+  File "/s/luffy/b/nobackup/mgorb/anaconda/envs/transformers/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 569, in _next_data
+    index = self._next_index()  # may raise StopIteration
+  File "/s/luffy/b/nobackup/mgorb/anaconda/envs/transformers/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 521, in _next_index
+    return next(self._sampler_iter)  # may raise StopIteration
+  File "/s/luffy/b/nobackup/mgorb/anaconda/envs/transformers/lib/python3.7/site-packages/torch/utils/data/sampler.py", line 226, in __iter__
+    for idx in self.sampler:
+  File "/s/luffy/b/nobackup/mgorb/anaconda/envs/transformers/lib/python3.7/site-packages/torch/utils/data/sampler.py", line 66, in __iter__
+    return iter(range(len(self.data_source)))
+ValueError: __len__() should return >= 0
+(transformers) luffy:~/sparse-binary-transformers$

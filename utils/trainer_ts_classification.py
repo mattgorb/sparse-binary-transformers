@@ -29,18 +29,10 @@ def train(model, iterator, optimizer, criterion, device,dataset):
             data, label, index=batch
 
         label=label[:,0].long().to(device)
-        print(data.dtype)
-        data=data.double().to(device)
-        #print(data)
-        print(data.dtype)
-
         data=data.float().to(device)
-        #print(data)
-        print(data.dtype)
-
 
         predictions,_ = model(data.float(),pad_mask=pad_mask)
-        sys.exit()
+
         loss = criterion(predictions, label)
         loss.backward()
         optimizer.step()
