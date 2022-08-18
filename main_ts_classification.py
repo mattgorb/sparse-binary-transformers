@@ -65,7 +65,7 @@ def main():
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
-    optimizer = optim.RAdam(model.parameters(),lr=1e-3)
+    optimizer = optim.RAdam(model.parameters(),lr=1e-5)
     criterion = nn.CrossEntropyLoss()
     best_loss = 0#float('inf')
 

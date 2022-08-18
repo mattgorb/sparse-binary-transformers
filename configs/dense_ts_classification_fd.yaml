@@ -20,4 +20,4 @@ layer_norm: False
 batch_norm: True
 save_graphs: False
 
-pos_enc: 'Standard'
+pos_enc: 'Learnable'
