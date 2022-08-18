@@ -35,6 +35,7 @@ def train(model, iterator, optimizer, criterion, device,dataset):
 
         loss = criterion(predictions, label)
         loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=4.0)
         optimizer.step()
 
         epoch_loss += loss.item()
