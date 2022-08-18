@@ -304,7 +304,7 @@ def get_classification_ds(dataset,root_dir, args):
         test_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TEST', n_proc=-1, )
 
     print(all_data.feature_df.shape)
-    sys.exit()
+
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat':
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
         # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
@@ -363,8 +363,9 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, padding, index = batch
             args.window_size = data.size(1)
-            # print(data.size())
+            print(data.size())
             break
+        sys.exit()
     else:
         train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
                                   shuffle=True, pin_memory=True, )
@@ -375,9 +376,9 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, index = batch
             args.window_size = data.size(1)
-            # print(data.size())
+            print(data.size())
             break
-
+        sys.exit()
     print(all_data.feature_df.shape)
     print(test_data.feature_df.shape)
 
