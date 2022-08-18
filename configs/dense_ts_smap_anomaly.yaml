@@ -1,0 +1,21 @@
+
+dataset: SMAP
+
+weight_seed: 0
+score_seed: 0
+gpu: 0
+batch_size: 128
+model_type: 'Dense'
+
+epochs: 50
+weight_file: dense_ts_smd
+
+window_size: 200
+forecast: False
+save_scores: False
+layer_norm: True
+batch_norm: False
+save_graphs: False
+
+pos_enc: 'Standard'
+
