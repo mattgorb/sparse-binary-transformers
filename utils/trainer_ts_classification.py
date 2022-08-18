@@ -73,5 +73,5 @@ def test(model, iterator, criterion, device,dataset):
 
             epoch_loss += loss.item()
             epoch_acc += acc.item()
-    sys.exit()
+
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
