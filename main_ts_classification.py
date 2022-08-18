@@ -67,15 +67,15 @@ def main():
 
     optimizer = optim.Adam(model.parameters(),lr=1e-5)
     criterion = nn.CrossEntropyLoss()
-    best_loss = float('inf')
+    best_acc = 0#float('inf')
 
     for epoch in range(args.epochs):
         train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device,args.dataset)
 
         val_loss, val_acc=test(model, val_dataloader, criterion, device,args.dataset)
         test_loss, test_acc = test(model, test_dataloader, criterion, device, args.dataset)
-        if val_loss < best_loss:
-            best_loss = val_loss
+        if val_acc > best_acc:
+            best_acc = val_acc
             torch.save(model.state_dict(), weight_file)
             test_loss, test_acc = test(model, test_dataloader, criterion, device,args.dataset)
         else:
