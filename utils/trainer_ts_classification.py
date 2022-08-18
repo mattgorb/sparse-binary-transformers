@@ -31,6 +31,13 @@ def train(model, iterator, optimizer, criterion, device,dataset):
         label=label[:,0].long().to(device)
         data=data.float().to(device)
         print(data)
+        print(data.dtype)
+
+        data=data.double().to(device)
+        print(data)
+        print(data.dtype)
+
+
         predictions,_ = model(data.float(),pad_mask=pad_mask)
         sys.exit()
         loss = criterion(predictions, label)
