@@ -363,9 +363,9 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, padding, index = batch
             args.window_size = data.size(1)
-            print(data.size())
+            #print(data.size())
             break
-        sys.exit()
+        #sys.exit()
     else:
         train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
                                   shuffle=True, pin_memory=True, )
@@ -376,9 +376,9 @@ def get_classification_ds(dataset,root_dir, args):
         for batch in train_loader:
             data, label, index = batch
             args.window_size = data.size(1)
-            print(data.size())
+            #print(data.size())
             break
-        sys.exit()
+        #sys.exit()
     print(all_data.feature_df.shape)
     print(test_data.feature_df.shape)
 
