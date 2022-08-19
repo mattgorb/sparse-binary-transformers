@@ -67,7 +67,7 @@ def main():
         input_dim=train_dataloader.dataset.train.shape[1]
 
         print(val_dataloader.dataset.val.shape)
-        continue
+        #continue
 
         dmodel = input_dim*2
 
