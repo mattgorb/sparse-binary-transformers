@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/results/anomaly_msl_dense" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dense_ts_smap_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_smap_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dense_ts_smap_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_smap_forecast.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +70,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="85699000" />
+      <workItem from="1660263049974" duration="86291000" />
     </task>
     <servers />
   </component>
@@ -79,10 +82,10 @@
       <screen x="1680" y="25" width="1920" height="1055" />
     </state>
     <state x="2683" y="363" key="#Notifications/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1659329018058" />
-    <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1660855567652">
-      <screen x="1680" y="25" width="1920" height="1055" />
+    <state x="586" y="305" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1660875373119">
+      <screen x="0" y="25" width="1680" height="910" />
     </state>
-    <state x="586" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.910@0.25.1680.910" timestamp="1660831407201" />
+    <state x="586" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.910@0.25.1680.910" timestamp="1660875373119" />
     <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@1680.25.1920.1055" timestamp="1660855567652" />
     <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1660502085664" />
     <state x="209" y="125" width="1371" height="710" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1660619622069">
