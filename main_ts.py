@@ -52,7 +52,7 @@ def main():
     elif args.dataset=='MSL':
         entities=27
 
-    for ent in range(40,entities):
+    for ent in range(entities):
 
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
@@ -65,6 +65,9 @@ def main():
                                            win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
 
         input_dim=train_dataloader.dataset.train.shape[1]
+
+        print(val_dataloader.dataset.val.shape)
+        continue
 
         dmodel = input_dim*2
 
@@ -87,7 +90,7 @@ def main():
 
         print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-        print(f'number of test batches: {val_dataloader.dataset.__len__()/args.batch_size}')
+        print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
         for epoch in range(args.epochs):
             train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
 

@@ -120,10 +120,10 @@ class SMAP(object):
 
 
         data_len = len(self.train)
-        self.val = self.train[(int)(data_len * 0.75):]
-        self.train = self.train[:(int)(data_len * 0.75)]
-        #self.train, self.val, _, _ = train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
+        self.val = self.train[(int)(data_len * 0.8):]
+        self.train = self.train[:(int)(data_len * 0.8)]
+        #self.train, self.val, _, _ = train_test_split(self.train, np.zeros(self.train.shape[0]), test_size=0.15, random_state=1)
 
 
 
