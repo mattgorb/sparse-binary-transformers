@@ -1,0 +1,98 @@
+(transformers) luffy:~/sparse-binary-transformers$  python3 main_ts_classification.py --config=configs/dense_ts_classification_insect.yaml --gpu=3 --epochs=400
+=> Reading YAML config from configs/dense_ts_classification_insect.yaml
+Namespace(batch_norm=True, batch_size=8, config='configs/dense_ts_classification_insect.yaml', conv_type=None, data='/s/luffy/b/nobackup/mgorb/data', dataset='InsectWingbeat', dmodel=64, entity=None, epochs=400, evaluate=False, freeze_weights=False, gpu=3, layer_norm=False, log_dir=None, lr=0.1, model_type='Dense', n_head=8, n_layers=3, name=None, nhid=256, num_classes=10, optimizer='sgd', pos_enc='Learnable', pretrained=None, print_freq=50, resume='', save_every=-1, save_graphs=False, save_scores=False, score_init=None, score_seed=0, seed=0, set='ImageNet', weight_file='dense_ts_smd', weight_init=None, weight_seed=0, window_size=None, workers=20)
+2022-08-18 18:31:59.096848
+2022-08-18 18:37:11.861955
+2022-08-18 18:54:09.000195
+2022-08-18 18:59:28.405677
+(167974, 200)
+20000 samples may be used for training
+5000 samples will be used for validation
+25000 samples will be used for testing
+torch.Size([8, 30, 200])
+(167974, 200)
+(167560, 200)
+=> Freezing model weights
+The model has 266,802 trainable parameters
+Train acc: 0.1173 | Val acc: 0.148 | Test acc: 0.14492
+Train acc: 0.14215 | Val acc: 0.1996 | Test acc: 0.1958
+Train acc: 0.1874 | Val acc: 0.2058 | Test acc: 0.19928
+Train acc: 0.1979 | Val acc: 0.2072 | Test acc: 0.20096
+Train acc: 0.2104 | Val acc: 0.222 | Test acc: 0.22296
+Train acc: 0.2298 | Val acc: None | Test acc: 0.22116
+Train acc: 0.24165 | Val acc: 0.266 | Test acc: 0.26924
+Train acc: 0.26005 | Val acc: 0.2946 | Test acc: 0.29464
+Train acc: 0.279 | Val acc: 0.3064 | Test acc: 0.29992
+Train acc: 0.29655 | Val acc: 0.3144 | Test acc: 0.30972
+Train acc: 0.3167 | Val acc: 0.3272 | Test acc: 0.32408
+Train acc: 0.33555 | Val acc: None | Test acc: 0.31888
+Train acc: 0.3566 | Val acc: 0.3722 | Test acc: 0.3682
+Train acc: 0.3718 | Val acc: 0.4144 | Test acc: 0.40484
+Train acc: 0.38515 | Val acc: None | Test acc: 0.40476
+Train acc: 0.3975 | Val acc: 0.4196 | Test acc: 0.41468
+Train acc: 0.40965 | Val acc: 0.4338 | Test acc: 0.43088
+Train acc: 0.42115 | Val acc: 0.4394 | Test acc: 0.43816
+
+Train acc: 0.4296 | Val acc: 0.4538 | Test acc: 0.45688
+Train acc: 0.43965 | Val acc: 0.4678 | Test acc: 0.46708
+Train acc: 0.44875 | Val acc: 0.473 | Test acc: 0.47056
+Train acc: 0.45845 | Val acc: 0.4844 | Test acc: 0.48408
+Train acc: 0.4675 | Val acc: None | Test acc: 0.4824
+Train acc: 0.4751 | Val acc: 0.4962 | Test acc: 0.49408
+Train acc: 0.4822 | Val acc: 0.4996 | Test acc: 0.49804
+Train acc: 0.4931 | Val acc: 0.515 | Test acc: 0.51032
+Train acc: 0.4974 | Val acc: 0.5172 | Test acc: 0.5142
+Train acc: 0.5102 | Val acc: 0.5312 | Test acc: 0.5248
+Train acc: 0.5183 | Val acc: None | Test acc: 0.52388
+Train acc: 0.52685 | Val acc: None | Test acc: 0.52528
+Train acc: 0.52975 | Val acc: 0.5512 | Test acc: 0.54476
+Train acc: 0.5378 | Val acc: 0.5574 | Test acc: 0.55112
+Train acc: 0.53725 | Val acc: None | Test acc: 0.5486
+Train acc: 0.5514 | Val acc: None | Test acc: 0.54264
+Train acc: 0.54925 | Val acc: 0.5608 | Test acc: 0.56092
+Train acc: 0.55775 | Val acc: 0.5676 | Test acc: 0.56564
+Train acc: 0.56465 | Val acc: 0.5718 | Test acc: 0.56968
+Train acc: 0.56725 | Val acc: None | Test acc: 0.571
+Train acc: 0.5712 | Val acc: 0.5764 | Test acc: 0.5748
+Train acc: 0.57195 | Val acc: None | Test acc: 0.57076
+Train acc: 0.5748 | Val acc: 0.5804 | Test acc: 0.57952
+Train acc: 0.5801 | Val acc: 0.5814 | Test acc: 0.58152
+Train acc: 0.5812 | Val acc: 0.5902 | Test acc: 0.587
+Train acc: 0.5866 | Val acc: None | Test acc: 0.58136
+Train acc: 0.5904 | Val acc: None | Test acc: 0.58872
+Train acc: 0.59085 | Val acc: 0.5932 | Test acc: 0.59488
+Train acc: 0.59715 | Val acc: None | Test acc: 0.59512
+Train acc: 0.59685 | Val acc: None | Test acc: 0.5922
+Train acc: 0.6009 | Val acc: 0.596 | Test acc: 0.5984
+Train acc: 0.5997 | Val acc: 0.6024 | Test acc: 0.5992
+Train acc: 0.6058 | Val acc: None | Test acc: 0.60084
+Train acc: 0.6092 | Val acc: None | Test acc: 0.60436
+Train acc: 0.6094 | Val acc: None | Test acc: 0.60468
+Train acc: 0.6142 | Val acc: 0.6044 | Test acc: 0.60664
+Train acc: 0.6133 | Val acc: 0.6066 | Test acc: 0.60996
+Train acc: 0.61905 | Val acc: 0.608 | Test acc: 0.60896
+Train acc: 0.6228 | Val acc: 0.6124 | Test acc: 0.61656
+Train acc: 0.62185 | Val acc: 0.6164 | Test acc: 0.6128
+Train acc: 0.6243 | Val acc: 0.6234 | Test acc: 0.62032
+Train acc: 0.62555 | Val acc: None | Test acc: 0.6182
+Train acc: 0.63005 | Val acc: None | Test acc: 0.62348
+Train acc: 0.6307 | Val acc: None | Test acc: 0.61928
+Train acc: 0.63065 | Val acc: None | Test acc: 0.62256
+Train acc: 0.6388 | Val acc: 0.624 | Test acc: 0.62612
+Train acc: 0.639 | Val acc: None | Test acc: 0.61816
+Train acc: 0.6371 | Val acc: 0.6274 | Test acc: 0.62484
+Train acc: 0.63725 | Val acc: 0.6352 | Test acc: 0.6272
+Train acc: 0.64015 | Val acc: None | Test acc: 0.62948
+Train acc: 0.64535 | Val acc: None | Test acc: 0.62524
+Train acc: 0.65135 | Val acc: None | Test acc: 0.6288
+Train acc: 0.6502 | Val acc: None | Test acc: 0.63208
+Train acc: 0.65285 | Val acc: 0.6364 | Test acc: 0.63072
+Train acc: 0.64955 | Val acc: None | Test acc: 0.62984
+Train acc: 0.65435 | Val acc: 0.6366 | Test acc: 0.63144
+Train acc: 0.6552 | Val acc: 0.6436 | Test acc: 0.63548
+Train acc: 0.6556 | Val acc: None | Test acc: 0.63448
+Train acc: 0.6603 | Val acc: None | Test acc: 0.63532
+Train acc: 0.66065 | Val acc: None | Test acc: 0.63836
+Train acc: 0.66005 | Val acc: None | Test acc: 0.63844
+client_loop: send disconnect: Broken pipe
+(base) Matthews-MacBook-Pro:~ matthewgorbett$
