@@ -202,6 +202,10 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     denom = recall + precision
     f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
     print(f1_scores)
+    print(f'TP: {len([i for i in anomaly_final_vals if i>=threshold])} '
+          f'TN: {len([i for i in benign_final_vals if i<threshold])}, '
+          f'FP: {len([i for i in benign_final_vals if i>=threshold])}, '
+          f'FN: {len([i for i in anomaly_final_vals if i<threshold])}')
 
     '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
