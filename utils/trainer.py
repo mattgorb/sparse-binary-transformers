@@ -179,7 +179,7 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
         df = pd.DataFrame({'scores': scores, 'labels':labels})
         df.to_csv('output/scores.csv')
     
-    print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
+    '''print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
     #print(f'PR Curve : {metrics.auc(recall, precision)}')
     numerator = 2 * recall * precision
@@ -192,8 +192,16 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     print(f'TP: {len([i for i in anomaly_final_vals if i>=max_f1_thresh])} '
           f'TN: {len([i for i in benign_final_vals if i<max_f1_thresh])}, '
           f'FP: {len([i for i in benign_final_vals if i>=max_f1_thresh])}, '
-          f'FN: {len([i for i in anomaly_final_vals if i<max_f1_thresh])}')
+          f'FN: {len([i for i in anomaly_final_vals if i<max_f1_thresh])}')'''
 
+
+    threshold=max(val_losses)
+    scores_with_threshold=(scores>threshold)
+    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores_with_threshold)
+    numerator = 2 * recall * precision
+    denom = recall + precision
+    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
+    print(f1_scores)
 
     '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
