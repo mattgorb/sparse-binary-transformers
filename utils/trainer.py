@@ -196,8 +196,8 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
 
 
     #threshold=max(val_losses)
-    threshold = np.percentile(val_losses, 1 - iterator.dataset.anomaly_ratio)
-    scores_with_threshold=(scores>threshold)
+    #threshold = np.percentile(val_losses, 1 - iterator.dataset.anomaly_ratio)
+    '''scores_with_threshold=(scores>threshold)
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores_with_threshold)
     numerator = 2 * recall * precision
     denom = recall + precision
@@ -206,7 +206,9 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
     print(f'TP: {len([i for i in anomaly_final_vals if i>=threshold])} '
           f'TN: {len([i for i in benign_final_vals if i<threshold])}, '
           f'FP: {len([i for i in benign_final_vals if i>=threshold])}, '
-          f'FN: {len([i for i in anomaly_final_vals if i<threshold])}')
+          f'FN: {len([i for i in anomaly_final_vals if i<threshold])}')'''
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
+    print(result)
 
     '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
     anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
