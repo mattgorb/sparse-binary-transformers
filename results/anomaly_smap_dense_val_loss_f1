@@ -1,5 +1,4 @@
 
-[1]+  Stopped                 python3 main_ts.py --config=configs/dense_ts_msl_anomaly.yaml --gpu=3
 (transformers) luffy:~/sparse-binary-transformers$  python3 main_ts.py --config=configs/dense_ts_smap_anomaly.yaml --gpu=2
 => Reading YAML config from configs/dense_ts_smap_anomaly.yaml
 Namespace(batch_norm=False, batch_size=128, config='configs/dense_ts_smap_anomaly.yaml', conv_type=None, data='/s/luffy/b/nobackup/mgorb/data', dataset='SMAP', entity=None, epochs=50, evaluate=False, forecast=False, freeze_weights=False, gpu=2, layer_norm=True, log_dir=None, lr=0.1, model_type='Dense', name=None, num_classes=10, optimizer='sgd', pos_enc='Standard', pretrained=None, print_freq=50, resume='', save_every=-1, save_graphs=False, save_scores=False, score_init=None, score_seed=0, seed=0, set='ImageNet', weight_file='dense_ts_smd', weight_init=None, weight_seed=0, window_size=50, workers=20)

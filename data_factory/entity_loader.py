@@ -103,7 +103,7 @@ class SMD(object):
 
 
 
-class SMAP(object):
+class SMAP_MSL(object):
     def __init__(self, data_path,entity, win_size, step, mode,forecast):
         self.mode = mode
         self.step = step
@@ -138,6 +138,9 @@ class SMAP(object):
             filter_anomalies=np.argwhere(self.test_labels==0)
             self.test=self.test[filter_anomalies[:,0]]
             self.test_labels=self.test_labels[filter_anomalies[:,0]]
+
+
+        self.anomaly_ratio=sum(self.test_labels)/len(self.test_labels)
 
 
     def __len__(self):
@@ -189,7 +192,7 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         entities = entities['chan_id'].values
         print(f'Dataset: {entities[entity]}')
         # print(entities)
-        dataset = SMAP(data_path,entities[entity], win_size, step, mode, forecast)
+        dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,
                              shuffle=shuffle,

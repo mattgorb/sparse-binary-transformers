@@ -195,7 +195,8 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
           f'FN: {len([i for i in anomaly_final_vals if i<max_f1_thresh])}')'''
 
 
-    threshold=max(val_losses)
+    #threshold=max(val_losses)
+    threshold = np.percentile(val_losses, 1 - iterator.dataset.anomaly_ratio)
     scores_with_threshold=(scores>threshold)
     precision, recall, thresholds = metrics.precision_recall_curve(labels, scores_with_threshold)
     numerator = 2 * recall * precision
