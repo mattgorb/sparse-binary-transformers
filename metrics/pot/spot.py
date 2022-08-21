@@ -204,14 +204,6 @@ class SPOT:
         self.Nt = self.peaks.size
         self.n = n_init
 
-        '''print("here")
-        print(level)
-        print(n_init)
-        print(self.init_threshold)
-        print(self.peaks)
-        print(self.Nt)
-        print(self.n)
-        sys.exit()'''
 
         if verbose:
             print('Initial threshold : %s' % self.init_threshold)
@@ -344,6 +336,7 @@ class SPOT:
             jac_vs = (1 / t) * (-vs + np.mean(1 / s ** 2))
             return us * jac_vs + vs * jac_us
 
+        print('heree1')
         Ym = self.peaks.min()
         YM = self.peaks.max()
         Ymean = self.peaks.mean()
@@ -366,7 +359,7 @@ class SPOT:
                                         lambda t: jac_w(self.peaks, t),
                                         (b, c),
                                         n_points, 'regular')
-
+        print('heree2')
         # all the possible roots
         zeros = np.concatenate((left_zeros, right_zeros))
 
@@ -374,7 +367,7 @@ class SPOT:
         gamma_best = 0
         sigma_best = Ymean
         ll_best = SPOT._log_likelihood(self.peaks, gamma_best, sigma_best)
-
+        print('heree3')
         # we look for better candidates
         for z in zeros:
             gamma = u(1 + z * self.peaks) - 1
