@@ -207,9 +207,8 @@ def test_anomaly_detection(model, iterator,val_iterator, criterion, device,args,
           f'TN: {len([i for i in benign_final_vals if i<threshold])}, '
           f'FP: {len([i for i in benign_final_vals if i>=threshold])}, '
           f'FN: {len([i for i in anomaly_final_vals if i<threshold])}')'''
-    print('here')
+
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-    print('here2')
     print(result)
 
     '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)

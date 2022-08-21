@@ -137,8 +137,10 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
             s = SPOT(q)  # SPOT object
             s.fit(init_score, score)  # data import
             s.initialize(level=lms, min_extrema=False, verbose=False)  # initialization step
+            print(lms)
         except: lms = lms * 0.999
         else: break
+    print('heere')
     ret = s.run(dynamic=False)  # run
 
     pot_th = np.mean(ret['thresholds']) * lm[0][1]
