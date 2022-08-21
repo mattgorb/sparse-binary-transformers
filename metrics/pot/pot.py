@@ -141,7 +141,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
             print(lms)
         except: lms = lms * 0.999
         else: break
-    print('heere')
+    print('heere2')
     ret = s.run(dynamic=False)  # run
 
     pot_th = np.mean(ret['thresholds']) * lm[0][1]
