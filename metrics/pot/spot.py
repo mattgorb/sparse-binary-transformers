@@ -264,11 +264,11 @@ class SPOT:
                 j[i] = 2 * fx * jac(x)
                 i = i + 1
             return g, j
-        print('here')
+
         opt = minimize(lambda X: objFun(X, fun, jac), X0,
                        method='L-BFGS-B',
                        jac=True, bounds=[bounds] * len(X0))
-        print('here2')
+
         X = opt.x
         np.round(X, decimals=5)
         return np.unique(X)
@@ -348,7 +348,7 @@ class SPOT:
         a = a + epsilon
         b = 2 * (Ymean - Ym) / (Ymean * Ym)
         c = 2 * (Ymean - Ym) / (Ym ** 2)
-
+        print('here')
         # We look for possible roots
         left_zeros = SPOT._rootsFinder(lambda t: w(self.peaks, t),
                                        lambda t: jac_w(self.peaks, t),
