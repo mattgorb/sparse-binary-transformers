@@ -348,7 +348,6 @@ class SPOT:
         a = a + epsilon
         b = 2 * (Ymean - Ym) / (Ymean * Ym)
         c = 2 * (Ymean - Ym) / (Ym ** 2)
-        print('here')
         # We look for possible roots
         left_zeros = SPOT._rootsFinder(lambda t: w(self.peaks, t),
                                        lambda t: jac_w(self.peaks, t),
