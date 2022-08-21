@@ -132,6 +132,7 @@ def pot_eval(init_score, score, label,args, q=1e-5, level=0.02):
     """
     lm=lm_d[args.dataset]
     lms = lm[0][0]
+    print('heere')
     while True:
         try:
             s = SPOT(q)  # SPOT object
