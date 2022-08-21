@@ -184,7 +184,7 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         entities=entities[entities['spacecraft']=='SMAP']
         entities=entities['chan_id'].values
         print(f'Dataset: {entities[entity]}')
-        dataset = SMAP(data_path, entities[entity], win_size, step, mode, forecast)
+        dataset = SMAP_MSL(data_path, entities[entity], win_size, step, mode, forecast)
         #print(entities)
     elif dataset == 'MSL':
         entities = pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
