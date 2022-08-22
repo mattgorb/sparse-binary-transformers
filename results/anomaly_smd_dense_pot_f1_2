@@ -193,3 +193,157 @@ Entity: 2 | Epoch: 1 | Train loss: 0.08787031198830568 |  Val loss: 2.5394667157
 
 
 
+
+
+Entity 3
+Dataset: machine-2-3.txt
+train size: (18950, 38)
+val size: (4738, 38)
+test size: (23689, 38)
+(23689,)
+269
+Dataset: machine-2-3.txt
+train size: (18950, 38)
+val size: (4738, 38)
+test size: (23689, 38)
+(23689,)
+269
+Dataset: machine-2-3.txt
+train size: (18950, 38)
+val size: (4738, 38)
+test size: (23689, 38)
+(23689,)
+269
+(4738, 38)
+=> Freezing model weights
+The model has 168,514 trainable parameters
+number of training batches: 146.484375
+number of test batches: 183.5078125
+number of val batches: 35.453125
+{'f1': 0.99999496285028, 'precision': 0.9999999628252803, 'recall': 0.9999999628252803, 'TP': 269, 'TN': 21300, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 1618.7626190303438}
+Entity: 3 | Epoch: 0 | Train loss: 0.9522805833488702 |  Val loss: 0.3246109232613501 |  Test loss: 48.903059562042145
+{'f1': 0.99999496285028, 'precision': 0.9999999628252803, 'recall': 0.9999999628252803, 'TP': 269, 'TN': 21300, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 1548.1221023003834}
+Entity: 3 | Epoch: 1 | Train loss: 0.6767789519059658 |  Val loss: 0.22377183026219186 |  Test loss: 48.65807734533844
+{'f1': 0.99999496285028, 'precision': 0.9999999628252803, 'recall': 0.9999999628252803, 'TP': 269, 'TN': 21300, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 1485.0291475223148}
+Entity: 3 | Epoch: 2 | Train loss: 0.5153251986880104 |  Val loss: 0.17111610212133857 |  Test loss: 48.55396230404041
+{'f1': 0.99999496285028, 'precision': 0.9999999628252803, 'recall': 0.9999999628252803, 'TP': 269, 'TN': 21300, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 1421.8768673457057}
+Entity: 3 | Epoch: 3 | Train loss: 0.43647452011585236 |  Val loss: 0.1455349106103126 |  Test loss: 48.484142360176094
+{'f1': 0.99999496285028, 'precision': 0.9999999628252803, 'recall': 0.9999999628252803, 'TP': 269, 'TN': 21300, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 1358.0227695704928}
+Entity: 3 | Epoch: 4 | Train loss: 0.38138930830364426 |  Val loss: 0.13102454199373997 |  Test loss: 48.40702675669797
+
+
+
+
+
+
+Entity 4
+Dataset: machine-1-1.txt
+train size: (22783, 38)
+val size: (5696, 38)
+test size: (28479, 38)
+(28479,)
+2694
+Dataset: machine-1-1.txt
+train size: (22783, 38)
+val size: (5696, 38)
+test size: (28479, 38)
+(28479,)
+2694
+Dataset: machine-1-1.txt
+train size: (22783, 38)
+val size: (5696, 38)
+test size: (28479, 38)
+(28479,)
+2694
+(5696, 38)
+=> Freezing model weights
+The model has 168,514 trainable parameters
+number of training batches: 176.4296875
+number of test batches: 220.9296875
+number of val batches: 42.9375
+{'f1': 0.9996239388025846, 'precision': 0.9992581565309415, 'recall': 0.9999999962880475, 'TP': 2694, 'TN': 23991, 'FP': 2, 'FN': 0, 'ROC/AUC': 0.9999583211770099, 'threshold': 260.0412028695146}
+Entity: 4 | Epoch: 0 | Train loss: 0.5141257611745256 |  Val loss: 0.3248428137657087 |  Test loss: 50785.173551432046
+{'f1': 0.9996239388025846, 'precision': 0.9992581565309415, 'recall': 0.9999999962880475, 'TP': 2694, 'TN': 23991, 'FP': 2, 'FN': 0, 'ROC/AUC': 0.9999583211770099, 'threshold': 231.47373316663564}
+Entity: 4 | Epoch: 1 | Train loss: 0.22834187739127904 |  Val loss: 0.24126789759264328 |  Test loss: 50773.985499530165
+
+
+
+Entity 5
+Dataset: machine-3-3.txt
+train size: (18962, 38)
+val size: (4741, 38)
+test size: (23703, 38)
+(23703,)
+632
+Dataset: machine-3-3.txt
+train size: (18962, 38)
+val size: (4741, 38)
+test size: (23703, 38)
+(23703,)
+632
+Dataset: machine-3-3.txt
+train size: (18962, 38)
+val size: (4741, 38)
+test size: (23703, 38)
+(23703,)
+632
+(4741, 38)
+=> Freezing model weights
+The model has 168,514 trainable parameters
+number of training batches: 146.578125
+number of test batches: 183.6171875
+number of val batches: 35.4765625
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 651.2557846094915}
+Entity: 5 | Epoch: 0 | Train loss: 0.9131905998564663 |  Val loss: 0.3968088195060967 |  Test loss: 0.7902639683115542
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 633.0414175176231}
+Entity: 5 | Epoch: 1 | Train loss: 0.5205772147585307 |  Val loss: 0.21772468323041835 |  Test loss: 0.5993121202253856
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 616.1990630248837}
+Entity: 5 | Epoch: 2 | Train loss: 0.37438878445269463 |  Val loss: 0.16264906222732076 |  Test loss: 0.5477259175031135
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 599.8614962442847}
+Entity: 5 | Epoch: 3 | Train loss: 0.31418570727949796 |  Val loss: 0.1366061577029925 |  Test loss: 0.5197875010841816
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 588.5120697525529}
+Entity: 5 | Epoch: 4 | Train loss: 0.280185551625037 |  Val loss: 0.12351221360751867 |  Test loss: 0.502323778521802
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 580.8689875902867}
+Entity: 5 | Epoch: 5 | Train loss: 0.25623210914979627 |  Val loss: 0.1128168648842659 |  Test loss: 0.492393995165647
+{'f1': 0.0, 'precision': 0.0, 'recall': 0.0, 'TP': 0, 'TN': 17769, 'FP': 2, 'FN': 632, 'ROC/AUC': 0.49994372854650837, 'threshold': 571.4565167225134}
+Entity: 5 | Epoch: 6 | Train loss: 0.2377885156316555 |  Val loss: 0.10228307204404294 |  Test loss: 0.48759454279090786
+{'f1': 0.9984152054337232, 'precision': 0.9968454101443942, 'recall': 0.9999999841772155, 'TP': 632, 'TN': 17769, 'FP': 2, 'FN': 0, 'ROC/AUC': 0.9999437285465084, 'threshold': 564.3129906699795}
+Entity: 5 | Epoch: 7 | Train loss: 0.22139869359095637 |  Val loss: 0.09468981172365255 |  Test loss: 0.4844866999408866
+{'f1': 0.9984152054337232, 'precision': 0.9968454101443942, 'recall': 0.9999999841772155, 'TP': 632, 'TN': 17769, 'FP': 2, 'FN': 0, 'ROC/AUC': 0.9999437285465084, 'threshold': 558.3593649338725}
+Entity: 5 | Epoch: 8 | Train loss: 0.20758899416109947 |  Val loss: 0.08551924415995105 |  Test loss: 0.4729792754937459
+{'f1': 0.9984152054337232, 'precision': 0.9968454101443942, 'recall': 0.9999999841772155, 'TP': 632, 'TN': 17769, 'FP': 2, 'FN': 0, 'ROC/AUC': 0.9999437285465084, 'threshold': 553.2947212507189}
+
+
+
+Entity 6
+Dataset: machine-2-1.txt
+train size: (18954, 38)
+val size: (4739, 38)
+test size: (23694, 38)
+(23694,)
+1170
+Dataset: machine-2-1.txt
+train size: (18954, 38)
+val size: (4739, 38)
+test size: (23694, 38)
+(23694,)
+1170
+Dataset: machine-2-1.txt
+train size: (18954, 38)
+val size: (4739, 38)
+test size: (23694, 38)
+(23694,)
+1170
+(4739, 38)
+=> Freezing model weights
+The model has 168,514 trainable parameters
+number of training batches: 146.515625
+number of test batches: 183.546875
+number of val batches: 35.4609375
+{'f1': 0.9999949914779914, 'precision': 0.9999999914529916, 'recall': 0.9999999914529916, 'TP': 1170, 'TN': 19737, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 584.405196211875}
+Entity: 6 | Epoch: 0 | Train loss: 0.7548631023676382 |  Val loss: 0.5674457616708461 |  Test loss: 1.6082942710565125
+{'f1': 0.9999949914779914, 'precision': 0.9999999914529916, 'recall': 0.9999999914529916, 'TP': 1170, 'TN': 19737, 'FP': 0, 'FN': 0, 'ROC/AUC': 1.0, 'threshold': 566.871853183808}
+Entity: 6 | Epoch: 1 | Train loss: 0.45116444173522935 |  Val loss: 0.4047986060425255 |  Test loss: 1.432059587240365
+
+
+

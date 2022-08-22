@@ -52,67 +52,67 @@ def main():
     elif args.dataset=='MSL':
         entities=27
 
-    #for ent in range(entities):
-    ent=args.entity
-    weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
-    print(f'\n\n\nEntity {ent}')
+    for ent in range(7,entities):
+        #ent=args.entity
+        weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
+        print(f'\n\n\nEntity {ent}')
 
-    train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
-                                        dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
-    val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
-                                      dataset=args.dataset, entity=ent, forecast=args.forecast)
-    test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
-                                       win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
+        train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
+                                            dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
+        val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
+                                          dataset=args.dataset, entity=ent, forecast=args.forecast)
+        test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
+                                           win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
 
-    input_dim=train_dataloader.dataset.train.shape[1]
+        input_dim=train_dataloader.dataset.train.shape[1]
 
-    print(val_dataloader.dataset.val.shape)
-    #continue
+        print(val_dataloader.dataset.val.shape)
+        #continue
 
-    dmodel = input_dim*2
+        dmodel = input_dim*2
 
-    if args.model_type=='Dense':
-        model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-    else:
-        model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
-
-    freeze_model_weights(model)
-    print(f'The model has {count_parameters(model):,} trainable parameters')
-
-    optimizer = optim.Adam(model.parameters(),lr=1e-4)
-    criterion = nn.MSELoss(reduction='none')
-    best_loss = float('inf')
-
-    if args.evaluate:
-        evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
-        return
-
-
-    print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
-    print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-    print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
-    for epoch in range(args.epochs):
-        train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
-
-        if args.forecast:
-            if train_loss < best_loss:
-                best_loss = train_loss
-                torch.save(model.state_dict(), weight_file)
-
-                test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
-            else:
-                test_loss=None
-            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
+        if args.model_type=='Dense':
+            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
         else:
-            val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
-            if val_loss < best_loss:
-                best_loss = val_loss
-                torch.save(model.state_dict(), weight_file)
-                test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
+            model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+
+        freeze_model_weights(model)
+        print(f'The model has {count_parameters(model):,} trainable parameters')
+
+        optimizer = optim.Adam(model.parameters(),lr=1e-4)
+        criterion = nn.MSELoss(reduction='none')
+        best_loss = float('inf')
+
+        if args.evaluate:
+            evaluate_flops_memory_size(model, test_dataloader, criterion,train_dataloader, args)
+            return
+
+
+        print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
+        print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
+        print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
+        for epoch in range(args.epochs):
+            train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
+
+            if args.forecast:
+                if train_loss < best_loss:
+                    best_loss = train_loss
+                    torch.save(model.state_dict(), weight_file)
+
+                    test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
+                else:
+                    test_loss=None
+                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
-                val_loss=None
-                test_loss=None
-            print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
+                val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
+                if val_loss < best_loss:
+                    best_loss = val_loss
+                    torch.save(model.state_dict(), weight_file)
+                    test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
+                else:
+                    val_loss=None
+                    test_loss=None
+                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
 
 
 
