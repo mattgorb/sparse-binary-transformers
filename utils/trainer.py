@@ -117,21 +117,21 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
-        if len(val_losses)<500:
-            for batch in train_iterator:
-                data_base, label = batch
-                data = torch.clone(data_base)
-                if args.forecast:
-                    data[:, -1:, :] = 0
+        #if len(val_losses)<500:
+        for batch in train_iterator:
+            data_base, label = batch
+            data = torch.clone(data_base)
+            if args.forecast:
+                data[:, -1:, :] = 0
 
-                data = data.to(device)
-                data_base = data_base.to(device)
-                predictions, _ = model(data, )
+            data = data.to(device)
+            data_base = data_base.to(device)
+            predictions, _ = model(data, )
 
-                sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-                sample_loss = sample_loss.mean(dim=1)
+            sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+            sample_loss = sample_loss.mean(dim=1)
 
-                val_losses.extend(sample_loss.cpu().detach().numpy())
+            val_losses.extend(sample_loss.cpu().detach().numpy())
 
         for batch in iterator:
             data_base, label, index = batch
