@@ -52,7 +52,7 @@ def main():
     elif args.dataset=='MSL':
         entities=27
 
-    for ent in range(7,entities):
+    for ent in range(entities):
         #ent=args.entity
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
