@@ -33,7 +33,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         embed_dim: total dimension of the model.
         num_heads: parallel attention heads.
         dropout: a Dropout layer on attn_output_weights. Default: 0.0.
-        bias: add bias as module parameter. Default: True.
+        bias: add bias as module parameter. Default: True.F
         add_bias_kv: add bias to the key and value sequences at dim=0.
         add_zero_attn: add a new batch of zeros to the key and
                        value sequences at dim=1.
