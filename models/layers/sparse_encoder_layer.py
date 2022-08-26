@@ -18,7 +18,11 @@ class SparseTransformerEncoderLayer(nn.Module):
         else:
             self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
-        # Implementation of Feedforward model
+
+        self.dropout=dropout
+        self.dropout1 = nn.Dropout(self.dropout)
+        self.dropout2 = nn.Dropout(self.dropout)
+        self.dropout3 = nn.Dropout(self.dropout)
 
         self.linear1 = linear_init(d_model, dim_feedforward,args=args, **factory_kwargs)
         self.linear2 = linear_init(dim_feedforward, d_model,args=args, **factory_kwargs)
