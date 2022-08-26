@@ -66,7 +66,7 @@ class MultiheadAttention(nn.MultiheadAttention):
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
-        self.args.args
+        self.args=args
         self.linear_Q = nn.Linear(self.embed_dim, self.embed_dim, bias=bias, **factory_kwargs)
         self.linear_K = nn.Linear(self.kdim, self.embed_dim, bias=bias, **factory_kwargs)
         self.linear_V = nn.Linear(self.vdim, self.embed_dim, bias=bias, **factory_kwargs)
