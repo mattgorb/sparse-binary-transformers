@@ -7,7 +7,7 @@ from models.layers.sparse_type import linear_init,emb_init
 
 class TSClsSparseTransformerModel(nn.Module):
 
-    def __init__(self, input_dim, ninp, nhead, nhid, nlayers=6, args=None):
+    def __init__(self, input_dim, ninp, nhead, nhid, nlayers=6, args=None,classification_labels=None):
         super(TSClsSparseTransformerModel, self).__init__()
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
@@ -24,7 +24,7 @@ class TSClsSparseTransformerModel(nn.Module):
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
         self.ninp = ninp
-        self.decoder = linear_init(ninp, input_dim,bias=False,args=args, )
+        self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
 
         #self.init_weights()
 

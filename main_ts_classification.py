@@ -61,7 +61,7 @@ def main():
         model=model.float()
     else:
         model=TSClsSparseTransformerModel(input_dim=input_dim, ninp=args.dmodel, nhead=args.n_head, nhid=args.nhid,
-                                            nlayers=args.n_layers,args=args).to(device)
+                                            nlayers=args.n_layers,args=args,classification_labels=classification_labels).to(device)
         model=model.float()
 
     freeze_model_weights(model)
