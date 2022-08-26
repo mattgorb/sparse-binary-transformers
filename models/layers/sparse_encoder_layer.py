@@ -12,6 +12,7 @@ class SparseTransformerEncoderLayer(nn.Module):
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
 
+        self.args=args
         if args.attention=='Sparse':
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
