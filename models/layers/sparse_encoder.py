@@ -21,7 +21,7 @@ class SparseTransformerEncoder(nn.Module):
     def forward(self, src, mask = None, src_key_padding_mask = None):
         output = src
         for mod in self.layers:
-            output = mod(output, src_mask=mask, src_key_padding_mask=src_key_padding_mask)
+            output,_ = mod(output, src_mask=mask, src_key_padding_mask=src_key_padding_mask)
 
         if self.norm is not None:
             output = self.norm(output)
