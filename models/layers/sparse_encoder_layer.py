@@ -46,6 +46,7 @@ class SparseTransformerEncoderLayer(nn.Module):
         #x=x + self._ff_block(x)
 
         return x'''
+        print(src)
         print(src.size())
         sys.exit()
         src2, attention = self.self_attn(src, src, src, attn_mask=src_mask,
