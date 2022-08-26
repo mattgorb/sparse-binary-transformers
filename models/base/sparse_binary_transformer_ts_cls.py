@@ -39,7 +39,7 @@ class TSClsSparseTransformerModel(nn.Module):
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
-    def forward(self, src, has_src_mask=True, has_pad_mask=False, ):
+    def forward(self, src, has_src_mask=True, pad_mask=None, ):
         if has_src_mask:
             size=src.size(1)
             mask=torch.eye(size,)
@@ -51,12 +51,9 @@ class TSClsSparseTransformerModel(nn.Module):
 
         else:
             self.src_mask = None
-        if has_pad_mask:
+        if pad_mask is not None:
             device = src.device
-            mask = (src == 0).t()
-            self.pad_mask = mask.to(device)
-        else:
-            self.pad_mask = None
+            self.pad_mask = pad_mask.to(device)
 
         src = src.permute(1, 0, 2)
         src = self.embedding(src)*math.sqrt(self.ninp)
