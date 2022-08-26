@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from models.layers.positional_encoder import PositionalEncoding, LearnablePositionalEncoding
-from models.layers.sparse_type import linear_init,emb_init
+from models.layers.sparse_type import linear_init
 
 class TSSparseTransformerModel(nn.Module):
 
