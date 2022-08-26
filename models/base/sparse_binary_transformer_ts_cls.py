@@ -65,4 +65,8 @@ class TSClsSparseTransformerModel(nn.Module):
         output = output.permute(1, 0, 2)
         output = self.decoder(output)
 
+
+        output = output.mean(dim=1)
+        output=F.log_softmax(output)
+
         return output, attention_list
