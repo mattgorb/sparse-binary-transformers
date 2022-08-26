@@ -275,7 +275,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         # `torch.nn.functional.multi_head_attention`. Will need to refactor.
         static_k = None
         static_v = None
-
+        print('heer')
+        print(query[0].size())
         if self.batch_first:
             query, key, value = [x.transpose(0, 1) for x in (query, key, value)]
         print('heer')
