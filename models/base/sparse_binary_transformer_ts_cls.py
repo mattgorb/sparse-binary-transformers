@@ -5,10 +5,10 @@ import torch.nn.functional as F
 from models.layers.positional_encoder import PositionalEncoding, LearnablePositionalEncoding
 from models.layers.sparse_type import linear_init,emb_init
 
-class TSSparseTransformerModel(nn.Module):
+class TSClsSparseTransformerModel(nn.Module):
 
     def __init__(self, input_dim, ninp, nhead, nhid, nlayers=6, args=None):
-        super(TSSparseTransformerModel, self).__init__()
+        super(TSClsSparseTransformerModel, self).__init__()
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
             from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer

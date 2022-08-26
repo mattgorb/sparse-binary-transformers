@@ -2,6 +2,7 @@ import torch.nn as nn
 from models.layers.sparse_type import linear_init,layernorm_init
 import torch.nn.functional as F
 from models.layers.sparse_multihead_attention import SparseMultiheadAttention
+from models.layers.base_multihead_attention import MultiheadAttention
 
 class SparseTransformerEncoderLayer(nn.Module):
 
@@ -11,8 +12,12 @@ class SparseTransformerEncoderLayer(nn.Module):
         factory_kwargs = {'device': device, 'dtype': dtype}
         super(SparseTransformerEncoderLayer, self).__init__()
 
-        self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
-                                            **factory_kwargs)
+        if args.attention=='Sparse':
+            self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
+                                                **factory_kwargs)
+        else:
+            self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
+                                                **factory_kwargs)
         # Implementation of Feedforward model
 
         self.linear1 = linear_init(d_model, dim_feedforward,args=args, **factory_kwargs)
@@ -25,14 +30,40 @@ class SparseTransformerEncoderLayer(nn.Module):
 
 
     def forward(self, src, src_mask= None, src_key_padding_mask = None):
-        x = src
+        '''x = src
 
         x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
         x = self.norm2(x + self._ff_block(x))
         #x=x + self._sa_block(x, src_mask, src_key_padding_mask)
         #x=x + self._ff_block(x)
 
-        return x
+        return x'''
+        src2, attention = self.self_attn(src, src, src, attn_mask=src_mask,
+                              key_padding_mask=src_key_padding_mask)
+        src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
+
+        if self.args.layer_norm:
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+            src = self.norm1(src)
+            src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        if self.args.batch_norm:
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+            src=self.bn1(src)
+            src = src.permute(2, 0, 1)
+
+        src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
+        src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
+
+        if self.args.layer_norm:
+            src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
+            src = self.norm2(src)
+            src = src.permute(2, 0, 1)  # restore (seq_len, batch_size, d_model)
+        if self.args.batch_norm:
+            src = src.permute(1, 2, 0)
+            src=self.bn2(src)
+            src = src.permute(2, 0, 1)
+
+        return src, attention
 
     # self-attention block
     def _sa_block(self, x,attn_mask, key_padding_mask) :

@@ -74,7 +74,7 @@ def main():
         if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
         else:
-            model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+            model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
 
         freeze_model_weights(model)
         print(f'The model has {count_parameters(model):,} trainable parameters')

@@ -1,7 +1,7 @@
 import torch
 from torchtext.datasets import IMDB
 from models.base.dense_transformer_ts_classification import TSClassificationTransformer
-from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
+from models.base.sparse_binary_transformer_ts_cls import TSClsSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
 import torchtext
@@ -59,8 +59,10 @@ def main():
         model = TSClassificationTransformer(input_dim=input_dim, ninp=args.dmodel, nhead=args.n_head, nhid=args.nhid,
                                             nlayers=args.n_layers, args=args,classification_labels=classification_labels).to(device)
         model=model.float()
-    #else:
-        #model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=16, nlayers=2, args=args).to(device)
+    else:
+        model=TSClsSparseTransformerModel(input_dim=input_dim, ninp=args.dmodel, nhead=args.n_head, nhid=args.nhid,
+                                            nlayers=args.n_layers,args=args).to(device)
+        model=model.float()
 
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
