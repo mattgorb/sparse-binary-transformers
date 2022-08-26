@@ -31,6 +31,9 @@ class SparseTransformerEncoderLayer(nn.Module):
         self.norm1 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
         self.norm2 = layernorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
 
+        self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+
         self.activation = activation
 
 

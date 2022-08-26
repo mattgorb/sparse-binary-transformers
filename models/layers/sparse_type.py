@@ -186,3 +186,43 @@ class SubnetLayerNorm(nn.LayerNorm):
         x=F.layer_norm(x,self.normalized_shape,w, self.bias)
         # Return output from linear layer
         return x
+
+
+
+
+def batchnorm_init(in_dim,eps=None , args=None, **factory_kwargs):
+    layer=SubnetBatchNorm(normalized_shape=in_dim,eps=eps, **factory_kwargs)
+    layer.init(args)
+    return layer
+
+class SubnetBatchNorm(nn.LayerNorm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.scores = nn.Parameter(torch.Tensor(self.weight.size()))
+        nn.init.normal_(self.scores,0,1 )
+    @property
+    def clamped_scores(self):
+        # For unquantized activations
+        return self.scores.abs()
+
+    def init(self,args):
+        self.args=args
+        self.weight=_init_weight(self.args, self.weight)
+        self.scores=_init_score(self.args, self.scores)
+        self.prune_rate=args.layer_norm_prune_rate
+
+    def calc_alpha(self):
+        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
+        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
+        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
+        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
+        return self.alpha
+
+    def forward(self, x):
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)#s, self.calc_alpha())
+        # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
+        w = self.weight * subnet
+        # Pass binary subnetwork weights to convolution layer
+        x=F.batch_norm(x,self.normalized_shape,w, self.bias)
+        # Return output from linear layer
+        return x
