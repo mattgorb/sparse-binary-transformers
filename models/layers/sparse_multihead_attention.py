@@ -278,7 +278,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
 
         if self.batch_first:
             query, key, value = [x.transpose(0, 1) for x in (query, key, value)]
-
+        print('heer')
+        print(query)
         tgt_len, bsz, embed_dim_to_check = query.size()
         assert self.embed_dim == embed_dim_to_check
         # allow MHA to have different sizes for the feature dimension
