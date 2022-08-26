@@ -18,7 +18,13 @@ class TSSparseTransformerModel(nn.Module):
         self.src_mask = None
         self.pad_mask = None
         self.args=args
-        self.pos_encoder = LearnablePositionalEncoding(ninp, )
+
+        if args.pos_enc=='Learnable':
+            self.pos_encoder = LearnablePositionalEncoding(ninp, )
+        else:
+            self.pos_encoder = PositionalEncoding(ninp,)
+
+        #self.pos_encoder = LearnablePositionalEncoding(ninp, )
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
 

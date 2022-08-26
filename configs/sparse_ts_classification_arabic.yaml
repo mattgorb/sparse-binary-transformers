@@ -1,0 +1,25 @@
+#weight_init: kaiming_normal
+#score_init: None
+dataset: SpokenArabicDigits
+
+weight_seed: 0
+score_seed: 0
+gpu: 2
+batch_size: 8
+
+model_type: 'Sparse'
+attention: 'Sparse'
+
+epochs: 50
+weight_file: dense_ts_smd
+
+nhid: 256
+dmodel: 128
+n_layers: 2
+n_head: 2
+save_scores: False
+layer_norm: False
+batch_norm: True
+save_graphs: False
+lr: 1e-5
+pos_enc: 'Learnable'

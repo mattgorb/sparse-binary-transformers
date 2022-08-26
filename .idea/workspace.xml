@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/configs/sparse_ts_msl_forecast.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts_cls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_arabic.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Freezing" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_ts_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts_classification.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/results/Book1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/results/Book1.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +32,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/models/base" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/configs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -46,8 +40,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/configs" />
+      <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/results" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$" />
@@ -75,7 +69,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="118746000" />
+      <workItem from="1660263049974" duration="119729000" />
     </task>
     <servers />
   </component>
