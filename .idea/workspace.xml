@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts_cls.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts_cls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
-    </list>
+    <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +65,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="122620000" />
+      <workItem from="1660263049974" duration="122635000" />
     </task>
     <servers />
   </component>
