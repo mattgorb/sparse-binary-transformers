@@ -17,7 +17,7 @@ class SparseTransformerEncoderLayer(nn.Module):
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
         else:
-            self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
+            self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=self.args,
                                                 **factory_kwargs)
 
         self.dropout=dropout
