@@ -6,7 +6,7 @@ from models.layers.base_multihead_attention import MultiheadAttention
 
 class SparseTransformerEncoderLayer(nn.Module):
 
-    def __init__(self, d_model, nhead, dim_feedforward=2048, dropout=0.1, activation=F.relu,
+    def __init__(self, d_model, nhead, dim_feedforward=2048, dropout=0.0, activation=F.relu,
                  layer_norm_eps=1e-5, batch_first=False,
                  device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
