@@ -56,7 +56,7 @@ def parse_arguments():
     parser.add_argument(
         "--lr",
         "--learning-rate",
-        default=0.1,
+        default=0.001,
         type=float,
         metavar="LR",
         help="initial learning rate",

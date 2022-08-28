@@ -8,7 +8,7 @@ gpu: 2
 batch_size: 8
 
 model_type: 'Sparse'
-attention: 'Dense'
+attention: 'Sparse' #
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
@@ -26,4 +26,4 @@ layer_norm: False
 batch_norm: False
 save_graphs: False
 lr: 1e-3
-pos_enc: 'Fixed'
+pos_enc: 'Learnable'
