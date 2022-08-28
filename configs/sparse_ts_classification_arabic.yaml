@@ -17,8 +17,8 @@ attention_prune_rate: .05
 epochs: 50
 weight_file: sparse_cls_arabic
 
-nhid: 512
-dmodel: 256
+nhid: 256
+dmodel: 128
 n_layers: 2
 n_head: 2
 save_scores: False

@@ -23,6 +23,7 @@ class TSClsSparseTransformerModel(nn.Module):
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
+        self.embedding = nn.Linear(input_dim, ninp,  )
         self.ninp = ninp
         self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
 
