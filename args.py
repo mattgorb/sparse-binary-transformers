@@ -65,6 +65,10 @@ def parse_arguments():
     parser.add_argument("--scale_fan", default=False, type=bool)
     parser.add_argument("--mode", default="fan_in", help="Weight initialization mode")
     parser.add_argument(
+        "--nonlinearity", default="relu", help="Nonlinearity used by initialization"
+    )
+
+    parser.add_argument(
         "-p",
         "--print-freq",
         default=50,
