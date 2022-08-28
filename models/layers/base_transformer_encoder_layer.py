@@ -121,21 +121,6 @@ class TransformerEncoderLayer(Module):
         return src, attention
 
 
-    # self-attention block
-    def _sa_block(self, x: Tensor,
-                  attn_mask: Optional[Tensor], key_padding_mask: Optional[Tensor]) -> Tensor:
-        x, attention = self.self_attn(x, x, x,
-                           attn_mask=attn_mask,
-                           key_padding_mask=key_padding_mask,
-                           need_weights=False)[0]
-        return x
-
-    # feed forward block
-    def _ff_block(self, x: Tensor) -> Tensor:
-        x = self.linear2(self.activation(self.linear1(x)))
-        return x
-
-
 def _get_clones(module, N):
     return ModuleList([copy.deepcopy(module) for i in range(N)])
 
