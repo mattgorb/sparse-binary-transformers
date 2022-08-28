@@ -50,7 +50,7 @@ class TSClsSparseTransformerModel(nn.Module):
         nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
-    def forward(self, src, has_src_mask=True, pad_mask=None, ):
+    def forward(self, src, has_src_mask=False, pad_mask=None, ):
         if has_src_mask:
             size=src.size(1)
             mask=torch.eye(size,)
