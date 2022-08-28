@@ -64,9 +64,10 @@ def main():
                                             nlayers=args.n_layers,args=args,classification_labels=classification_labels).to(device)
         model=model.float()
 
-    freeze_model_weights(model)
+        freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
-
+    print(args.lr)
+    sys.exit()
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
     criterion = nn.CrossEntropyLoss()
     best_acc = 0#float('inf')
@@ -85,14 +86,9 @@ def main():
             test_loss=None
             val_acc=None
             #test_acc=None
-        #print(f'Dataset: {args.dataset} Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}\n')
         print(f'Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
-
-
-
 
 
 if __name__ == "__main__":
     print(args)
-
     main()
