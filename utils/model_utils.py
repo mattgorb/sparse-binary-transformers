@@ -50,6 +50,7 @@ def _init_weight(args,weight):
             nn.init.kaiming_normal_(
                 weight, mode=args.mode, nonlinearity=args.nonlinearity
             )
+        print(f"Using {args.weight_init} weight initialization")
 
     elif args.weight_init == "kaiming_uniform":
         nn.init.kaiming_uniform_(
@@ -68,7 +69,7 @@ def _init_weight(args,weight):
     elif args.weight_init == "standard":
         nn.init.kaiming_uniform_(weight, a=math.sqrt(5))
     else:
-        print("Using default score initialization")
+        print("Using default weight initialization")
 
     return weight
 
