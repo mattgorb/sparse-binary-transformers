@@ -30,7 +30,8 @@ class TSClsSparseTransformerModel(nn.Module):
         self.embedding = linear_init(input_dim, ninp,args=args,)
         #self.embedding = nn.Linear(input_dim, ninp,  )
         self.ninp = ninp
-        self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
+        #self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
+        self.decoder = nn.Linear(ninp, classification_labels,  )
 
 
     def _generate_square_subsequent_mask(self, sz):
