@@ -41,7 +41,7 @@ def _init_weight(args,weight):
 
         if args.scale_fan:
             fan = nn.init._calculate_correct_fan(weight, args.mode)
-            fan = fan * (1 - args.prune_rate)
+            fan = fan * (1 - args.lin_prune_rate)
             gain = nn.init.calculate_gain(args.nonlinearity)
             std = gain / math.sqrt(fan)
             with torch.no_grad():
