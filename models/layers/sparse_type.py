@@ -61,6 +61,7 @@ class SubnetLinBiprop(nn.Linear):
 
     def init(self,args):
         self.args=args
+        print('Linear init')
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.lin_prune_rate
@@ -130,6 +131,7 @@ class SubnetEmb(nn.Embedding):
 
     def init(self,args):
         self.args=args
+        print('Embedding init')
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.emb_prune_rate
@@ -152,6 +154,7 @@ class SubnetEmb(nn.Embedding):
 
 def layernorm_init(in_dim,eps=None , args=None, **factory_kwargs):
     layer=SubnetLayerNorm(normalized_shape=in_dim,eps=eps, **factory_kwargs)
+
     layer.init(args)
     return layer
 
@@ -207,6 +210,7 @@ class SubnetBatchNorm(nn.LayerNorm):
 
     def init(self,args):
         self.args=args
+
         #self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.layer_norm_prune_rate
