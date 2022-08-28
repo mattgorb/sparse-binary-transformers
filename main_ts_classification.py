@@ -66,8 +66,7 @@ def main():
 
         freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
-    print(args.lr)
-    sys.exit()
+
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
     criterion = nn.CrossEntropyLoss()
     best_acc = 0#float('inf')
