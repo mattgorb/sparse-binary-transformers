@@ -167,7 +167,7 @@ class SubnetLayerNorm(nn.LayerNorm):
 
     def init(self,args):
         self.args=args
-        self.weight=_init_weight(self.args, self.weight)
+        #self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.layer_norm_prune_rate
 
@@ -207,7 +207,7 @@ class SubnetBatchNorm(nn.LayerNorm):
 
     def init(self,args):
         self.args=args
-        self.weight=_init_weight(self.args, self.weight)
+        #self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.layer_norm_prune_rate
 
