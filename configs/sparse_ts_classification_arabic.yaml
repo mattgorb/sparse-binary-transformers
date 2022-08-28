@@ -7,7 +7,7 @@ score_seed: 0
 gpu: 2
 batch_size: 8
 
-model_type: 'Dense'
+model_type: 'Sparse'
 attention: 'Dense'
 
 layer_norm_prune_rate: 0.5
@@ -25,5 +25,5 @@ save_scores: False
 layer_norm: False
 batch_norm: False
 save_graphs: False
-lr: 1e-5
-pos_enc: 'Learnable'
+lr: 1e-3
+pos_enc: 'Fixed'
