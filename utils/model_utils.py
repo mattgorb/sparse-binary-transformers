@@ -48,7 +48,7 @@ def _init_weight(args,weight):
                 weight.data.normal_(0, std)
         else:
             nn.init.kaiming_normal_(
-                weight, mode=args.mode, nonlinearity=args.nonlinearity
+                weight, #mode=args.mode, nonlinearity=args.nonlinearity
             )
         print(f"Using {args.weight_init} weight initialization")
 
