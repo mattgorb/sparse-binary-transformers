@@ -12,6 +12,8 @@ class TSClsSparseTransformerModel(nn.Module):
         try:
             from models.layers.sparse_encoder import SparseTransformerEncoder
             from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer
+            from models.layers.base_transformer_encoder import TransformerEncoder
+            from models.layers.base_transformer_encoder_layer import TransformerEncoderLayer
         except:
             raise ImportError("Had trouble importing transformer modules. ")
         self.model_type = 'Transformer'
@@ -19,15 +21,17 @@ class TSClsSparseTransformerModel(nn.Module):
         self.pad_mask = None
         self.args=args
         self.pos_encoder = LearnablePositionalEncoding(ninp, )
-        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
-        self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
+
+        #encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
+        #self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
+        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid,args=self.args,)
+        self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
-        self.embedding = nn.Linear(input_dim, ninp,  )
+        #self.embedding = nn.Linear(input_dim, ninp,  )
         self.ninp = ninp
         self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
 
-        #self.init_weights()
 
     def _generate_square_subsequent_mask(self, sz):
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
