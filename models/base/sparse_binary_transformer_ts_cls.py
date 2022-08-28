@@ -47,7 +47,7 @@ class TSClsSparseTransformerModel(nn.Module):
     def init_weights(self):
         initrange = 0.1
         nn.init.uniform_(self.embedding.weight, -initrange, initrange)
-        nn.init.zeros_(self.decoder.bias)
+        #nn.init.zeros_(self.decoder.bias)
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
     def forward(self, src, has_src_mask=False, pad_mask=None, ):
