@@ -5,3 +5,5 @@ data/
 .idea/
 .vector_cache/
 weights/
+results/
+output/

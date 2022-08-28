@@ -1,0 +1,114 @@
+(transformers) luffy:~/sparse-binary-transformers$ python3 main_ts_classification.py --config=configs/sparse_ts_classification_arabic.yaml
+=> Reading YAML config from configs/sparse_ts_classification_arabic.yaml
+Namespace(attention='Sparse', attention_prune_rate=0.5, batch_norm=True, batch_size=8, config='configs/sparse_ts_classification_arabic.yaml', conv_type=None, data='/s/luffy/b/nobackup/mgorb/data', dataset='SpokenArabicDigits', dmodel=128, entity=None, epochs=50, evaluate=False, freeze_weights=False, gpu=2, layer_norm=False, layer_norm_prune_rate=0.5, lin_prune_rate=0.5, log_dir=None, lr='1e-3', mode='fan_in', model_type='Sparse', n_head=2, n_layers=2, name=None, nhid=256, nonlinearity='relu', num_classes=10, optimizer='sgd', pos_enc='Fixed', pretrained=None, print_freq=50, resume='', save_every=-1, save_graphs=False, save_scores=False, scale_fan=False, score_init=None, score_seed=0, seed=0, set='ImageNet', weight_file='sparse_cls_arabic', weight_init=None, weight_seed=0, window_size=None, workers=20)
+2022-08-28 12:28:52.135414
+2022-08-28 12:29:00.672324
+2022-08-28 12:29:25.873907
+2022-08-28 12:29:28.533330
+(428935, 13)
+5279 samples may be used for training
+1320 samples will be used for validation
+2199 samples will be used for testing
+torch.Size([8, 65, 13])
+(428935, 13)
+(142935, 13)
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Using default score initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+Linear init
+Using default weight initialization
+Using default score initialization
+=> Freezing model weights
+==> No gradient to transformer_encoder.layers.0.self_attn.out_proj.weight
+==> No gradient to transformer_encoder.layers.0.self_attn.out_proj.bias
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_Q.weight
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_Q.bias
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_K.weight
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_K.bias
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_V.weight
+==> No gradient to transformer_encoder.layers.0.self_attn.linear_V.bias
+==> No gradient to transformer_encoder.layers.0.linear1.weight
+==> No gradient to transformer_encoder.layers.0.linear2.weight
+==> No gradient to transformer_encoder.layers.1.self_attn.out_proj.weight
+==> No gradient to transformer_encoder.layers.1.self_attn.out_proj.bias
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_Q.weight
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_Q.bias
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_K.weight
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_K.bias
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_V.weight
+==> No gradient to transformer_encoder.layers.1.self_attn.linear_V.bias
+==> No gradient to transformer_encoder.layers.1.linear1.weight
+==> No gradient to transformer_encoder.layers.1.linear2.weight
+==> No gradient to embedding.weight
+==> No gradient to decoder.weight
+The model has 366,720 trainable parameters
+Train acc: 0.35703463204430813 | Val acc: 0.44393939393939397 | Test acc: 0.43454545454545457
+Train acc: 0.48912337666208094 | Val acc: 0.6772727272727272 | Test acc: 0.6404545454545455
+Train acc: 0.6133387446403503 | Val acc: 0.7522727272727273 | Test acc: 0.6976623379100453
+Train acc: 0.6726461039348082 | Val acc: 0.803030303030303 | Test acc: 0.7427272727272727
+Train acc: 0.7245941559473673 | Val acc: 0.8643939393939394 | Test acc: 0.815
+Train acc: 0.7870941559473673 | Val acc: 0.8924242424242425 | Test acc: 0.8868181818181818
+Train acc: 0.8310335498867613 | Val acc: 0.9181818181818182 | Test acc: 0.894090909090909
+Train acc: 0.8617153680685795 | Val acc: 0.9393939393939394 | Test acc: 0.9022727272727272
+Train acc: 0.868560606060606 | Val acc: None | Test acc: 0.8845454545454545
+Train acc: 0.8848484848484849 | Val acc: 0.9424242424242424 | Test acc: 0.9190909090909091
+Train acc: 0.890530303030303 | Val acc: 0.9477272727272728 | Test acc: 0.9231818181818182
+Train acc: 0.9124458874716903 | Val acc: 0.95 | Test acc: 0.9318181818181818
+Train acc: 0.919291125644337 | Val acc: 0.953030303030303 | Test acc: 0.9336363636363636
+Train acc: 0.9302759741291855 | Val acc: 0.9659090909090909 | Test acc: 0.9381818181818182
+Train acc: 0.935010822614034 | Val acc: 0.9712121212121212 | Test acc: 0.945
+Train acc: 0.9435606060606061 | Val acc: 0.9757575757575757 | Test acc: 0.9622727272727273
+Train acc: 0.9486201298959327 | Val acc: None | Test acc: 0.9459090909090909
+Train acc: 0.9528409090909091 | Val acc: 0.9803030303030303 | Test acc: 0.9509090909090909
+Train acc: 0.9547077923110037 | Val acc: None | Test acc: 0.9695454545454546
+Train acc: 0.9625 | Val acc: 0.9818181818181818 | Test acc: 0.9727272727272728
+Train acc: 0.9579545454545455 | Val acc: 0.9863636363636363 | Test acc: 0.9645454545454546
+Train acc: 0.9638257575757576 | Val acc: 0.9886363636363636 | Test acc: 0.9631818181818181
+Train acc: 0.968939393939394 | Val acc: None | Test acc: 0.9668181818181818
+Train acc: 0.96875 | Val acc: None | Test acc: 0.9709090909090909
+Train acc: 0.9715909090909091 | Val acc: None | Test acc: 0.9572727272727273
+Train acc: 0.9708333333333333 | Val acc: None | Test acc: 0.9709090909090909
+Train acc: 0.9693181818181819 | Val acc: 0.9901515151515151 | Test acc: 0.9695454545454546
+Train acc: 0.9728896104928219 | Val acc: None | Test acc: 0.9609090909090909
+Train acc: 0.9755681818181818 | Val acc: None | Test acc: 0.9677272727272728
+Train acc: 0.977840909090909 | Val acc: None | Test acc: 0.9731818181818181
+Train acc: 0.9744318181818182 | Val acc: None | Test acc: 0.9604545454545454
+Train acc: 0.975 | Val acc: 0.9916666666666667 | Test acc: 0.9659090909090909
+Train acc: 0.9804924242424242 | Val acc: None | Test acc: 0.9727272727272728
+Train acc: 0.9765151515151516 | Val acc: 0.9946969696969697 | Test acc: 0.9704545454545455
+Train acc: 0.9829545454545454 | Val acc: None | Test acc: 0.9804545454545455
+Train acc: 0.9765151515151516 | Val acc: None | Test acc: 0.9690909090909091
+Train acc: 0.9804653680685794 | Val acc: None | Test acc: 0.9727272727272728
+Train acc: 0.9806818181818182 | Val acc: None | Test acc: 0.9731818181818181
+Train acc: 0.9831439393939394 | Val acc: 0.9962121212121212 | Test acc: 0.9695454545454546
+Train acc: 0.9797348484848485 | Val acc: None | Test acc: 0.98
+Train acc: 0.9804924242424242 | Val acc: None | Test acc: 0.9745454545454545
+Train acc: 0.9844426407958522 | Val acc: None | Test acc: 0.9713636363636363
+Train acc: 0.981439393939394 | Val acc: None | Test acc: 0.965
+Train acc: 0.9846590909090909 | Val acc: None | Test acc: 0.980909090909091
+Train acc: 0.9839015151515151 | Val acc: None | Test acc: 0.9654545454545455
+Train acc: 0.9846320347352462 | Val acc: None | Test acc: 0.9736363636363636
+Train acc: 0.9846590909090909 | Val acc: None | Test acc: 0.9790909090909091
+Train acc: 0.987310606060606 | Val acc: None | Test acc: 0.975
+Train acc: 0.9867424242424242 | Val acc: None | Test acc: 0.9709090909090909
+Train acc: 0.98125 | Val acc: None | Test acc: 0.9736363636363636
