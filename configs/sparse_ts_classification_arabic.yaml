@@ -13,8 +13,8 @@ attention: 'Sparse' #
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
 attention_prune_rate: .25
-weight_init: 'kaiming_normal'
-scale_fan: False
+#weight_init: 'kaiming_normal'
+#scale_fan: False
 
 epochs: 50
 weight_file: sparse_cls_arabic
