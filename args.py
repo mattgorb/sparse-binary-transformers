@@ -62,7 +62,7 @@ def parse_arguments():
         help="initial learning rate",
         dest="lr",
     )
-
+    parser.add_argument("--scale_fan", default=False, type=bool)
     parser.add_argument(
         "-p",
         "--print-freq",
