@@ -30,11 +30,11 @@ class TSClsSparseTransformerModel(nn.Module):
         encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid,args=self.args,)
         self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
 
-        #self.embedding = linear_init(input_dim, ninp,args=args,)
-        self.embedding = nn.Linear(input_dim, ninp,  )
+        self.embedding = linear_init(input_dim, ninp,args=args,)
+        #self.embedding = nn.Linear(input_dim, ninp,  )
         self.ninp = ninp
-        #self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
-        self.decoder = nn.Linear(ninp, classification_labels,  )
+        self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
+        #self.decoder = nn.Linear(ninp, classification_labels,  )
 
         self.init_weights()
         self.act=nn.ReLU()
