@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/configs/dense_ts_classification_arabic.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_classification_arabic.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_ts_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts_classification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/dense_transformer_ts_classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/dense_transformer_ts_classification.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +67,7 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="130250000" />
+      <workItem from="1660263049974" duration="130371000" />
     </task>
     <servers />
   </component>
