@@ -22,10 +22,10 @@ class TSClsSparseTransformerModel(nn.Module):
         self.args=args
         self.pos_encoder = LearnablePositionalEncoding(ninp, )
 
-        #encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
-        #self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
-        encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid,args=self.args,)
-        self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
+        encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
+        self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
+        #encoder_layers = TransformerEncoderLayer(ninp, nhead, nhid,args=self.args,)
+        #self.transformer_encoder = TransformerEncoder(encoder_layers, nlayers)
 
         self.embedding = linear_init(input_dim, ninp,args=args,)
         #self.embedding = nn.Linear(input_dim, ninp,  )
