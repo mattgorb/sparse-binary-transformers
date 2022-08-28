@@ -69,6 +69,8 @@ class TSClsSparseTransformerModel(nn.Module):
 
         output, attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
 
+        output = self.act(output)
+
         output = output.permute(1, 0, 2)
         output = self.decoder(output)
 
