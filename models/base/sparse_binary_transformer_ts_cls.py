@@ -33,6 +33,7 @@ class TSClsSparseTransformerModel(nn.Module):
         #self.decoder = linear_init(ninp, classification_labels,bias=False,args=args, )
         self.decoder = nn.Linear(ninp, classification_labels,  )
 
+        self.init_weights()
 
     def _generate_square_subsequent_mask(self, sz):
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
