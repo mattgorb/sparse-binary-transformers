@@ -3,21 +3,21 @@ dataset: MSL
 
 weight_seed: 0
 score_seed: 0
-gpu: 1
+gpu: 0
 batch_size: 128
-model_type: 'Sparse'
 
+model_type: 'Sparse'
 attention: 'Dense' #
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
 attention_prune_rate: .5
 
-epochs: 150
-weight_file: dense_ts_smd
+epochs: 50
+weight_file: sparse_ts_smd
 
 window_size: 50
-forecast: True
+forecast: False
 save_scores: False
 layer_norm: True
 batch_norm: False

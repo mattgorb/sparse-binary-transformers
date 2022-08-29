@@ -17,7 +17,7 @@ attention_prune_rate: .1
 #scale_fan: False
 
 epochs: 50
-weight_file: sparse_cls_arabic
+weight_file: sparse_cls_hb
 
 nhid: 256
 dmodel: 128

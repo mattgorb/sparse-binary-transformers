@@ -47,26 +47,31 @@ class TSSparseTransformerModel(nn.Module):
 
     def forward(self, src, has_src_mask=True, has_pad_mask=False, pad_mask=None,):
         if has_src_mask:
-            size=src.size(1)
-            mask=torch.eye(size,)
-            mask=mask.masked_fill(mask == 0, float('-inf'))
-            mask[-1,:]=0
+            if self.src_mask is None :
+                size=src.size(1)
+                mask=torch.eye(size,)
+                mask=mask.masked_fill(mask == 0, float('-inf'))
+                mask[-1,:]=0
 
-            mask[-1,-1]=float('-inf')
-            self.src_mask = mask.to(self.args.device)
+                mask[-1,-1]=float('-inf')
+                self.src_mask = mask.to(self.args.device)
 
         else:
             self.src_mask = None
-        if pad_mask is not None:
+        if has_pad_mask:
             device = src.device
-            self.pad_mask = pad_mask.to(device)
+            mask = (src == 0).t()
+            self.pad_mask = mask.to(device)
+        else:
+            self.pad_mask = None
 
         src = src.permute(1, 0, 2)
         src = self.embedding(src)*math.sqrt(self.ninp)
         src = self.pos_encoder(src)
 
-        output, attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
+        output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
 
+        output=self.act(output)
         output = output.permute(1, 0, 2)
         output = self.decoder(output)
 
