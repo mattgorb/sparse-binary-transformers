@@ -18,7 +18,6 @@ def train(model, iterator, optimizer, criterion, device,dataset):
     epoch_acc = 0
 
     model.train()
-    i=0
     pad_mask=None
     for batch in iterator:
         optimizer.zero_grad()
@@ -43,8 +42,6 @@ def train(model, iterator, optimizer, criterion, device,dataset):
         acc = binary_accuracy(predictions, label)
 
         epoch_acc += acc.item()
-
-        #print(i)
 
     return epoch_loss / len(iterator), epoch_acc / len(iterator)
 

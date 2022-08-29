@@ -37,7 +37,7 @@ def evaluate(model, test_dataloader, criterion, args):
         break
 
 
-    flops_dict, modules_not_found = flops(model, data)
+    flops_dict, modules_not_found = flops(model, data.float())
     for k, v in flops_dict.items():
         print(f'{k}: {v}')
     print(f'Modules not found for FLOP measurement: {modules_not_found}')
