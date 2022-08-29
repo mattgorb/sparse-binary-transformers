@@ -37,12 +37,6 @@ def evaluate(model, test_dataloader, criterion, args):
         break
 
 
-    model.eval()
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-    print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
-
-
-
     flops_dict, modules_not_found = flops(model, data)
     for k, v in flops_dict.items():
         print(f'{k}: {v}')
