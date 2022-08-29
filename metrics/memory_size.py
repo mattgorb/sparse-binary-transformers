@@ -71,7 +71,7 @@ def model_size(model,args,quantized=False, as_bits=True):
             params_dict['total_nonzero_params'] += nz
             params_dict['float32_params']+=t
 
-    if args.model_type=='SparseBinary':
+    if args.model_type=='SparseBinary' or args.model_type=='Sparse':
         #logic for float32 and binary network
         for name, m in model.named_modules():
             if hasattr(m, "weight") and m.weight is not None:
