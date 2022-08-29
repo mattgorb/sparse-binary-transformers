@@ -1,5 +1,5 @@
 
-dataset: MSL
+dataset: SMD
 
 weight_seed: 0
 score_seed: 0
@@ -15,7 +15,7 @@ lin_prune_rate: 0.5
 attention_prune_rate: .5
 
 epochs: 50
-weight_file: dense_ts_smd
+weight_file: sparse_ts_smd_forecast
 
 window_size: 200
 forecast: True
