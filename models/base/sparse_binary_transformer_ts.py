@@ -31,7 +31,7 @@ class TSSparseTransformerModel(nn.Module):
         self.embedding = linear_init(input_dim, ninp,args=args,)
         self.ninp = ninp
         self.decoder = linear_init(ninp, input_dim,bias=False,args=args, )
-
+        self.act=nn.ReLU()
         #self.init_weights()
 
     def _generate_square_subsequent_mask(self, sz):
