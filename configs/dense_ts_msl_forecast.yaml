@@ -7,7 +7,7 @@ gpu: 1
 batch_size: 128
 model_type: 'Dense'
 
-epochs: 150
+epochs: 50
 weight_file: dense_ts_smd
 
 window_size: 50
