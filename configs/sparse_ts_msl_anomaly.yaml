@@ -19,7 +19,7 @@ weight_file: sparse_ts_smd
 window_size: 50
 forecast: False
 save_scores: False
-layer_norm: True
+layer_norm: False
 batch_norm: False
 save_graphs: False
 
