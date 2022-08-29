@@ -22,7 +22,7 @@ from metrics.flops import flops
 from metrics.memory_size import memory, model_size
 from utils.trainer_ts_classification import train,test
 
-from metrics.evaluate import evaluate_flops_memory_size
+from metrics.evaluate import evaluate
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.ts_classification_loader import get_classification_ds
 
@@ -69,7 +69,11 @@ def main():
 
     optimizer = optim.Adam(model.parameters(),lr=float(args.lr))
     criterion = nn.CrossEntropyLoss()
-    best_acc = 0#float('inf')
+    best_acc = 0
+
+    if args.evaluate:
+        evaluate(model, test_dataloader, criterion, args)
+        return
 
     for epoch in range(args.epochs):
         train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device,args.dataset)
