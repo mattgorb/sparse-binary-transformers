@@ -110,7 +110,7 @@ def main():
                     torch.save(model.state_dict(), weight_file)
                     test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
                 else:
-                    val_loss=None
+                    #val_loss=None
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
 
