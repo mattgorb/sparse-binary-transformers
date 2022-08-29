@@ -94,7 +94,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     params_dict['total_bits'] += int(nz*32+(t-nz)*1)
                 else:
                     print(f'Class not found {m._get_name()}')
-                    sys.exit()
+                    #sys.exit()
                 params_dict['total_params'] += int(t)
                 params_dict['total_nonzero_params'] += int(nz)
                 params_dict['float32_params'] += int(f)
