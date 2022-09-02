@@ -121,33 +121,37 @@ def multihead_attention_flops(multihead_attention_module, input,):
     # Q scaling
     flops += qlen * qdim
 
-    # Initial projections
-    '''flops += (
-        (qlen * qdim * qdim)  # QW
-        + (klen * kdim * kdim)  # KW
-        + (vlen * vdim * vdim)  # VW
-    )'''
-
-    if multihead_attention_module.in_proj_bias is not None:
-        flops += (qlen + klen + vlen) * qdim
-
     # attention heads: scale, matmul, softmax, matmul
     qk_head_dim = qdim // num_heads
     v_head_dim = vdim // num_heads
 
+    #head_flops = (
+        #(qlen * klen * qk_head_dim)  # QK^T
+        #+ (qlen * klen)  # softmax
+        #+ (qlen * klen * v_head_dim)  # AV
+    #)
+    #qlen=405
+    #qk_head=64
+    #(405, 64)(64,405)
+    #𝑛𝑚(2𝑝−1).
+    #405*405*127
+    #https://math.stackexchange.com/questions/3512976/proof-of-of-flops-in-matrix-multiplication
+    print(f'attention has source mask? {multihead_attention_module.args.has_src_mask}')
+    if not multihead_attention_module.args.has_src_mask:
+        head_flops=0
+        head_flops+=(qlen * klen * (qk_head_dim))  # QK^T nm(2p-1)
+        head_flops += (qlen * klen)  # softmax
+        head_flops += (qlen * klen * (v_head_dim))  # AV # (n-1)(2p-1)+(m-1)(2p-1)
+        flops += num_heads * head_flops
+        #flops *= batch_size
+    else:
+        head_flops=0
+        head_flops+=((qlen-1) * (qk_head_dim)+(klen-1) * (qk_head_dim))  # QK^T (n-1)(2p-1)+(m-1)(2p-1)
+        head_flops += (qlen + klen)  # softmax
+        head_flops +=((qlen-1) * (v_head_dim-1)+(klen-1) * (v_head_dim))  # AV
+        flops += num_heads * head_flops
+        #flops *= batch_size
 
-    head_flops = (
-        (qlen * klen * qk_head_dim)  # QK^T
-        + (qlen * klen)  # softmax
-        + (qlen * klen * v_head_dim)  # AV
-    )
-
-    flops += num_heads * head_flops
-
-    # final projection, bias is always enabled
-    flops += qlen * vdim * (vdim + 1)
-
-    flops *= batch_size
     return flops
 
 
@@ -194,8 +198,6 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
         assert kdim == qdim
     if multihead_attention_module.vdim is None:
         assert vdim == qdim
-
-
 
 
     # Q scaling
@@ -247,7 +249,6 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     attn_output = torch.bmm(attn_output_weights, v)
     nonzero_attn_output=torch.count_nonzero(attn_output).item()
 
-
     head_flops1=nonzero_attn_weights# QK^T
     head_flops2=(qlen * klen)# softmax
     head_flops3=nonzero_attn_output# AV
@@ -257,9 +258,9 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     flops += num_heads * head_flops
 
     # final projection, bias is always enabled
-    flops += qlen * vdim * (vdim + 1)
+    #flops += qlen * vdim * (vdim + 1)
 
-    flops *= batch_size
+    #flops *= batch_size
     return bops, int(flops)
 
 

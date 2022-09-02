@@ -40,15 +40,14 @@ def evaluate(model, test_dataloader, criterion, args):
     flops_dict, modules_not_found = flops(model, data.float())
     for k, v in flops_dict.items():
         print(f'{k}: {v}')
-    print(f'Modules not found for FLOP measurement: {modules_not_found}')
 
 
-    params_dict = model_size(model, args, quantized=True)
-    for k, v in params_dict.items():
-        print(f'{k}: {v}')
+    params_dict = model_size(model, args, quantized=False)
+    #for k, v in params_dict.items():
+        #print(f'{k}: {v}')
 
-    valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
-    print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
+    #valid_loss, valid_acc = test(model, test_dataloader, criterion, device)
+    #print(f'\t Quantized Val. Loss: {valid_loss:.3f} |  Val. Acc: {valid_acc * 100:.2f}%')
 
 
 

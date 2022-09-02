@@ -101,7 +101,6 @@ def model_size(model,args,quantized=False, as_bits=True):
                 params_dict['binary_params'] += int(b)
 
     print(params_dict)
-    sys.exit()
     return params_dict
 
 def memory(model, input, as_bits=True):

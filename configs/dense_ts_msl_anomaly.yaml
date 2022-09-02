@@ -17,5 +17,7 @@ layer_norm: True
 batch_norm: False
 save_graphs: False
 
+has_src_mask: False
+
 pos_enc: 'Standard'
 

@@ -25,3 +25,4 @@ save_graphs: False
 
 pos_enc: 'Standard'
 
+has_src_mask: True

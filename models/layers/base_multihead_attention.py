@@ -438,8 +438,9 @@ class MultiheadAttention(nn.MultiheadAttention):
         k = self.dequant_k(k)
         v = self.dequant_v(v)
 
-        attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
+
+        attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
 
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
