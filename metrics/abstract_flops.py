@@ -254,6 +254,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
     print(multihead_attention_module.attention_prune_rate)
     print(q.shape)
+    print(attn_output_weights.size())
     print(nonzero_attn_weights)
     sys.exit()
 
