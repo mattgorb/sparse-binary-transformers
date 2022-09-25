@@ -263,6 +263,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     print(q.shape)
     print(attn_output_weights.size())
     print(nonzero_attn_weights)
+    print(attn_output_weights)
     sys.exit()
 
     attn_output_weights = nnF.softmax(
