@@ -226,6 +226,8 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     finds the nonzero flop count
     '''
     q_tensor=torch.tensor(q)
+    print(q)
+    sys.exit()
     tgt_len, bsz, embed_dim_to_check = q_tensor.size()
     head_dim = multihead_attention_module.embed_dim // multihead_attention_module.num_heads
     q = multihead_attention_module.linear_Q(q_tensor)

@@ -57,7 +57,7 @@ def get_activations(model, input):
         else:
             activations[module] = (input[0].detach().cpu().numpy().copy(),
                                    output[0].detach().cpu().numpy().copy(),)
-        print(input[0][0][0][0])
+        #print(input[0][0][0][0])
 
     fn, hooks = hook_applyfn(store_activations, model, forward=True)
     model.apply(fn)
