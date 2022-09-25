@@ -252,6 +252,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
     nonzero_attn_weights=torch.count_nonzero(attn_output_weights).item()
 
+    print(multihead_attention_module.weight)
     print(multihead_attention_module.attention_prune_rate)
     print(q.shape)
     print(attn_output_weights.size())
