@@ -39,7 +39,7 @@ def evaluate(model, test_dataloader, criterion, args):
     model_input=torch.ones_like(data.float())*.5
 
 
-    flops_dict, modules_not_found = flops(model, data.float())
+    flops_dict, modules_not_found = flops(model, model_input)
     for k, v in flops_dict.items():
         print(f'{k}: {v}')
 
