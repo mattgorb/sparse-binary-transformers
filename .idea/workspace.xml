@@ -3,19 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/args.py" beforeDir="false" afterPath="$PROJECT_DIR$/args.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/dense_ts_msl_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_msl_anomaly.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/dense_ts_msl_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_msl_forecast.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_msl_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_msl_forecast.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smap_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smap_forecast.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smd_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smd_forecast.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/abstract_flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/abstract_flops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/memory_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/memory_size.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/base/dense_transformer_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/dense_transformer_ts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/base/sparse_binary_transformer_ts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/base_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/base_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/base_transformer_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/base_transformer_encoder_layer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
@@ -83,7 +74,9 @@
       <workItem from="1656387581098" duration="68743000" />
       <workItem from="1657249626173" duration="64066000" />
       <workItem from="1659729438170" duration="15819000" />
-      <workItem from="1660263049974" duration="182536000" />
+      <workItem from="1660263049974" duration="199143000" />
+      <workItem from="1663855490388" duration="983000" />
+      <workItem from="1663939220676" duration="6190000" />
     </task>
     <servers />
   </component>
@@ -112,8 +105,8 @@
       <screen x="0" y="25" width="1680" height="913" />
     </state>
     <state x="792" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.913@0.25.1680.913" timestamp="1656470744489" />
-    <state x="702" y="238" width="598" height="496" key="find.popup" timestamp="1662090055152">
-      <screen x="0" y="25" width="1680" height="922" />
+    <state x="2482" y="269" width="683" height="567" key="find.popup" timestamp="1664122933995">
+      <screen x="1680" y="25" width="1920" height="1055" />
     </state>
     <state x="702" y="235" width="597" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1661483694296" />
     <state x="702" y="236" width="597" height="490" key="find.popup/0.25.1680.913@0.25.1680.913" timestamp="1661695458078" />
@@ -124,11 +117,11 @@
     <state x="702" y="236" width="597" height="548" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@0.25.1680.913" timestamp="1657301848383" />
     <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1657685766341" />
     <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@3600.-40.1920.1055" timestamp="1657828566674" />
-    <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@1680.25.1920.1055" timestamp="1661806857542" />
+    <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@1680.25.1920.1055" timestamp="1664122933995" />
     <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@3600.-40.1920.1055" timestamp="1659665994840" />
     <state x="2482" y="111" width="684" height="726" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@1680.25.1920.1055" timestamp="1661782445045" />
     <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@3600.-40.1920.1055" timestamp="1659191672012" />
-    <state x="4402" y="204" width="684" height="568" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.930@3600.-40.1920.1055" timestamp="1658421064250" />
+    <state x="4402" y="204" width="684" height="568" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.930@3600.-40.1920.1055" timestamp="1663092825704" />
     <state x="2482" y="242" width="683" height="536" key="find.popup/1680.25.1920.940/3600.-40.1920.1055/0.25.1680.1025@1680.25.1920.940" timestamp="1660077473208" />
     <state x="585" y="224" width="670" height="676" key="search.everywhere.popup" timestamp="1660186865281">
       <screen x="0" y="25" width="1680" height="913" />

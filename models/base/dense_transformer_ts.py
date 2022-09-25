@@ -103,8 +103,11 @@ class TSTransformerModel(nn.Module):
         else:
             self.pad_mask = None
 
+
         src = src.permute(1, 0, 2)
+
         src = self.embedding(src)*math.sqrt(self.ninp)
+
         src = self.pos_encoder(src)
 
         output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)

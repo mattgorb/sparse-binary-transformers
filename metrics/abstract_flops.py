@@ -137,6 +137,14 @@ def multihead_attention_flops(multihead_attention_module, input,):
     #405*405*127
     #https://math.stackexchange.com/questions/3512976/proof-of-of-flops-in-matrix-multiplication
     print(f'attention has source mask? {multihead_attention_module.args.has_src_mask}')
+
+    print(q.shape)
+    print(qlen)
+    print(qdim)
+    print(qk_head_dim)
+    print(v_head_dim)
+    print(num_heads)
+    sys.exit()
     if not multihead_attention_module.args.has_src_mask:
         head_flops=0
         head_flops+=(qlen * klen * (qk_head_dim))  # QK^T nm(2p-1)
@@ -145,6 +153,7 @@ def multihead_attention_flops(multihead_attention_module, input,):
         flops += num_heads * head_flops
         #flops *= batch_size
     else:
+
         head_flops=0
         head_flops+=((qlen-1) * (qk_head_dim)+(klen-1) * (qk_head_dim))  # QK^T (n-1)(2p-1)+(m-1)(2p-1)
         head_flops += (qlen + klen)  # softmax
@@ -242,6 +251,11 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
     attn_output_weights = torch.bmm(q, k.transpose(1, 2))
     nonzero_attn_weights=torch.count_nonzero(attn_output_weights).item()
+
+    print(multihead_attention_module.attention_prune_rate)
+    print(q.shape)
+    print(nonzero_attn_weights)
+    sys.exit()
 
     attn_output_weights = nnF.softmax(
         attn_output_weights, dim=-1)

@@ -292,6 +292,10 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
+        #q=128
+        #prune_rate 50%
+        #highest absolute values
+
 
         prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
 
