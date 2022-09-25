@@ -284,8 +284,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 
 def subnet_dense_flops(module):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
-    print(module.weight)
-    sys.exit()
+
     return module.in_features*module.out_features, module.prune_rate*module.in_features*module.out_features
 
 def subnet_norm_flops(module, input,):
