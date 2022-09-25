@@ -236,7 +236,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     k=q_tensor
     v=q_tensor
 
-    prune_size = int(torch.flatten(q).size()[0] * (1-multihead_attention_module.attention_prune_rate))
+    prune_size = int(torch.flatten(q).size()[0] * (multihead_attention_module.attention_prune_rate))
 
     q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
     q.flatten()[q_sort_ind[prune_size:]] = 0
