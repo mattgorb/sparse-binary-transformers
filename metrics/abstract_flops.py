@@ -247,6 +247,8 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
     v.flatten()[v_sort_ind[prune_size:]] = 0
 
+    print(q)
+
     q = q.contiguous().view(tgt_len, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
     if k is not None:
         k = k.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
