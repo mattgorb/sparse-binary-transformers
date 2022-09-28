@@ -184,7 +184,7 @@ class ForecastDS(object):
 
             #self.data = np.load()
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
-            print(data_frame.head())
+            #print(data_frame.head())
             data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]
             #print(data_frame.head())
             #sys.exit()
