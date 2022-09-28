@@ -176,14 +176,18 @@ class ForecastDS(object):
         self.scaler = StandardScaler()
         if dataset=='electricity':
             train_start = '2014-01-01 00:00:00'
-            train_end = '2014-12-18 00:00:00'
-            valid_start = '2014-12-11 00:00:00'
-            valid_end = '2014-12-24 23:00:00'
-            test_start = '2014-12-18 00:00:00'  # need additional 7 days as given info
+            train_end = '2014-08-01 00:00:00'
+            valid_start = '2014-08-01 00:00:00'
+            valid_end = '2014-09-01 23:00:00'
+            test_start = '2014-09-01 00:00:00'  # need additional 7 days as given info
             test_end = '2014-12-31 23:00:00'
 
             #self.data = np.load()
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
+            #print(data_frame.head())
+            data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]
+            #print(data_frame.head())
+            #sys.exit()
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
             test_data = data_frame[test_start:test_end].values
