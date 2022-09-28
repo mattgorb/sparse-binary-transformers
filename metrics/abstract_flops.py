@@ -374,3 +374,38 @@ def conv2d_flops(in_channels, out_channels, input_shape, kernel_shape,
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
+
+
+
+'''
+import torch
+vals=[]
+for i in range(2000):
+    q=torch.randn(20,10)
+    k=torch.randn(10,20)
+    prune_size = int(torch.flatten(q).size()[0] * .1)
+
+    q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
+    q.flatten()[q_sort_ind[prune_size:]] = 0
+    q.flatten()[q_sort_ind[:prune_size]] = 1
+
+    k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
+    k.flatten()[k_sort_ind[prune_size:]] = 0
+    k.flatten()[k_sort_ind[:prune_size]] = 1
+
+    output=torch.einsum('ij,jk->ikj', q,k)
+    #print(torch.sum(output))
+    #print(torch.sum(torch.mm(q,k)))
+    vals.append(torch.sum(output))
+
+print(min(vals))
+print(max(vals))
+import torch
+q = torch.zeros(20, 10)
+k = torch.zeros(10, 20)
+q[:,0]=1
+k[0,:]=1
+
+print(torch.sum(torch.mm(q,k)))
+#20 20
+'''

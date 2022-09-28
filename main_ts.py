@@ -51,6 +51,8 @@ def main():
         entities=55
     elif args.dataset=='MSL':
         entities=27
+    else:
+        entities=1
 
     for ent in range(entities):
         #ent=args.entity

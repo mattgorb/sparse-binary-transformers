@@ -1,23 +1,20 @@
-
-dataset: MSL
+#weight_init: kaiming_normal
+#score_init: None
+dataset: traffic
 
 weight_seed: 0
 score_seed: 0
-gpu: 1
+gpu: 2
 batch_size: 128
 model_type: 'Dense'
-
 epochs: 50
-weight_file: dense_ts_smd
+weight_file: dense_ts_traffic
 
-window_size: 50
+window_size: 200
 forecast: True
 save_scores: False
 layer_norm: True
 batch_norm: False
 save_graphs: False
 
-
-
 pos_enc: 'Standard'
-

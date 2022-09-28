@@ -10,6 +10,7 @@ import numbers
 import math
 import pandas as pd
 import ast
+import sys
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
 import pickle
 from  sklearn.model_selection import train_test_split
@@ -167,6 +168,81 @@ class SMAP_MSL(object):
 
 
 
+class ForecastDS(object):
+    def __init__(self, data_path, win_size, step, mode,dataset):
+        self.mode = mode
+        self.step = step
+        self.win_size = win_size
+        self.scaler = StandardScaler()
+        if dataset=='electricity':
+            train_start = '2014-01-01 00:00:00'
+            train_end = '2014-12-18 00:00:00'
+            valid_start = '2014-12-11 00:00:00'
+            valid_end = '2014-12-24 23:00:00'
+            test_start = '2014-12-18 00:00:00'  # need additional 7 days as given info
+            test_end = '2014-12-31 23:00:00'
+
+            #self.data = np.load()
+            data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
+            self.data = data_frame[train_start:train_end].values
+            valid_data = data_frame[valid_start: valid_end].values
+            test_data = data_frame[test_start:test_end].values
+            print(self.data.shape)
+            print(valid_data.shape)
+            print(test_data.shape)
+        elif dataset=='electricity':
+            train_start = '2014-01-01 00:00:00'
+            train_end = '2014-12-18 00:00:00'
+            valid_start = '2014-12-11 00:00:00'
+            valid_end = '2014-12-24 23:00:00'
+            test_start = '2014-12-18 00:00:00'  # need additional 7 days as given info
+            test_end = '2014-12-31 23:00:00'
+
+            #self.data = np.load()
+            data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
+            self.data = data_frame[train_start:train_end].values
+            valid_data = data_frame[valid_start: valid_end].values
+            test_data = data_frame[test_start:test_end].values
+            print(self.data.shape)
+            print(valid_data.shape)
+            print(test_data.shape)
+        else:
+            print("dataset not found")
+            sys.exit(1)
+
+
+        self.scaler.fit(self.data)
+        self.train = self.scaler.transform(self.data)
+        self.test =self.scaler.transform(test_data)
+        self.val = self.scaler.transform(valid_data)
+
+
+    def __len__(self):
+
+        if self.mode == "train":
+            return (self.train.shape[0] - self.win_size)
+        elif (self.mode == 'val'):
+            return (self.val.shape[0] - self.win_size)
+        elif (self.mode == 'test'):
+            return (self.test.shape[0] - self.win_size)
+        else:
+            return (self.test.shape[0] - self.win_size)
+
+    def __getitem__(self, index):
+        if self.mode == "train":
+            return np.float32(self.train[index:index + self.win_size]), np.zeros_like(self.train[index:index + self.win_size])
+            #return np.float32(self.train[index:index + self.win_size]), None
+        elif (self.mode == 'val'):
+            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size]), index
+        elif (self.mode == 'test'):
+            return np.float32(self.test[index:index + self.win_size]), np.zeros_like(
+                self.test[index:index + self.win_size]), index
+        else:
+            return np.float32(self.test[
+                              index // self.step * self.win_size:index // self.step * self.win_size + self.win_size]), np.float32(
+                self.test_labels[index // self.step * self.win_size:index // self.step * self.win_size + self.win_size])
+
+
 def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         entities=os.listdir(f'{data_path}/SMD_raw/train')
@@ -186,8 +262,12 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         entities = entities[entities['spacecraft'] == 'MSL']
         entities = entities['chan_id'].values
         print(f'Dataset: {entities[entity]}')
-        # print(entities)
         dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
+    elif dataset == 'electricity' or dataset=='traffic':
+        dataset = ForecastDS(data_path, win_size, step, mode,dataset )
+
+
+
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,
                              shuffle=shuffle,

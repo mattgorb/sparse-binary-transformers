@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/configs/dense_ts_elect_forecast.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/dense_ts_traffic_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dense_ts_msl_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_msl_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_factory/entity_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_factory/entity_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/abstract_flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/abstract_flops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/base_transformer_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/base_transformer_encoder_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,19 +45,19 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data/traffic" />
+      <recent name="$PROJECT_DIR$/data/electricity" />
+      <recent name="$PROJECT_DIR$/old_anomaly_transformer" />
+      <recent name="$PROJECT_DIR$/results/old" />
+      <recent name="$PROJECT_DIR$/data/classification" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/models/base" />
       <recent name="$PROJECT_DIR$/results" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/old_anomaly_transformer" />
-      <recent name="$PROJECT_DIR$/results/old" />
-      <recent name="$PROJECT_DIR$/data/classification" />
-      <recent name="$PROJECT_DIR$/old" />
-      <recent name="$PROJECT_DIR$/models/layers" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -70,6 +78,7 @@
       <workItem from="1660263049974" duration="199143000" />
       <workItem from="1663855490388" duration="983000" />
       <workItem from="1663939220676" duration="8756000" />
+      <workItem from="1664149117786" duration="11797000" />
     </task>
     <servers />
   </component>
@@ -98,10 +107,10 @@
       <screen x="0" y="25" width="1680" height="913" />
     </state>
     <state x="792" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.913@0.25.1680.913" timestamp="1656470744489" />
-    <state x="2482" y="269" width="683" height="567" key="find.popup" timestamp="1664132093911">
-      <screen x="1680" y="25" width="1920" height="1055" />
+    <state x="702" y="235" width="597" height="582" key="find.popup" timestamp="1664331060076">
+      <screen x="0" y="25" width="1680" height="910" />
     </state>
-    <state x="702" y="235" width="597" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1661483694296" />
+    <state x="702" y="235" width="597" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1664331060076" />
     <state x="702" y="236" width="597" height="490" key="find.popup/0.25.1680.913@0.25.1680.913" timestamp="1661695458078" />
     <state x="702" y="100" width="598" height="631" key="find.popup/0.25.1680.918@0.25.1680.918" timestamp="1661716219521" />
     <state x="702" y="238" width="598" height="496" key="find.popup/0.25.1680.922@0.25.1680.922" timestamp="1662090055152" />
@@ -135,12 +144,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/utils/trainer.py</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main_ts.py</url>
-          <line>90</line>
+          <line>92</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
