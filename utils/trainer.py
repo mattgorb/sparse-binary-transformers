@@ -291,6 +291,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
     indexes = (np.array(actual) != 0)
     print(indexes.shape)
+    print(np.array(preds).shape)
     print(indexes)
     print(preds[indexes])
     sys.exit()
