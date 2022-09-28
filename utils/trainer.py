@@ -290,6 +290,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
     indexes = (np.array(actual) != 0)
+    print(indexes)
+    print(preds[indexes])
+    sys.exit()
     diffs=np.array(preds[indexes])-np.array(actual[indexes])
     se_loss=diffs*diffs
     #print(len(diffs))
