@@ -294,7 +294,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     se_loss=diffs*diffs
     print(len(diffs))
     print(np.sum(se_loss))
-    se = torch.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
+    se = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
     print(se)
     sys.exit()
     if args.save_graphs:
