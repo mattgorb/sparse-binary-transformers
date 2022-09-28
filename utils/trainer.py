@@ -33,7 +33,8 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
     losses=[]
 
     for i, batch in enumerate(iterator):
-        print(i)
+        if i%50:
+            print(i)
         optimizer.zero_grad()
         data_base, _=batch
 
