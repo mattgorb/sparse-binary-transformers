@@ -68,6 +68,7 @@ def parse_arguments():
         "--nonlinearity", default="relu", help="Nonlinearity used by initialization"
     )
     parser.add_argument("--has_src_mask", default=False, help="Weight initialization mode")
+    parser.add_argument("--dmodel", default=None, help="dmodel")
     parser.add_argument(
         "-p",
         "--print-freq",

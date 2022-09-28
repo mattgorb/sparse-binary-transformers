@@ -69,9 +69,11 @@ def main():
         input_dim=train_dataloader.dataset.train.shape[1]
 
 
+        if args.dmodel is None:
 
-        dmodel = args.dmodel#input_dim*2
-
+            dmodel = input_dim*2
+        else:
+            dmodel = args.dmodel  #
         if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
         else:

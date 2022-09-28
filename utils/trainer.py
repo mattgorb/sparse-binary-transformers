@@ -268,7 +268,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         if i % 50 == 0:
             print(i)
         optimizer.zero_grad()
-        data_base, labels, v = batch
+        data_base, labels = batch
         print(data_base)
         print(data_base.size())
         print(labels.size())
