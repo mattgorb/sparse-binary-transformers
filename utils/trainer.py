@@ -297,16 +297,18 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(actual[0][:10])
     #sys.exit()
     nz_index=(actual!=0)
-    #len=np.sum(nz_index)
-    #print(len)
-    diffs = np.array(preds) - np.array(actual)
+    len=np.sum(nz_index.astype(int))
+    diffs = np.array(preds)[nz_index] - np.array(actual)[nz_index]
+    print(diffs.shape)
+    print(len(diffs))
+    sys.exit()
     se_loss=diffs*diffs
     #print(len(diffs))
     #print(np.sum(se_loss))
     #print(np.mean(se_loss))
     #print(np.sum(actual))
     #sys.exit()
-    nrmse = np.sqrt(np.sum(se_loss) / len) / (np.sum(actual) / len)
+    nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
     #print(nrmse)
     #sys.exit()
     if args.save_graphs:
