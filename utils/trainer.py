@@ -306,8 +306,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #preds=iterator.dataset.inverse(np.array(preds))
     #actual = iterator.dataset.inverse(np.array(actual))
 
-    print(preds)
-    print(actual)
+    print(preds[0][0])
+    print(actual[0][0])
     sys.exit()
     diffs = np.array(preds) - np.array(actual)
     se_loss=diffs*diffs
