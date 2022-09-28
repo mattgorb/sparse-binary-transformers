@@ -289,10 +289,14 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    diffs=preds-actual
-    se_loss=diffs*diffs
-    se = torch.sqrt(total_se / total_pred_num) / (total_label / total_pred_num)
 
+    diffs=np.array(preds)-np.array(actual)
+    se_loss=diffs*diffs
+    print(len(diffs))
+    print(np.sum(se_loss))
+    se = torch.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
+    print(se)
+    sys.exit()
     if args.save_graphs:
         preds = np.array(preds)
         actual = np.array(actual)
