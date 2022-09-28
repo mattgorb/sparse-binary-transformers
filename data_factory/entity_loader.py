@@ -167,12 +167,17 @@ class SMAP_MSL(object):
 
 
 class electTestDataset(Dataset):
-    def __init__(self, data_path, data_name, predict_length):
-        self.data = np.load(os.path.join(data_path, f'test_data_{data_name}.npy'))
-        self.v = np.load(os.path.join(data_path, f'test_v_{data_name}.npy'))
-        self.label = np.load(os.path.join(data_path, f'test_label_{data_name}.npy'))
+    def __init__(self, data_path, data_name, predict_length,mode):
+
+        self.data = np.load(os.path.join(data_path, f'{mode}_data_{data_name}.npy'))
+        self.v = np.load(os.path.join(data_path, f'{mode}_v_{data_name}.npy'))
+        self.label = np.load(os.path.join(data_path, f'{mode}_label_{data_name}.npy'))
         self.test_len = self.data.shape[0]
         self.pred_length = predict_length
+
+        self.train=self.data
+        self.test=self.data
+        self.val=None
 
     def __len__(self):
         return self.test_len
@@ -305,7 +310,7 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         print(f'Dataset: {entities[entity]}')
         dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'electricity' :
-        dataset = electTestDataset(data_path+'electricity/', dataset,1 )
+        dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
 
 
 
