@@ -289,12 +289,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-
-    diffs=np.array(preds)-np.array(actual)
+    indexes = (np.array(actual) != 0)
+    diffs=np.array(preds[indexes])-np.array(actual[indexes])
     se_loss=diffs*diffs
-    print(len(diffs))
-    print(np.mean(se_loss))
-    print()
+    #print(len(diffs))
+    #print(np.mean(se_loss))
+    #print()
     nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
     print(nrmse)
     #sys.exit()
