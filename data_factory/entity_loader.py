@@ -203,7 +203,7 @@ class electTestDataset(Dataset):
             all_data.append(single_data)
         all_data = torch.stack(all_data, dim=0)
         print(all_data.size())
-        print(all_data.squeeze(1))
+        print(all_data.squeeze(1).size())
         sys.exit()
         label = label[-self.pred_length:]
 
