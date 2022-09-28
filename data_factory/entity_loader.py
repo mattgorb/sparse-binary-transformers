@@ -168,13 +168,14 @@ class SMAP_MSL(object):
 
 class electTestDataset(Dataset):
     def __init__(self, data_path, data_name, predict_length,mode):
-
-        self.data = np.load(os.path.join(data_path, f'{mode}_data_{data_name}.npy'))
-        self.v = np.load(os.path.join(data_path, f'{mode}_v_{data_name}.npy'))
-        self.label = np.load(os.path.join(data_path, f'{mode}_label_{data_name}.npy'))
-        self.test_len = self.data.shape[0]
-        self.pred_length = predict_length
-
+        if mode!='val':
+            self.data = np.load(os.path.join(data_path, f'{mode}_data_{data_name}.npy'))
+            self.v = np.load(os.path.join(data_path, f'{mode}_v_{data_name}.npy'))
+            self.label = np.load(os.path.join(data_path, f'{mode}_label_{data_name}.npy'))
+            self.test_len = self.data.shape[0]
+            self.pred_length = predict_length
+        else:
+            self.data=None
         self.train=self.data
         self.test=self.data
         self.val=None
