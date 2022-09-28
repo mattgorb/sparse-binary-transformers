@@ -288,10 +288,10 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             preds.extend(predictions[:, -1, :])
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
-    print(torch.tensor(preds).size())
-    sys.exit()
-    #indexes = (np.array(actual) != 0)
-    indexes =np.argwhere(actual!=0)
+    #print(torch.tensor(preds).size())
+    #sys.exit()
+    indexes = (np.array(actual) != 0)
+    #indexes =np.argwhere(actual!=0)
     print(indexes.shape)
 
     print(np.array(preds).shape)
