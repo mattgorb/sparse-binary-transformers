@@ -292,11 +292,11 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
     diffs=np.array(preds)-np.array(actual)
     se_loss=diffs*diffs
-    print(len(diffs))
-    print(np.sum(se_loss))
-    se = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
-    print(se)
-    sys.exit()
+    #print(len(diffs))
+    #print(np.sum(se_loss))
+    nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
+    print(nrmse)
+    #sys.exit()
     if args.save_graphs:
         preds = np.array(preds)
         actual = np.array(actual)
@@ -309,5 +309,5 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             plt.legend()
             plt.savefig(f'output/forecast_{x}.png')
 
-    return epoch_loss / iterator.dataset.__len__()
+    return nrmse
 
