@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     global save_path
     csv_path = '/s/luffy/b/nobackup/mgorb/data/electricity/LD2011_2014.txt'
-    save_name = 'elect'
+    save_name = 'electricity'
     window_size = 192
     stride_size = 24
     num_covariates = 4
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     pred_days = 7
     given_days = 7
 
-    save_path = os.path.join('/s/luffy/b/nobackup/mgorb/data//electricity', save_name)
+    save_path = os.path.join('/s/luffy/b/nobackup/mgorb/data/', save_name)
 
     data_frame = pd.read_csv(csv_path, sep=";", index_col=0, parse_dates=True, decimal=',')
     data_frame = data_frame.resample('1H',label = 'left',closed = 'right').sum()[train_start:test_end]
