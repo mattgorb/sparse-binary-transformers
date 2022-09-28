@@ -290,16 +290,17 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
     #print(torch.tensor(preds).size())
     #sys.exit()
-    indexes = (np.array(actual) != 0)
+    #indexes = (np.array(actual) != 0)
     #indexes =np.argwhere(actual!=0)
-    print(indexes.shape)
+    #print(indexes.shape)
 
-    print(np.array(preds).shape)
+    #print(np.array(preds).shape)
     #print(indexes.astype(int))
     #print(np.array(preds)[indexes.astype(int)].shape)
-    print(np.array(preds)[indexes].shape)
-    sys.exit()
-    diffs=np.array(preds)[indexes.astype(int)]-np.array(actual)[indexes.astype(int)]
+    #print(np.array(preds)[indexes].shape)
+    #sys.exit()
+    #diffs=np.array(preds)[indexes.astype(int)]-np.array(actual)[indexes.astype(int)]
+    diffs = np.array(preds) - np.array(actual)
     se_loss=diffs*diffs
     #print(len(diffs))
     #print(np.mean(se_loss))
