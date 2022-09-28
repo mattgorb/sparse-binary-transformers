@@ -286,7 +286,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
 
-            preds.extend(predictions[:, -1, :])
+            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
     #print(torch.tensor(preds).size())
     #sys.exit()
