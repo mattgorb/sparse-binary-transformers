@@ -292,8 +292,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
     diffs=np.array(preds)-np.array(actual)
     se_loss=diffs*diffs
-    #print(len(diffs))
+    print(len(diffs))
     print(np.mean(se_loss))
+    print()
     nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
     print(nrmse)
     #sys.exit()
