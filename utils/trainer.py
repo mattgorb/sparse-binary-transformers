@@ -297,9 +297,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(actual[0][:10])
     #sys.exit()
     nz_index=(actual!=0)
-    len=np.sum(nz_index)
-    print(len)
-    diffs = np.array(preds)[nz_index] - np.array(actual)[nz_index]
+    #len=np.sum(nz_index)
+    #print(len)
+    diffs = np.array(preds) - np.array(actual)
     se_loss=diffs*diffs
     #print(len(diffs))
     #print(np.sum(se_loss))
