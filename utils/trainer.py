@@ -281,6 +281,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             # full loss
             predictions, _ = model(data, )
 
+            print(data_base[:, -1, :])
+            print(predictions[:, -1, :])
+            sys.exit()
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
             epoch_loss += sum(sample_loss.detach().cpu().numpy())
