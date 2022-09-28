@@ -215,13 +215,13 @@ class ForecastDS(object):
             sys.exit(1)
 
 
-        self.scaler.fit(self.data)
-        self.train = self.scaler.transform(self.data)
-        self.test =self.scaler.transform(test_data)
-        self.val = self.scaler.transform(valid_data)
-        #self.train=self.data
-        #self.test=test_data
-        #self.val=valid_data
+        #self.scaler.fit(self.data)
+        #self.train = self.scaler.transform(self.data)
+        #self.test =self.scaler.transform(test_data)
+        #self.val = self.scaler.transform(valid_data)
+        self.train=self.data
+        self.test=test_data
+        self.val=valid_data
 
     def inverse(self,x):
         return self.scaler.inverse_transform(x)
