@@ -11,6 +11,7 @@ epochs: 50
 weight_file: dense_ts_electricity
 
 window_size: 150
+dmodel: 512
 forecast: True
 save_scores: False
 layer_norm: True

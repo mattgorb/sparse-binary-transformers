@@ -71,7 +71,7 @@ def main():
         print(val_dataloader.dataset.val.shape)
         #continue
 
-        dmodel = input_dim*2
+        dmodel = args.dmodel#input_dim*2
 
         if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
