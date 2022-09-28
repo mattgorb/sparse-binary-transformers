@@ -223,7 +223,8 @@ class ForecastDS(object):
         #self.test=test_data
         #self.val=valid_data
 
-
+    def inverse(self,x):
+        return self.scaler.inverse_transform(x)
     def __len__(self):
 
         if self.mode == "train":
