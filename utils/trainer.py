@@ -289,11 +289,13 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    indexes = (np.array(actual) != 0)
+    #indexes = (np.array(actual) != 0)
+    indexes =np.argwhere(actual!=0)
     print(indexes.shape)
+
     print(np.array(preds).shape)
-    print(indexes.astype(int))
-    print(np.array(preds)[indexes.astype(int)].shape)
+    #print(indexes.astype(int))
+    #print(np.array(preds)[indexes.astype(int)].shape)
     print(np.array(preds)[indexes].shape)
     sys.exit()
     diffs=np.array(preds)[indexes.astype(int)]-np.array(actual)[indexes.astype(int)]
