@@ -38,6 +38,7 @@ def train(model, iterator, optimizer, criterion, device,args,epoch):
         optimizer.zero_grad()
         data_base, _=batch
 
+
         data=torch.clone(data_base)
         if args.forecast:
             data[:,-1:,:]=0
@@ -254,6 +255,39 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
 
     print(result)'''
+
+    return epoch_loss / iterator.dataset.__len__()
+
+
+def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
+    epoch_loss = 0
+    model.train()
+    losses = []
+
+    for i, batch in enumerate(iterator):
+        if i % 50 == 0:
+            print(i)
+        optimizer.zero_grad()
+        data_base, labels, v = batch
+        print(data_base)
+        print(data_base.size())
+        print(labels.size())
+        sys.exit()
+        data = torch.clone(data_base)
+        if args.forecast:
+            data[:, -1:, :] = 0
+        data = data.to(device)
+        data_base = data_base.to(device)
+
+        predictions, _ = model(data)
+
+        sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+        sample_loss = sample_loss.mean(dim=1)
+        batch_loss = torch.sum(sample_loss)
+        epoch_loss += sum(sample_loss.detach().cpu().numpy())
+
+        batch_loss.backward()
+        optimizer.step()
 
     return epoch_loss / iterator.dataset.__len__()
 

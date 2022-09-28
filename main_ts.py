@@ -20,7 +20,7 @@ from torch.quantization import *
 from utils.model_size import get_model_complexity_info
 from metrics.flops import flops
 from metrics.memory_size import memory, model_size
-from utils.trainer import train,test_forecast,validation,test_anomaly_detection
+from utils.trainer import train,test_forecast,validation,test_anomaly_detection,train_forecast
 from metrics.evaluate import evaluate
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
@@ -94,9 +94,10 @@ def main():
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
         for epoch in range(args.epochs):
-            train_loss = train(model, train_dataloader, optimizer, criterion, device,args,epoch)
+
 
             if args.forecast:
+                train_loss = train_forecast(model, train_dataloader, optimizer, criterion, device, args, epoch)
                 if train_loss < best_loss:
                     best_loss = train_loss
                     torch.save(model.state_dict(), weight_file)
@@ -106,6 +107,7 @@ def main():
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
+                train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
                 val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
                 if val_loss < best_loss:
                     best_loss = val_loss

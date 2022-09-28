@@ -166,7 +166,39 @@ class SMAP_MSL(object):
 
 
 
+class electTestDataset(Dataset):
+    def __init__(self, data_path, data_name, predict_length):
+        self.data = np.load(os.path.join(data_path, f'test_data_{data_name}.npy'))
+        self.v = np.load(os.path.join(data_path, f'test_v_{data_name}.npy'))
+        self.label = np.load(os.path.join(data_path, f'test_label_{data_name}.npy'))
+        self.test_len = self.data.shape[0]
+        self.pred_length = predict_length
 
+    def __len__(self):
+        return self.test_len
+
+    def __getitem__(self, index):
+        all_data = torch.from_numpy(self.data[index].copy())
+        cov = all_data[:, 2:]
+        label = torch.from_numpy(self.label[index].copy())
+        v = float(self.v[index][0])
+        if v > 0:
+            data = label / v
+        else:
+            data = label
+
+        split_start = len(label) - self.pred_length + 1
+        all_data = []
+        for i in range(self.pred_length):
+            single_data = data[i:(split_start+i)].clone().unsqueeze(1)
+            single_data[-1] = -1
+            single_cov = cov[i:(split_start+i), :].clone()
+            single_data = torch.cat([single_data, single_cov], dim=1)
+            all_data.append(single_data)
+        all_data = torch.stack(all_data, dim=0)
+        label = label[-self.pred_length:]
+
+        return all_data, label, v
 
 class ForecastDS(object):
     def __init__(self, data_path, win_size, step, mode,dataset):
@@ -272,8 +304,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         entities = entities['chan_id'].values
         print(f'Dataset: {entities[entity]}')
         dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
-    elif dataset == 'electricity' or dataset=='traffic':
-        dataset = ForecastDS(data_path, win_size, step, mode,dataset )
+    elif dataset == 'electricity' :
+        dataset = electTestDataset(data_path, 'elect',1 )
 
 
 

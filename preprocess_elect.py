@@ -69,10 +69,7 @@ def prep_data(data, covariates, data_start, train = True):
                     label[count, :] = label[count, :]/v_input[count, 0]
             count += 1
     prefix = os.path.join(save_path, 'train_' if train else 'test_')
-    print(x_input.shape)
-    print(v_input.shape)
-    print(label.shape)
-    sys.exit()
+
     np.save(prefix+'data_'+save_name, x_input)
     np.save(prefix+'v_'+save_name, v_input)
     np.save(prefix+'label_'+save_name, label)
@@ -98,7 +95,7 @@ def visualize(data, week_start):
 if __name__ == '__main__':
 
     global save_path
-    csv_path = 'data/electricity/LD2011_2014.txt'
+    csv_path = '/s/luffy/b/nobackup/mgorb/data/electricity/LD2011_2014.txt'
     save_name = 'elect'
     window_size = 192
     stride_size = 24
@@ -110,7 +107,7 @@ if __name__ == '__main__':
     pred_days = 7
     given_days = 7
 
-    save_path = os.path.join('data/electricity', save_name)
+    save_path = os.path.join('/s/luffy/b/nobackup/mgorb/data//electricity', save_name)
 
     data_frame = pd.read_csv(csv_path, sep=";", index_col=0, parse_dates=True, decimal=',')
     data_frame = data_frame.resample('1H',label = 'left',closed = 'right').sum()[train_start:test_end]
