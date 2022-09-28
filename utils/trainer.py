@@ -293,7 +293,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(indexes.shape)
     print(np.array(preds).shape)
     print(indexes.astype(int))
-    print(preds[indexes.astype(int)])
+    print(np.array(preds)[indexes.astype(int)])
     sys.exit()
     diffs=np.array(preds[indexes])-np.array(actual[indexes])
     se_loss=diffs*diffs
