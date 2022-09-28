@@ -286,7 +286,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             #sys.exit()
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            epoch_loss += sum(sample_loss.detach().cpu().numpy())
+            #epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
@@ -296,7 +296,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(preds[0][:10])
     print(actual[0][:10])
     #sys.exit()
-    diffs = np.array(preds) - np.array(actual)
+    nz_index=(actual!=0)
+    diffs = np.array(preds)[nz_index] - np.array(actual)[nz_index]
     se_loss=diffs*diffs
     #print(len(diffs))
     #print(np.sum(se_loss))
