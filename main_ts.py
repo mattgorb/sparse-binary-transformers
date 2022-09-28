@@ -91,7 +91,7 @@ def main():
 
         print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
         print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
-        print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
+        #print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
         for epoch in range(args.epochs):
 
 
