@@ -331,9 +331,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
-    print("HERE")
-    print(preds[0][:10])
-    print(actual[0][:10])
+
 
 
     #sys.exit()
@@ -341,6 +339,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #len=np.sum(nz_index.astype(int))
     preds=iterator.dataset.inverse(np.array(preds))
     actual = iterator.dataset.inverse(np.array(actual))
+
+
+    print("HERE")
+    print(preds[0][:10])
+    print(actual[0][:10])
+
     diffs = np.array(preds) - np.array(actual)
 
     se_loss=diffs*diffs
