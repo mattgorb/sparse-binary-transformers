@@ -106,6 +106,10 @@ class TSTransformerModel(nn.Module):
 
         src = src.permute(1, 0, 2)
 
+        print(src.size())
+        print(self.embedding.weight.size())
+        sys.exit()
+
         src = self.embedding(src)*math.sqrt(self.ninp)
 
         src = self.pos_encoder(src)
