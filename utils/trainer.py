@@ -270,7 +270,10 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
             print(i)
         optimizer.zero_grad()
         data_base, labels = batch
+        print(data_base.size())
+        print(labels.size())
 
+        sys.exit()
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0

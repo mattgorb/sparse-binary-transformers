@@ -29,19 +29,12 @@ def prep_data(data, covariates, data_start, train = True):
     input_size = window_size-stride_size
 
     windows_per_series = np.full((num_series), (time_len-input_size) // stride_size)
-    print(num_series)
-    print(time_len)
-    print(input_size)
-    print(windows_per_series)
-    print((time_len-input_size) // stride_size)
-    sys.exit()
+
     if train: windows_per_series -= (data_start+stride_size-1) // stride_size
     total_windows = np.sum(windows_per_series)
     x_input = np.zeros((total_windows, window_size, 1 + num_covariates + 1), dtype='float32')
 
-    print(windows_per_series.shape)
-    print(x_input.shape)
-    sys.exit()
+
     label = np.zeros((total_windows, window_size), dtype='float32')
     v_input = np.zeros((total_windows, 2), dtype='float32')
     count = 0
@@ -80,12 +73,13 @@ def prep_data(data, covariates, data_start, train = True):
                     label[count, :] = label[count, :]/v_input[count, 0]
             count += 1
     prefix = os.path.join(save_path, 'train_' if train else 'test_')
-    print(v_input)
+    #print(v_input)
     print(x_input.shape)
     print(v_input.shape)
     print(label.shape)
-    print(train_data)
-    print(x_input)
+    for i in range(x_input.shape[2]):
+        print(np.mean(x_input[:,:,i]))
+        print(np.std(x_input[:,:, i]))
     sys.exit()
     np.save(prefix+'data_'+save_name, x_input)
     np.save(prefix+'v_'+save_name, v_input)
