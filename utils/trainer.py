@@ -10,6 +10,7 @@ from metrics.pot.pot import pot_eval
 from utils.train_util import adjust_learning_rate
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
+import pandas as pd
 
 def attention_uniformity(attention_list,args):
     totals=None
@@ -300,18 +301,24 @@ def metrics(preds, actual):
     se_loss = diffs * diffs
 
     print('mse')
-    print(torch.mean(se_loss))
+    mse=torch.mean(se_loss).item()
+    print(mse)
+
+    print('mae')
+    print(torch.mean(torch.abs(diffs)).item())
 
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print("nrmse")
-    print(nrmse)
+    print(nrmse.item())
 
     print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
-    return nrmse
-def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
+    return mse
+
+
+def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch):
     epoch_loss = 0
     batch_num=1
     model.eval()
@@ -357,6 +364,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
 
 
+    df = pd.DataFrame(preds.detach().cpu().numpy(), columns = [i for i in range(preds.detach().cpu().numpy().shape[1])])
+    df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_epoch{epoch}_preds.csv')
+    if epoch==0:
+        df = pd.DataFrame(actual.detach().cpu().numpy(), columns = [i for i in range(actual.detach().cpu().numpy().shape[1])])
+        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual.csv')
+    #
     if args.save_graphs:
         preds = np.array(preds)
         actual = np.array(actual)
