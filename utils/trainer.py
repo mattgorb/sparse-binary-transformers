@@ -283,21 +283,19 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
         batch_loss = torch.sum(sample_loss)
-        epoch_loss += sum(sample_loss.detach().cpu().numpy())
+        epoch_loss += torch.sum(sample_loss)
 
-        preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-        actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+        #preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+        #actual.extend(data_base[:, -1, :].cpu().detach().numpy())
 
         batch_loss.backward()
         optimizer.step()
 
-    diffs = np.array(preds) - np.array(actual)
+    #diffs = np.array(preds) - np.array(actual)
+    #se_loss=diffs*diffs
 
-    se_loss=diffs*diffs
-
-    print(np.mean(se_loss))
-    torch.cuda.empty_cache()
-    return np.mean(se_loss)
+    #print(np.mean(se_loss))
+    return epoch_loss.item()/iterator.dataset.__len__()
 
 
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
@@ -310,7 +308,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     actual=[]
 
     with torch.no_grad():
-        for batch in iterator:
+        for i,batch in enumerate(iterator):
             data_base, label, index = batch
 
             data = torch.clone(data_base)
@@ -329,14 +327,19 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             #epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
 
-            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-            actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+            if i==0:
+                preds=predictions[:, -1, :]
+                actual=data_base[:, -1, :]
+            else:
+                preds=predictions[:, -1, :]
+                actual=data_base[:, -1, :]
 
-
+            print(preds.size())
+            sys.exit()
 
     #sys.exit()
     #nz_index=(actual!=0)
-    #len=np.sum(nz_index.astype(int))
+    #len=torch.sum(nz_index.astype(int))
     preds=iterator.dataset.inverse(np.array(preds))
     actual = iterator.dataset.inverse(np.array(actual))
 
@@ -346,12 +349,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(actual[0][:10])
 
     diffs = np.array(preds) - np.array(actual)
-
     se_loss=diffs*diffs
-    #print(np.array(preds).shape)
-    print(np.mean(se_loss))
-    #print(np.sum(actual))
-    #sys.exit()
     nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
     print(nrmse)
 
@@ -364,7 +362,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print('quantiles')
     quantile_loss(np.array(actual).flatten(), np.array(preds).flatten(), 0.9)
     quantile_loss(np.array(actual).flatten(), np.array(preds).flatten(), 0.5)
-    #sys.exit()
+
     if args.save_graphs:
         preds = np.array(preds)
         actual = np.array(actual)
@@ -376,6 +374,6 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             plt.plot([t for t in range(actual.shape[0])], actual[:, x], ':', label='actual')
             plt.legend()
             plt.savefig(f'output/forecast_{x}.png')
-    torch.cuda.empty_cache()
+
     return nrmse
 
