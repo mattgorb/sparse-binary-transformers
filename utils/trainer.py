@@ -332,11 +332,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 actual=data_base[:, -1, :]
             else:
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
-                actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
+                actual=torch.cat([actual,data_base[:, :, :]], dim=0)
 
-            print(preds.size())
+            #print(preds.size())
             #sys.exit()
-
+    print(preds.size())
+    print(actual.size())
     sys.exit()
     #nz_index=(actual!=0)
     #len=torch.sum(nz_index.astype(int))
