@@ -122,7 +122,7 @@ def main():
                     #val_loss=None
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
-            scheduler.step()
+            #scheduler.step()
 
 
 
