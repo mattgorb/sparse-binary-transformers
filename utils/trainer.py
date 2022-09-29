@@ -309,6 +309,8 @@ def metrics(preds, actual):
     print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
+
+    return nrmse
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
     epoch_loss = 0
     batch_num=1
@@ -346,11 +348,11 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
     print('standardized')
-    metrics(preds,actual)
+    loss1=metrics(preds,actual)
 
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    metrics(preds,actual)
+    loss2=metrics(preds,actual)
 
 
 
@@ -366,5 +368,5 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             plt.legend()
             plt.savefig(f'output/forecast_{x}.png')
 
-    return nrmse
+    return loss2
 
