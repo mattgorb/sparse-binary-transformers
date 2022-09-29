@@ -269,10 +269,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
             print(i)
         optimizer.zero_grad()
         data_base, labels = batch
-        print(data_base)
-        print(data_base.size())
-        print(labels.size())
-        sys.exit()
+
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0
@@ -319,7 +316,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             #print(predictions[:, -1, :])
             #sys.exit()
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            sample_loss = sample_loss.mean(dim=1)
+            sample_loss = sample_loss.sum(dim=1)
             #epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
 
@@ -333,9 +330,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #nz_index=(actual!=0)
     #len=np.sum(nz_index.astype(int))
     diffs = np.array(preds) - np.array(actual)
-    print(diffs.shape)
-    print(len(diffs))
-    sys.exit()
+    #print(diffs.shape)
+    #print(len(diffs))
+    #sys.exit()
     se_loss=diffs*diffs
     #print(len(diffs))
     #print(np.sum(se_loss))
