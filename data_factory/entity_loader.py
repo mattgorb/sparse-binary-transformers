@@ -295,8 +295,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         print(f'Dataset: {entities[entity]}')
         dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'electricity' :
-        #dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
-        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
+        dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
+        #dataset = ForecastDS(data_path, win_size, step, mode, dataset)
 
 
     data_loader = DataLoader(dataset=dataset,

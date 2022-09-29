@@ -271,6 +271,8 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         optimizer.zero_grad()
         data_base, labels = batch
 
+        print(data_base.size())
+
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0
@@ -285,19 +287,18 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         batch_loss = torch.sum(sample_loss)
         epoch_loss += torch.sum(sample_loss)
 
-        #preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-        #actual.extend(data_base[:, -1, :].cpu().detach().numpy())
-
         batch_loss.backward()
         optimizer.step()
 
-    #diffs = np.array(preds) - np.array(actual)
-    #se_loss=diffs*diffs
-
-    #print(np.mean(se_loss))
     return epoch_loss.item()/iterator.dataset.__len__()
 
+def quantile_loss(labels, mu, quantile):
 
+    I = (labels >= mu).float()
+    diff = 2*(torch.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
+    denom = torch.sum(torch.abs(labels)).item()
+    q_loss = diff/denom
+    print(q_loss)
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
     epoch_loss = 0
     batch_num=1
@@ -334,29 +335,16 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
-            #print(preds.size())
-            #sys.exit()
-
-    #nz_index=(actual!=0)
-    #len=torch.sum(nz_index.astype(int))
-    #preds=iterator.dataset.inverse(np.array(preds))
-    #actual = iterator.dataset.inverse(np.array(actual))
-
-
 
 
     diffs = preds - actual
     se_loss=diffs*diffs
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
+    print("nrmse")
     print(nrmse)
 
-    def quantile_loss(labels, mu, quantile):
 
-        I = (labels >= mu).float()
-        diff = 2*(torch.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
-        denom = torch.sum(torch.abs(labels)).item()
-        q_loss = diff/denom
-        print(q_loss)
+
     print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
