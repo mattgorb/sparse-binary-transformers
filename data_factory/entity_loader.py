@@ -218,7 +218,7 @@ class ForecastDS(object):
             valid_start = '2014-08-01 00:00:00'
             valid_end = '2014-09-01 23:00:00'
             test_start = '2014-09-01 00:00:00'  # need additional 7 days as given info
-            test_end = '2014-12-31 23:00:00'
+            test_end = '2014-09-08 23:00:00'
 
             #self.data = np.load()
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
