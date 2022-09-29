@@ -338,7 +338,14 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
 
     diffs = preds - actual
+
     se_loss=diffs*diffs
+
+    print(preds[0][:10])
+    print(actual[0][:10])
+    print(diffs[0][:10])
+    print(se_loss[0][:10])
+
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print("nrmse")
     print(nrmse)
