@@ -331,13 +331,13 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 preds=predictions[:, -1, :]
                 actual=data_base[:, -1, :]
             else:
-                preds=predictions[:, -1, :]
-                actual=data_base[:, -1, :]
+                preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
+                actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
             print(preds.size())
-            sys.exit()
+            #sys.exit()
 
-    #sys.exit()
+    sys.exit()
     #nz_index=(actual!=0)
     #len=torch.sum(nz_index.astype(int))
     preds=iterator.dataset.inverse(np.array(preds))
