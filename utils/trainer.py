@@ -329,7 +329,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             if i==0:
                 preds=predictions[:, -1, :]
-                actual=data_base[:, -1, :]
+                actual=data_base[:, :, :]
             else:
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, :, :]], dim=0)
