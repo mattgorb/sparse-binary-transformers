@@ -340,7 +340,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     diffs = np.array(preds) - np.array(actual)
 
     se_loss=diffs*diffs
-
+    print(np.array(preds).shape)
     print(np.mean(se_loss))
     #print(np.sum(actual))
     #sys.exit()
