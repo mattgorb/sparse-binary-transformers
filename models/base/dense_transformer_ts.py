@@ -67,7 +67,7 @@ class TSTransformerModel(nn.Module):
 
         self.embedding = nn.Linear(input_dim, ninp)
         self.ninp = ninp
-        self.decoder = nn.Linear(ninp, 1)
+        self.decoder = nn.Linear(ninp, input_dim)
 
         self.init_weights()
 
