@@ -341,10 +341,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
     se_loss=diffs*diffs
 
-    print(preds[0][:10])
-    print(actual[0][:10])
-    print(diffs[0][:10])
-    print(se_loss[0][:10])
+    mse_loss=torch.sum(se_loss,dim=1)
+    print('mse')
+    print(torch.mean(mse_loss))
 
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print("nrmse")
