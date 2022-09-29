@@ -263,7 +263,8 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     epoch_loss = 0
     model.train()
     losses = []
-
+    preds=[]
+    actual=[]
     for i, batch in enumerate(iterator):
         if i % 50 == 0:
             print(i)
@@ -283,10 +284,19 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         batch_loss = torch.sum(sample_loss)
         epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
+        preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+        actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+
         batch_loss.backward()
         optimizer.step()
 
-    return epoch_loss / iterator.dataset.__len__()
+    diffs = np.array(preds) - np.array(actual)
+
+    se_loss=diffs*diffs
+
+    print(np.mean(se_loss))
+
+    return np.mean(se_loss)
 
 
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
@@ -312,11 +322,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             # full loss
             predictions, _ = model(data, )
 
-            #print(data_base[:, -1, :])
-            #print(predictions[:, -1, :])
-            #sys.exit()
+
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
-            sample_loss = sample_loss.sum(dim=1)
+            sample_loss = sample_loss.mean(dim=1)
             #epoch_loss += sum(sample_loss.detach().cpu().numpy())
             batch_num+=1
 
@@ -330,12 +338,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #nz_index=(actual!=0)
     #len=np.sum(nz_index.astype(int))
     diffs = np.array(preds) - np.array(actual)
-    #print(diffs.shape)
-    #print(len(diffs))
-    #sys.exit()
+
     se_loss=diffs*diffs
-    #print(len(diffs))
-    #print(np.sum(se_loss))
+
     print(np.mean(se_loss))
     #print(np.sum(actual))
     #sys.exit()
