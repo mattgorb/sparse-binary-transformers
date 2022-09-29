@@ -271,8 +271,6 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         optimizer.zero_grad()
         data_base, labels = batch
 
-        print(data_base.size())
-
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0
@@ -336,6 +334,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
 
+    preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
 
     diffs = preds - actual
     se_loss=diffs*diffs
