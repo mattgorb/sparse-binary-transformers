@@ -1,6 +1,6 @@
 import torch
 from torchtext.datasets import IMDB
-from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
+from models.base.dense_transformer_ts import TSTransformerModel
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.base.dense_transformer_ts_forecast import TSTransformerModelForecast
 from models.layers.sparse_type import SubnetLinBiprop
