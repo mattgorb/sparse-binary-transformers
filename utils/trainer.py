@@ -351,9 +351,9 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print(nrmse)
 
     def quantile_loss(labels, mu, quantile):
-        print(preds.size())
-        print(actual)
-        print(preds)
+        print(labels.size())
+        print(labels)
+        print(mu)
         sys.exit()
         I = (labels >= mu)#.float()
         diff = 2*(torch.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
