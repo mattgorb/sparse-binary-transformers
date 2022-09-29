@@ -262,17 +262,12 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     epoch_loss = 0
     model.train()
-    losses = []
-    preds=[]
-    actual=[]
+
     for i, batch in enumerate(iterator):
         if i % 50 == 0:
             print(i)
         optimizer.zero_grad()
         data_base, labels = batch
-
-        #print(data_base.size())
-        #print(labels.size())
 
         data = torch.clone(data_base)
         if args.forecast:
@@ -281,7 +276,6 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         data_base = data_base.to(device)
 
         predictions, _ = model(data)
-
 
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
@@ -300,7 +294,21 @@ def quantile_loss(labels, mu, quantile):
     q_loss = diff/denom
     print(q_loss)
 
+def metrics(preds, actual):
+    diffs = preds - actual
 
+    se_loss = diffs * diffs
+
+    print('mse')
+    print(torch.mean(se_loss))
+
+    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
+    print("nrmse")
+    print(nrmse)
+
+    print('quantiles')
+    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
+    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
     epoch_loss = 0
     batch_num=1
@@ -337,44 +345,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
-
-    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    print(preds.size())
-
-
-    diffs = preds - actual
-
-    se_loss=diffs*diffs
-
-    print('mse')
-    print(torch.mean(se_loss))
-
-    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
-    print("nrmse")
-    print(nrmse)
-
-    print('quantiles')
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
-
-
-
-
+    print('standardized')
+    metrics(preds,actual)
 
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    print('transformed:')
-    diffs = preds - actual
-    se_loss=diffs*diffs
-    print('mse')
-    print(torch.mean(se_loss))
-    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
-    print("nrmse")
-    print(nrmse)
-    print('quantiles')
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
+    metrics(preds,actual)
 
 
 
