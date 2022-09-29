@@ -271,12 +271,12 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         optimizer.zero_grad()
         data_base, labels = batch
 
-        print(data_base.size())
-        print(labels.size())
+        #print(data_base.size())
+        #print(labels.size())
 
         data = torch.clone(data_base)
-        #if args.forecast:
-            #data[:, -1:, :] = 0
+        if args.forecast:
+            data[:, -1:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
 
@@ -294,12 +294,13 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     return epoch_loss.item()/iterator.dataset.__len__()
 
 def quantile_loss(labels, mu, quantile):
-
     I = (labels >= mu).float()
     diff = 2*(torch.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
     denom = torch.sum(torch.abs(labels)).item()
     q_loss = diff/denom
     print(q_loss)
+
+
 def test_forecast(model, iterator, val_iterator, criterion, device, args, entity):
     epoch_loss = 0
     batch_num=1
@@ -322,7 +323,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             # full loss
             predictions, _ = model(data, )
-
+            print(predictions.size())
+            sys.exit()
 
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)

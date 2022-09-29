@@ -2,6 +2,7 @@ import torch
 from torchtext.datasets import IMDB
 from models.base.dense_transformer_ts import TSTransformerModel, TranAD_Basic
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
+from models.base.dense_transformer_ts_forecast import TSTransformerModelForecast
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
 import torchtext
@@ -70,14 +71,17 @@ def main():
 
 
         if args.dmodel is None:
-
             dmodel = input_dim*2
         else:
-            dmodel = args.dmodel  #
-        if args.model_type=='Dense':
+            dmodel = args.dmodel
+
+        if args.model_type=='Dense' and not args.forecast:
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-        else:
+        elif args.model_type!='Dense' and not args.forecast:
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
+        elif args.model_type=='Dense' and args.forecast:
+            #model=TSTransformerModelForecast(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
+            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
 
         freeze_model_weights(model)
         print(f'The model has {count_parameters(model):,} trainable parameters')
