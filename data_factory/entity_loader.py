@@ -203,10 +203,10 @@ class electTestDataset(Dataset):
             all_data.append(single_data)
         all_data = torch.stack(all_data, dim=0)
         label = label[-self.pred_length:]
-        print(all_data.squeeze(1).size())
+        print(all_data.squeeze(0).size())
         print(all_data.size())
         sys.exit()
-        return all_data.squeeze(1), label#, v
+        return all_data.squeeze(0), label#, v
 
 class ForecastDS(object):
     def __init__(self, data_path, win_size, step, mode,dataset):
