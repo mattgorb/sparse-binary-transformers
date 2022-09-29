@@ -124,7 +124,7 @@ def main():
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
             #if epoch>10:
             scheduler.step()
-            print(lr_scheduler.get_lr())
+            print(scheduler.get_lr())
 
 
 
