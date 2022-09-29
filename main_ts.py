@@ -102,7 +102,7 @@ def main():
                 if train_loss < best_loss:
                     best_loss = train_loss
                     torch.save(model.state_dict(), weight_file)
-                    test_loss = test_forecast(model, val_dataloader, train_dataloader, criterion, device, args, ent)
+                    test_loss = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, ent)
                 else:
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')

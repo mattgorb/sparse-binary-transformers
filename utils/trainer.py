@@ -329,40 +329,36 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             if i==0:
                 preds=predictions[:, -1, :]
-                actual=data_base[:, :, :]
+                actual=data_base[:, -1, :]
             else:
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
-                actual=torch.cat([actual,data_base[:, :, :]], dim=0)
+                actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
             #print(preds.size())
             #sys.exit()
-    print(preds.size())
-    print(actual.size())
-    sys.exit()
+
     #nz_index=(actual!=0)
     #len=torch.sum(nz_index.astype(int))
-    preds=iterator.dataset.inverse(np.array(preds))
-    actual = iterator.dataset.inverse(np.array(actual))
+    #preds=iterator.dataset.inverse(np.array(preds))
+    #actual = iterator.dataset.inverse(np.array(actual))
 
 
-    print("HERE")
-    print(preds[0][:10])
-    print(actual[0][:10])
 
-    diffs = np.array(preds) - np.array(actual)
+
+    diffs = preds - actual
     se_loss=diffs*diffs
-    nrmse = np.sqrt(np.sum(se_loss) / len(diffs)) / (np.sum(actual) / len(diffs))
+    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print(nrmse)
 
     def quantile_loss(labels, mu, quantile):
         I = (labels >= mu)#.float()
-        diff = 2*(np.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
-        denom = np.sum(np.abs(labels)).item()
+        diff = 2*(torch.sum(quantile*((labels-mu)*I)+ (1-quantile) *(mu-labels)*(1-I))).item()
+        denom = torch.sum(torch.abs(labels)).item()
         q_loss = diff/denom
         print(q_loss)
     print('quantiles')
-    quantile_loss(np.array(actual).flatten(), np.array(preds).flatten(), 0.9)
-    quantile_loss(np.array(actual).flatten(), np.array(preds).flatten(), 0.5)
+    quantile_loss(actual.flatten(), preds.flatten(), 0.9)
+    quantile_loss(actual.flatten(), np.array(preds).flatten(), 0.5)
 
     if args.save_graphs:
         preds = np.array(preds)
