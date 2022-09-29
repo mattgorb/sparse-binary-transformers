@@ -303,7 +303,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     epoch_loss = 0
     batch_num=1
     model.eval()
-
+    torch.cuda.empty_cache()
 
     preds=[]
     actual=[]
@@ -330,7 +330,6 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
-
 
 
 
