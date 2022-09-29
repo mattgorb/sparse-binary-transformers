@@ -10,7 +10,7 @@ model_type: 'Dense'
 epochs: 50
 weight_file: dense_ts_electricity
 
-window_size: 200
+window_size: 192
 dmodel: 512
 forecast: True
 save_scores: False
