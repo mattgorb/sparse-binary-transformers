@@ -278,9 +278,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         data_base = data_base.to(device)
 
         predictions, _ = model(data)
-        print(predictions.size())
-        print(labels.size())
-        sys.exit()
+
 
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
@@ -298,7 +296,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     se_loss=diffs*diffs
 
     print(np.mean(se_loss))
-
+    torch.cuda.empty_cache()
     return np.mean(se_loss)
 
 
@@ -306,7 +304,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     epoch_loss = 0
     batch_num=1
     model.eval()
-    torch.cuda.empty_cache()
+
 
     preds=[]
     actual=[]
@@ -378,6 +376,6 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
             plt.plot([t for t in range(actual.shape[0])], actual[:, x], ':', label='actual')
             plt.legend()
             plt.savefig(f'output/forecast_{x}.png')
-
+    torch.cuda.empty_cache()
     return nrmse
 
