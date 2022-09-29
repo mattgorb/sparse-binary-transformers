@@ -271,9 +271,12 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         optimizer.zero_grad()
         data_base, labels = batch
 
+        print(data_base.size())
+        print(labels.size())
+
         data = torch.clone(data_base)
-        if args.forecast:
-            data[:, -1:, :] = 0
+        #if args.forecast:
+            #data[:, -1:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
 
@@ -334,16 +337,12 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
 
-    preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
 
     diffs = preds - actual
 
     se_loss=diffs*diffs
-
-    mse_loss=torch.sum(se_loss,dim=1)
-    print('mse')
-    print(torch.mean(mse_loss))
 
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print("nrmse")
