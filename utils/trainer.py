@@ -347,9 +347,10 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
-    print('standardized')
+    print('\nstandardized')
     loss1=metrics(preds,actual)
 
+    print('\nnon standardized')
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     loss2=metrics(preds,actual)
