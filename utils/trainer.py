@@ -354,8 +354,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         q_loss = diff/denom
         print(q_loss)
 
-    quantile_loss(actual, preds, 0.9)
-    quantile_loss(actual, preds, 0.5)
+    #quantile_loss(actual, preds, 0.9)
+    #quantile_loss(actual, preds, 0.5)
     #sys.exit()
     if args.save_graphs:
         preds = np.array(preds)

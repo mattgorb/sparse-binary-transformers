@@ -27,10 +27,21 @@ def prep_data(data, covariates, data_start, train = True):
     """Divide the training sequence into windows"""
     time_len = data.shape[0]
     input_size = window_size-stride_size
+
     windows_per_series = np.full((num_series), (time_len-input_size) // stride_size)
+    print(num_series)
+    print(time_len)
+    print(input_size)
+    print(windows_per_series)
+    print((time_len-input_size) // stride_size)
+    sys.exit()
     if train: windows_per_series -= (data_start+stride_size-1) // stride_size
     total_windows = np.sum(windows_per_series)
     x_input = np.zeros((total_windows, window_size, 1 + num_covariates + 1), dtype='float32')
+
+    print(windows_per_series.shape)
+    print(x_input.shape)
+    sys.exit()
     label = np.zeros((total_windows, window_size), dtype='float32')
     v_input = np.zeros((total_windows, 2), dtype='float32')
     count = 0
@@ -69,7 +80,13 @@ def prep_data(data, covariates, data_start, train = True):
                     label[count, :] = label[count, :]/v_input[count, 0]
             count += 1
     prefix = os.path.join(save_path, 'train_' if train else 'test_')
-
+    print(v_input)
+    print(x_input.shape)
+    print(v_input.shape)
+    print(label.shape)
+    print(train_data)
+    print(x_input)
+    sys.exit()
     np.save(prefix+'data_'+save_name, x_input)
     np.save(prefix+'v_'+save_name, v_input)
     np.save(prefix+'label_'+save_name, label)
@@ -93,10 +110,12 @@ def visualize(data, week_start):
     plt.close()
 
 if __name__ == '__main__':
-
+    #np.full((num_series), (time_len - input_size) // stride_size)
+    #num series 370
+    #time len 32304
     global save_path
-    csv_path = '/s/luffy/b/nobackup/mgorb/data/electricity/LD2011_2014.txt'
-    save_name = 'electricity'
+    csv_path = 'data/electricity/LD2011_2014.txt'
+    save_name = 'elect'
     window_size = 192
     stride_size = 24
     num_covariates = 4
@@ -107,7 +126,7 @@ if __name__ == '__main__':
     pred_days = 7
     given_days = 7
 
-    save_path = os.path.join('/s/luffy/b/nobackup/mgorb/data/', save_name)
+    save_path = os.path.join('data/electricity', save_name)
 
     data_frame = pd.read_csv(csv_path, sep=";", index_col=0, parse_dates=True, decimal=',')
     data_frame = data_frame.resample('1H',label = 'left',closed = 'right').sum()[train_start:test_end]
@@ -119,6 +138,6 @@ if __name__ == '__main__':
     total_time = data_frame.shape[0] #32304
     num_series = data_frame.shape[1] #370
 
-
+    print(train_data.shape)
     prep_data(train_data, covariates, data_start)
     prep_data(test_data, covariates, data_start, train=False)
