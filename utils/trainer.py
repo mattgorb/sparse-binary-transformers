@@ -353,7 +353,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         denom = np.sum(np.abs(labels)).item()
         q_loss = diff/denom
         print(q_loss)
-
+    print('quantiles')
     quantile_loss(np.mean(actual,axis=1), np.mean(preds,axis=1), 0.9)
     quantile_loss(np.mean(actual,axis=1), np.mean(preds,axis=1), 0.5)
     #sys.exit()
