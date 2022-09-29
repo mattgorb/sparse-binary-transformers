@@ -334,6 +334,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print("HERE")
     print(preds[0][:10])
     print(actual[0][:10])
+
+
     #sys.exit()
     #nz_index=(actual!=0)
     #len=np.sum(nz_index.astype(int))
@@ -354,8 +356,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
         q_loss = diff/denom
         print(q_loss)
     print('quantiles')
-    quantile_loss(np.mean(actual,axis=1), np.mean(preds,axis=1), 0.9)
-    quantile_loss(np.mean(actual,axis=1), np.mean(preds,axis=1), 0.5)
+    quantile_loss(actual.flatten(), preds.flatten(), 0.9)
+    quantile_loss(actual.flatten(), preds.flatten(), 0.5)
     #sys.exit()
     if args.save_graphs:
         preds = np.array(preds)
