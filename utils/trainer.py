@@ -323,8 +323,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
             # full loss
             predictions, _ = model(data, )
-            print(predictions.size())
-            sys.exit()
+
 
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
@@ -341,6 +340,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
 
     #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    print(preds.size())
+
 
     diffs = preds - actual
 
@@ -353,11 +354,29 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     print("nrmse")
     print(nrmse)
 
-
-
     print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
+
+
+
+
+
+    preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    print('transformed:')
+    diffs = preds - actual
+    se_loss=diffs*diffs
+    print('mse')
+    print(torch.mean(se_loss))
+    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
+    print("nrmse")
+    print(nrmse)
+    print('quantiles')
+    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
+    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
+
+
 
     if args.save_graphs:
         preds = np.array(preds)
