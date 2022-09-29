@@ -270,10 +270,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
             print(i)
         optimizer.zero_grad()
         data_base, labels = batch
-        print(data_base.size())
-        print(labels.size())
 
-        sys.exit()
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -1:, :] = 0
@@ -342,6 +339,8 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, entity
     #sys.exit()
     #nz_index=(actual!=0)
     #len=np.sum(nz_index.astype(int))
+    preds=iterator.dataset.inverse(np.array(preds))
+    actual = iterator.dataset.inverse(np.array(actual))
     diffs = np.array(preds) - np.array(actual)
 
     se_loss=diffs*diffs
