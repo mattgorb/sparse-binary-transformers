@@ -198,7 +198,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     if result['f1']>best_f1['f1']:
         print(result)
         df = pd.DataFrame({'scores': scores, 'labels':labels})
-        df.to_csv('/s/luffy/b/nobackup/mgorb/data/ad_results/scores.csv')
+        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_{result["f1"]}_epoch_{epoch}_.csv')
 
 
     return result,epoch_loss / iterator.dataset.__len__()
