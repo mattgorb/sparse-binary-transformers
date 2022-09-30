@@ -193,7 +193,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     scores=benign_final_vals+anomaly_final_vals
 
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-
+    print(result)
 
     if result['f1']>best_f1['f1']:
         print(result)
