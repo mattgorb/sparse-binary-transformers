@@ -263,10 +263,10 @@ def metrics(preds, actual,iterator):
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
 
-    nonzero_ind=torch.tensor(iterator.dataset.test_raw!=0).float()
+    nonzero_ind=torch.tensor(actual!=0).float()
     print(nonzero_ind)
     print(torch.sum(nonzero_ind))
-    print(iterator.dataset.test_raw.shape)
+    print(actual.size())
     sys.exit()
 
     return mse
