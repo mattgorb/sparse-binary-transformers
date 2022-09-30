@@ -108,9 +108,8 @@ def main():
                 if train_loss < best_loss:
                     best_loss = train_loss
                     torch.save(model.state_dict(), weight_file)
-                    result = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, epoch,best_f1)
-                    if result['f1']>best_result['f1']:
-                        best_result['f1']=result['f1']
+                    test_loss = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, epoch,)
+
                 else:
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
@@ -120,7 +119,9 @@ def main():
                 if val_loss < best_loss:
                     best_loss = val_loss
                     torch.save(model.state_dict(), weight_file)
-                    test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
+                    result = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch,best_result)
+                    if result['f1'] > best_result['f1']:
+                        best_result['f1'] = result['f1']
                 else:
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
