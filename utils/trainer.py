@@ -265,6 +265,8 @@ def metrics(preds, actual,iterator):
 
     nonzero_ind=torch.tensor(iterator.dataset.test_raw!=0).float()
     print(nonzero_ind)
+    print(torch.sum(nonzero_ind))
+    print(iterator.dataset.test_raw.shape)
     sys.exit()
 
     return mse
