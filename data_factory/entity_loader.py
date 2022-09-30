@@ -250,7 +250,7 @@ class ForecastDS(object):
         #self.train=self.data
         #self.test=test_data
         #self.val=valid_data
-
+        print(self.data.shape)
         print(np.count_nonzero(self.data))
         sys.exit()
 
