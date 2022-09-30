@@ -319,19 +319,19 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     print('\nstandardized')
     loss1=metrics(preds,actual,iterator)
 
-    #print('\nnon standardized')
-    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    #loss2=metrics(preds,actual, iterator)
-
-
+    print('\nnon standardized')
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    loss2=metrics(preds,actual, iterator)
+
+
+    '''preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     df = pd.DataFrame(preds.detach().cpu().numpy(), columns = [i for i in range(preds.detach().cpu().numpy().shape[1])])
     df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_epoch{epoch}_preds.csv')
     if epoch==0:
         df = pd.DataFrame(actual.detach().cpu().numpy(), columns = [i for i in range(actual.detach().cpu().numpy().shape[1])])
-        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual.csv')
+        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual.csv')'''
     #
     if args.save_graphs:
         preds = np.array(preds)
