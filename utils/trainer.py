@@ -254,6 +254,9 @@ def metrics(preds, actual,iterator):
     print('mae')
     print(torch.mean(torch.abs(diffs)).item())
 
+    print(diffs.size())
+    print(len(diffs))
+
     nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs)) / (torch.sum(actual) / len(diffs))
     print("nrmse")
     print(nrmse.item())
@@ -267,8 +270,13 @@ def metrics(preds, actual,iterator):
     print(nonzero_ind)
     print(torch.sum(nonzero_ind))
     print(actual.size())
-    sys.exit()
+    print(len(diffs[nonzero_ind]))
 
+    diffs = preds[nonzero_ind] - actual[nonzero_ind]
+    se_loss = diffs * diffs
+    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs[nonzero_ind])) / (torch.sum(actual[nonzero_ind]) / len(diffs[nonzero_ind]))
+    print(nrmse)
+    sys.exit()
     return mse
 
 
