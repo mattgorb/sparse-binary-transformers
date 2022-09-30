@@ -91,7 +91,7 @@ def validation(model, iterator, optimizer, criterion, device,args, epoch):
     return epoch_loss / iterator.dataset.__len__()
 
 
-def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterion, device,args, entity, epoch):
+def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterion, device,args, entity, epoch,best_f1):
 
     epoch_loss=0
     batch_num=0
@@ -190,74 +190,18 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
 
-
-
     scores=benign_final_vals+anomaly_final_vals
 
-    if args.save_scores:
-        df = pd.DataFrame({'scores': scores, 'labels':labels})
-        df.to_csv('output/scores.csv')
-    
-    '''print(f'ROC: {metrics.roc_auc_score(labels, scores)}')
-    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores)
-    #print(f'PR Curve : {metrics.auc(recall, precision)}')
-    numerator = 2 * recall * precision
-    denom = recall + precision
-    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
-    max_f1 = np.max(f1_scores)
-    max_f1_thresh = thresholds[np.argmax(f1_scores)]
-    print(f"max_f1_thresh: {max_f1_thresh}")
-    print(f"max_f1: {max_f1}")
-    print(f'TP: {len([i for i in anomaly_final_vals if i>=max_f1_thresh])} '
-          f'TN: {len([i for i in benign_final_vals if i<max_f1_thresh])}, '
-          f'FP: {len([i for i in benign_final_vals if i>=max_f1_thresh])}, '
-          f'FN: {len([i for i in anomaly_final_vals if i<max_f1_thresh])}')'''
-
-
-    #threshold=max(val_losses)
-    #threshold = np.percentile(val_losses, 1 - iterator.dataset.anomaly_ratio)
-    '''scores_with_threshold=(scores>threshold)
-    precision, recall, thresholds = metrics.precision_recall_curve(labels, scores_with_threshold)
-    numerator = 2 * recall * precision
-    denom = recall + precision
-    f1_scores = np.divide(numerator, denom, out=np.zeros_like(denom), where=(denom != 0))
-    print(f1_scores)
-    print(f'TP: {len([i for i in anomaly_final_vals if i>=threshold])} '
-          f'TN: {len([i for i in benign_final_vals if i<threshold])}, '
-          f'FP: {len([i for i in benign_final_vals if i>=threshold])}, '
-          f'FN: {len([i for i in anomaly_final_vals if i<threshold])}')'''
-
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-    print(result)
 
-    '''combined_energy = np.concatenate([val_losses, benign_final_vals,anomaly_final_vals], axis=0)
-    anomaly_ratio=len(anomaly_dict.keys())/combined_energy.shape[0]
-    print(anomaly_ratio)
-    thresh = np.percentile(val_losses, 100 - anomaly_ratio)
-    print("Threshold :", thresh)
-    pred = (scores > thresh)
 
-    accuracy = accuracy_score(labels, pred)
-    precision, recall, f_score, support = precision_recall_fscore_support(labels, pred,
-                                                                          average='binary')
-    print("Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,recall, f_score))'''
+    if result['f1']>best_f1:
+        print(result)
+        df = pd.DataFrame({'scores': scores, 'labels':labels})
+        df.to_csv('/s/luffy/b/nobackup/mgorb/data/ad_results/scores.csv')
 
-    '''result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels),args=args)
 
-    #result={}
-    result['base_roc']=metrics.roc_auc_score(labels, scores)
-    result['base_pr']=metrics.auc(recall, precision)
-    result['base_max_f1']=max_f1
-    result['base_max_f1_threshold']=max_f1_thresh
-
-    result['total_anomalies']=len(anomaly_final_vals)
-    result['count_benign_gt_max_f1_th']=len([i for i in benign_final_vals if i>=max_f1_thresh])
-    result['count_anomaly_gt_max_f1_th']=len([i for i in anomaly_final_vals if i>=max_f1_thresh])
-
-    print(result)'''
-
-    return epoch_loss / iterator.dataset.__len__()
+    return result# epoch_loss / iterator.dataset.__len__()
 
 
 def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):

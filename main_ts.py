@@ -75,14 +75,13 @@ def main():
         else:
             dmodel = args.dmodel
 
-        if args.model_type=='Dense' and not args.forecast:
+        if args.model_type=='Dense':
             model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-        elif args.model_type!='Dense' and not args.forecast:
+        elif args.model_type=='Sparse':
             model=TSSparseTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-        elif args.model_type=='Dense' and args.forecast:
-            #model=TSTransformerModelForecast(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-            model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
-
+        else:
+            print("Invalid")
+            sys.exit()
         freeze_model_weights(model)
         print(f'The model has {count_parameters(model):,} trainable parameters')
 
@@ -90,6 +89,8 @@ def main():
         scheduler = optim.lr_scheduler.StepLR(optimizer, 2, gamma=0.9)
         criterion = nn.MSELoss(reduction='none')
         best_loss = float('inf')
+        best_result={}
+        best_result['f1']=0
 
         if args.evaluate:
             evaluate(model, test_dataloader, criterion, args)
@@ -107,7 +108,9 @@ def main():
                 if train_loss < best_loss:
                     best_loss = train_loss
                     torch.save(model.state_dict(), weight_file)
-                    test_loss = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, epoch)
+                    result = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, epoch,best_f1)
+                    if result['f1']>best_result['f1']:
+                        best_result['f1']=result['f1']
                 else:
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
@@ -119,10 +122,9 @@ def main():
                     torch.save(model.state_dict(), weight_file)
                     test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch)
                 else:
-                    #val_loss=None
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
-            if epoch>10:
+            if epoch>10 and args.scheduler==True:
                 scheduler.step()
                 print(scheduler.get_lr())
 
@@ -130,5 +132,4 @@ def main():
 
 if __name__ == "__main__":
     print(args)
-
     main()
