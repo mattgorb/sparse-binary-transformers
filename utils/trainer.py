@@ -194,14 +194,14 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-    print(result)
+    #print(result)
     #print(np.array(val_losses).shape)
     #print(np.array(labels).shape)
-
-    if result['f1']>best_f1['f1']:
-        print(result)
-        df = pd.DataFrame({'scores': scores, 'labels':labels})
-        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}.csv')
+    if result is not None:
+        if result['f1']>best_f1['f1']:
+            print(result)
+            df = pd.DataFrame({'scores': scores, 'labels':labels})
+            df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}.csv')
 
 
     return result,epoch_loss / iterator.dataset.__len__()
