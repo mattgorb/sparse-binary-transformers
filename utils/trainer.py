@@ -242,7 +242,7 @@ def quantile_loss(labels, mu, quantile):
     q_loss = diff/denom
     print(q_loss)
 
-def metrics(preds, actual):
+def metrics(preds, actual,iterator):
     diffs = preds - actual
 
     se_loss = diffs * diffs
@@ -261,6 +261,11 @@ def metrics(preds, actual):
     print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
+
+
+    nonzero_ind=(iterator.dataset.test_raw!=0).float()
+    print(nonzero_ind)
+    sys.exit()
 
     return mse
 
@@ -302,7 +307,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
     print('\nstandardized')
-    loss1=metrics(preds,actual)
+    loss1=metrics(preds,actual,iterator)
 
     #print('\nnon standardized')
     #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
