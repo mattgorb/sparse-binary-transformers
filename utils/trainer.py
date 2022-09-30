@@ -263,7 +263,7 @@ def metrics(preds, actual,iterator):
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
 
-    nonzero_ind=(iterator.dataset.test_raw!=0).float()
+    nonzero_ind=torch.tensor(iterator.dataset.test_raw!=0).float()
     print(nonzero_ind)
     sys.exit()
 
