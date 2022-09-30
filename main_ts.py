@@ -119,7 +119,7 @@ def main():
                 if val_loss < best_loss:
                     best_loss = val_loss
                     torch.save(model.state_dict(), weight_file)
-                    result = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch,best_result)
+                    result, test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch,best_result)
                     if result['f1'] > best_result['f1']:
                         best_result['f1'] = result['f1']
                 else:
