@@ -181,6 +181,8 @@ class electTestDataset(Dataset):
         self.val=None
 
         print(self.label)
+        print(self.label.shape)
+        print(np.count_nonzero(self.label))
         sys.exit()
 
     def __len__(self):
