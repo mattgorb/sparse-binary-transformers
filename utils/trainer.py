@@ -266,17 +266,17 @@ def metrics(preds, actual,iterator):
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
 
-    '''nonzero_ind=torch.tensor(actual!=0).float()
-    print(nonzero_ind)
-    print(torch.sum(nonzero_ind))
-    print(actual.size())
-    print(len(diffs[nonzero_ind]))
+    nonzero_ind=torch.tensor(actual!=0).float()
+    #print(nonzero_ind)
+    #print(torch.sum(nonzero_ind))
+    #print(actual.size())
+    #print(len(diffs[nonzero_ind]))
 
     diffs = preds[nonzero_ind] - actual[nonzero_ind]
     se_loss = diffs * diffs
-    nrmse = torch.sqrt(torch.sum(se_loss) / len(diffs[nonzero_ind])) / (torch.sum(actual[nonzero_ind]) / len(diffs[nonzero_ind]))
+    nrmse = torch.sqrt(torch.sum(se_loss) / torch.sum(nonzero_ind)) / (torch.sum(actual[nonzero_ind]) / torch.sum(nonzero_ind))
     print(nrmse)
-    sys.exit()'''
+    sys.exit()
     return mse
 
 
@@ -319,19 +319,19 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     print('\nstandardized')
     loss1=metrics(preds,actual,iterator)
 
-    print('\nnon standardized')
+    #print('\nnon standardized')
+    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    #loss2=metrics(preds,actual, iterator)
+
+
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    loss2=metrics(preds,actual, iterator)
-
-
-    '''preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     df = pd.DataFrame(preds.detach().cpu().numpy(), columns = [i for i in range(preds.detach().cpu().numpy().shape[1])])
     df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_epoch{epoch}_preds.csv')
     if epoch==0:
         df = pd.DataFrame(actual.detach().cpu().numpy(), columns = [i for i in range(actual.detach().cpu().numpy().shape[1])])
-        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual.csv')'''
+        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual.csv')
     #
     if args.save_graphs:
         preds = np.array(preds)
