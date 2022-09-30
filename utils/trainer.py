@@ -195,7 +195,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
 
 
-    if result['f1']>best_f1:
+    if result['f1']>best_f1['f1']:
         print(result)
         df = pd.DataFrame({'scores': scores, 'labels':labels})
         df.to_csv('/s/luffy/b/nobackup/mgorb/data/ad_results/scores.csv')
