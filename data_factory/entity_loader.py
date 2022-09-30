@@ -251,7 +251,7 @@ class ForecastDS(object):
         #self.test=test_data
         #self.val=valid_data
 
-        print(np.count_nonzero(self.train))
+        print(np.count_nonzero(self.data))
         sys.exit()
 
     def inverse(self,x):
