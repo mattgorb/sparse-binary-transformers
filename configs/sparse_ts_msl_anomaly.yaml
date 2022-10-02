@@ -10,7 +10,7 @@ model_type: 'Sparse'
 attention: 'Dense' #
 
 layer_norm_prune_rate: 0.5
-lin_prune_rate: 0.5
+lin_prune_rate: 0.9
 attention_prune_rate: .5
 
 epochs: 50

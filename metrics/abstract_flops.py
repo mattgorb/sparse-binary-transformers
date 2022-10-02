@@ -138,13 +138,7 @@ def multihead_attention_flops(multihead_attention_module, input,):
     #https://math.stackexchange.com/questions/3512976/proof-of-of-flops-in-matrix-multiplication
     print(f'attention has source mask? {multihead_attention_module.args.has_src_mask}')
 
-    print(q.shape)
-    print(qlen)
-    print(qdim)
-    print(qk_head_dim)
-    print(v_head_dim)
-    print(num_heads)
-    sys.exit()
+
     if not multihead_attention_module.args.has_src_mask:
         head_flops=0
         head_flops+=(qlen * klen * (qk_head_dim))  # QK^T nm(2p-1)

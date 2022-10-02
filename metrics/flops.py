@@ -82,6 +82,9 @@ def flops(model, input):
 
     activations = get_activations(model, input)
 
+    print(model)
+    sys.exit()
+
     modules_not_found=[]
     # The ones we need for backprop
     for m, (act, _) in activations.items():
