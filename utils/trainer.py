@@ -263,14 +263,14 @@ def metrics(preds, actual,iterator):
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
 
-    nonzero_ind=torch.tensor(actual.abs()>.001).bool()
+    nonzero_ind=torch.tensor(actual.abs()>.0001).bool()
     #print(nonzero_ind)
     #print(torch.sum(nonzero_ind))
     #print(actual.size())
     #print(len(diffs[nonzero_ind]))
 
     print(torch.sum(nonzero_ind))
-    print(actual.size())
+
 
     diffs = preds[nonzero_ind] - actual[nonzero_ind]
     se_loss = diffs * diffs
