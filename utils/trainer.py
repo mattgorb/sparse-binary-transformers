@@ -267,7 +267,7 @@ def metrics(preds, actual,iterator):
 
 
     nonzero_ind=torch.tensor(actual!=0).bool()
-    #print(nonzero_ind)
+    print(nonzero_ind)
     #print(torch.sum(nonzero_ind))
     #print(actual.size())
     #print(len(diffs[nonzero_ind]))
