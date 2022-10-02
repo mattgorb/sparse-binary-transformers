@@ -107,6 +107,8 @@ class ClassiregressionDataset(Dataset):
         self.feature_df = self.data.feature_df.loc[self.IDs]
 
         self.labels_df = self.data.labels_df.loc[self.IDs]
+        print(self.feature_df.shape)
+        sys.exit()
 
     def __getitem__(self, ind):
         """
