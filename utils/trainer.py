@@ -272,6 +272,9 @@ def metrics(preds, actual,iterator):
     #print(actual.size())
     #print(len(diffs[nonzero_ind]))
 
+    print(torch.sum(nonzero_ind))
+    print(actual.size())
+
     diffs = preds[nonzero_ind] - actual[nonzero_ind]
     se_loss = diffs * diffs
     nrmse = torch.sqrt(torch.sum(se_loss) / torch.sum(nonzero_ind)) / (torch.sum(actual[nonzero_ind]) / torch.sum(nonzero_ind))
