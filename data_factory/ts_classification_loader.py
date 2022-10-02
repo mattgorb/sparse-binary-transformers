@@ -302,9 +302,7 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'InsectWingbeat':
         all_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TEST', n_proc=-1, )
-    elif dataset == 'PEMS-SF':
-        all_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TRAIN', )
-        test_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TEST', n_proc=-1, )
+
     print(all_data.feature_df.shape)
 
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat':
@@ -380,7 +378,7 @@ def get_classification_ds(dataset,root_dir, args):
             args.window_size = data.size(1)
             print(data.size())
             break
-        #sys.exit()
+    sys.exit()
     print(all_data.feature_df.shape)
     print(test_data.feature_df.shape)
 
