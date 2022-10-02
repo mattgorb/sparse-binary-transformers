@@ -254,9 +254,6 @@ def metrics(preds, actual,iterator):
     print('mae')
     print(torch.mean(torch.abs(diffs)).item())
 
-    print(diffs.size())
-    print(len(diffs))
-
     nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
     print("nrmse")
     print(nrmse.item())
@@ -266,7 +263,7 @@ def metrics(preds, actual,iterator):
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)
 
 
-    nonzero_ind=torch.tensor(actual!=0).bool()
+    nonzero_ind=torch.tensor(actual.abs()>.005).bool()
     print(nonzero_ind)
     #print(torch.sum(nonzero_ind))
     #print(actual.size())

@@ -253,7 +253,7 @@ class ForecastDS(object):
         self.test_raw=test_data
         print(self.test_raw.shape)
         print(np.count_nonzero(self.test_raw))
-        sys.exit()
+        #sys.exit()
     def inverse(self,x):
         return self.scaler.inverse_transform(x)
 
