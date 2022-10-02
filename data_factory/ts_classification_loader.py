@@ -107,8 +107,7 @@ class ClassiregressionDataset(Dataset):
         self.feature_df = self.data.feature_df.loc[self.IDs]
 
         self.labels_df = self.data.labels_df.loc[self.IDs]
-        print(self.feature_df.shape)
-        sys.exit()
+
 
     def __getitem__(self, ind):
         """
@@ -379,8 +378,8 @@ def get_classification_ds(dataset,root_dir, args):
             data, label, index = batch
             args.window_size = data.size(1)
             print(data.size())
-            #break
-    sys.exit()
+            break
+    #sys.exit()
     print(all_data.feature_df.shape)
     print(test_data.feature_df.shape)
 
