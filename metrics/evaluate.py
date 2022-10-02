@@ -37,7 +37,7 @@ def evaluate(model, test_dataloader, criterion, args):
         break
 
     print(data.size())
-    #sys.exit()
+    sys.exit()
     model_input=torch.ones_like(data.float())*.5
 
 

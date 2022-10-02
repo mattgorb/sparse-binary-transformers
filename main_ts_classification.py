@@ -66,7 +66,7 @@ def main():
         break
 
     print(data.size())
-    sys.exit()
+    #sys.exit()
     weight_file = weight_file_base + f'classification_ds_{args.dataset}_ws_{args.window_size}.pt'
 
 
