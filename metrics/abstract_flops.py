@@ -2,6 +2,7 @@ import numpy as np
 import torch
 from models.layers.sparse_type import *
 import torch.nn.functional as nnF
+import math
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
@@ -173,7 +174,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     bops=0
 
     q, k, v = input, input, input
-    print(q.shape)
+
 
     batch_first = multihead_attention_module.batch_first \
         if hasattr(multihead_attention_module, 'batch_first') else False
@@ -270,12 +271,14 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     head_flops1=nonzero_attn_weights# QK^T
     head_flops2=(qlen * klen)# softmax
     head_flops3=nonzero_attn_output# AV'''
-    print(qdim)
-    print(qlen)
-    sys.exit()
-    head_flops1=nonzero_attn_weights# QK^T
-    head_flops2=(qlen * klen)# softmax
-    head_flops3=nonzero_attn_output# AV
+    #print(qdim)
+    #print(qlen)
+    3*qlen*math.ln(qlen)
+    qlen_prate=int(qlen* multihead_attention_module.attention_prune_rate)
+
+    head_flops1=qlen_prate*qlen_prate# QK^T
+    head_flops2=(qlen_prate*qlen_prate)# softmax
+    head_flops3=qlen_prate*qlen_prate# AV
 
     head_flops=head_flops1+head_flops2+head_flops3
 
