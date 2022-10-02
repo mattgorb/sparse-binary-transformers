@@ -222,8 +222,8 @@ class ForecastDS(object):
             train_end = '2014-09-01 00:00:00'
             valid_start = '2014-08-25 00:00:00'
             valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-08-25 00:00:00'  # need additional 7 days as given info
-            test_end = '2014-09-08 00:00:00'
+            test_start = '2014-09-01 00:00:00'  # need additional 7 days as given info
+            test_end = '2014-12-31 23:00:00'
 
             #self.data = np.load()
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
@@ -304,8 +304,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         print(f'Dataset: {entities[entity]}')
         dataset = SMAP_MSL(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'electricity' :
-        #dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
-        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
+        dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
+        #dataset = ForecastDS(data_path, win_size, step, mode, dataset)
 
 
     data_loader = DataLoader(dataset=dataset,
