@@ -55,7 +55,7 @@ def main():
     else:
         entities=1
 
-    for ent in range(entities):
+    for ent in range(52,entities):
         #ent=args.entity
         weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
         print(f'\n\n\nEntity {ent}')
@@ -123,6 +123,7 @@ def main():
                     if result is not None:
                         if result['f1'] > best_result['f1']:
                             best_result['f1'] = result['f1']
+                    print(f'result: {result}')
                 else:
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
