@@ -36,6 +36,8 @@ def evaluate(model, test_dataloader, criterion, args):
         data, label, index = batch
         break
 
+    print(data.size())
+    sys.exit()
     model_input=torch.ones_like(data.float())*.5
 
 
