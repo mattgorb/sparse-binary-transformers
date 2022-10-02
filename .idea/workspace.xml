@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/abstract_flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/abstract_flops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +73,7 @@
       <workItem from="1660263049974" duration="199143000" />
       <workItem from="1663855490388" duration="983000" />
       <workItem from="1663939220676" duration="8756000" />
-      <workItem from="1664149117786" duration="77895000" />
+      <workItem from="1664149117786" duration="78383000" />
     </task>
     <servers />
   </component>
@@ -104,6 +106,14 @@
       <screen x="0" y="25" width="1680" height="913" />
     </state>
     <state x="792" y="399" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1680.913@0.25.1680.913" timestamp="1656470744489" />
+    <state x="3709" y="224" width="1390" height="576" key="dock-window-1" timestamp="1664741013624">
+      <screen x="3600" y="-40" width="1920" height="1055" />
+    </state>
+    <state x="3709" y="224" width="1390" height="576" key="dock-window-1/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1664741013624" />
+    <state x="3600" y="-26" width="1390" height="576" key="dock-window-2" timestamp="1664741013625">
+      <screen x="3600" y="-40" width="1920" height="1055" />
+    </state>
+    <state x="3600" y="-26" width="1390" height="576" key="dock-window-2/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1664741013625" />
     <state x="2482" y="269" width="683" height="567" key="find.popup" timestamp="1664737353936">
       <screen x="1680" y="25" width="1920" height="1055" />
     </state>
