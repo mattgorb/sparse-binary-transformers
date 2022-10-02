@@ -51,22 +51,7 @@ def main():
 
     train_dataloader,val_dataloader, test_dataloader, classification_labels, input_dim =get_classification_ds(args.dataset,root_dir, args)
 
-    for batch in train_dataloader:
-        data, label, index = batch
-        break
 
-    print(data.size())
-    for batch in val_dataloader:
-        data, label, index = batch
-        break
-
-    print(data.size())
-    for batch in test_dataloader:
-        data, label, index = batch
-        break
-
-    print(data.size())
-    #sys.exit()
     weight_file = weight_file_base + f'classification_ds_{args.dataset}_ws_{args.window_size}.pt'
 
 
