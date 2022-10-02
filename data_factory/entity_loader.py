@@ -185,6 +185,9 @@ class electTestDataset(Dataset):
         print(np.count_nonzero(self.label))
         print(np.mean(self.label))
         print(np.std(self.label))
+        print(np.max(self.label))
+
+        print(np.min(self.label))
         sys.exit()
 
     def __len__(self):
