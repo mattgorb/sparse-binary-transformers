@@ -254,6 +254,9 @@ def metrics(preds, actual,iterator):
     print('mae')
     print(torch.mean(torch.abs(diffs)).item())
 
+    print(len(torch.flatten(diffs)))
+    print(actual.size())
+
     nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
     print("nrmse")
     print(nrmse.item())
