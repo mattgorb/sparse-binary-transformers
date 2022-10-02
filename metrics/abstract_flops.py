@@ -173,6 +173,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     bops=0
 
     q, k, v = input, input, input
+    print(q.shape)
 
     batch_first = multihead_attention_module.batch_first \
         if hasattr(multihead_attention_module, 'batch_first') else False
