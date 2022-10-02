@@ -43,7 +43,7 @@ def evaluate(model, test_dataloader, criterion, args):
     for k, v in flops_dict.items():
         print(f'{k}: {v}')
 
-
+    print('\n\n\n Model Size: ')
     params_dict = model_size(model, args, quantized=False)
     #for k, v in params_dict.items():
         #print(f'{k}: {v}')

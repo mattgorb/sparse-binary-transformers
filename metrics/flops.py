@@ -78,7 +78,7 @@ def flops(model, input):
 
     flops_dict={}
     flops_dict['total_flops']=0
-    flops_dict['total_bops']=0
+    #flops_dict['total_bops']=0
 
     activations = get_activations(model, input)
 
@@ -93,8 +93,8 @@ def flops(model, input):
         elif m.__class__ in BOP_fn:
             module_bops, module_nonzero_flops = BOP_fn[m.__class__](m, act)
             flops_dict['total_flops'] += module_nonzero_flops
-            flops_dict['total_bops'] += module_bops
-            print(f'Module: {m._get_name()}, BOPs: {module_bops:,},  Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')
+            #flops_dict['total_bops'] += module_bops
+            print(f'Module: {m._get_name()},   Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')
 
         else:
             #print(f'Module not found: {m._get_name()}')
