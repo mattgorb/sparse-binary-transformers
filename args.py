@@ -64,6 +64,7 @@ def parse_arguments():
     )
     parser.add_argument("--scale_fan", default=False, type=bool)
     parser.add_argument("--lin_prune_rate", default=1, type=float)
+    parser.add_argument("--attention_prune_rate", default=1, type=float)
     parser.add_argument("--scheduler", default=False, type=bool)
     parser.add_argument("--mode", default="fan_in", help="Weight initialization mode")
     parser.add_argument(

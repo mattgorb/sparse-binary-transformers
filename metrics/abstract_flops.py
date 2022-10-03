@@ -411,7 +411,8 @@ q = torch.zeros(20, 10)
 k = torch.zeros(10, 20)
 q[:,0]=1
 k[0,:]=1
-
+print(torch.sum(q))
+print(torch.sum(k))
 print(torch.sum(torch.mm(q,k)))
 #20 20
 '''
