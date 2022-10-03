@@ -61,7 +61,7 @@ class SubnetLinBiprop(nn.Linear):
 
     def init(self,args):
         self.args=args
-        print('Linear init')
+        print(f'Linear init with p.r. {args.lin_prune_rate}')
         self.weight=_init_weight(self.args, self.weight)
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.lin_prune_rate
