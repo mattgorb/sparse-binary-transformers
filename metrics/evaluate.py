@@ -31,10 +31,15 @@ def evaluate(model, test_dataloader, criterion, args):
     criterion=criterion.to(device)
 
     model.eval()
+    if args.dataset=='InsectWingbeat':
 
-    for batch in test_dataloader:
-        data, label, index = batch
-        break
+        for batch in test_dataloader:
+            data, label, padding, index = batch
+            break
+    else:
+        for batch in test_dataloader:
+            data, label, index = batch
+            break
 
     #print(data.size())
     #sys.exit()
