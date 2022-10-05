@@ -191,7 +191,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     print(result)
 
 
-    scores2=(scores>scores_threshold)
+    scores2=(test_losses>scores_threshold)
     for i in range(len(labels)):
         if labels[i] == 1 and scores2[i] == 1 and not anomaly_state:
             anomaly_state = True
