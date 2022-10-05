@@ -179,9 +179,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
-
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
-
     scores=benign_final_vals+anomaly_final_vals
 
 
@@ -194,6 +192,25 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
     scores2=(scores>scores_threshold)
+    for i in range(len(labels)):
+        if labels[i] == 1 and scores2[i] == 1 and not anomaly_state:
+            anomaly_state = True
+            for j in range(i, 0, -1):
+                if labels[j] == 0:
+                    break
+                else:
+                    if scores2[j] == 0:
+                        scores2[j] = 1
+            for j in range(i, len(labels)):
+                if labels[j] == 0:
+                    break
+                else:
+                    if scores2[j] == 0:
+                        scores2[j] = 1
+        elif labels[i] == 0:
+            anomaly_state = False
+        #if anomaly_state:
+            #pred[i] = 1
     from sklearn.metrics import f1_score
     f1=f1_score(labels, scores2,)
     print(f1)
