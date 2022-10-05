@@ -109,7 +109,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
         #if len(val_losses)<500:
-        '''for i,batch in enumerate(train_iterator):
+        for i,batch in enumerate(train_iterator):
             if i % 50 == 0:
                 print(i)
             data_base, label = batch
@@ -124,7 +124,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-            val_losses.extend(sample_loss.cpu().detach().numpy())'''
+            val_losses.extend(sample_loss.cpu().detach().numpy())
 
         for i,batch in enumerate(iterator):
             if i % 50 == 0:
@@ -191,7 +191,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
     print(result)
 
-    scores_threshold=np.quantile(np.array(scores), .995)
+    scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(scores)], axis=0), .995)
+    print(scores_threshold)
     scores2=(scores>scores_threshold)
     from sklearn.metrics import f1_score
     f1=f1_score(labels, scores2,)
