@@ -65,14 +65,15 @@ def model_size(model,args,quantized=False, as_bits=True):
         for name, tensor in model.named_parameters():
             if 'bn' in name:
                 if args.batch_norm == False:
-                    print('continuing...')
+                    print(f'{name} continuing...')
                     continue
             if 'norm' in name:
                 if args.layer_norm == False:
-                    print('continuing...')
+                    print(f'{name} continuing...')
                     continue
             t = np.prod(tensor.shape)
             print(f'Weights found for {name}')
+            print(t)
             nz = nonzero(tensor.detach().cpu().numpy())
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
