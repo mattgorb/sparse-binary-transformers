@@ -65,7 +65,6 @@ def model_size(model,args,quantized=False, as_bits=True):
         for name, tensor in model.named_parameters():
             t = np.prod(tensor.shape)
             print(f'Weights found for {name}')
-            print(t)
             nz = nonzero(tensor.detach().cpu().numpy())
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
@@ -91,29 +90,41 @@ def model_size(model,args,quantized=False, as_bits=True):
 
                 elif m._get_name()=='Linear':
                     tensor=m.weight.detach().cpu().numpy()
-                    b = np.prod(tensor.shape)
-                    t=b
-                    #print(t)
-                    nz = nonzero(tensor)
-                    dtype=torch.float
-                    bits = dtype2bits[dtype]
-                    params_dict['total_bits'] += int(bits * b)
-                elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
-                    tensor=m.weight.detach().cpu().numpy()
                     t = np.prod(tensor.shape)
-                    nz = t*m.prune_rate
-                    b=(t-nz)
-                    f=t*m.prune_rate
-                    params_dict['total_bits'] += int(nz*32+(t-nz)*1)
-                elif m._get_name()=='BatchNorm1d':
-                    tensor=m.weight.detach().cpu().numpy()
-                    b = np.prod(tensor.shape)
-                    t=b
+                    b=0
                     #print(t)
                     nz = nonzero(tensor)
                     dtype=torch.float
                     bits = dtype2bits[dtype]
-                    params_dict['total_bits'] += int(bits * b)
+                    params_dict['total_bits'] += int(bits * t)
+                elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
+                    if args.layer_norm==False:
+                        print('continuing...')
+                        continue
+                    else:
+                        tensor=m.weight.detach().cpu().numpy()
+                        t = np.prod(tensor.shape)
+                        nz = t*m.prune_rate
+                        b=(t-nz)
+                        f=t*m.prune_rate
+                        #params_dict['total_bits'] += int(nz*32+(t-nz)*1)
+                        #continue
+                        sys.exit()
+                elif m._get_name()=='BatchNorm1d':
+                    if args.layer_norm==False:
+                        print('continuing...')
+                        continue
+                    else:
+                        tensor=m.weight.detach().cpu().numpy()
+                        t = np.prod(tensor.shape)
+                        #t=b
+                        b=0
+                        #print(t)
+                        nz = nonzero(tensor)
+                        dtype=torch.float
+                        bits = dtype2bits[dtype]
+                        params_dict['total_bits'] += int(bits * t)
+                        sys.exit()
                 else:
                     print(f'Class not found {m._get_name()}')
                     #sys.exit()
