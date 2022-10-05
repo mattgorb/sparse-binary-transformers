@@ -126,6 +126,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
 
+        test_losses=[]
         for i,batch in enumerate(iterator):
             if i % 50 == 0:
                 print(i)
@@ -144,6 +145,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
+            test_losses.extend(sample_loss.cpu().detach().numpy())
             epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
             for i,l in zip(index, sample_loss,):
@@ -170,6 +172,9 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         anomaly_dict[i]=list(map(itemgetter(1), g))
         i+=1
 
+    scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
+    print(scores_threshold)
+
     anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
@@ -191,13 +196,12 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
     print(result)
 
-    scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(scores)], axis=0), .995)
-    print(scores_threshold)
+
     scores2=(scores>scores_threshold)
     from sklearn.metrics import f1_score
     f1=f1_score(labels, scores2,)
     print(f1)
-    sys.exit()
+    #sys.exit()
     if result is not None:
         if result['f1']>=best_f1['f1']:
             print(result)
