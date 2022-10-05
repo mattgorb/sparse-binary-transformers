@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/graphs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/memory_size.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/memory_size.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/class_sparse_arabic" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +55,32 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="graphs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sparse-binary-transformers" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graphs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.graphs" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -71,7 +99,7 @@
       <workItem from="1660263049974" duration="199143000" />
       <workItem from="1663855490388" duration="983000" />
       <workItem from="1663939220676" duration="8756000" />
-      <workItem from="1664149117786" duration="97831000" />
+      <workItem from="1664149117786" duration="112555000" />
     </task>
     <servers />
   </component>
@@ -118,13 +146,19 @@
       <screen x="1680" y="25" width="1920" height="1055" />
     </state>
     <state x="2194" y="25" width="1390" height="999" key="dock-window-3/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@3600.-40.1920.1055" timestamp="1664758061503" />
-    <state x="4402" y="204" width="684" height="568" key="find.popup" timestamp="1664765791811">
+    <state x="3600" y="-40" width="1920" height="540" key="dock-window-4" timestamp="1664907042437">
       <screen x="3600" y="-40" width="1920" height="1055" />
+    </state>
+    <state x="1680" y="25" width="1920" height="540" key="dock-window-4/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@3600.-40.1920.1055" timestamp="1664894181896" />
+    <state x="3600" y="-40" width="1920" height="540" key="dock-window-4/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1664907042437" />
+    <state x="702" y="239" width="599" height="500" key="find.popup" timestamp="1664936386527">
+      <screen x="0" y="25" width="1680" height="927" />
     </state>
     <state x="702" y="235" width="597" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1664331060076" />
     <state x="702" y="236" width="597" height="490" key="find.popup/0.25.1680.913@0.25.1680.913" timestamp="1661695458078" />
     <state x="702" y="100" width="598" height="631" key="find.popup/0.25.1680.918@0.25.1680.918" timestamp="1661716219521" />
     <state x="702" y="238" width="598" height="496" key="find.popup/0.25.1680.922@0.25.1680.922" timestamp="1662090055152" />
+    <state x="702" y="239" width="599" height="500" key="find.popup/0.25.1680.927@0.25.1680.927" timestamp="1664936386527" />
     <state x="702" y="240" width="598" height="500" key="find.popup/0.25.1680.930@0.25.1680.930" timestamp="1658369025469" />
     <state x="4402" y="203" width="683" height="601" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1660517181769" />
     <state x="702" y="236" width="597" height="548" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@0.25.1680.913" timestamp="1657301848383" />

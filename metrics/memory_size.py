@@ -64,6 +64,8 @@ def model_size(model,args,quantized=False, as_bits=True):
         #logic for float32 and binary network
         for name, tensor in model.named_parameters():
             t = np.prod(tensor.shape)
+            print(f'Weights found for {name}')
+            print(t)
             nz = nonzero(tensor.detach().cpu().numpy())
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
@@ -81,8 +83,19 @@ def model_size(model,args,quantized=False, as_bits=True):
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)
                     t=b
+                    #print(t)
                     nz = b*m.prune_rate
                     dtype=torch.bool
+                    bits = dtype2bits[dtype]
+                    params_dict['total_bits'] += int(bits * b)
+
+                elif m._get_name()=='Linear':
+                    tensor=m.weight.detach().cpu().numpy()
+                    b = np.prod(tensor.shape)
+                    t=b
+                    #print(t)
+                    nz = nonzero(tensor)
+                    dtype=torch.float
                     bits = dtype2bits[dtype]
                     params_dict['total_bits'] += int(bits * b)
                 elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb':
@@ -92,6 +105,15 @@ def model_size(model,args,quantized=False, as_bits=True):
                     b=(t-nz)
                     f=t*m.prune_rate
                     params_dict['total_bits'] += int(nz*32+(t-nz)*1)
+                elif m._get_name()=='BatchNorm':
+                    tensor=m.weight.detach().cpu().numpy()
+                    b = np.prod(tensor.shape)
+                    t=b
+                    #print(t)
+                    nz = nonzero(tensor)
+                    dtype=torch.float
+                    bits = dtype2bits[dtype]
+                    params_dict['total_bits'] += int(bits * b)
                 else:
                     print(f'Class not found {m._get_name()}')
                     #sys.exit()
