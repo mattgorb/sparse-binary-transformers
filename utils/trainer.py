@@ -12,7 +12,7 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 import pandas as pd
 from metrics.pot.pot import calc_point2point
-
+from sklearn.metrics import confusion_matrix
 
 
 def train(model, iterator, optimizer, criterion, device,args,epoch):
@@ -223,8 +223,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,
             recall, f_score))
-    result2=calc_point2point(scores2, labels)
-    print(result2)
+    tn, fp, fn, tp = confusion_matrix(labels, scores2,).ravel()
+    print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
     #sys.exit()
     if result is not None:
         if result['f1']>=best_f1['f1']:
