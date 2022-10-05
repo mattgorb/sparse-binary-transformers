@@ -62,7 +62,8 @@ def model_size(model,args,quantized=False, as_bits=True):
                 params_dict['int8_params']+=t
     if args.model_type=='Dense':
         #logic for float32 and binary network
-        for name, tensor in model.named_parameters():
+        for name, tensor in model.named_modules():
+
             t = np.prod(tensor.shape)
             print(f'Weights found for {name}')
             nz = nonzero(tensor.detach().cpu().numpy())
