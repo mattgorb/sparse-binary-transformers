@@ -182,6 +182,11 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals
 
+    print(len(scores))
+    print(len(test_losses))
+    print(np.array(scores).shape)
+    print(np.array(test_losses).shape)
+    print(np.array(labels).shape)
 
     result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
     #print(result)
