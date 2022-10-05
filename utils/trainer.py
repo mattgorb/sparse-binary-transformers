@@ -162,16 +162,15 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             labels.extend(label.cpu().detach().numpy())
 
 
-    anomaly_dict={}
+    '''anomaly_dict={}
     i=0
     for k, g in groupby(enumerate(anomaly_ind), lambda ix : ix[0] - ix[1]):
         anomaly_dict[i]=list(map(itemgetter(1), g))
-        i+=1
+        i+=1'''
 
-    scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
-    print(scores_threshold)
 
-    anomaly_final_vals=[]
+
+    '''anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
         #anomaly_final_vals.append(max(sample_losses))
@@ -180,22 +179,16 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
-    scores=benign_final_vals+anomaly_final_vals
-
-    print(len(scores))
-    print(len(test_losses))
-    print(np.array(scores).shape)
-    print(np.array(test_losses).shape)
-    print(np.array(labels).shape)
-
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-    #print(result)
-    #print(np.array(val_losses).shape)
-    #print(np.array(labels).shape)
-
-    print(result)
+    scores=benign_final_vals+anomaly_final_vals'''
+    #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
 
 
+
+
+
+
+    scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
+    print(scores_threshold)
     scores2=(test_losses>scores_threshold)
     for i in range(len(labels)):
         if labels[i] == 1 and scores2[i] == 1 and not anomaly_state:
@@ -231,14 +224,14 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     tn, fp, fn, tp = confusion_matrix(labels, scores2,).ravel()
     print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
     #sys.exit()
-    if result is not None:
+    '''if result is not None:
         if result['f1']>=best_f1['f1']:
             print(result)
             df = pd.DataFrame({'scores': scores, 'labels':labels})
-            df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}_type_{args.model_type}_pr_{args.lin_prune_rate}.csv')
+            df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}_type_{args.model_type}_pr_{args.lin_prune_rate}.csv')'''
 
 
-    return result,epoch_loss / iterator.dataset.__len__()
+    return f1,epoch_loss / iterator.dataset.__len__()
 
 
 def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
