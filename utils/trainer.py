@@ -173,8 +173,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     anomaly_final_vals=[]
     for key,val in anomaly_dict.items():
         sample_losses=[sample_loss_dict.get(key) for key in val]
-        anomaly_final_vals.append(max(sample_losses))
-        #anomaly_final_vals.extend([max(sample_losses) for i in range(len(sample_losses))])
+        #anomaly_final_vals.append(max(sample_losses))
+        anomaly_final_vals.extend([max(sample_losses) for i in range(len(sample_losses))])
 
 
     benign_final_vals = [sample_loss_dict.get(key) for key in benign_ind]
@@ -188,6 +188,15 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(result)
     #print(np.array(val_losses).shape)
     #print(np.array(labels).shape)
+
+    print(result)
+
+    scores_threshold=np.quantile(np.array(scores), .995)
+    scores2=(scores>scores_threshold)
+    from sklearn.metrics import f1_score
+    f1=f1_score(labels, scores2,)
+    print(f1)
+    sys.exit()
     if result is not None:
         if result['f1']>=best_f1['f1']:
             print(result)
