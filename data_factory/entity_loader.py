@@ -46,12 +46,12 @@ class SMDSegLoader(object):
     def __getitem__(self, index):
         index = index * self.step
         if self.mode == "train":
-            return np.float32(self.train[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
+            return np.float32(self.train[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size]), None
         elif (self.mode == 'val'):
-            return np.float32(self.val[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
+            return np.float32(self.val[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size]), index
         elif (self.mode == 'test'):
             return np.float32(self.test[index:index + self.win_size]), np.float32(
-                self.test_labels[index:index + self.win_size])
+                self.test_labels[index:index + self.win_size]), index
         else:
             return np.float32(self.test[
                               index // self.step * self.win_size:index // self.step * self.win_size + self.win_size]), np.float32(
