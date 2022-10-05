@@ -105,7 +105,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     b=(t-nz)
                     f=t*m.prune_rate
                     params_dict['total_bits'] += int(nz*32+(t-nz)*1)
-                elif m._get_name()=='BatchNorm':
+                elif m._get_name()=='BatchNorm1d':
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)
                     t=b
