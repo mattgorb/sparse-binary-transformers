@@ -13,7 +13,7 @@ layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
 attention_prune_rate: .5
 
-epochs: 100
+epochs: 150
 weight_file: sparse_ts_smd
 
 window_size: 50
