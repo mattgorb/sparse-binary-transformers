@@ -84,8 +84,6 @@ def model_size(model,args,quantized=False, as_bits=True):
     if args.model_type=='SparseBinary' or args.model_type=='Sparse':
         #logic for float32 and binary network
         for name, m in model.named_modules():
-            print(name)
-            print(m)
             if hasattr(m, "weight") and m.weight is not None:
                 b=t=nz=f=0
                 print(f'Weights found for {m._get_name()}')
