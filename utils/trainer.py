@@ -11,7 +11,7 @@ from utils.train_util import adjust_learning_rate
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 import pandas as pd
-
+from metrics.pot.pot import calc_point2point
 
 
 
@@ -223,7 +223,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
             accuracy, precision,
             recall, f_score))
-
+    result2=calc_point2point(scores2, labels)
+    print(result2)
     #sys.exit()
     if result is not None:
         if result['f1']>=best_f1['f1']:
