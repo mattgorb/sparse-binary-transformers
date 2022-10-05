@@ -201,6 +201,16 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     from sklearn.metrics import f1_score
     f1=f1_score(labels, scores2,)
     print(f1)
+    from sklearn.metrics import precision_recall_fscore_support
+    from sklearn.metrics import accuracy_score
+    accuracy = accuracy_score(labels, scores2,)
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, scores2,
+                                                                          average='binary')
+    print(
+        "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
+            accuracy, precision,
+            recall, f_score))
+
     #sys.exit()
     if result is not None:
         if result['f1']>=best_f1['f1']:
