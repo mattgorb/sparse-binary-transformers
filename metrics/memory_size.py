@@ -73,7 +73,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     continue
             t = np.prod(tensor.shape)
             print(f'Weights found for {name}')
-            print(t)
+            #print(t)
             nz = nonzero(tensor.detach().cpu().numpy())
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
@@ -84,6 +84,7 @@ def model_size(model,args,quantized=False, as_bits=True):
     if args.model_type=='SparseBinary' or args.model_type=='Sparse':
         #logic for float32 and binary network
         for name, m in model.named_modules():
+            print(name)
             if hasattr(m, "weight") and m.weight is not None:
                 b=t=nz=f=0
                 print(f'Weights found for {m._get_name()}')
