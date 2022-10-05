@@ -12,20 +12,7 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import accuracy_score
 import pandas as pd
 
-def attention_uniformity(attention_list,args):
-    totals=None
 
-    for att in attention_list:
-        for head in range(att.size(1)):
-            x=(torch.norm(att[:,head, -1, :], dim=1) *
-             torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1) / (
-                        torch.sqrt(torch.tensor(att[-1,head, -1, :].numel())) - 1)
-            if totals is None:
-                totals=x
-            else:
-                totals+=x
-    totals/=(len(attention_list)*att.size(1))
-    return totals
 
 
 def train(model, iterator, optimizer, criterion, device,args,epoch):
@@ -122,7 +109,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
         #if len(val_losses)<500:
-        for i,batch in enumerate(train_iterator):
+        '''for i,batch in enumerate(train_iterator):
             if i % 50 == 0:
                 print(i)
             data_base, label = batch
@@ -137,7 +124,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
 
-            val_losses.extend(sample_loss.cpu().detach().numpy())
+            val_losses.extend(sample_loss.cpu().detach().numpy())'''
 
         for i,batch in enumerate(iterator):
             if i % 50 == 0:
