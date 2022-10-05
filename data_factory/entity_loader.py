@@ -35,16 +35,16 @@ class SMDSegLoader(object):
     def __len__(self):
 
         if self.mode == "train":
-            return (self.train.shape[0] - self.win_size) // self.step + 1
+            return (self.train.shape[0] - self.win_size)
         elif (self.mode == 'val'):
-            return (self.val.shape[0] - self.win_size) // self.step + 1
+            return (self.val.shape[0] - self.win_size)
         elif (self.mode == 'test'):
-            return (self.test.shape[0] - self.win_size) // self.step + 1
+            return (self.test.shape[0] - self.win_size)
         else:
-            return (self.test.shape[0] - self.win_size) // self.win_size + 1
+            return (self.test.shape[0] - self.win_size)
 
     def __getitem__(self, index):
-        index = index * self.step
+        #index = index * self.step
         if self.mode == "train":
             return np.float32(self.train[index:index + self.win_size]), np.float32(self.test_labels[0:self.win_size])
         elif (self.mode == 'val'):
@@ -335,8 +335,8 @@ class ForecastDS(object):
 def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         print(data_path)
-        entities=os.listdir(f'{data_path}/SMD_raw/train')
-        print(f'Dataset: {entities[entity]}')
+        #entities=os.listdir(f'{data_path}/SMD_raw/train')
+        #print(f'Dataset: {entities[entity]}')
         #print(entities)
         dataset=SMDSegLoader(f'{data_path}/SMD/', win_size, step, mode=mode)
         #dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
