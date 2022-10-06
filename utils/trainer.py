@@ -99,8 +99,6 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         for batch in val_iterator:
             data_base, label, index = batch
             data = torch.clone(data_base)
-            if args.forecast:
-                data[:, -1:, :] = 0
 
             data = data.to(device)
             data_base = data_base.to(device)
@@ -110,14 +108,12 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
-        #if len(val_losses)<500:
+
         for i,batch in enumerate(train_iterator):
             if i%500==0:
                 print(i)
             data_base, label = batch
             data = torch.clone(data_base)
-            if args.forecast:
-                data[:, -1:, :] = 0
 
             data = data.to(device)
             data_base = data_base.to(device)
@@ -134,8 +130,6 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             data_base, label, index = batch
 
             data = torch.clone(data_base)
-            if args.forecast:
-                data[:, -1:, :] = 0
 
             data = data.to(device)
             data_base = data_base.to(device)
@@ -150,7 +144,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             test_losses.extend(sample_loss.cpu().detach().numpy())
             epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
-            for i,l in zip(index, sample_loss,):
+            '''for i,l in zip(index, sample_loss,):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
 
             #first, specifically look at instances with no anomalies at all
@@ -164,7 +158,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-            actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+            actual.extend(data_base[:, -1, :].cpu().detach().numpy())'''
             labels.extend(label[:, -1].cpu().detach().numpy())
 
 
@@ -187,9 +181,12 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals'''
     #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-
+    print('labels')
+    print(np.sum(np.array(labels)))
+    print(np.array(labels).shape)
     result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
     print(result)
+
     updated_preds=(test_losses>result['threshold'])
     anomaly_state=False
     for i in range(len(labels)):
