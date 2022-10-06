@@ -22,7 +22,7 @@ def train(model, iterator, optimizer, criterion, device,dataset):
     for batch in iterator:
         optimizer.zero_grad()
 
-        if dataset=='InsectWingbeat':
+        if dataset=='InsectWingbeat' or dataset=='JapaneseVowels':
             data, label,pad_mask, index=batch
         else:
             data, label, index=batch
