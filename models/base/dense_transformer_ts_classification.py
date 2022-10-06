@@ -66,9 +66,12 @@ class TSClassificationTransformer(nn.Module):
             self.pad_mask = pad_mask.to(device)
 
 
-
+        print('here')
+        print(src.size())
         src = src.permute(1, 0, 2)
+        print(src.size())
         src = self.embedding(src)*math.sqrt(self.ninp)
+        print(src.size())
         src = self.pos_encoder(src)
 
         output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
