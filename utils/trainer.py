@@ -189,8 +189,9 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
 
     result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
-
+    print(result)
     updated_preds=(test_losses>result['threshold'])
+    anomaly_state=False
     for i in range(len(labels)):
         if labels[i] == 1 and updated_preds[i] == 1 and not anomaly_state:
             anomaly_state = True
@@ -199,6 +200,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
                     break
                 else:
                     if updated_preds[j] == 0:
+                        print('uppdating')
                         updated_preds[j] = 1
             for j in range(i, len(labels)):
                 if labels[j] == 0:
@@ -219,6 +221,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
     print(f'thresh: {scores_threshold}')
     scores2=(test_losses>scores_threshold)
+    anomaly_state=False
     for i in range(len(labels)):
         if labels[i] == 1 and scores2[i] == 1 and not anomaly_state:
             anomaly_state = True
@@ -227,6 +230,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
                     break
                 else:
                     if scores2[j] == 0:
+                        print('uppdating 2')
                         scores2[j] = 1
             for j in range(i, len(labels)):
                 if labels[j] == 0:
