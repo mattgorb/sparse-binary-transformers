@@ -117,7 +117,7 @@ def main():
 
                 else:
                     test_loss=None
-                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
+                print(f'Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
                 train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
                 val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
@@ -129,7 +129,7 @@ def main():
                 else:
                     test_loss=None
                     early_stopping_increment+=1
-                print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
+                print(f'Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}\n\n\n')
             if epoch>5 and args.scheduler==True:
                 scheduler.step()
                 print(scheduler.get_lr())
