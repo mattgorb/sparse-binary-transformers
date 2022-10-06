@@ -335,11 +335,11 @@ class ForecastDS(object):
 def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         print(data_path)
-        entities=os.listdir(f'{data_path}/SMD_raw/train')
+        #entities=os.listdir(f'{data_path}/SMD_raw/train')
         #print(f'Dataset: {entities[entity]}')
         #print(entities)
-        #dataset=SMDSegLoader(f'{data_path}/SMD/', win_size, step, mode=mode)
-        dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
+        dataset=SMDSegLoader(f'{data_path}/SMD/', win_size, step, mode=mode)
+        #dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'SMAP':
         entities=pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
         entities=entities[entities['spacecraft']=='SMAP']
