@@ -203,7 +203,10 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             labels.extend(label[:, -1].cpu().detach().numpy())
 
-    r=0.995 if args.dataset=='SMD' else r=.99
+    if args.dataset=='SMD':
+        r=0.995
+    else:
+        r=0.99
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), r)
     scores_manual_threshold=(test_losses>scores_threshold)
     scores_manual_threshold=update_anomaly_preds(labels, scores_manual_threshold)
