@@ -232,7 +232,6 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     print(metrics_manual_threshold_cleaned)
 
 
-    print
 
 
     df = pd.DataFrame({'scores': scores_manual_threshold, 'labels':labels})

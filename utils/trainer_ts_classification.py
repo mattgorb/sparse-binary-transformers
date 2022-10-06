@@ -55,7 +55,7 @@ def test(model, iterator, criterion, device,dataset):
     with torch.no_grad():
         pad_mask = None
         for batch in iterator:
-            if dataset == 'InsectWingbeat':
+            if dataset == 'InsectWingbeat' or dataset=='JapaneseVowels':
                 data, label, pad_mask, index = batch
             else:
                 data, label, index = batch
