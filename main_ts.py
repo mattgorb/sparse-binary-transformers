@@ -86,7 +86,7 @@ def main():
         print(f'The model has {count_parameters(model):,} trainable parameters')
 
         optimizer = optim.Adam(model.parameters(),lr=args.lr)
-        scheduler = optim.lr_scheduler.StepLR(optimizer, 2, gamma=0.9)
+        scheduler = optim.lr_scheduler.StepLR(optimizer, 1, gamma=0.75)
         criterion = nn.MSELoss(reduction='none')
         best_loss = float('inf')
         best_result={}
