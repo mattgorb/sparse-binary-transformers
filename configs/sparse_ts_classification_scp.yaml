@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: JapaneseVowels
+dataset: SelfRegulationSCP1
 
 weight_seed: 0
 score_seed: 0
@@ -17,7 +17,7 @@ attention_prune_rate: .5
 #scale_fan: False
 
 epochs: 100
-weight_file: sparse_cls_japanese
+weight_file: sparse_cls_scp
 
 nhid: 256
 dmodel: 128
