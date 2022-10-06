@@ -303,10 +303,13 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'InsectWingbeat':
         all_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TEST', n_proc=-1, )
+    elif dataset == 'JapaneseVowels':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TEST', n_proc=-1, )
 
     print(all_data.feature_df.shape)
 
-    if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat' or dataset=='SelfRegulationSCP2':
+    if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat' or dataset=='SelfRegulationSCP2' or dataset=='JapaneseVowels':
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
         # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
         val_ratio=0.2
