@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: PEMS-SF
+dataset: FaceDetection
 
 weight_seed: 0
 score_seed: 0
