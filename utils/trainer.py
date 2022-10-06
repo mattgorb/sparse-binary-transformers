@@ -108,7 +108,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
-
+        train_labels=[]
         for i,batch in enumerate(train_iterator):
             if i%500==0:
                 print(i)
@@ -123,6 +123,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
+            train_labels.extend(label[:, -1].cpu().detach().numpy())
 
         test_losses=[]
         for i,batch in enumerate(iterator):
@@ -200,7 +201,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(val_losses)
     #print(test_losses)
     #sys.exit()
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(val_losses), np.array(labels), args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(val_losses), np.array(train_labels), args=args)
     print(result)
 
     updated_preds=(test_losses>result['threshold'])
