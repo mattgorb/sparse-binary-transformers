@@ -8,7 +8,7 @@ gpu: 0
 batch_size: 128
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
-epochs: 5
+epochs: 25
 weight_file: dense_ts_smd
 
 window_size: 200
@@ -19,4 +19,4 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
-scheduler: False
+scheduler: True

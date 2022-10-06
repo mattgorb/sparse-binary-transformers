@@ -103,7 +103,8 @@ def main():
         print(train_dataloader.dataset.train.shape)
         print(train_dataloader.dataset.val.shape)
         print(train_dataloader.dataset.test.shape)
-        #sys.exit()
+
+        early_stopping_increment=0
         for epoch in range(args.epochs):
 
 
@@ -124,17 +125,17 @@ def main():
                     best_loss = val_loss
                     torch.save(model.state_dict(), weight_file)
                     result, test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch,best_result)
-                    #if result is not None:
-                        #if result['f1'] >= best_result['f1']:
-                            #best_result['f1'] = result['f1']
-                    #print(f'result: {result}')
+                    early_stopping_increment=0
                 else:
                     test_loss=None
+                    early_stopping_increment+=1
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}')
-            if epoch>10 and args.scheduler==True:
+            if epoch>5 and args.scheduler==True:
                 scheduler.step()
                 print(scheduler.get_lr())
-
+            if early_stopping_increment>=3:
+                print("Early Stopping")
+                return
 
 
 if __name__ == "__main__":
