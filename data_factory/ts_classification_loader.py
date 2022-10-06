@@ -369,7 +369,18 @@ def get_classification_ds(dataset,root_dir, args):
             args.window_size = data.size(1)
             print(data.size())
             break
-        #sys.exit()
+    elif dataset == 'JapaneseVowels':
+        train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
+                                  shuffle=True,pin_memory=True,collate_fn = lambda x: collate_superv(x, max_len=29))
+        val_loader = DataLoader(dataset=val_dataset, batch_size=args.batch_size,
+                                  shuffle=False,pin_memory=True,collate_fn = lambda x: collate_superv(x, max_len=29))
+        test_loader = DataLoader(dataset=test_dataset, batch_size=args.batch_size,
+                                  shuffle=False,pin_memory=True,collate_fn = lambda x: collate_superv(x, max_len=29))
+        for batch in train_loader:
+            data, label, padding, index = batch
+            args.window_size = data.size(1)
+            print(data.size())
+            break
     else:
         train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size,
                                   shuffle=True, pin_memory=True, )
