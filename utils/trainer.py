@@ -186,13 +186,36 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     scores=benign_final_vals+anomaly_final_vals'''
     #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
 
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
+    print(result)
+    print(updated_preds[0])
+    for i in range(len(labels)):
+        if labels[i] == 1 and updated_preds[i] == 1 and not anomaly_state:
+            anomaly_state = True
+            for j in range(i, 0, -1):
+                if labels[j] == 0:
+                    break
+                else:
+                    if updated_preds[j] == 0:
+                        updated_preds[j] = 1
+            for j in range(i, len(labels)):
+                if labels[j] == 0:
+                    break
+                else:
+                    if updated_preds[j] == 0:
+                        updated_preds[j] = 1
+        elif labels[i] == 0:
+            anomaly_state = False
+    accuracy = accuracy_score(labels, updated_preds,)
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, updated_preds, average='binary')
+    print( "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format( accuracy, precision, recall, f_score))
+    tn, fp, fn, tp = confusion_matrix(labels, updated_preds,).ravel()
+    print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
 
-
-
-    print(np.array(labels).shape)
+    #print(np.array(labels).shape)
 
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
-    print(scores_threshold)
+    print(f'thresh: {scores_threshold}')
     scores2=(test_losses>scores_threshold)
     for i in range(len(labels)):
         if labels[i] == 1 and scores2[i] == 1 and not anomaly_state:
@@ -215,12 +238,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             #pred[i] = 1
 
     accuracy = accuracy_score(labels, scores2,)
-    precision, recall, f_score, support = precision_recall_fscore_support(labels, scores2,
-                                                                          average='binary')
-    print(
-        "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format(
-            accuracy, precision,
-            recall, f_score))
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, scores2, average='binary')
+    print( "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format( accuracy, precision, recall, f_score))
     tn, fp, fn, tp = confusion_matrix(labels, scores2,).ravel()
     print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
 
