@@ -165,9 +165,11 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(len(anomaly_ind))
     #print(len(benign_ind))
     #sys.exit()
+    print(len(benign_ind+anomaly_ind))
+    print(len(test_losses))
     test_losses = [test_losses[i] for i in benign_ind+anomaly_ind]
     labels = [labels[i] for i in benign_ind+anomaly_ind]
-
+    print(len(test_losses))
     #test_losses=test_losses[benign_ind+anomaly_ind]
     #labels=labels[benign_ind+anomaly_ind]
 
