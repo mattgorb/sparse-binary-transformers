@@ -250,7 +250,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}_type_{args.model_type}_pr_{args.lin_prune_rate}.csv')'''
 
 
-    return f1,epoch_loss / iterator.dataset.__len__()
+    return f_score,epoch_loss / iterator.dataset.__len__()
 
 
 def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
