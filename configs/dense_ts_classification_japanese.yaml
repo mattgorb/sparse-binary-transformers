@@ -9,7 +9,7 @@ batch_size: 8
 model_type: 'Dense'
 #weight_file: /s/luffy/b/nobackup/mgorb/weights/dense.pt
 epochs: 100
-weight_file: dense_ts_scp
+weight_file: dense_ts_japanese
 
 nhid: 256
 dmodel: 128

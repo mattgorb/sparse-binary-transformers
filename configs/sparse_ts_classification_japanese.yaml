@@ -16,8 +16,8 @@ attention_prune_rate: .1
 #weight_init: 'kaiming_normal'
 #scale_fan: False
 
-epochs: 50
-weight_file: sparse_cls_hb
+epochs: 100
+weight_file: sparse_cls_japanese
 
 nhid: 256
 dmodel: 128
@@ -27,5 +27,5 @@ save_scores: False
 layer_norm: False
 batch_norm: True
 save_graphs: False
-lr: 1e-3
+lr: 1e-4
 pos_enc: 'Fixed'
