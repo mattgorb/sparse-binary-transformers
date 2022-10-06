@@ -144,7 +144,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             test_losses.extend(sample_loss.cpu().detach().numpy())
             epoch_loss += sum(sample_loss.detach().cpu().numpy())
 
-            '''for i,l in zip(index, sample_loss,):
+            for i,l in zip(index, sample_loss,):
                 sample_loss_dict[i.item()]=l.cpu().detach().numpy()
 
             #first, specifically look at instances with no anomalies at all
@@ -157,10 +157,14 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             if len(anomaly_data)>0:
                 anomaly_ind.extend(index[anomaly_data].cpu().detach().numpy())
 
-            preds.extend(predictions[:, -1, :].cpu().detach().numpy())
-            actual.extend(data_base[:, -1, :].cpu().detach().numpy())'''
-            labels.extend(label[:, -1].cpu().detach().numpy())
+            #preds.extend(predictions[:, -1, :].cpu().detach().numpy())
+            #actual.extend(data_base[:, -1, :].cpu().detach().numpy())
+            #labels.extend(label[:, -1].cpu().detach().numpy())
 
+    print(len(labels))
+    print(len(anomaly_ind))
+    print(len(benign_ind))
+    sys.exit()
 
     '''anomaly_dict={}
     i=0
