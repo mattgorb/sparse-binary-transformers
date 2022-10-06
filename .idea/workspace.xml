@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/configs/dense_ts_classification_scp.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_classification_japanese.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_japanese.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/results" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/configs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -38,9 +38,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/results" />
       <recent name="$PROJECT_DIR$/models/base" />
-      <recent name="$PROJECT_DIR$/configs" />
       <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -100,7 +100,7 @@
       <workItem from="1663855490388" duration="983000" />
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
-      <workItem from="1664994912367" duration="19715000" />
+      <workItem from="1664994912367" duration="20026000" />
     </task>
     <servers />
   </component>
