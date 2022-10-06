@@ -172,8 +172,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
     #print(len(benign_ind+anomaly_ind))
     #print(len(test_losses))
-    #test_losses = [test_losses[i] for i in benign_ind+anomaly_ind]
-    #labels = [labels[i] for i in benign_ind+anomaly_ind]
+    test_losses_cleaned = [test_losses[i] for i in benign_ind+anomaly_ind]
+    labels_cleaned = [labels[i] for i in benign_ind+anomaly_ind]
     #print(len(test_losses))
 
 
@@ -203,7 +203,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(val_losses)
     #print(test_losses)
     #sys.exit()
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(val_losses), np.array(train_labels), args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses_cleaned), np.array(labels_cleaned), args=args)
     print(result)
 
     updated_preds=(test_losses>result['threshold'])
@@ -231,6 +231,36 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     print( "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format( accuracy, precision, recall, f_score))
     tn, fp, fn, tp = confusion_matrix(labels, updated_preds,).ravel()
     print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
+
+
+
+
+    updated_preds=(test_losses>result['threshold'])
+    anomaly_state=False
+    for i in range(len(labels)):
+        if labels[i] == 1 and updated_preds[i] == 1 and not anomaly_state:
+            anomaly_state = True
+            for j in range(i, 0, -1):
+                if labels[j] == 0:
+                    break
+                else:
+                    if updated_preds[j] == 0:
+                        #print('uppdating')
+                        updated_preds[j] = 1
+            for j in range(i, len(labels)):
+                if labels[j] == 0:
+                    break
+                else:
+                    if updated_preds[j] == 0:
+                        updated_preds[j] = 1
+        elif labels[i] == 0:
+            anomaly_state = False
+    accuracy = accuracy_score(labels, updated_preds,)
+    precision, recall, f_score, support = precision_recall_fscore_support(labels, updated_preds, average='binary')
+    print( "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format( accuracy, precision, recall, f_score))
+    tn, fp, fn, tp = confusion_matrix(labels, updated_preds,).ravel()
+    print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
+
 
 
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
