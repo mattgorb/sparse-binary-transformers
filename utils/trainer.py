@@ -127,6 +127,11 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         for i,batch in enumerate(iterator):
 
             data_base, label, index = batch
+            print('heeree')
+            print(data_base.size())
+            print(label.size())
+            print(label[:, -1, :].size())
+            sys.exit()
             data = torch.clone(data_base)
             if args.forecast:
                 data[:, -1:, :] = 0
