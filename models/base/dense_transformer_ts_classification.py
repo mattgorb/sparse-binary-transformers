@@ -23,7 +23,10 @@ class TSClassificationTransformer(nn.Module):
         self.pad_mask = None
         self.args=args
         if args.pos_enc=='Learnable':
-            self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
+            if args.dataset=='SelfRegulationSCP2':
+                self.pos_encoder = LearnablePositionalEncoding(ninp, dropout,max_len=1200)
+            else:
+                self.pos_encoder = LearnablePositionalEncoding(ninp, dropout)
         else:
             self.pos_encoder = PositionalEncoding(ninp,)
 
@@ -66,14 +69,10 @@ class TSClassificationTransformer(nn.Module):
             self.pad_mask = pad_mask.to(device)
 
 
-        print('here')
-        print(src.size())
+
         src = src.permute(1, 0, 2)
-        print(src.size())
         src = self.embedding(src)*math.sqrt(self.ninp)
-        print(src.size())
-        print(self.pos_encoder.pe.size())
-        sys.exit()
+
         src = self.pos_encoder(src)
 
         output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
