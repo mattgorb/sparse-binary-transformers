@@ -130,7 +130,7 @@ def main():
                     test_loss=None
                     early_stopping_increment+=1
                 print(f'Epoch: {epoch} | Train loss: {train_loss} |  Val loss: {val_loss} |  Test loss: {test_loss}\n\n\n')
-            if epoch>5 and args.scheduler==True:
+            if early_stopping_increment>0 and args.scheduler==True:
                 scheduler.step()
                 print(scheduler.get_lr())
             if early_stopping_increment>=3:
