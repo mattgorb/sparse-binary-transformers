@@ -184,7 +184,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print('labels')
     #print(np.sum(np.array(labels)))
     #print(np.array(labels).shape)
-    result, updated_preds = pot_eval(np.array(test_losses), np.array(test_losses), np.array(labels), args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
     print(result)
 
     updated_preds=(test_losses>result['threshold'])
