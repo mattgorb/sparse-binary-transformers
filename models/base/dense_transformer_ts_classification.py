@@ -72,7 +72,7 @@ class TSClassificationTransformer(nn.Module):
         print(src.size())
         src = self.embedding(src)*math.sqrt(self.ninp)
         print(src.size())
-        print(self.pos_encoder.pe.weight.size())
+        print(self.pos_encoder.pe.size())
         sys.exit()
         src = self.pos_encoder(src)
 
