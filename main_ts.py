@@ -118,7 +118,7 @@ def main():
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
-                train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
+                #train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
                 val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
                 if val_loss < best_loss:
                     best_loss = val_loss
