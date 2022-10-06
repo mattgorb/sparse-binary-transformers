@@ -127,11 +127,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
         for i,batch in enumerate(iterator):
 
             data_base, label, index = batch
-            print('heeree')
-            print(data_base.size())
-            print(label.size())
-            print(label[:, -1, :].size())
-            sys.exit()
+
             data = torch.clone(data_base)
             if args.forecast:
                 data[:, -1:, :] = 0
@@ -164,7 +160,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
             preds.extend(predictions[:, -1, :].cpu().detach().numpy())
             actual.extend(data_base[:, -1, :].cpu().detach().numpy())
-            labels.extend(label.cpu().detach().numpy())
+            labels.extend(label[:, -1].cpu().detach().numpy())
 
 
     '''anomaly_dict={}
@@ -190,7 +186,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
 
-
+    print(np.array(labels).shape)
 
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses)], axis=0), .995)
     print(scores_threshold)
