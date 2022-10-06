@@ -165,13 +165,14 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(len(anomaly_ind))
     #print(len(benign_ind))
     #sys.exit()
-    print(len(benign_ind+anomaly_ind))
-    print(len(test_losses))
-    test_losses = [test_losses[i] for i in benign_ind+anomaly_ind]
-    labels = [labels[i] for i in benign_ind+anomaly_ind]
-    print(len(test_losses))
-    #test_losses=test_losses[benign_ind+anomaly_ind]
-    #labels=labels[benign_ind+anomaly_ind]
+
+
+    #print(len(benign_ind+anomaly_ind))
+    #print(len(test_losses))
+    #test_losses = [test_losses[i] for i in benign_ind+anomaly_ind]
+    #labels = [labels[i] for i in benign_ind+anomaly_ind]
+    #print(len(test_losses))
+
 
 
     '''anomaly_dict={}
@@ -199,7 +200,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     #print(val_losses)
     #print(test_losses)
     #sys.exit()
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
+    result, updated_preds = pot_eval(np.array(val_losses), np.array(val_losses), np.array(labels), args=args)
     print(result)
 
     updated_preds=(test_losses>result['threshold'])
