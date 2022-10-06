@@ -95,6 +95,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     preds=[]
     actual=[]
     labels=[]
+    train_labels = []
     with torch.no_grad():
         for batch in val_iterator:
             data_base, label, index = batch
@@ -108,7 +109,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
             sample_loss = sample_loss.mean(dim=1)
 
             val_losses.extend(sample_loss.cpu().detach().numpy())
-        train_labels=[]
+            train_labels.extend(label[:, -1].cpu().detach().numpy())
+
         for i,batch in enumerate(train_iterator):
             if i%500==0:
                 print(i)
