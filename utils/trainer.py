@@ -191,6 +191,8 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
     print(result)
     print(updated_preds)
+    updated_preds=updated_preds.astype(int)
+    print(updated_preds)
     for i in range(len(labels)):
         if labels[i] == 1 and updated_preds[i] == 1 and not anomaly_state:
             anomaly_state = True
