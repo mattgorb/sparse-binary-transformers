@@ -27,5 +27,5 @@ save_scores: False
 layer_norm: False
 batch_norm: True
 save_graphs: False
-lr: 1e-4
+lr: 1e-3
 pos_enc: 'Fixed'
