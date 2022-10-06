@@ -224,9 +224,9 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
     scores_threshold=np.quantile(np.concatenate([np.array(val_losses), np.array(test_losses_cleaned)], axis=0), r)
-    scores_manual_threshold=(test_losses_cleaned>scores_threshold)
-    scores_manual_threshold=update_anomaly_preds(labels_cleaned, scores_manual_threshold)
-    metrics_manual_threshold_cleaned=anomaly_metrics(labels_cleaned, scores_manual_threshold)
+    scores_manual_threshold_cleaned=(test_losses_cleaned>scores_threshold)
+    scores_manual_threshold_cleaned=update_anomaly_preds(labels_cleaned, scores_manual_threshold_cleaned)
+    metrics_manual_threshold_cleaned=anomaly_metrics(labels_cleaned, scores_manual_threshold_cleaned)
     metrics_manual_threshold_cleaned[f'threshold_{r}']=scores_threshold
     print('Manual Threshold Cleaned')
     print(metrics_manual_threshold_cleaned)
@@ -235,14 +235,10 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 
 
 
-
-
-    '''if result is not None:
-        if result['f1']>=best_f1['f1']:
-            print(result)
-            df = pd.DataFrame({'scores': scores, 'labels':labels})
-            df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_entity_{entity}_type_{args.model_type}_pr_{args.lin_prune_rate}.csv')'''
-
+    df = pd.DataFrame({'scores': scores_manual_threshold, 'labels':labels})
+    df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_full_{args.dataset}_type_{args.model_type}_pr_{args.lin_prune_rate}.csv')
+    df = pd.DataFrame({'scores_manual_threshold_cleaned': scores_manual_threshold_cleaned,'scores_POT':updated_preds, 'labels':labels_cleaned})
+    df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/ad_results/scores_{args.dataset}_type_{args.model_type}_pr_{args.lin_prune_rate}_epoch_{epoch}.csv')
 
     return metrics_manual_threshold_cleaned,epoch_loss / iterator.dataset.__len__()
 
