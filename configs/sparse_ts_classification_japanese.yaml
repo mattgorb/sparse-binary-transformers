@@ -12,7 +12,7 @@ attention: 'Sparse' #
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
-attention_prune_rate: .1
+attention_prune_rate: .5
 #weight_init: 'kaiming_normal'
 #scale_fan: False
 
