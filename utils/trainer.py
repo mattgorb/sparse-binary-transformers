@@ -181,10 +181,10 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     labels=[0 for i in range(len(benign_final_vals))]+[1 for i in range(len(anomaly_final_vals))]
     scores=benign_final_vals+anomaly_final_vals'''
     #result, updated_preds = pot_eval(np.array(val_losses), np.array(scores), np.array(labels), args=args)
-    print('labels')
-    print(np.sum(np.array(labels)))
-    print(np.array(labels).shape)
-    result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
+    #print('labels')
+    #print(np.sum(np.array(labels)))
+    #print(np.array(labels).shape)
+    '''result, updated_preds = pot_eval(np.array(val_losses), np.array(test_losses), np.array(labels), args=args)
     print(result)
 
     updated_preds=(test_losses>result['threshold'])
@@ -211,7 +211,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
     precision, recall, f_score, support = precision_recall_fscore_support(labels, updated_preds, average='binary')
     print( "Accuracy : {:0.4f}, Precision : {:0.4f}, Recall : {:0.4f}, F-score : {:0.4f} ".format( accuracy, precision, recall, f_score))
     tn, fp, fn, tp = confusion_matrix(labels, updated_preds,).ravel()
-    print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')
+    print(f'tp: {tp} tn {tn}, fp {fp} fn {fn}')'''
 
     #print(np.array(labels).shape)
 
