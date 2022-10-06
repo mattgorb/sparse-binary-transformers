@@ -118,15 +118,15 @@ def main():
                     test_loss=None
                 print(f'Entity: {ent} | Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
-                #train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
+                train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
                 val_loss=validation(model, val_dataloader, optimizer, criterion, device, args, epoch)
                 if val_loss < best_loss:
                     best_loss = val_loss
-                    #torch.save(model.state_dict(), weight_file)
+                    torch.save(model.state_dict(), weight_file)
                     result, test_loss = test_anomaly_detection(model, test_dataloader,val_dataloader,train_dataloader, criterion, device, args, ent,epoch,best_result)
-                    if result is not None:
-                        if result['f1'] >= best_result['f1']:
-                            best_result['f1'] = result['f1']
+                    #if result is not None:
+                        #if result['f1'] >= best_result['f1']:
+                            #best_result['f1'] = result['f1']
                     #print(f'result: {result}')
                 else:
                     test_loss=None
