@@ -21,7 +21,7 @@ weight_file: sparse_cls_scp
 
 nhid: 256
 dmodel: 128
-n_layers: 3
+n_layers: 2
 n_head: 2
 save_scores: False
 layer_norm: False

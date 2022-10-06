@@ -315,7 +315,7 @@ def get_classification_ds(dataset,root_dir, args):
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat' or dataset=='SelfRegulationSCP1':
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
         # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
-        val_ratio=0.2
+        val_ratio=0.05
         val_data=all_data
         labels = all_data.labels_df.values.flatten()
         unique_labels=len(set(labels))
@@ -325,7 +325,7 @@ def get_classification_ds(dataset,root_dir, args):
         train_indices, val_indices = zip(*splitter.split(X=np.zeros(len(all_data.all_IDs)), y=labels))
         test_indices = test_data.all_IDs
 
-        train_indices = train_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
+        train_indices = all_data.all_IDs[0]  # `split_dataset` returns a list of indices *per fold/split*
         val_indices = val_indices[0]  # `split_dataset` returns a list of indices *per fold/split*
     else:
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
