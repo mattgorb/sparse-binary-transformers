@@ -16,7 +16,7 @@ attention_prune_rate: .5
 #weight_init: 'kaiming_normal'
 #scale_fan: False
 
-epochs: 100
+epochs: 150
 weight_file: sparse_cls_scp
 
 nhid: 256
@@ -25,7 +25,7 @@ n_layers: 2
 n_head: 2
 save_scores: False
 layer_norm: False
-batch_norm: False
+batch_norm: True
 save_graphs: False
-lr: 1e-3
+lr: 1e-4
 pos_enc: 'Fixed'
