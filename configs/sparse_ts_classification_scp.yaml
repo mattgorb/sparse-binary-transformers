@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: SelfRegulationSCP1
+dataset: JapaneseVowels
 
 weight_seed: 0
 score_seed: 0
