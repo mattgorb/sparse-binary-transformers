@@ -309,7 +309,9 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'SelfRegulationSCP1':
         all_data = TSRegressionArchive(f'{root_dir}/classification/SelfRegulationSCP1', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/SelfRegulationSCP1', pattern='TEST', n_proc=-1, )
-
+    elif dataset == 'SelfRegulationSCP1':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
     print(all_data.feature_df.shape)
 
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat'\
