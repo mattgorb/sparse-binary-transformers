@@ -11,7 +11,7 @@ model_type: 'Sparse'
 attention: 'Dense'
 
 epochs: 50
-weight_file: dense_ts_electricity
+weight_file: sparse_ts_electricity
 
 window_size: 200
 dmodel: 512
