@@ -114,9 +114,10 @@ def main():
                     best_loss = train_loss
                     torch.save(model.state_dict(), weight_file)
                     test_loss = test_forecast(model, test_dataloader, train_dataloader, criterion, device, args, epoch,)
-
+                    early_stopping_increment=0
                 else:
                     test_loss=None
+                    early_stopping_increment+=1
                 print(f'Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss}')
             else:
                 train_loss = train(model, train_dataloader, optimizer, criterion, device, args, epoch)
