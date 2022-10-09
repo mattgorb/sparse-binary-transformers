@@ -282,6 +282,9 @@ def metrics(preds, actual,iterator):
 
     se_loss = diffs * diffs
 
+    print('se loss')
+    print(se_loss)
+
     print('mse')
     mse=torch.mean(se_loss).item()
     print(mse)

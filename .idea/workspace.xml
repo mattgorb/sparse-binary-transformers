@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,11 +46,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pyraformer/Pyraformer" />
+      <recent name="$PROJECT_DIR$/pyraformer/models/SingleStep" />
+      <recent name="$PROJECT_DIR$/pyraformer/Pyraformer/data" />
+      <recent name="$PROJECT_DIR$/pyraformer/models" />
       <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$/results" />
-      <recent name="$PROJECT_DIR$/results/old2" />
-      <recent name="$PROJECT_DIR$/data/traffic" />
-      <recent name="$PROJECT_DIR$/data/electricity" />
     </key>
   </component>
   <component name="RunManager">
@@ -101,7 +101,7 @@
       <workItem from="1663855490388" duration="983000" />
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
-      <workItem from="1664994912367" duration="28359000" />
+      <workItem from="1664994912367" duration="31464000" />
     </task>
     <servers />
   </component>
