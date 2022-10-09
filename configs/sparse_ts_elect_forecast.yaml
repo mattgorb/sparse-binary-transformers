@@ -23,7 +23,7 @@ dmodel: 512
 forecast: True
 save_scores: False
 layer_norm: False
-batch_norm: False
+batch_norm: True
 save_graphs: False
 
 pos_enc: 'Standard'
