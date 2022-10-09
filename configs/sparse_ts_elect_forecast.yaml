@@ -22,7 +22,7 @@ window_size: 200
 dmodel: 512
 forecast: True
 save_scores: False
-layer_norm: True
+layer_norm: False
 batch_norm: False
 save_graphs: False
 
