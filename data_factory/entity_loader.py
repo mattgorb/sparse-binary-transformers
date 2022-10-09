@@ -283,7 +283,7 @@ class ForecastDS(object):
             valid_end = '2014-05-26 19:00:00'
             test_start = '2014-05-24 20:00:00'
             test_end = '2014-12-31 23:00:00'
-            data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', sep=";", index_col=0, parse_dates=True,)
+            data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', index_col=0, parse_dates=True,)
             print(data_frame.head())
 
             self.data = data_frame[train_start:train_end].values
