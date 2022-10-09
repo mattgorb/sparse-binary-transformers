@@ -292,7 +292,7 @@ class ForecastDS(object):
             print(self.data.shape)
             print(valid_data.shape)
             print(test_data.shape)
-            sys.exit()
+            #sys.exit()
         else:
             print("dataset not found")
             sys.exit(1)
