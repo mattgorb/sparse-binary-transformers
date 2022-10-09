@@ -282,9 +282,9 @@ class ForecastDS(object):
             valid_start = '2014-02-04 04:00:00'
             valid_end = '2014-05-26 20:00:00'
             test_start = '2014-05-24 20:00:00'
-            test_end = '2014-12-31 23:00:00'
+            test_end = '2015-01-01 00:00:00'
             data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', index_col=0, parse_dates=True,)
-            print(data_frame.head())
+            #print(data_frame.head())
 
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
@@ -292,7 +292,7 @@ class ForecastDS(object):
             print(self.data.shape)
             print(valid_data.shape)
             print(test_data.shape)
-            sys.exit()
+            #sys.exit()
         else:
             print("dataset not found")
             sys.exit(1)
