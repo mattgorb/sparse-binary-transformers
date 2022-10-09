@@ -282,6 +282,8 @@ def metrics(preds, actual,iterator):
 
     se_loss = diffs * diffs
 
+    print(se_loss.size())
+
     print('se loss')
     print(torch.sum(se_loss))
 

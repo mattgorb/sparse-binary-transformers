@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/trainer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +26,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/pyraformer/Pyraformer" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="2AgeG9s2Rqgnv5p22cyrttziddl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -109,7 +110,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="10509000" />
+      <workItem from="1665329939999" duration="11101000" />
     </task>
     <servers />
   </component>
