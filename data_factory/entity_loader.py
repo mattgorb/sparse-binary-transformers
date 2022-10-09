@@ -267,26 +267,32 @@ class ForecastDS(object):
         self.win_size = win_size
         self.scaler = StandardScaler()
         if dataset=='electricity':
-            train_start = '2011-01-01 00:00:00'
+            '''train_start = '2011-01-01 00:00:00'
             train_end = '2014-09-01 00:00:00'
             valid_start = '2014-08-25 00:00:00'
             valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-09-01 00:00:00'  # need additional 7 days as given info
+            test_start = '2014-09-01 00:00:00'
             test_end = '2014-12-31 23:00:00'
 
-            #self.data = np.load()
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
-            #print(data_frame.head())
-            data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]
-            #print(data_frame.head())
-            #sys.exit()
+            data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]'''
+
+            train_start = '2012-01-01 00:00:00'
+            train_end = '2014-02-06 03:0:00'
+            valid_start = '2014-02-04 04:00:00'
+            valid_end = '2014-05-26 19:00:00'
+            test_start = '2014-05-24 20:00:00'
+            test_end = '2014-12-31 23:00:00'
+            data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', sep=";", index_col=0, parse_dates=True,)
+
+
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
             test_data = data_frame[test_start:test_end].values
             print(self.data.shape)
             print(valid_data.shape)
             print(test_data.shape)
-
+            sys.exit()
         else:
             print("dataset not found")
             sys.exit(1)
