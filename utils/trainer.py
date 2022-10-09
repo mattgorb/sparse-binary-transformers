@@ -247,8 +247,8 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     model.train()
 
     for i, batch in enumerate(iterator):
-        if i % 50 == 0:
-            print(i)
+        #if i % 50 == 0:
+            #print(i)
         optimizer.zero_grad()
         data_base, labels = batch
 
