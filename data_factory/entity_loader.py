@@ -280,7 +280,7 @@ class ForecastDS(object):
             train_start = '2012-01-01 00:00:00'
             train_end = '2014-02-06 03:0:00'
             valid_start = '2014-02-04 04:00:00'
-            valid_end = '2014-05-26 19:00:00'
+            valid_end = '2014-05-26 20:00:00'
             test_start = '2014-05-24 20:00:00'
             test_end = '2014-12-31 23:00:00'
             data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', index_col=0, parse_dates=True,)
@@ -292,7 +292,7 @@ class ForecastDS(object):
             print(self.data.shape)
             print(valid_data.shape)
             print(test_data.shape)
-            #sys.exit()
+            sys.exit()
         else:
             print("dataset not found")
             sys.exit(1)
@@ -306,8 +306,8 @@ class ForecastDS(object):
         #self.test=test_data
         #self.val=valid_data
         self.test_raw=test_data
-        print(self.test_raw.shape)
-        print(np.count_nonzero(self.test_raw))
+        #print(self.test_raw.shape)
+        #print(np.count_nonzero(self.test_raw))
         #sys.exit()
     def inverse(self,x):
         return self.scaler.inverse_transform(x)
