@@ -283,6 +283,13 @@ class ForecastDS(object):
             valid_end = '2014-05-26 20:00:00'
             test_start = '2014-05-24 20:00:00'
             test_end = '2015-01-01 00:00:00'
+
+            train_start = '2012-01-01 00:00:00'
+            train_end = '2014-09-01 00:00:00'
+            valid_start = '2014-08-25 00:00:00'
+            valid_end = '2014-09-08 00:00:00'
+            test_start = '2014-09-01 00:00:00'
+            test_end = '2014-12-31 23:00:00'
             data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', index_col=0, parse_dates=True,)
             #print(data_frame.head())
 
