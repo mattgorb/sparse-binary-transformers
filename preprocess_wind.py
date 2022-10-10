@@ -29,9 +29,15 @@ def prep_data(data, covariates, data_start, train = True):
     input_size = window_size-stride_size
 
     windows_per_series = np.full((num_series), (time_len-input_size) // stride_size)
-
+    #print("HERE")
+    #print(time_len)
+    #print(num_series)
+    #print(input_size)
+    #print(windows_per_series)
     if train: windows_per_series -= (data_start+stride_size-1) // stride_size
     total_windows = np.sum(windows_per_series)
+    #print(windows_per_series)
+    #print(total_windows)
     x_input = np.zeros((total_windows, window_size, 1 + num_covariates + 1), dtype='float32')
 
 
@@ -75,11 +81,13 @@ def prep_data(data, covariates, data_start, train = True):
     prefix = os.path.join(save_path, 'train_' if train else 'test_')
     #print(v_input)
     print(x_input.shape)
-    print(v_input.shape)
+    #print(v_input.shape)
     print(label.shape)
-    for i in range(x_input.shape[2]):
-        print(np.mean(x_input[:,:,i]))
-        print(np.std(x_input[:,:, i]))
+    print(np.max(label))
+    print(np.mean(label))
+    #for i in range(x_input.shape[2]):
+        #print(np.mean(x_input[:,:,i]))
+        #print(np.std(x_input[:,:, i]))
     sys.exit()
     np.save(prefix+'data_'+save_name, x_input)
     np.save(prefix+'v_'+save_name, v_input)
@@ -125,6 +133,7 @@ if __name__ == '__main__':
     data_frame = pd.read_csv(csv_path, sep=";", index_col=0, parse_dates=True, decimal=',')
     data_frame = data_frame.resample('1H',label = 'left',closed = 'right').sum()[train_start:test_end]
     data_frame.fillna(0, inplace=True)
+    #print(data_frame.shape)
     covariates = gen_covariates(data_frame[train_start:test_end].index, num_covariates)
     train_data = data_frame[train_start:train_end].values # shape: [seq_length, user_num]
     test_data = data_frame[test_start:test_end].values
@@ -132,6 +141,6 @@ if __name__ == '__main__':
     total_time = data_frame.shape[0] #32304
     num_series = data_frame.shape[1] #370
 
-    print(train_data.shape)
-    prep_data(train_data, covariates, data_start)
+    print(test_data.shape)
+    #prep_data(train_data, covariates, data_start)
     prep_data(test_data, covariates, data_start, train=False)
