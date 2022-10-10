@@ -134,9 +134,10 @@ def main():
             if early_stopping_increment>0 and args.scheduler==True:
                 scheduler.step()
                 print(scheduler.get_lr())
-            if early_stopping_increment>=3:
-                print("Early Stopping")
-                return
+            if args.es_epochs is not None:
+                if early_stopping_increment>=args.es_epochs:
+                    print("Early Stopping")
+                    return
 
 
 if __name__ == "__main__":
