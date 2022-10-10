@@ -4,8 +4,6 @@
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ECL.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
@@ -113,7 +111,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="24652000" />
+      <workItem from="1665329939999" duration="24671000" />
     </task>
     <servers />
   </component>
