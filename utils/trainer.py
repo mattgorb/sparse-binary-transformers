@@ -294,11 +294,11 @@ def metrics(preds, actual,iterator):
     print('mae')
     print(torch.mean(torch.abs(diffs)).item())
 
-    nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
+    '''nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
     print("nrmse")
     print(nrmse.item())
 
-    '''print('quantiles')
+    print('quantiles')
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
     quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)'''
 
@@ -344,10 +344,10 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     print('\nstandardized')
     loss1=metrics(preds,actual,iterator)
 
-    print('\nnon standardized')
-    preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    loss2=metrics(preds,actual, iterator)
+    #print('\nnon standardized')
+    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
+    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
+    #loss2=metrics(preds,actual, iterator)
 
 
     '''preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
