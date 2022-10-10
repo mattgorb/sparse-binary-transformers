@@ -6,6 +6,7 @@
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/dense_ts_elect_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_elect_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
@@ -112,7 +113,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="25574000" />
+      <workItem from="1665329939999" duration="28038000" />
     </task>
     <servers />
   </component>
@@ -128,7 +129,7 @@
       <screen x="0" y="25" width="1680" height="910" />
     </state>
     <state x="291" y="139" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1680.910@0.25.1680.910" timestamp="1664333972796" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1665420972507">
+    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1665421561472">
       <screen x="1680" y="25" width="1920" height="1055" />
     </state>
     <state x="586" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.910@0.25.1680.910" timestamp="1661140448072" />
@@ -137,7 +138,7 @@
     <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@1680.25.1920.1055" timestamp="1661034057442" />
     <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1664566454712" />
     <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1665412003966" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@1680.25.1920.1055" timestamp="1665420972507" />
+    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@1680.25.1920.1055" timestamp="1665421561472" />
     <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1665418309086" />
     <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@3600.-40.1920.1055" timestamp="1664761803319" />
     <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.930@3600.-40.1920.1055" timestamp="1664803801184" />

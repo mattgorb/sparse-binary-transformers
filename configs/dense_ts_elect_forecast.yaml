@@ -7,7 +7,7 @@ score_seed: 0
 gpu: 2
 batch_size: 128
 model_type: 'Dense'
-epochs: 50
+epochs: 100
 weight_file: dense_ts_electricity
 
 window_size: 200
