@@ -31,8 +31,8 @@ class SparseTransformerEncoderLayer(nn.Module):
         #self.norm1 = layernorm_init(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
         #self.norm2 = layernorm_init(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
 
-        self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
+        self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
 
         self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
