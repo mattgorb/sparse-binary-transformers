@@ -285,14 +285,15 @@ def metrics(preds, actual,iterator):
     #print(se_loss.size())
 
     #print('se loss')
-    print(torch.sum(se_loss))
+    #print(torch.sum(se_loss))
 
-    print('mse')
+
     mse=torch.mean(se_loss).item()
-    print(mse)
+    print(f'MSE: {mse}')
 
-    print('mae')
-    print(torch.mean(torch.abs(diffs)).item())
+    #print('mae')
+    print(f'MAE: {torch.mean(torch.abs(diffs)).item()}')
+    #print()
 
     '''nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
     print("nrmse")
@@ -341,7 +342,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
                 preds=torch.cat([preds,predictions[:, -1, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, -1, :]], dim=0)
 
-    print('\nstandardized')
+    #print('\nstandardized')
     loss1=metrics(preds,actual,iterator)
 
     #print('\nnon standardized')
