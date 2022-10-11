@@ -74,6 +74,15 @@ class SubnetLinBiprop(nn.Linear):
         self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
         return self.alpha
 
+    def rerandomize(self):
+        with torch.no_grad():
+            sorted, indices = torch.sort(self.scores.abs().flatten())
+            k = int((0.2) * self.scores.numel())
+            low_scores=indices[:k]
+            high_scores=indices[-k:]
+            self.weight.flatten()[low_scores]=self.weight.flatten()[high_scores]
+            print('recycling {} out of {} weights'.format(k,self.weight.numel()))
+
     def forward(self, x):
 
         # Get binary mask and gain term for subnetwork

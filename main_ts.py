@@ -25,7 +25,7 @@ from utils.trainer import train,test_forecast,validation,test_anomaly_detection,
 from metrics.evaluate import evaluate
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
-
+from models.layers.sparse_type import SubnetLinBiprop
 
 
 
@@ -35,6 +35,12 @@ def epoch_time(start_time, end_time):
     elapsed_secs = int(elapsed_time - (elapsed_mins * 60))
     return elapsed_mins, elapsed_secs
 
+def rerandomize_model(model, args):
+    for n, m in model.named_modules():
+        if hasattr(m, "weight") and m.weight is not None:
+            if isinstance(m, SubnetLinBiprop):
+                print(f"==> Rerandomizing weights of {n}")
+                m.rerandomize()
 
 def main():
     device = torch.device(f'cuda:{args.gpu}' if torch.cuda.is_available() else 'cpu')
@@ -58,7 +64,6 @@ def main():
     #for ent in range(entities):
         #ent=args.entity
     weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
-    #print(f'\n\n\nEntity {ent}')
 
     train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
                                         dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
@@ -138,7 +143,9 @@ def main():
             if early_stopping_increment>=args.es_epochs:
                 print("Early Stopping")
                 return
-
+        if epoch%5==0:
+            if args.rerandomize==True and epoch>0 and epoch != args.epochs - 1:
+                rerandomize_model(model, args)
 
 if __name__ == "__main__":
     print(args)
