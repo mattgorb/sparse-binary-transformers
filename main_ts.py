@@ -143,9 +143,9 @@ def main():
             if early_stopping_increment>=args.es_epochs:
                 print("Early Stopping")
                 return
-        if epoch%5==0:
-            if args.rerandomize==True and epoch>0 and epoch != args.epochs - 1:
-                rerandomize_model(model, args)
+        #if epoch%5==0:
+            #if args.rerandomize==True and epoch>0 and epoch != args.epochs - 1:
+                #rerandomize_model(model, args)
 
 if __name__ == "__main__":
     print(args)
