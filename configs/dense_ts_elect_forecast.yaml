@@ -2,7 +2,7 @@
 #score_init: None
 dataset: electricity
 
-weight_seed: 3
+weight_seed: 0
 score_seed: 0
 gpu: 2
 batch_size: 128
