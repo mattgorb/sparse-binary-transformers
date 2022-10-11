@@ -8,7 +8,7 @@ gpu: 2
 batch_size: 128
 
 model_type: 'Sparse'
-attention: 'Sparse'
+attention: 'Dense'
 
 epochs: 100
 weight_file: sparse_ts_electricity
@@ -30,4 +30,3 @@ pos_enc: 'Standard'
 lr: .001
 scheduler: True
 es_epochs: 5
-rerandomize: True
