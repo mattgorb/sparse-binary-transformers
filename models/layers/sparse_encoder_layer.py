@@ -1,5 +1,5 @@
 import torch.nn as nn
-from models.layers.sparse_type import linear_init,layernorm_init
+from models.layers.sparse_type import linear_init,layernorm_init, batchnorm_init
 import torch.nn.functional as F
 from models.layers.sparse_multihead_attention import SparseMultiheadAttention
 from models.layers.base_multihead_attention import MultiheadAttention
@@ -31,8 +31,9 @@ class SparseTransformerEncoderLayer(nn.Module):
         #self.norm1 = layernorm_init(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
         #self.norm2 = layernorm_init(self.args.window_size, eps=layer_norm_eps,args=args, **factory_kwargs)
 
-        self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
-        self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        #self.norm1 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+        #self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
+
 
         self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
         self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)

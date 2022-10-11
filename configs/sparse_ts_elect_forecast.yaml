@@ -15,8 +15,8 @@ weight_file: sparse_ts_electricity
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
-attention_prune_rate: .5
-has_src_mask: True
+attention_prune_rate: 0.5
+has_src_mask: False
 
 window_size: 200
 dmodel: 512
