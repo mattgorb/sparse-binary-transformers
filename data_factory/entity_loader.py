@@ -272,8 +272,7 @@ class ForecastDS(object):
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
             test_data = data_frame[test_start:test_end].values
-            print(self.data)
-            print(test_data)
+
             print(self.data.shape)
             print(valid_data.shape)
             print(test_data.shape)
