@@ -210,55 +210,6 @@ class SMAP_MSL(object):
 
 
 
-class electTestDataset(Dataset):
-    def __init__(self, data_path, data_name, predict_length,mode):
-        if mode!='val':
-            self.data = np.load(os.path.join(data_path, f'{mode}_data_{data_name}.npy'))
-            self.v = np.load(os.path.join(data_path, f'{mode}_v_{data_name}.npy'))
-            self.label = np.load(os.path.join(data_path, f'{mode}_label_{data_name}.npy'))
-            self.test_len = self.data.shape[0]
-            self.pred_length = predict_length
-        else:
-            self.data=None
-        self.train=self.data
-        self.test=self.data
-        self.val=None
-
-        print(self.label)
-        print(self.label.shape)
-        print(np.count_nonzero(self.label))
-        print(np.mean(self.label))
-        print(np.std(self.label))
-        print(np.max(self.label))
-
-        print(np.min(self.label))
-        sys.exit()
-
-    def __len__(self):
-        return self.test_len
-
-    def __getitem__(self, index):
-        all_data = torch.from_numpy(self.data[index].copy())
-        cov = all_data[:, 2:]
-        label = torch.from_numpy(self.label[index].copy())
-        v = float(self.v[index][0])
-        if v > 0:
-            data = label / v
-        else:
-            data = label
-
-        split_start = len(label) - self.pred_length + 1
-        all_data = []
-        for i in range(self.pred_length):
-            single_data = data[i:(split_start+i)].clone().unsqueeze(1)
-            single_data[-1] = -1
-            single_cov = cov[i:(split_start+i), :].clone()
-            single_data = torch.cat([single_data, single_cov], dim=1)
-            all_data.append(single_data)
-        all_data = torch.stack(all_data, dim=0)
-        label = label[-self.pred_length:]
-
-        return all_data.squeeze(0), label#, v
 
 class ForecastDS(object):
     def __init__(self, data_path, win_size, step, mode,dataset):
@@ -277,6 +228,7 @@ class ForecastDS(object):
             data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
             data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]'''
 
+            #informer dates
             train_start = '2012-01-01 00:00:00'
             train_end = '2014-02-06 03:0:00'
             valid_start = '2014-02-04 04:00:00'
@@ -284,6 +236,7 @@ class ForecastDS(object):
             test_start = '2014-05-24 20:00:00'
             test_end = '2015-01-01 00:00:00'
 
+            #pyraformer dates
             '''train_start = '2012-01-01 00:00:00'
             train_end = '2014-09-01 00:00:00'
             valid_start = '2014-08-25 00:00:00'
@@ -299,20 +252,21 @@ class ForecastDS(object):
             print(valid_data.shape)
             print(test_data.shape)
         elif dataset=='ETTh1':
+            #informer
+            train_start = '2016-07-01 00:00:00'
+            train_end = '2017-06-25 23:00:00'
+            valid_start = '2017-06-24 00:00:00'
+            valid_end = '2017-10-23 23:00:00'
+            test_start = '2017-10-22 00:00:00'
+            test_end = '2018-02-20 23:00:00'
 
-            train_start = '2012-01-01 00:00:00'
-            train_end = '2014-02-06 03:0:00'
-            valid_start = '2014-02-04 04:00:00'
-            valid_end = '2014-05-26 20:00:00'
-            test_start = '2014-05-24 20:00:00'
-            test_end = '2015-01-01 00:00:00'
-
-            '''train_start = '2012-01-01 00:00:00'
-            train_end = '2014-09-01 00:00:00'
-            valid_start = '2014-08-25 00:00:00'
-            valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-09-01 00:00:00'
-            test_end = '2014-12-31 23:00:00'''
+            #pyraformer
+            '''train_start = '2016-07-01 00:00:00'
+            train_end = '2017-06-25 23:00:00'
+            valid_start = '2017-06-24 00:00:00'
+            valid_end = '2017-10-23 23:00:00'
+            test_start = '2017-10-22 00:00:00'
+            test_end = '2018-02-20 23:00:00'''''
             data_frame = pd.read_csv(f'{data_path}ETTh1/ETTh1.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
@@ -324,19 +278,21 @@ class ForecastDS(object):
             print(valid_data.shape)
             print(test_data.shape)
         elif dataset=='ETTm1':
-            train_start = '2012-01-01 00:00:00'
-            train_end = '2014-02-06 03:0:00'
-            valid_start = '2014-02-04 04:00:00'
-            valid_end = '2014-05-26 20:00:00'
-            test_start = '2014-05-24 20:00:00'
-            test_end = '2015-01-01 00:00:00'
+            #informer dates
+            train_start = '2016-07-01 00:00:00'
+            train_end = '2017-06-25 23:45:00'
+            valid_start = '2017-06-25 12:00:00'
+            valid_end = '2017-10-23 23:45:00'
+            test_start = '2017-10-23 12:00:00'
+            test_end = '2018-02-20 23:45:00'
 
-            '''train_start = '2012-01-01 00:00:00'
-            train_end = '2014-09-01 00:00:00'
-            valid_start = '2014-08-25 00:00:00'
-            valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-09-01 00:00:00'
-            test_end = '2014-12-31 23:00:00'''
+            #pyraformer dates
+            '''train_start = '2016-07-01 00:00:00'
+            train_end = '2017-06-25 23:45:00'
+            valid_start = '2016-07-01 00:00:00'
+            valid_end = '2017-10-23 23:45:00'
+            test_start = '2017-10-20 00:00:00'
+            test_end = '2018-02-20 23:45:00'''
             data_frame = pd.read_csv(f'{data_path}ETTm1/ETTm1.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
@@ -392,6 +348,8 @@ class ForecastDS(object):
                 self.test_labels[index // self.step * self.win_size:index // self.step * self.win_size + self.win_size])
 
 
+
+
 def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         print(data_path)
@@ -416,7 +374,10 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
     elif dataset == 'electricity' :
         #dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
         dataset = ForecastDS(data_path, win_size, step, mode, dataset)
-
+    elif dataset == 'ETTh1':
+        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
+    elif dataset == 'ETTm1':
+        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
 
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,
