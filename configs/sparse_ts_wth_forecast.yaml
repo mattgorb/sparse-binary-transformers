@@ -5,13 +5,13 @@ dataset: WTH
 weight_seed: 0
 score_seed: 0
 gpu: 2
-batch_size: 128
+batch_size: 64
 
 model_type: 'Sparse'
 attention: 'Dense'
 
 epochs: 50
-weight_file: dense_ts_wth
+weight_file: sparse_ts_wth
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
@@ -27,6 +27,6 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
-lr: .01
+lr: .001
 scheduler: True
 es_epochs: 5
