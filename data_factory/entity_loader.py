@@ -291,8 +291,7 @@ class Dataset_ETT_hour(Dataset):
             seq_y = self.data_y[r_begin:r_end]
         seq_x_mark = self.data_stamp[s_begin:s_end]
         seq_y_mark = self.data_stamp[r_begin:r_end]
-        print(seq_x.shape)
-        sys.exit()
+
         return seq_x, seq_y
 
     def __len__(self):
