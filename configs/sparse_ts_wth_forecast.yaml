@@ -27,6 +27,6 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
-lr: .001
+lr: .01
 scheduler: True
 es_epochs: 5
