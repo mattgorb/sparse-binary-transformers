@@ -547,11 +547,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         #dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )
         dataset = ForecastDS(data_path, win_size, step, mode, dataset)
     elif dataset == 'ETTh1':
-        #dataset = ForecastDS(data_path, win_size, step, mode, dataset)
-        dataset = Dataset_ETT_hour(data_path,flag=mode, win_size=win_size)
-            #root_path, flag = 'train', size = None,
-            #features = 'S', data_path = 'ETTm1.csv',
-            #target = 'OT', scale = True, inverse = False, timeenc = 0, freq = 't', cols = None
+        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
+        #dataset = Dataset_ETT_hour(data_path,flag=mode, win_size=win_size)
     elif dataset == 'ETTm1':
         dataset = ForecastDS(data_path, win_size, step, mode, dataset)
 
