@@ -510,10 +510,10 @@ class ForecastDS(object):
             return np.float32(self.train[index:index + self.win_size]), np.zeros_like(self.train[index:index + self.win_size])
             #return np.float32(self.train[index:index + self.win_size]), None
         elif (self.mode == 'val'):
-            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size]), index
+            return np.float32(self.val[index:index + self.win_size]), np.zeros_like(self.val[index:index + self.win_size])
         elif (self.mode == 'test'):
             return np.float32(self.test[index:index + self.win_size]), np.zeros_like(
-                self.test[index:index + self.win_size]), index
+                self.test[index:index + self.win_size])
         else:
             return np.float32(self.test[
                               index // self.step * self.win_size:index // self.step * self.win_size + self.win_size]), np.float32(

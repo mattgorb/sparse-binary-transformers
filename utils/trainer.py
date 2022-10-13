@@ -312,7 +312,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
 
     with torch.no_grad():
         for i,batch in enumerate(iterator):
-            data_base, label, index = batch
+            data_base, label = batch
 
             data = torch.clone(data_base)
             if args.forecast:
