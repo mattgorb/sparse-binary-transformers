@@ -345,7 +345,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     #loss2=metrics(preds,actual, iterator)
 
-
+    print(preds)
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     df = pd.DataFrame(preds.detach().cpu().numpy(), columns = [i for i in range(preds.detach().cpu().numpy().shape[1])])
