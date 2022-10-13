@@ -245,7 +245,7 @@ def test_anomaly_detection(model, iterator,val_iterator,train_iterator, criterio
 def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     epoch_loss = 0
     model.train()
-
+    model.float()
     for i, batch in enumerate(iterator):
         #if i % 50 == 0:
             #print(i)
@@ -257,8 +257,8 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
             data[:, -1:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
-        print(data)
-        predictions, _ = model(data.double())
+        #print(data)
+        predictions, _ = model(data)
 
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
