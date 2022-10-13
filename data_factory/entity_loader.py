@@ -262,7 +262,7 @@ class ForecastDS(object):
 
             #pyraformer
             train_start = '2016-07-01 00:00:00'
-            train_end = '2017-06-25 23:00:00'
+            train_end = '2017-10-22 00:00:00'
             valid_start = '2017-06-24 00:00:00'
             valid_end = '2017-10-23 23:00:00'
             test_start = '2017-10-22 00:00:00'
@@ -287,9 +287,9 @@ class ForecastDS(object):
 
             #pyraformer dates
             train_start = '2016-07-01 00:00:00'
-            train_end = '2017-06-25 23:45:00'
+            train_end = '2017-10-20 00:00:00'
             valid_start = '2016-07-01 00:00:00'
-            valid_end = '2017-10-23 23:45:00'
+            valid_end = '2017-10-20 23:45:00'
             test_start = '2017-10-20 00:00:00'
             test_end = '2018-02-20 23:45:00'
             data_frame = pd.read_csv(f'{data_path}ETTm1/ETTm1.csv', index_col=0, parse_dates=True,)
