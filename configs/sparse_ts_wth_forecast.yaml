@@ -10,7 +10,7 @@ batch_size: 64
 model_type: 'Sparse'
 attention: 'Dense'
 
-epochs: 50
+epochs: 100
 weight_file: sparse_ts_wth
 
 layer_norm_prune_rate: 0.5
