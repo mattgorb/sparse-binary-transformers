@@ -105,9 +105,9 @@ def main():
     print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
-    print(train_dataloader.dataset.train.shape)
-    print(train_dataloader.dataset.val.shape)
-    print(train_dataloader.dataset.test.shape)
+    #print(train_dataloader.dataset.train.shape)
+    #print(train_dataloader.dataset.val.shape)
+    #print(train_dataloader.dataset.test.shape)
 
     early_stopping_increment=0
     for epoch in range(args.epochs):
