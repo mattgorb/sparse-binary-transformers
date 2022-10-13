@@ -291,7 +291,7 @@ class Dataset_ETT_hour(Dataset):
         seq_x_mark = self.data_stamp[s_begin:s_end]
         seq_y_mark = self.data_stamp[r_begin:r_end]
 
-        return seq_x, seq_y
+        return np.float32(seq_x), np.float32(seq_y)
 
     def __len__(self):
         return len(self.data_x) - self.seq_len - self.pred_len + 1
