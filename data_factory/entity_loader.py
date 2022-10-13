@@ -281,7 +281,7 @@ class Dataset_ETT_hour(Dataset):
 
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
-
+        print(self.data_x.shape)
         seq_x = self.data_x[s_begin:s_end]
         if self.inverse:
             seq_y = np.concatenate(
