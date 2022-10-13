@@ -562,6 +562,8 @@ def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='trai
         #dataset = Dataset_ETT_hour(data_path,flag=mode, win_size=win_size)
     elif dataset == 'ETTm1':
         dataset = ForecastDS(data_path, win_size, step, mode, dataset)
+    elif dataset == 'WTH':
+        dataset = ForecastDS(data_path, win_size, step, mode, dataset)
 
     data_loader = DataLoader(dataset=dataset,
                              batch_size=batch_size,

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/configs/dense_ts_wth_forecast.yaml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ECL.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ETTh1/ETTh1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ETTm1/ETTm1.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data/ETTh1/ETTh1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -117,7 +114,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="62175000" />
+      <workItem from="1665329939999" duration="62655000" />
     </task>
     <servers />
   </component>
