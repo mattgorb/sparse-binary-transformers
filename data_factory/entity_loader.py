@@ -211,7 +211,7 @@ class SMAP_MSL(object):
 
 class Dataset_ETT_hour(Dataset):
     def __init__(self, root_path, flag='train', size=None,
-                 features='S', data_path='ETTh1/ETTh1.csv',
+                 features='M', data_path='ETTh1/ETTh1.csv',
                  target='OT', scale=True, inverse=False, timeenc=0, freq='h', cols=None, win_size=None):
         # size [seq_len, label_len, pred_len]
         # info
@@ -267,9 +267,9 @@ class Dataset_ETT_hour(Dataset):
         df_stamp = df_raw[['date']][border1:border2]
         df_stamp['date'] = pd.to_datetime(df_stamp.date)
         data_stamp = time_features(df_stamp, timeenc=self.timeenc, freq=self.freq)
-        print(data.shape)
+
         self.data_x = data[border1:border2]
-        print(self.data_x.shape)
+
         if self.inverse:
             self.data_y = df_data.values[border1:border2]
         else:
