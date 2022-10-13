@@ -267,8 +267,9 @@ class Dataset_ETT_hour(Dataset):
         df_stamp = df_raw[['date']][border1:border2]
         df_stamp['date'] = pd.to_datetime(df_stamp.date)
         data_stamp = time_features(df_stamp, timeenc=self.timeenc, freq=self.freq)
-        print(df_stamp)
+        print(data.shape)
         self.data_x = data[border1:border2]
+        print(self.data_x.shape)
         if self.inverse:
             self.data_y = df_data.values[border1:border2]
         else:
@@ -291,6 +292,7 @@ class Dataset_ETT_hour(Dataset):
         seq_x_mark = self.data_stamp[s_begin:s_end]
         seq_y_mark = self.data_stamp[r_begin:r_end]
         print(seq_x.shape)
+        sys.exit()
         return seq_x, seq_y
 
     def __len__(self):
