@@ -437,7 +437,7 @@ class ForecastDS(object):
             valid_end = '2017-10-23 23:00:00'
             test_start = '2013-03-12 20:00:00'
             test_end = '2013-12-31 23:00:00'
-            data_frame = pd.read_csv(f'{data_path}weather/WTH.csv', index_col=0, parse_dates=True,)
+            data_frame = pd.read_csv(f'{data_path}WTH/WTH.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
