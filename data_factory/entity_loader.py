@@ -253,20 +253,20 @@ class ForecastDS(object):
             print(test_data.shape)
         elif dataset=='ETTh1':
             #informer
-            train_start = '2016-07-01 00:00:00'
-            train_end = '2017-06-25 23:00:00'
-            valid_start = '2017-06-24 00:00:00'
-            valid_end = '2017-10-23 23:00:00'
-            test_start = '2017-10-22 00:00:00'
-            test_end = '2018-02-20 23:00:00'
-
-            #pyraformer
             '''train_start = '2016-07-01 00:00:00'
             train_end = '2017-06-25 23:00:00'
             valid_start = '2017-06-24 00:00:00'
             valid_end = '2017-10-23 23:00:00'
             test_start = '2017-10-22 00:00:00'
             test_end = '2018-02-20 23:00:00'''''
+
+            #pyraformer
+            train_start = '2016-07-01 00:00:00'
+            train_end = '2017-06-25 23:00:00'
+            valid_start = '2017-06-24 00:00:00'
+            valid_end = '2017-10-23 23:00:00'
+            test_start = '2017-10-22 00:00:00'
+            test_end = '2018-02-20 23:00:00'
             data_frame = pd.read_csv(f'{data_path}ETTh1/ETTh1.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
@@ -278,20 +278,20 @@ class ForecastDS(object):
             print(test_data.shape)
         elif dataset=='ETTm1':
             #informer dates
-            train_start = '2016-07-01 00:00:00'
+            '''train_start = '2016-07-01 00:00:00'
             train_end = '2017-06-25 23:45:00'
             valid_start = '2017-06-25 12:00:00'
             valid_end = '2017-10-23 23:45:00'
             test_start = '2017-10-23 12:00:00'
-            test_end = '2018-02-20 23:45:00'
+            test_end = '2018-02-20 23:45:00'''''
 
             #pyraformer dates
-            '''train_start = '2016-07-01 00:00:00'
+            train_start = '2016-07-01 00:00:00'
             train_end = '2017-06-25 23:45:00'
             valid_start = '2016-07-01 00:00:00'
             valid_end = '2017-10-23 23:45:00'
             test_start = '2017-10-20 00:00:00'
-            test_end = '2018-02-20 23:45:00'''
+            test_end = '2018-02-20 23:45:00'
             data_frame = pd.read_csv(f'{data_path}ETTm1/ETTm1.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
