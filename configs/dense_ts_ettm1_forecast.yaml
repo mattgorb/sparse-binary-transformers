@@ -7,7 +7,7 @@ score_seed: 0
 gpu: 2
 batch_size: 128
 model_type: 'Dense'
-epochs: 100
+epochs: 50
 weight_file: dense_ts_electricity
 
 window_size: 200
@@ -21,4 +21,4 @@ save_graphs: False
 pos_enc: 'Standard'
 lr: .001
 scheduler: True
-es_epochs: 10
+es_epochs: 5
