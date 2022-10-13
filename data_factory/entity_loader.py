@@ -278,6 +278,8 @@ class Dataset_ETT_hour(Dataset):
     def __getitem__(self, index):
         s_begin = index
         s_end = s_begin + self.seq_len
+        print(self.seq_len)
+        sys.exit()
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
 
