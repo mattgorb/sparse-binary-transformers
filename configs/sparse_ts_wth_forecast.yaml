@@ -28,5 +28,5 @@ save_graphs: False
 
 pos_enc: 'Standard'
 lr: .001
-scheduler: True
+#scheduler: True
 #es_epochs: 5
