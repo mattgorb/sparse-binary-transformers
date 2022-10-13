@@ -258,7 +258,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
         data = data.to(device)
         data_base = data_base.to(device)
 
-        predictions, _ = model(data)
+        predictions, _ = model(data.double())
 
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
         sample_loss = sample_loss.mean(dim=1)
