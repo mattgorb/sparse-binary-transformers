@@ -7,7 +7,7 @@ gpu: 0
 batch_size: 128
 
 model_type: 'Sparse'
-attention: 'Sparse' #
+attention: 'Dense' #
 
 layer_norm_prune_rate: 0.5
 lin_prune_rate: 0.5
