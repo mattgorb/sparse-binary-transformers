@@ -10,6 +10,6 @@ nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=6 
 nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=7 --lin_prune_rate=0.25 --attention_prune_rate=0.25> ~/results_anomaly/8.txt 2>&1
 nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=0 --lin_prune_rate=0.25 --attention_prune_rate=0.25> ~/results_anomaly/9.txt 2>&1
 
-nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=6 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/10.txt 2>&1
-nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=7 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/11.txt 2>&1
-nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=0 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/12.txt 2>&1
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=1 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/10.txt 2>&1
+nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=2 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/11.txt 2>&1
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=3 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/12.txt 2>&1
