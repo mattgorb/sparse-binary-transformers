@@ -20,4 +20,5 @@ save_graphs: False
 has_src_mask: False
 
 pos_enc: 'Standard'
-
+scheduler: True
+es_epochs: 5

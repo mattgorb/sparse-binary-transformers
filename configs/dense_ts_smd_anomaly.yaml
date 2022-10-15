@@ -19,4 +19,6 @@ batch_norm: False
 save_graphs: False
 
 pos_enc: 'Standard'
+
 scheduler: True
+es_epochs: 5
