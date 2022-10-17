@@ -161,6 +161,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                 else:
                     print(f'Class not found {m._get_name()}')
                     #sys.exit()
+                print(t)
                 params_dict['total_params'] += int(t)
                 params_dict['total_nonzero_params'] += int(nz)
                 params_dict['float32_params'] += int(f)
