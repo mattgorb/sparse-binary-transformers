@@ -14,9 +14,9 @@ class SparseTransformerEncoderLayer(nn.Module):
         super(SparseTransformerEncoderLayer, self).__init__()
 
         self.args=args
-        print(args.attention)
+
         if self.args.attention=='SparseTopP':
-            print('here')
+
             from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
             self.self_attn = SparseTopPMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
@@ -25,12 +25,13 @@ class SparseTransformerEncoderLayer(nn.Module):
             from models.layers.sparse_multihead_attention import SparseMultiheadAttention
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
+            print(self.self_attn)
         else:
             from models.layers.base_multihead_attention import MultiheadAttention
             self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=self.args,
                                                 **factory_kwargs)
 
-        print(self.self_attn)
+
         sys.exit()
         self.dropout=dropout
         self.dropout1 = nn.Dropout(self.dropout)
