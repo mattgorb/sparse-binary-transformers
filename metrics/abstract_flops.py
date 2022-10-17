@@ -273,7 +273,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     head_flops3=nonzero_attn_output# AV'''
     #print(qdim)
     #print(qlen)
-    sort_flops=int(3*qlen*math.log(qlen))
+    sort_flops=int(3*qlen*qdim*math.log(qlen*qdim))
     #print(sort_flops)
     flops+=sort_flops
     qlen_prate=int(qlen* multihead_attention_module.attention_prune_rate)
