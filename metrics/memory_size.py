@@ -118,7 +118,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                         f=t*m.prune_rate
                         #params_dict['total_bits'] += int(nz*32+(t-nz)*1)
                         #continue
-                        sys.exit()
+                        #sys.exit()
                 elif m._get_name()=='BatchNorm1d':
                     if args.layer_norm==False:
                         print('continuing...')
@@ -133,7 +133,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                         dtype=torch.float
                         bits = dtype2bits[dtype]
                         params_dict['total_bits'] += int(bits * t)
-                        sys.exit()
+                        #sys.exit()
                 else:
                     print(f'Class not found {m._get_name()}')
                     #sys.exit()
