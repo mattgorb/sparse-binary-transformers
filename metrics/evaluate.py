@@ -36,6 +36,11 @@ def evaluate(model, test_dataloader, criterion, args):
         for batch in test_dataloader:
             data, label, padding, index = batch
             break
+    elif args.forecast:
+        for batch in test_dataloader:
+            data, label = batch
+            break
+
     else:
         for batch in test_dataloader:
             data, label, index = batch
