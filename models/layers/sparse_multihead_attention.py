@@ -91,7 +91,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
 
 
     def _get_name(self):
-        return 'SparseTopPMultiheadAttention'
+        return 'SparseMultiheadAttention'
 
     @classmethod
     def from_float(cls, other):
