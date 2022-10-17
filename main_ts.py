@@ -98,7 +98,7 @@ def main():
     best_result['f1']=0
 
     if args.evaluate:
-        evaluate(model, test_dataloader, criterion, args)
+        evaluate(model, test_dataloader, criterion, args,device)
         return
 
 
