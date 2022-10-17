@@ -37,7 +37,7 @@ def epoch_time(start_time, end_time):
 
 def print_model(model, args):
     for n, m in model.named_modules():
-        print(f'{n}')
+        print(f'{n}, {m._get_name()}')
         #if hasattr(m, "weight") and m.weight is not None:
             #print(f'{n}: {m.weight.numel()}')
 
