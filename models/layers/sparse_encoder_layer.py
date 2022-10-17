@@ -21,18 +21,16 @@ class SparseTransformerEncoderLayer(nn.Module):
             self.self_attn = SparseTopPMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
         elif self.args.attention=='Sparse':
-            print('here2')
+
             from models.layers.sparse_multihead_attention import SparseMultiheadAttention
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
-            print(self.self_attn)
+
         else:
             from models.layers.base_multihead_attention import MultiheadAttention
             self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=self.args,
                                                 **factory_kwargs)
 
-
-        sys.exit()
         self.dropout=dropout
         self.dropout1 = nn.Dropout(self.dropout)
         self.dropout2 = nn.Dropout(self.dropout)
