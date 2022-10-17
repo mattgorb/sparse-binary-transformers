@@ -72,8 +72,8 @@ def model_size(model,args,quantized=False, as_bits=True):
                     print(f'{name} continuing...')
                     continue
             t = np.prod(tensor.shape)
-            print(f'Weights found for {name}')
-            #print(t)
+            print(f'Weights found for {name}, {t}')
+            print(t)
             nz = nonzero(tensor.detach().cpu().numpy())
             bits = dtype2bits[tensor.dtype]
             params_dict['total_bits']+=(bits*t)
