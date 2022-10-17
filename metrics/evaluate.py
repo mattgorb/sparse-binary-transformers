@@ -27,6 +27,7 @@ warnings.filterwarnings("ignore")
 
 def evaluate(model, test_dataloader, criterion, args,device='cpu'):
     #device ='cpu'
+    print(f'deevice {device}')
     model = model.to(device)
     criterion=criterion.to(device)
 
