@@ -1,8 +1,9 @@
 import torch.nn as nn
 from models.layers.sparse_type import linear_init,layernorm_init, batchnorm_init
 import torch.nn.functional as F
-from models.layers.sparse_multihead_attention import SparseMultiheadAttention
-from models.layers.base_multihead_attention import MultiheadAttention
+
+
+
 
 class SparseTransformerEncoderLayer(nn.Module):
 
@@ -13,10 +14,16 @@ class SparseTransformerEncoderLayer(nn.Module):
         super(SparseTransformerEncoderLayer, self).__init__()
 
         self.args=args
-        if args.attention=='Sparse':
+        if args.attention=='SparseTopP':
+            from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
+            self.self_attn = SparseTopPMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
+                                                **factory_kwargs)
+        elif args.attention=='Sparse':
+            from models.layers.sparse_multihead_attention import SparseMultiheadAttention
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
         else:
+            from models.layers.base_multihead_attention import MultiheadAttention
             self.self_attn = MultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=self.args,
                                                 **factory_kwargs)
 
@@ -35,11 +42,11 @@ class SparseTransformerEncoderLayer(nn.Module):
         #self.norm2 = nn.LayerNorm(self.args.window_size, eps=layer_norm_eps, **factory_kwargs)
 
 
-        self.bn1 = batchnorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
-        self.bn2 = batchnorm_init(d_model, eps=layer_norm_eps, args=args,**factory_kwargs)
+        #self.bn1 = batchnorm_init(d_model, eps=layer_norm_eps,args=args, **factory_kwargs)
+        #self.bn2 = batchnorm_init(d_model, eps=layer_norm_eps, args=args,**factory_kwargs)
 
-        #self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
-        #self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.bn1 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
+        self.bn2 = nn.BatchNorm1d(d_model, eps=layer_norm_eps, **factory_kwargs)
 
         self.activation = activation
 

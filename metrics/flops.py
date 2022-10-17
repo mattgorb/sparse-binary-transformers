@@ -8,7 +8,7 @@ from .abstract_flops import *
 from .util import get_activations
 from models.layers.positional_encoder import PositionalEncoding
 from models.layers.sparse_type import SubnetLayerNorm,SubnetLinBiprop
-from models.layers.sparse_multihead_attention import SparseMultiheadAttention
+from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
 
 def _multihead_attention_flops(module, activation):
     return multihead_attention_flops(multihead_attention_module=module,input=activation)
@@ -74,7 +74,7 @@ def flops(model, input):
         SubnetLinBiprop: _subnet_linear_flops,
         SubnetLayerNorm: _subnet_layernorm_flops,
         SubnetBatchNorm: _subnet_layernorm_flops,
-        SparseMultiheadAttention: _subnet_multihead_flops
+        SparseTopPMultiheadAttention: _subnet_multihead_flops
     }
 
     flops_dict={}

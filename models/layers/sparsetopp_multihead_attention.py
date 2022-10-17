@@ -9,7 +9,7 @@ from models.layers.sparse_type import linear_init
 
 import warnings
 
-class SparseMultiheadAttention(nn.MultiheadAttention):
+class SparseTopPMultiheadAttention(nn.MultiheadAttention):
     _FLOAT_MODULE = nn.MultiheadAttention
 
     r"""Quantizable implementation of the MultiheadAttention.
@@ -63,7 +63,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
                  kdim: int = None, vdim: int = None, batch_first: bool = False,
                  device=None, dtype=None, args=None) -> None:
         factory_kwargs = {'device': device, 'dtype': dtype}
-        super(SparseMultiheadAttention, self).__init__(embed_dim, num_heads, dropout,
+        super(SparseTopPMultiheadAttention, self).__init__(embed_dim, num_heads, dropout,
                                                  bias, add_bias_kv,
                                                  add_zero_attn, kdim, vdim, batch_first,
                                                  **factory_kwargs)
@@ -291,6 +291,22 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         q = self.linear_Q(query)
         k = self.linear_K(key)
         v = self.linear_V(value)
+
+        #q=128
+        #prune_rate 50%
+        #highest absolute values
+
+
+        prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
+
+        q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
+        q.flatten()[q_sort_ind[prune_size:]]=0
+
+        k_sort_val, k_sort_ind=torch.sort(k.abs().flatten(),descending=True)
+        k.flatten()[k_sort_ind[prune_size:]]=0
+
+        v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
+        v.flatten()[v_sort_ind[prune_size:]]=0
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
