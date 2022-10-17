@@ -106,7 +106,7 @@ def model_size(model,args,quantized=False, as_bits=True):
                     dtype=torch.float
                     bits = dtype2bits[dtype]
                     params_dict['total_bits'] += int(bits * t)
-                elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb' or m._get_name()=='SubnetBatchNorm':
+                elif m._get_name()=='SubnetLayerNorm' or m._get_name()=='SubnetEmb' :
                     if args.layer_norm==False:
                         print('continuing...')
                         continue
@@ -114,13 +114,37 @@ def model_size(model,args,quantized=False, as_bits=True):
                         tensor = m.weight.detach().cpu().numpy()
                         b = np.prod(tensor.shape)
                         t = b
-                        # print(t)
                         nz = b * m.prune_rate
                         dtype = torch.bool
                         bits = dtype2bits[dtype]
                         params_dict['total_bits'] += int(bits * b)
-
+                elif m._get_name()=='SubnetBatchNorm' or m._get_name()=='SubnetEmb' :
+                    if args.batch_norm==False:
+                        print('continuing...')
+                        continue
+                    else:
+                        tensor = m.weight.detach().cpu().numpy()
+                        b = np.prod(tensor.shape)
+                        t = b
+                        nz = b * m.prune_rate
+                        dtype = torch.bool
+                        bits = dtype2bits[dtype]
+                        params_dict['total_bits'] += int(bits * b)
                 elif m._get_name()=='BatchNorm1d':
+                    if args.batch_norm==False:
+                        print('continuing...')
+                        continue
+                    else:
+                        tensor=m.weight.detach().cpu().numpy()
+                        t = np.prod(tensor.shape)
+                        #t=b
+                        b=0
+                        #print(t)
+                        nz = nonzero(tensor)
+                        dtype=torch.float
+                        bits = dtype2bits[dtype]
+                        params_dict['total_bits'] += int(bits * t)
+                elif m._get_name()=='LayerNorm':
                     if args.layer_norm==False:
                         print('continuing...')
                         continue
@@ -134,7 +158,6 @@ def model_size(model,args,quantized=False, as_bits=True):
                         dtype=torch.float
                         bits = dtype2bits[dtype]
                         params_dict['total_bits'] += int(bits * t)
-                        #sys.exit()
                 else:
                     print(f'Class not found {m._get_name()}')
                     #sys.exit()
