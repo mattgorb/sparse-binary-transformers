@@ -8,7 +8,7 @@ gpu: 2
 batch_size: 128
 
 model_type: 'Sparse'
-attention: 'Dense'
+attention: 'Sparse'
 
 epochs: 100
 weight_file: sparse_ts_electricity

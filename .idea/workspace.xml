@@ -4,26 +4,18 @@
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ECL.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data/ETTh1/ETTh1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_arabic.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_arabic.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_fd.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_fd.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_hb.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_hb.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_insect.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_insect.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_japan.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_japan.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_msl_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_elect_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_ettm1_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_ettm1_forecast.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smap_anomaly.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_smd_anomaly.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forecasting.sh" beforeDir="false" afterPath="$PROJECT_DIR$/forecasting.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_wth_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_wth_forecast.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/flops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data/app_zone_rpc_hour_encrypted.zip" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data/ETTm1/ETTm1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" afterDir="false" />
@@ -126,7 +118,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="98411000" />
+      <workItem from="1665329939999" duration="99847000" />
     </task>
     <servers />
   </component>
@@ -236,7 +228,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main_ts.py</url>
-          <line>104</line>
+          <line>105</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
