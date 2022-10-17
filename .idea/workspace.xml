@@ -12,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/abstract_flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/abstract_flops.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/flops.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data/app_zone_rpc_hour_encrypted.zip" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data/ETTm1/ETTm1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" afterDir="false" />
@@ -115,7 +114,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="90913000" />
+      <workItem from="1665329939999" duration="91183000" />
     </task>
     <servers />
   </component>
@@ -175,7 +174,7 @@
     </state>
     <state x="34" y="25" width="1428" height="598" key="dock-window-5/0.25.1680.927@0.25.1680.927" timestamp="1664986535808" />
     <state x="3634" y="-40" width="1428" height="598" key="dock-window-5/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1664978242069" />
-    <state x="702" y="240" width="819" height="655" key="find.popup" timestamp="1665975364875">
+    <state x="697" y="304" width="888" height="655" key="find.popup" timestamp="1665975656850">
       <screen x="0" y="25" width="1680" height="934" />
     </state>
     <state x="702" y="235" width="597" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1664331060076" />
@@ -184,7 +183,7 @@
     <state x="702" y="238" width="818" height="645" key="find.popup/0.25.1680.922@0.25.1680.922" timestamp="1665508755210" />
     <state x="702" y="239" width="599" height="500" key="find.popup/0.25.1680.927@0.25.1680.927" timestamp="1664939237300" />
     <state x="702" y="240" width="598" height="500" key="find.popup/0.25.1680.930@0.25.1680.930" timestamp="1658369025469" />
-    <state x="702" y="240" width="819" height="655" key="find.popup/0.25.1680.934@0.25.1680.934" timestamp="1665975364875" />
+    <state x="697" y="304" width="888" height="655" key="find.popup/0.25.1680.934@0.25.1680.934" timestamp="1665975656850" />
     <state x="702" y="241" width="818" height="656" key="find.popup/0.25.1680.937@0.25.1680.937" timestamp="1665544066881" />
     <state x="4402" y="203" width="683" height="601" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1660517181769" />
     <state x="702" y="236" width="597" height="548" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@0.25.1680.913" timestamp="1657301848383" />
@@ -229,7 +228,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/metrics/abstract_flops.py</url>
-          <line>167</line>
+          <line>185</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

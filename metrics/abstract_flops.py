@@ -4,6 +4,24 @@ from models.layers.sparse_type import *
 import torch.nn.functional as nnF
 import math
 
+
+def subnet_norm_flops(module, input,):
+    batch_flops = np.prod(input[0].shape)
+
+    print("HERE")
+    print(batch_flops)
+    print(module.affine)
+    print(module.elementwise_affine)
+    sys.exit()
+
+    if (getattr(module, 'affine', False)
+            or getattr(module, 'elementwise_affine', False)):
+        batch_flops *= 2
+    return batch_flops, batch_flops*module.prune_rate
+
+
+
+
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
     print("HERE")
@@ -306,12 +324,6 @@ def subnet_dense_flops(module):
 
     return module.in_features*module.out_features, int(module.prune_rate*module.in_features*module.out_features)
 
-def subnet_norm_flops(module, input,):
-    batch_flops = np.prod(input[0].shape)
-    if (getattr(module, 'affine', False)
-            or getattr(module, 'elementwise_affine', False)):
-        batch_flops *= 2
-    return batch_flops, batch_flops*module.prune_rate
 
 
 
