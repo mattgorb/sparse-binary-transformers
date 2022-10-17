@@ -46,7 +46,7 @@ def evaluate(model, test_dataloader, criterion, args,device='cpu'):
         for batch in test_dataloader:
             data, label, index = batch
             break
-
+    data = data.to(device)
     #print(data.size())
     #sys.exit()
     model_input=torch.ones_like(data.float())*.5
