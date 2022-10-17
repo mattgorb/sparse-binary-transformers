@@ -14,12 +14,14 @@ class SparseTransformerEncoderLayer(nn.Module):
         super(SparseTransformerEncoderLayer, self).__init__()
 
         self.args=args
-        print(self.args.attention)
-        if args.attention=='SparseTopP':
+        print(args.attention)
+        if self.args.attention=='SparseTopP':
+            print('here')
             from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
             self.self_attn = SparseTopPMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
-        elif args.attention=='Sparse':
+        elif self.args.attention=='Sparse':
+            print('here2')
             from models.layers.sparse_multihead_attention import SparseMultiheadAttention
             self.self_attn = SparseMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
                                                 **factory_kwargs)
