@@ -14,6 +14,7 @@ class SparseTransformerEncoderLayer(nn.Module):
         super(SparseTransformerEncoderLayer, self).__init__()
 
         self.args=args
+        print(self.args.attention)
         if args.attention=='SparseTopP':
             from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
             self.self_attn = SparseTopPMultiheadAttention(d_model, nhead, dropout=dropout, batch_first=batch_first,args=args,
