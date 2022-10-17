@@ -7,9 +7,7 @@ import math
 
 def subnet_norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
-    print(input.shape)
-    print(module.weight.shape)
-    sys.exit()
+
     #if (getattr(module, 'affine', False)
      #       or getattr(module, 'elementwise_affine', False)):
       #  batch_flops *= 2
