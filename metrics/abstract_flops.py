@@ -6,6 +6,12 @@ import math
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
+    print("HERE")
+    print(batch_flops)
+    print(module.affine)
+    print(module.elementwise_affine)
+    sys.exit()
+
     if (getattr(module, 'affine', False)
             or getattr(module, 'elementwise_affine', False)):
         batch_flops *= 2

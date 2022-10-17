@@ -73,6 +73,7 @@ def flops(model, input):
     BOP_fn = {
         SubnetLinBiprop: _subnet_linear_flops,
         SubnetLayerNorm: _subnet_layernorm_flops,
+        SubnetBatchNorm: _subnet_layernorm_flops,
         SparseMultiheadAttention: _subnet_multihead_flops
     }
 
