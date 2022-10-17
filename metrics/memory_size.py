@@ -113,6 +113,9 @@ def model_size(model,args,quantized=False, as_bits=True):
                     else:
                         tensor=m.weight.detach().cpu().numpy()
                         t = np.prod(tensor.shape)
+                        print(tensor.shape)
+                        print(m.prune_rate)
+                        sys.exit()
                         nz = t*m.prune_rate
                         b=(t-nz)
                         f=t*m.prune_rate
