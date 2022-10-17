@@ -38,9 +38,7 @@ def epoch_time(start_time, end_time):
 def rerandomize_model(model, args):
     for n, m in model.named_modules():
         if hasattr(m, "weight") and m.weight is not None:
-            if isinstance(m, SubnetLinBiprop):
-                print(f"==> Rerandomizing weights of {n}")
-                m.rerandomize()
+            print(f'{n}: {m.weight.numel()}')
 
 def main():
     device = torch.device(f'cuda:{args.gpu}' if torch.cuda.is_available() else 'cpu')
@@ -87,7 +85,8 @@ def main():
     else:
         print("Invalid")
         sys.exit()
-
+    rerandomize_model(model, args)
+    sys.exit()
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
