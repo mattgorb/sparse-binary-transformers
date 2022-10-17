@@ -79,7 +79,9 @@ def main():
         dmodel = input_dim*2
     else:
         dmodel = args.dmodel
-
+    print(dmodel)
+    print(train_dataloader.dataset.train.shape)
+    sys.exit()
     if args.model_type=='Dense':
         model = TSTransformerModel(input_dim=input_dim, ninp=dmodel, nhead=2, nhid=256, nlayers=2, args=args).to(device)
     elif args.model_type=='Sparse':
