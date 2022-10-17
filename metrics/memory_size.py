@@ -71,6 +71,8 @@ def model_size(model,args,quantized=False, as_bits=True):
                 if args.layer_norm == False:
                     print(f'{name} continuing...')
                     continue
+            if 'in_proj' in name:
+                continue
             t = np.prod(tensor.shape)
             print(f'Weights found for {name}, {t}')
             #print(t)
