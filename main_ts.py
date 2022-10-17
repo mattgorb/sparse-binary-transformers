@@ -86,7 +86,7 @@ def main():
         print("Invalid")
         sys.exit()
     rerandomize_model(model, args)
-    sys.exit()
+    #sys.exit()
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
