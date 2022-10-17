@@ -203,7 +203,7 @@ class SubnetLayerNorm(nn.LayerNorm):
 
 
 def batchnorm_init(in_dim,eps=None , args=None, **factory_kwargs):
-    layer=SubnetBatchNorm(normalized_shape=in_dim,eps=eps, **factory_kwargs)
+    layer=SubnetBatchNorm(in_dim,eps=eps, **factory_kwargs)
     layer.init(args)
     return layer
 
