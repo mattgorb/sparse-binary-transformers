@@ -9,6 +9,7 @@ def subnet_norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
 
     print("HERE")
+    print(input.shape)
     print(batch_flops)
     print(module.affine)
     print(module.elementwise_affine)
