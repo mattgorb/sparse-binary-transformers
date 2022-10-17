@@ -7,17 +7,11 @@ import math
 
 def subnet_norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
-
-    print("HERE")
-    print(input.shape)
-    print(batch_flops)
-    print(module.affine)
-    print(module.elementwise_affine)
+    print(module.weight.shape)
     sys.exit()
-
-    if (getattr(module, 'affine', False)
-            or getattr(module, 'elementwise_affine', False)):
-        batch_flops *= 2
+    #if (getattr(module, 'affine', False)
+     #       or getattr(module, 'elementwise_affine', False)):
+      #  batch_flops *= 2
     return batch_flops, batch_flops*module.prune_rate
 
 
@@ -25,11 +19,7 @@ def subnet_norm_flops(module, input,):
 
 def norm_flops(module, input,):
     batch_flops = np.prod(input[0].shape)
-    print("HERE")
-    print(batch_flops)
-    print(module.affine)
-    print(module.elementwise_affine)
-    sys.exit()
+
 
     if (getattr(module, 'affine', False)
             or getattr(module, 'elementwise_affine', False)):
