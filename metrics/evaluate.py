@@ -32,12 +32,12 @@ def evaluate(model, test_dataloader, criterion, args,device='cpu'):
     criterion=criterion.to(device)
 
     model.eval()
-    if args.dataset=='InsectWingbeat':
+    if args.dataset=='InsectWingbeat' or args.dataset=='JapaneseVowels':
 
         for batch in test_dataloader:
             data, label, padding, index = batch
             break
-    elif args.forecast:
+    elif args.forecast :
         for batch in test_dataloader:
             data, label = batch
             break
