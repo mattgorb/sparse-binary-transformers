@@ -69,14 +69,14 @@ def flops(model, input):
         MultiheadAttention: _multihead_attention_flops,
         nn.LayerNorm: _layernorm_flops,
         PositionalEncoding: _posenc_flops,
+        SparseMultiheadAttention: _multihead_attention_flops
     }
 
     BOP_fn = {
         SubnetLinBiprop: _subnet_linear_flops,
         SubnetLayerNorm: _subnet_layernorm_flops,
         SubnetBatchNorm: _subnet_layernorm_flops,
-        SparseTopPMultiheadAttention: _subnet_multihead_flops,
-        SparseMultiheadAttention: _multihead_attention_flops
+        SparseTopPMultiheadAttention: _subnet_multihead_flops
     }
 
     flops_dict={}
