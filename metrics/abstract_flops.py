@@ -164,9 +164,13 @@ def multihead_attention_flops(multihead_attention_module, input,):
     else:
 
         head_flops=0
-        head_flops+=((qlen-1) * (qk_head_dim)+(klen-1) * (qk_head_dim))  # QK^T (n-1)(2p-1)+(m-1)(2p-1)
-        head_flops += (qlen + klen)  # softmax
-        head_flops +=((qlen-1) * (v_head_dim-1)+(klen-1) * (v_head_dim))  # AV
+        #head_flops+=((qlen-1) * (qk_head_dim)+(klen-1) * (qk_head_dim))  # QK^T (n-1)(2p-1)+(m-1)(2p-1)
+        #head_flops += (qlen + klen)  # softmax
+        #head_flops +=((qlen-1) * (v_head_dim-1)+(klen-1) * (v_head_dim))  # AV
+
+        head_flops+=((qlen-1) * (qk_head_dim))  # QK^T (n-1)(2p-1)+(m-1)(2p-1)
+        head_flops += (qlen)  # softmax
+        head_flops +=((qlen-1) * (qk_head_dim))  # AV
         flops += num_heads * head_flops
         #flops *= batch_size
 
