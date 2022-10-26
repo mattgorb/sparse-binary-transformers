@@ -402,9 +402,6 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
             )
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
-        attn_output_weights = nnF.softmax(
-            attn_output_weights, dim=-1)
-        attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
 
         if self.args.ablation:
             #print(attn_output_weights)
@@ -416,6 +413,12 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
             print(attn_output_weights[1,-1,-5:])
             #print(x)
             #sys.exit()
+
+        attn_output_weights = nnF.softmax(
+            attn_output_weights, dim=-1)
+        attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
+
+
 
         attn_output = torch.bmm(attn_output_weights, v)
 
