@@ -424,6 +424,13 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         attn_output = torch.bmm(attn_output_weights, v)
 
+
+        if self.args.ablation:
+            print(attn_output_weights.size())
+            print(torch.count_nonzero(attn_output_weights))
+            print(attn_output.size())
+            print(torch.count_nonzero(attn_output))
+
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
             attn_output = attn_output.view(bsz, tgt_len, self.embed_dim)

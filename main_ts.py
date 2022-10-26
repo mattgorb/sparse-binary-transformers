@@ -87,7 +87,7 @@ def main():
         print("Invalid")
         sys.exit()
     print_model(model, args)
-    #sys.exit()
+
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
