@@ -426,6 +426,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
         if self.args.ablation:
+            print('here')
             print(attn_output_weights.size())
             print(torch.count_nonzero(attn_output_weights))
             print(attn_output.size())
