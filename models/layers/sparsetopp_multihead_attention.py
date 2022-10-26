@@ -308,8 +308,10 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
         v.flatten()[v_sort_ind[prune_size:]]=0
 
+        print(q)
         q = self.q_scaling_product.mul_scalar(q, scaling)
-
+        print(q)
+        sys.exit()
         if attn_mask is not None:
             assert attn_mask.dtype == torch.float32 or attn_mask.dtype == torch.float64 or \
                 attn_mask.dtype == torch.float16 or attn_mask.dtype == torch.uint8 or attn_mask.dtype == torch.bool, \
