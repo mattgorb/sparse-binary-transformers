@@ -441,8 +441,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         #attention mask
         if self.softmax_mask is not None:
             #attn_output_weights.masked_fill_(self.softmax_mask , float('-inf'))
-            attn_output_weights+=self.softmax_mask.repeat(attn_output_weights.size(0),1,1)
+            attn_output_weights+=self.softmax_mask#.repeat(attn_output_weights.size(0),1,1)
         print('here')
+        print(self.softmax_mask)
         print(attn_output_weights)
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)

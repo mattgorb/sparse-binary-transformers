@@ -394,6 +394,7 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
                 attn_output_weights.masked_fill_(attn_mask, float('-inf'))
             else:
                 attn_output_weights += attn_mask
+
         if key_padding_mask is not None:
             attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
             attn_output_weights = attn_output_weights.masked_fill(
