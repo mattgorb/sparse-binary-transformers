@@ -147,20 +147,16 @@ def multihead_attention_flops(multihead_attention_module, input,):
         #+ (qlen * klen)  # softmax
         #+ (qlen * klen * v_head_dim)  # AV
     #)
-    #qlen=405
-    #qk_head=64
-    #(405, 64)(64,405)
-    #𝑛𝑚(2𝑝−1).
-    #405*405*127
+
     #https://math.stackexchange.com/questions/3512976/proof-of-of-flops-in-matrix-multiplication
     print(f'attention has source mask? {multihead_attention_module.args.has_src_mask}')
 
 
     if not multihead_attention_module.args.has_src_mask:
         head_flops=0
-        head_flops+=(qlen * klen * (qk_head_dim))  # QK^T nm(2p-1)
+        head_flops+=(qlen * klen * (qk_head_dim))  # QK^T
         head_flops += (qlen * klen)  # softmax
-        head_flops += (qlen * klen * (v_head_dim))  # AV # (n-1)(2p-1)+(m-1)(2p-1)
+        head_flops += (qlen * klen * (v_head_dim))  # AV #
         flops += num_heads * head_flops
         #flops *= batch_size
     else:
@@ -181,6 +177,7 @@ def multihead_attention_flops(multihead_attention_module, input,):
 
 def dense_flops(in_neurons, out_neurons):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
+
     return in_neurons * out_neurons
 
 

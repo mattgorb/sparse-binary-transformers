@@ -73,6 +73,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
         #self.q_act_mask=torch.randint(low=0, high=self.embed_dim*, size
+        print(self.linear_K)
+        sys.exit()
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
@@ -427,11 +429,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
 
         attn_output = torch.bmm(attn_output_weights, v)
-        print(attn_output_weights)
-        print(attn_output_weights.size())
-        print(query.size())
-        print(q.size())
-        sys.exit()
+
 
 
         if self.args.ablation:
