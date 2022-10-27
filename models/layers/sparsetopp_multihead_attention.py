@@ -84,6 +84,12 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.kdim*self.embed_dim)]
         self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
+        raw = torch.zeros((self.args.window_size * self.args.window_size,))
+        raw[:int(self.attention_prune_rate * self.args.window_size * self.args.window_size)] = 1.  # set EXACTLY 30% of the pixels in the mask
+        ridx = torch.randperm(self.args.window_size * self.args.window_size)  # a random permutation of the entries
+        mask = torch.reshape(raw[ridx], (self.args.window_size, self.args.window_size))
+        print(mask.size())
+        sys.exit()
         self.softmax_mask=torch.randperm(self.args.window_size*self.args.window_size)[:int((1-self.attention_prune_rate)*
                                                                                            self.args.window_size*self.args.window_size)]
 
@@ -430,7 +436,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         print("HEREE")
         print(attn_output_weights.size())
-        print( self.softmax_mask.repeat(attn_output_weights.size(0),).size())
+        print(self.softmax_mask.repeat(attn_output_weights.size(0),1).size())
+        attn_output_weights*=self.softmax_mask.repeat(attn_output_weights.size(0),1)
+        print()
         sys.exit()
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
