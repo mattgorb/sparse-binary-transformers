@@ -94,4 +94,7 @@ def main():
 
 if __name__ == "__main__":
     print(args)
-    main()
+    for run in range(args.model_runs):
+        print(f'Running experiment with weight seed {args.weight_seed}')
+        main()
+        args.weight_seed+=1
