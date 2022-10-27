@@ -72,7 +72,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
-
+        print(self.kdim)
+        print(kdim)
+        sys.exit()
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
