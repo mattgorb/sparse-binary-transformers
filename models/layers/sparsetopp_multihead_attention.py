@@ -72,6 +72,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
+        #self.q_act_mask=torch.randint(low=0, high=self.embed_dim*, size
+
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
 
@@ -308,10 +310,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
         v.flatten()[v_sort_ind[prune_size:]]=0
 
-        print(q)
+
         q = self.q_scaling_product.mul_scalar(q, scaling)
-        print(q)
-        sys.exit()
+
         if attn_mask is not None:
             assert attn_mask.dtype == torch.float32 or attn_mask.dtype == torch.float64 or \
                 attn_mask.dtype == torch.float16 or attn_mask.dtype == torch.uint8 or attn_mask.dtype == torch.bool, \
@@ -420,11 +421,16 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             )
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
+
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
 
         attn_output = torch.bmm(attn_output_weights, v)
+        print(attn_output_weights)
+        print(query.size())
+        print(q.size())
+        sys.exit()
 
 
         if self.args.ablation:
