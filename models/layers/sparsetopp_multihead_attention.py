@@ -72,15 +72,18 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
-        #self.q_act_mask=torch.randint(low=0, high=self.embed_dim*, size
-        print(self.linear_K)
-        sys.exit()
+
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
 
         self.args=args
         self.attention_prune_rate=args.attention_prune_rate
+
+
+        self.q_act_mask=torch.randperm(self.embed_dim*self.embed_dim)[:(1-self.attention_prune_rate)*embed_dim*embed_dim]
+        self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:(1-self.attention_prune_rate)*kdim*embed_dim]
+        self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:(1-self.attention_prune_rate)*vdim*embed_dim]
 
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
@@ -301,16 +304,19 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         #highest absolute values
 
 
-        prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
-
-        q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
+        #prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
+        '''q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
         q.flatten()[q_sort_ind[prune_size:]]=0
 
         k_sort_val, k_sort_ind=torch.sort(k.abs().flatten(),descending=True)
         k.flatten()[k_sort_ind[prune_size:]]=0
 
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
-        v.flatten()[v_sort_ind[prune_size:]]=0
+        v.flatten()[v_sort_ind[prune_size:]]=0'''
+
+        q.flatten()[self.q_act_mask]=0
+        k.flatten()[self.k_act_mask]=0
+        v.flatten()[self.v_act_mask]=0
 
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
