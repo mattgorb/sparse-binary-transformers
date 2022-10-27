@@ -441,7 +441,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         #attention mask
         if self.softmax_mask is not None:
             #attn_output_weights.masked_fill_(self.softmax_mask , float('-inf'))
-            attn_output_weights+=self.softmax_mask#.repeat(attn_output_weights.size(0),1,1)
+            attn_output_weights+=self.softmax_mask
 
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
@@ -454,10 +454,13 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         if self.args.ablation:
             print('here')
+            print(attn_output_weights)
             print(attn_output_weights.size())
             print(torch.count_nonzero(attn_output_weights))
+
             print(attn_output.size())
             print(torch.count_nonzero(attn_output))
+            sys.exit()
 
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
