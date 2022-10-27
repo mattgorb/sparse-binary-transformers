@@ -304,8 +304,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        print(q.size())
-        sys.exit()
+
 
         #prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
         '''q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
@@ -413,7 +412,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.dequant_k(k)
         v = self.dequant_v(v)
 
-
+        print(q)
+        print(q.size())
+        sys.exit()
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
 
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
