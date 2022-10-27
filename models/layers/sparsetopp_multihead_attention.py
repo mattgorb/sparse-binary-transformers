@@ -432,12 +432,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             )
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
-        print("HEREE")
-        print(attn_output_weights.size())
-        print(self.softmax_mask.repeat(attn_output_weights.size(0),1,1).size())
+        #attention mask
         attn_output_weights*=self.softmax_mask.repeat(attn_output_weights.size(0),1,1)
-        print(attn_output_weights)
-        sys.exit()
+
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
