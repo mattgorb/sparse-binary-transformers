@@ -85,7 +85,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
         raw = torch.zeros((self.args.window_size * self.args.window_size,))
-        raw[:int(self.attention_prune_rate * self.args.window_size * self.args.window_size)] = 1.  # set EXACTLY 30% of the pixels in the mask
+        raw[:int((1-self.attention_prune_rate) * self.args.window_size * self.args.window_size)] = float('-inf')  # set EXACTLY 30% of the pixels in the mask
         ridx = torch.randperm(self.args.window_size * self.args.window_size)  # a random permutation of the entries
         self.softmax_mask= torch.reshape(raw[ridx], (self.args.window_size, self.args.window_size)).to(self.args.device)
 
