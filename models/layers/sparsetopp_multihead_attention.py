@@ -86,16 +86,15 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         #static softmax mask.  multi
         sm_p=int((1-self.attention_prune_rate) * self.args.window_size)
-        raw = torch.ones((self.args.window_size , self.args.window_size,))
+        raw = torch.zeros((self.args.window_size , self.args.window_size,))
         for i in range(self.args.window_size ):
-            raw[i][torch.randperm(self.args.window_size)[:sm_p]] = float('-inf')
+            raw[i][torch.randperm(self.args.window_size)[:sm_p]] = 1
         self.softmax_mask = raw.to(self.args.device)
-        print(self.softmax_mask)
+
         #raw = torch.zeros((self.args.window_size * self.args.window_size,))
         #raw[:int((1-self.attention_prune_rate) * self.args.window_size * self.args.window_size)] = float('-inf')  # set EXACTLY 30% of the pixels in the mask
         #ridx = torch.randperm(self.args.window_size * self.args.window_size)  # a random permutation of the entries
         #self.softmax_mask= torch.reshape(raw[ridx], (self.args.window_size, self.args.window_size)).to(self.args.device)
-
         #self.softmax_mask=torch.randperm(self.args.window_size*self.args.window_size)[:int((1-self.attention_prune_rate)*  self.args.window_size*self.args.window_size)]
 
         # Functionals
@@ -440,7 +439,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
         #attention mask
-        attn_output_weights*=self.softmax_mask.repeat(attn_output_weights.size(0),1,1)
+        if self.softmax_mask is not None:
+            attn_output_weights.masked_fill_(self.softmax_mask , float('-inf'))
+            #attn_output_weights*=self.softmax_mask.repeat(attn_output_weights.size(0),1,1)
         print('here')
         print(attn_output_weights)
         attn_output_weights = nnF.softmax(
