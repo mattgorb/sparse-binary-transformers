@@ -72,9 +72,6 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.linear_K = linear_init(self.kdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
         self.linear_V = linear_init(self.vdim, self.embed_dim, bias=bias,args=args, **factory_kwargs)
 
-        print(self.kdim)
-        print(kdim)
-        sys.exit()
 
         # for the type: ignore, see https://github.com/pytorch/pytorch/issues/58969
         self.out_proj = linear_init(self.embed_dim, self.embed_dim, bias=bias,args=args, **factory_kwargs)  # type: ignore[assignment]
@@ -83,9 +80,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.attention_prune_rate=args.attention_prune_rate
 
 
-        self.q_act_mask=torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*embed_dim*embed_dim)]
-        self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*kdim*embed_dim)]
-        self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*vdim*embed_dim)]
+        self.q_act_mask=torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)]
+        self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*self.kdim*self.embed_dim)]
+        self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
