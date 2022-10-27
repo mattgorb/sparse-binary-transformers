@@ -81,17 +81,14 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
         self.q_act_mask=torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)]
-        self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*self.kdim*self.embed_dim)]
-        self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:(1-int(self.attention_prune_rate)*self.vdim*self.embed_dim)]
+        self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.kdim*self.embed_dim)]
+        self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
         print(self.q_act_mask)
         print(self.k_act_mask)
         print(torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)])
 
-        print(self.q_act_mask.size())
-        print(self.k_act_mask.size())
-        print(torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)].size())
-        sys.exit()
+
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
 
