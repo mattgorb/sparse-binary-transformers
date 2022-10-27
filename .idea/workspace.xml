@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data/app_zone_rpc_hour_encrypted.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" afterDir="false" />
@@ -114,7 +113,7 @@
       <workItem from="1663939220676" duration="8756000" />
       <workItem from="1664149117786" duration="127555000" />
       <workItem from="1664994912367" duration="39318000" />
-      <workItem from="1665329939999" duration="152648000" />
+      <workItem from="1665329939999" duration="152738000" />
     </task>
     <servers />
   </component>
