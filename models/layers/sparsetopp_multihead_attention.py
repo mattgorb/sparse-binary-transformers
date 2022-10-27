@@ -428,6 +428,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         attn_output = torch.bmm(attn_output_weights, v)
         print(attn_output_weights)
+        print(attn_output_weights.size())
         print(query.size())
         print(q.size())
         sys.exit()
