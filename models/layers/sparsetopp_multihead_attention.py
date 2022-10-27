@@ -84,14 +84,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.kdim*self.embed_dim)]
         self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
-        print(self.kdim)
-        print(self.q_act_mask)
-        print(self.k_act_mask)
-        print(torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)])
-
-        print(self.args)
-        print(self.args.window_size)
-        sys.exit()
+        self.softmax_mask=torch.randperm(self.args.window_size*self.args.window_size)[:int((1-self.attention_prune_rate)*
+                                                                                           self.args.window_size*self.args.window_size)]
 
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
@@ -436,7 +430,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             )
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
-
+        print("HEREE")
+        print(attn_output_weights.size())
+        sys.exit()
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
         attn_output_weights = nnF.dropout(attn_output_weights, p=self.dropout, training=self.training)
