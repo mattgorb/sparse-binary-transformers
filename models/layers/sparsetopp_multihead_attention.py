@@ -430,6 +430,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         print("HEREE")
         print(attn_output_weights.size())
+        print( self.softmax_mask.repeat(attn_output_weights.size(0),).size())
         sys.exit()
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
