@@ -84,6 +84,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.k_act_mask=torch.randperm(self.kdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.kdim*self.embed_dim)]
         self.v_act_mask=torch.randperm(self.vdim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.vdim*self.embed_dim)]
 
+        print(self.kdim)
         print(self.q_act_mask)
         print(self.k_act_mask)
         print(torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)])
@@ -303,10 +304,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        #q=128
-        #prune_rate 50%
-        #highest absolute values
-
+        print(q.size())
+        sys.exit()
 
         #prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
         '''q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
