@@ -90,6 +90,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         print(torch.randperm(self.embed_dim*self.embed_dim)[:int((1-self.attention_prune_rate)*self.embed_dim*self.embed_dim)])
 
         print(self.args)
+        print(self.args.window_size)
         sys.exit()
 
         # Functionals
