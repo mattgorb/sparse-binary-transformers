@@ -84,7 +84,8 @@ def main():
             best_acc = val_acc
             torch.save(model.state_dict(), weight_file)
             test_loss, test_acc = test(model, test_dataloader, criterion, device, args.dataset)
-
+        else:
+            test_acc=None
         print(f'Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
 
 
