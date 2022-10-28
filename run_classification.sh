@@ -6,7 +6,7 @@ nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classifica
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_hb.yaml --gpu=4 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/3.txt 2>&1 &
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_insect.yaml --gpu=5 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/4.txt 2>&1 &
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_lsst.yaml --gpu=6 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/5.txt 2>&1 &
-nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_uwave.yaml --gpu=6 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/16.txt 2>&1 &
+nohup python3 -u main_ts_classification.py --config=configs/dense_ts_classification_japan.yaml --gpu=6 > ~/results_classification/16.txt 2>&1 &
 
 
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_arabic.yaml --gpu=7 --lin_prune_rate=0.75 --attention_prune_rate=0.75> ~/results_classification/6.txt 2>&1 &

@@ -326,9 +326,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
         v.flatten()[v_sort_ind[prune_size:]]=0'''
 
-        q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
-        k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
-        v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
+        #q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
+        #k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
+        #v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
 
         #q.flatten()[self.q_act_mask]=0
         #k.flatten()[self.k_act_mask]=0
@@ -448,9 +448,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
         #attention mask
-        if self.softmax_mask is not None:
-            #attn_output_weights.masked_fill_(self.softmax_mask , float('-inf'))
-            attn_output_weights+=self.softmax_mask
+        #if self.softmax_mask is not None:
+            #attn_output_weights+=self.softmax_mask
 
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
