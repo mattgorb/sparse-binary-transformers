@@ -1,6 +1,6 @@
 #weight_init: kaiming_normal
 #score_init: None
-dataset: JapaneseVowels
+dataset: PEMS-SF
 
 weight_seed: 0
 score_seed: 0
