@@ -104,6 +104,7 @@ def multihead_attention_nonzero_flops(multihead_attention_module,lin_q,lin_k,lin
 def multihead_attention_flops(multihead_attention_module, input,):
     #https://github.com/sovrasov/flops-counter.pytorch/blob/master/ptflops/pytorch_ops.py
     #https://github.com/google-research/electra/blob/master/flops_computation.py
+    #https: // www.stat.cmu.edu / ~ryantibs / convexopt - F18 / scribes / Lecture_19.pdf
     flops = 0
 
     q, k, v = input, input, input
