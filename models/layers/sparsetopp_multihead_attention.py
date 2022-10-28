@@ -448,8 +448,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             attn_output_weights = attn_output_weights.view(bsz * self.num_heads, tgt_len, src_len)
 
         #attention mask
-        #if self.softmax_mask is not None:
-            #attn_output_weights+=self.softmax_mask
+        if self.softmax_mask is not None:
+            attn_output_weights+=self.softmax_mask
 
         attn_output_weights = nnF.softmax(
             attn_output_weights, dim=-1)
