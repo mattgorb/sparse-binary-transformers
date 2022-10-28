@@ -32,6 +32,7 @@ def _conv2d_flops(module, activation):
 
 def _linear_flops(module, activation):
     # Auxiliary func to use abstract flop computation
+
     return dense_flops(module.in_features, module.out_features)
 
 def _layernorm_flops(module, activation):

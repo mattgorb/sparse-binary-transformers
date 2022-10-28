@@ -70,6 +70,7 @@ class TSSparseTransformerModel(nn.Module):
 
         src = self.embedding(src)*math.sqrt(self.ninp)
 
+
         src = self.pos_encoder(src)
 
         output,attention_list = self.transformer_encoder(src, mask=self.src_mask, src_key_padding_mask=self.pad_mask)
