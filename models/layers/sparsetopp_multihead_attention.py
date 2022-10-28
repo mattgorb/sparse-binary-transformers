@@ -316,26 +316,26 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
 
-        #prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
-        '''q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
+        prune_size=int(torch.flatten(q).size()[0]*self.attention_prune_rate)
+        q_sort_val, q_sort_ind=torch.sort(q.abs().flatten(),descending=True)
         q.flatten()[q_sort_ind[prune_size:]]=0
 
         k_sort_val, k_sort_ind=torch.sort(k.abs().flatten(),descending=True)
         k.flatten()[k_sort_ind[prune_size:]]=0
 
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
-        v.flatten()[v_sort_ind[prune_size:]]=0'''
+        v.flatten()[v_sort_ind[prune_size:]]=0
 
-        q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
+        #q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
+        #k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
+        #v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
 
-        k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
-        v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
         #q.flatten()[self.q_act_mask]=0
         #k.flatten()[self.k_act_mask]=0
         #v.flatten()[self.v_act_mask]=0
 
-        print(q)
-        sys.exit()
+        #print(q)
+        #sys.exit()
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
