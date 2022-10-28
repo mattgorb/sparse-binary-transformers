@@ -325,6 +325,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         v_sort_val, v_sort_ind=torch.sort(v.abs().flatten(),descending=True)
         v.flatten()[v_sort_ind[prune_size:]]=0'''
+        print(q.size())
         print(q.flatten().size())
         print(self.q_act_mask.size())
         sys.exit()
