@@ -18,7 +18,7 @@ def parse_arguments():
     parser.add_argument("--set", help="name of dataset", type=str, default="ImageNet")
     parser.add_argument("--entity", help="num of entity", type=int, default=None)
     parser.add_argument("--ablation", help="num of entity", type=bool, default=False)
-    parser.add_argument("--dataset", help="dataset", type=bool, default=False)
+    parser.add_argument("--dataset", help="dataset", type=str, default="")
     parser.add_argument(
         "--config", help="Config file to use (see configs dir)", default=None
     )
