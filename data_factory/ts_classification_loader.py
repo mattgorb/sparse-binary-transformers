@@ -306,9 +306,12 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'JapaneseVowels':
         all_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TEST', n_proc=-1, )
-    elif dataset == 'LSST':
+    elif dataset == 'PEMS-SF':
         all_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TEST', n_proc=-1, )
+    elif dataset == 'LSST':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/LSST', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/LSST', pattern='TEST', n_proc=-1, )
     elif dataset == 'FaceDetection':
         all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
