@@ -16,7 +16,7 @@ attention_prune_rate: .5
 #weight_init: 'kaiming_normal'
 #scale_fan: False
 
-epochs: 50
+epochs: 300
 weight_file: sparse_cls_arabic
 
 nhid: 256
@@ -28,4 +28,4 @@ layer_norm: False
 batch_norm: True
 save_graphs: False
 lr: 1e-3
-pos_enc: 'Learnable'
+pos_enc: 'Fixed'
