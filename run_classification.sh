@@ -1,5 +1,5 @@
 #test insect on old top p
-nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_insect.yaml --gpu=5 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/4_new.txt 2>&1 &
+nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_insect.yaml --gpu=6 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=150> ~/results_classification/4_new.txt 2>&1 &
 
 
 
