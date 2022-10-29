@@ -86,7 +86,7 @@ def main():
         test_loss, test_acc = test(model, test_dataloader, criterion, device, args.dataset)
         #else:
             #test_acc=None
-        print(f'Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
+        print(f'Epoch {epoch},  Train acc: {train_acc} | Val acc: {val_acc} | Test acc: {test_acc}')
 
 
 if __name__ == "__main__":
