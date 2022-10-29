@@ -315,6 +315,7 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'FaceDetection':
         all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
+    print(dataset)
     print(all_data.feature_df.shape)
 
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat'\
