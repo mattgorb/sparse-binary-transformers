@@ -297,23 +297,25 @@ def get_classification_ds(dataset,root_dir, args):
     elif dataset == 'SpokenArabicDigits':
         all_data = TSRegressionArchive(f'{root_dir}/classification/SpokenArabicDigits', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/SpokenArabicDigits', pattern='TEST', n_proc=-1, )
-
+    elif dataset == 'SelfRegulationSCP2':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/SelfRegulationSCP2', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/SelfRegulationSCP2', pattern='TEST', n_proc=-1, )
     elif dataset == 'InsectWingbeat':
         all_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/InsectWingbeat', pattern='TEST', n_proc=-1, )
-    elif dataset == 'UWaveGestureLibrary':
-        all_data = TSRegressionArchive(f'{root_dir}/classification/UWaveGestureLibrary', pattern='TRAIN', )
-        test_data = TSRegressionArchive(f'{root_dir}/classification/UWaveGestureLibrary', pattern='TEST', n_proc=-1, )
+    elif dataset == 'JapaneseVowels':
+        all_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/JapaneseVowels', pattern='TEST', n_proc=-1, )
     elif dataset == 'LSST':
-        all_data = TSRegressionArchive(f'{root_dir}/classification/LSST', pattern='TRAIN', )
-        test_data = TSRegressionArchive(f'{root_dir}/classification/LSST', pattern='TEST', n_proc=-1, )
+        all_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TRAIN', )
+        test_data = TSRegressionArchive(f'{root_dir}/classification/PEMS-SF', pattern='TEST', n_proc=-1, )
     elif dataset == 'FaceDetection':
         all_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TRAIN', )
         test_data = TSRegressionArchive(f'{root_dir}/classification/FaceDetection', pattern='TEST', n_proc=-1, )
     print(all_data.feature_df.shape)
 
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat'\
-            or dataset=='UWaveGestureLibrary' or dataset=='FaceDetection' or dataset=='LSST':
+            or dataset=='SelfRegulationSCP1' or dataset=='JapaneseVowels' or dataset=='FaceDetection' or dataset=='PEMS-SF':
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
         # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
         val_ratio=0.05
