@@ -318,7 +318,8 @@ def get_classification_ds(dataset,root_dir, args):
     print(all_data.feature_df.shape)
 
     if dataset == 'SpokenArabicDigits' or dataset=='Heartbeat' or dataset=='InsectWingbeat'\
-            or dataset=='SelfRegulationSCP1' or dataset=='JapaneseVowels' or dataset=='FaceDetection' or dataset=='PEMS-SF':
+            or dataset=='SelfRegulationSCP1' or dataset=='JapaneseVowels' \
+            or dataset=='FaceDetection' or dataset=='PEMS-SF' or dataset=='LSST':
         # Note: currently a validation set must exist, either with `val_pattern` or `val_ratio`
         # Using a `val_pattern` means that `val_ratio` == 0 and `test_ratio` == 0
         val_ratio=0.05
