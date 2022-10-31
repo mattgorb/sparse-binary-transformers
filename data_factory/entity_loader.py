@@ -589,7 +589,9 @@ class ForecastDS(object):
         self.train = self.scaler.transform(self.data)
         self.test =self.scaler.transform(test_data)
         self.val = self.scaler.transform(valid_data)
-
+        print(self.test[:,0])
+        print(np.max(self.test[:,0]))
+        sys.exit()
         self.test_raw=test_data
 
     def inverse(self,x):

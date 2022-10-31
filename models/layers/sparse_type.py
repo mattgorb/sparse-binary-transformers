@@ -66,7 +66,7 @@ class SubnetLinBiprop(nn.Linear):
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.lin_prune_rate
 
-    #@property
+
     def calc_alpha(self):
         abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
         q_weight = abs_wgt * self.scores.abs() # Remove pruned weights

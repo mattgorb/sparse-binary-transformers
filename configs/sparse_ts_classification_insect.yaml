@@ -22,7 +22,7 @@ weight_file: sparse_cls_insect
 nhid: 256
 n_layers: 3
 n_head: 8
-dmodel: 64
+dmodel: 512
 save_scores: False
 layer_norm: False
 batch_norm: True
