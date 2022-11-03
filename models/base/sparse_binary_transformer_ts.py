@@ -67,7 +67,6 @@ class TSSparseTransformerModel(nn.Module):
 
         src = src.permute(1, 0, 2)
 
-
         src = self.embedding(src)*math.sqrt(self.ninp)
 
 

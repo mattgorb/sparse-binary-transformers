@@ -11,50 +11,36 @@ from models.layers.sparse_type import SubnetLayerNorm,SubnetLinBiprop
 from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAttention
 from models.layers.sparse_multihead_attention import SparseMultiheadAttention
 
-def _multihead_attention_flops(module, activation):
+def _multihead_attention_flops(module, activation, args):
     return multihead_attention_flops(multihead_attention_module=module,input=activation)
 
-def _conv2d_flops(module, activation):
+
+
+def _linear_flops(module, activation, args):
     # Auxiliary func to use abstract flop computation
 
-    # Drop batch & channels. Channels can be dropped since
-    # unlike shape they have to match to in_channels
-    input_shape = activation.shape[2:]
-    # TODO Add support for dilation and padding size
-    return conv2d_flops(in_channels=module.in_channels,
-                        out_channels=module.out_channels,
-                        input_shape=input_shape,
-                        kernel_shape=module.kernel_size,
-                        padding=module.padding_mode,
-                        strides=module.stride,
-                        dilation=module.dilation)
+    return dense_flops(module.in_features, module.out_features,args)
 
-
-def _linear_flops(module, activation):
-    # Auxiliary func to use abstract flop computation
-
-    return dense_flops(module.in_features, module.out_features)
-
-def _layernorm_flops(module, activation):
+def _layernorm_flops(module, activation, args):
     return norm_flops(module,activation)
 
-def _posenc_flops(module, activation):
+def _posenc_flops(module, activation, args):
     return posenc_flops(module,activation)
 
 
 
-def _subnet_linear_flops(module, activation):
+def _subnet_linear_flops(module, activation, args):
     # Auxiliary func to use abstract flop computation
-    return subnet_dense_flops(module, )
+    return subnet_dense_flops(module,args )
 
-def _subnet_layernorm_flops(module, activation):
+def _subnet_layernorm_flops(module, activation, args):
     return subnet_norm_flops(module,activation)
 
 
-def _subnet_multihead_flops(module, activation):
+def _subnet_multihead_flops(module, activation, args):
     return sparse_multihead_attention_flops(module,activation)
 
-def flops(model, input):
+def flops(model, input, args):
     """Compute Multiply-add FLOPs estimate from model
     Arguments:
         model {torch.nn.Module} -- Module to compute flops for
@@ -65,7 +51,7 @@ def flops(model, input):
         - int - Number of FLOPs related to nonzero parameters
     """
     FLOP_fn = {
-        nn.Conv2d: _conv2d_flops,
+
         nn.Linear: _linear_flops,
         MultiheadAttention: _multihead_attention_flops,
         nn.LayerNorm: _layernorm_flops,
@@ -73,7 +59,7 @@ def flops(model, input):
         SparseMultiheadAttention: _multihead_attention_flops
     }
 
-    BOP_fn = {
+    sbt_fn = {
         SubnetLinBiprop: _subnet_linear_flops,
         SubnetLayerNorm: _subnet_layernorm_flops,
         SubnetBatchNorm: _subnet_layernorm_flops,
@@ -91,11 +77,11 @@ def flops(model, input):
     # The ones we need for backprop
     for m, (act, _) in activations.items():
         if m.__class__ in FLOP_fn:
-            module_flops = FLOP_fn[m.__class__](m, act)
+            module_flops = FLOP_fn[m.__class__](m, act, args)
             flops_dict['total_flops'] += module_flops
             print(f'Module: {m._get_name()}, FLOPs: {module_flops:,}')#, nonzero FLOPS: {module_nonzero_flops}')
-        elif m.__class__ in BOP_fn:
-            module_bops, module_nonzero_flops = BOP_fn[m.__class__](m, act)
+        elif m.__class__ in sbt_fn:
+            module_bops, module_nonzero_flops = sbt_fn[m.__class__](m, act, args)
             flops_dict['total_flops'] += module_nonzero_flops
             #flops_dict['total_bops'] += module_bops
             print(f'Module: {m._get_name()},   Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')

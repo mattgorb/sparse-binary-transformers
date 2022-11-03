@@ -177,10 +177,10 @@ def multihead_attention_flops(multihead_attention_module, input,):
     return flops
 
 
-def dense_flops(in_neurons, out_neurons):
+def dense_flops(in_neurons, out_neurons,args):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
 
-    return in_neurons * out_neurons
+    return in_neurons * out_neurons*args.window_size
 
 
 
@@ -237,70 +237,13 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     v_head_dim = vdim // num_heads
 
 
-
-    '''
-    finds the nonzero flop count
-    '''
-    '''q_tensor=torch.tensor(q)
-
-    tgt_len, bsz, embed_dim_to_check = q_tensor.size()
-    head_dim = multihead_attention_module.embed_dim // multihead_attention_module.num_heads
-    #q = multihead_attention_module.linear_Q(q_tensor)
-    #k = multihead_attention_module.linear_K(q_tensor)
-    #v = multihead_attention_module.linear_V(q_tensor)
-    q=q_tensor
-    k=q_tensor
-    v=q_tensor
-
-    prune_size = int(torch.flatten(q).size()[0] * (multihead_attention_module.attention_prune_rate))
-
-    q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
-    q.flatten()[q_sort_ind[prune_size:]] = 0
-
-    k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
-    k.flatten()[k_sort_ind[prune_size:]] = 0
-
-    v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
-    v.flatten()[v_sort_ind[prune_size:]] = 0
-
-    print(q)
-
-    q = q.contiguous().view(tgt_len, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
-    if k is not None:
-        k = k.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
-    if v is not None:
-        v = v.contiguous().view(-1, bsz * multihead_attention_module.num_heads, head_dim).transpose(0, 1)
-
-    attn_output_weights = torch.bmm(q, k.transpose(1, 2))
-    nonzero_attn_weights=torch.count_nonzero(attn_output_weights).item()
-
-
-    print(multihead_attention_module.attention_prune_rate)
-    print(q.shape)
-    print(attn_output_weights.size())
-    print(nonzero_attn_weights)
-    print(attn_output_weights)
-    sys.exit()
-
-    attn_output_weights = nnF.softmax(
-        attn_output_weights, dim=-1)
-
-    attn_output = torch.bmm(attn_output_weights, v)
-    nonzero_attn_output=torch.count_nonzero(attn_output).item()
-
-    head_flops1=nonzero_attn_weights# QK^T
-    head_flops2=(qlen * klen)# softmax
-    head_flops3=nonzero_attn_output# AV'''
-    #print(qdim)
-    #print(qlen)
-    sort_flops=int(3*qlen*qdim*math.log(qlen*qdim))
-    #print(sort_flops)
-    flops+=sort_flops
     qlen_prate=int(qlen* multihead_attention_module.attention_prune_rate)
+    klen_prate=int(klen* multihead_attention_module.attention_prune_rate)
 
-    head_flops1=qlen_prate*qlen_prate# QK^T
-    head_flops2=(qlen_prate*qlen_prate)# softmax
-    head_flops3=qlen_prate*qlen_prate# AV
+
+    head_flops1=qlen_prate*qlen_prate*qk_head_dim# QK^T
+    head_flops2=(qlen * klen)# softmax
+    head_flops3=qlen*klen_prate*v_head_dim# AV
 
     head_flops=head_flops1+head_flops2+head_flops3
 
@@ -310,15 +253,15 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
     #flops += qlen * vdim * (vdim + 1)
 
     #flops *= batch_size
-    return bops, int(flops)
+    return int(flops), int(flops)
 
 
 
 
-def subnet_dense_flops(module):
+def subnet_dense_flops(module, args):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
 
-    return module.in_features*module.out_features, int(module.prune_rate*module.in_features*module.out_features)
+    return module.in_features*module.out_features, int(module.prune_rate*module.in_features*module.out_features*args.window_size)
 
 
 

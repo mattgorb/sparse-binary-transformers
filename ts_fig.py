@@ -95,8 +95,12 @@ f.add_subplot(111, frameon=False)
 plt.tick_params(labelcolor='none', top=False, bottom=False, left=False, right=False)
 plt.grid(False)
 plt.xlabel("Time", fontsize=20)
-plt.ylabel("Value", fontsize=20)
+#plt.ylabel("Value", fontsize=20)
+a0.set_ylabel('HULL', fontsize=18)
+a2.set_ylabel('HULL', fontsize=18)
 
+a1.set_ylabel('LUFL', fontsize=18)
+a3.set_ylabel('LUFL', fontsize=18)
 
 lines_labels = [ax.get_legend_handles_labels() for ax in f.axes]
 lines, labels = [sum(lol, []) for lol in zip(*lines_labels)]
