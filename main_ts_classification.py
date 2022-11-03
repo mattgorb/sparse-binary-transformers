@@ -73,7 +73,7 @@ def main():
 
     if args.evaluate:
         evaluate(model, test_dataloader, criterion, args)
-        return
+        sys.exit(0)
 
     for epoch in range(args.epochs):
         train_loss, train_acc = train(model, train_dataloader, optimizer, criterion, device,args.dataset)

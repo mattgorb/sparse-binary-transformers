@@ -100,7 +100,7 @@ def main():
 
     if args.evaluate:
         evaluate(model, test_dataloader, criterion, args,device)
-        return
+        sys.exit(0)
 
 
     print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
