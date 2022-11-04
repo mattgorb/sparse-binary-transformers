@@ -4,7 +4,6 @@
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ECL.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
@@ -15,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/samplefigure.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
       <workItem from="1665329939999" duration="176974000" />
       <workItem from="1667054559694" duration="34114000" />
       <workItem from="1667510150063" duration="37000" />
-      <workItem from="1667510439400" duration="3249000" />
+      <workItem from="1667510439400" duration="3616000" />
     </task>
     <servers />
   </component>
