@@ -180,7 +180,7 @@ def multihead_attention_flops(multihead_attention_module, input,):
 def dense_flops(in_neurons, out_neurons,args):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
 
-    return in_neurons * out_neurons*args.window_size
+    return in_neurons * out_neurons#*args.window_size
 
 
 
@@ -261,7 +261,7 @@ def sparse_multihead_attention_flops(multihead_attention_module, input,):
 def subnet_dense_flops(module, args):
     """Compute the number of multiply-adds used by a Dense (Linear) layer"""
 
-    return module.in_features*module.out_features, int(module.prune_rate*module.in_features*module.out_features*args.window_size)
+    return module.in_features*module.out_features, int(module.prune_rate*module.in_features*module.out_features)#*args.window_size)
 
 
 
