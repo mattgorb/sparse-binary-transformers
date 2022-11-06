@@ -467,21 +467,7 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
 
-        #print(attn_output_weights.size())
-        #print(v.size())
-        #print(attn_output.size())
-        #print(attn_output_weights)
-        #print(attn_output[:,-2,:])
-        #print(attn_output.size())
-        #sys.exit()
-        '''print('here')
-        print(query.size())
-        print(q.size())
-        print(attn_output_weights.size())
-        print(v.size())
-        print(attn_output.size())
 
-        sys.exit()'''
 
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
@@ -498,9 +484,9 @@ class MultiheadAttention(nn.MultiheadAttention):
 
 
 
+
         attn_output = self.out_proj(attn_output)  # type: ignore[has-type]
         attn_output_weights = self.quant_attn_output_weights(attn_output_weights)
-
 
 
 

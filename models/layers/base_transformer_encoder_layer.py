@@ -110,6 +110,7 @@ class TransformerEncoderLayer(Module):
         src2 = self.linear2(self.dropout2(self.activation(self.linear1(src))))
         src = src + self.dropout3(src2)  # (seq_len, batch_size, d_model)
 
+
         if self.args.layer_norm:
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
             src = self.norm2(src)

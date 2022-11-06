@@ -12,33 +12,37 @@ from models.layers.sparsetopp_multihead_attention import SparseTopPMultiheadAtte
 from models.layers.sparse_multihead_attention import SparseMultiheadAttention
 
 def _multihead_attention_flops(module, activation, args):
-    return multihead_attention_flops(multihead_attention_module=module,input=activation)
+    return multihead_attention_flops(multihead_attention_module=module,input=activation[0])
 
 
 
 def _linear_flops(module, activation, args):
     # Auxiliary func to use abstract flop computation
 
-    return dense_flops(module.in_features, module.out_features,args)
-
-def _layernorm_flops(module, activation, args):
-    return norm_flops(module,activation)
-
-def _posenc_flops(module, activation, args):
-    return posenc_flops(module,activation)
-
-
+    return dense_flops(module.in_features, module.out_features,args, activation)
 
 def _subnet_linear_flops(module, activation, args):
     # Auxiliary func to use abstract flop computation
-    return subnet_dense_flops(module,args )
+    return subnet_dense_flops(module,args,activation )
+
+
+
+def _layernorm_flops(module, activation, args):
+    return norm_flops(module,activation[0])
+
+def _posenc_flops(module, activation, args):
+    return posenc_flops(module,activation[0])
+
+
+
+
 
 def _subnet_layernorm_flops(module, activation, args):
-    return subnet_norm_flops(module,activation)
+    return subnet_norm_flops(module,activation[0])
 
 
 def _subnet_multihead_flops(module, activation, args):
-    return sparse_multihead_attention_flops(module,activation)
+    return sparse_multihead_attention_flops(module,activation[0])
 
 def flops(model, input, args):
     """Compute Multiply-add FLOPs estimate from model
@@ -74,8 +78,16 @@ def flops(model, input, args):
 
 
     modules_not_found=[]
-    # The ones we need for backprop
-    for m, (act, _) in activations.items():
+
+    '''for n, m in model.named_modules():
+        print(f'{n}, {m._get_name()}')
+        print(m.__class__)
+
+        if m.__class__ in FLOP_fn:
+            print('heere')'''
+    #sys.exit()
+    for m, act in activations.items():
+
         if m.__class__ in FLOP_fn:
             module_flops = FLOP_fn[m.__class__](m, act, args)
             flops_dict['total_flops'] += module_flops

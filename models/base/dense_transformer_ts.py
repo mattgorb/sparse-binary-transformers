@@ -67,7 +67,6 @@ class TSTransformerModel(nn.Module):
         else:
             self.pad_mask = None
 
-
         src = src.permute(1, 0, 2)
 
         src = self.embedding(src)*math.sqrt(self.ninp)
@@ -78,6 +77,7 @@ class TSTransformerModel(nn.Module):
 
         output=self.act(output)
         output = output.permute(1, 0, 2)
+
         output = self.decoder(output)
 
         return output, attention_list
