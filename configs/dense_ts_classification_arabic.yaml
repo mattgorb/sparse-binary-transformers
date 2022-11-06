@@ -12,7 +12,7 @@ epochs: 50
 weight_file: dense_ts_smd
 
 nhid: 256
-dmodel: 128
+dmodel: 64
 n_layers: 2
 n_head: 2
 save_scores: False
