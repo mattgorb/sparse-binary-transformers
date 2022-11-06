@@ -67,7 +67,7 @@ class SparseTransformerEncoderLayer(nn.Module):
 
         src2, attention = self.self_attn(src, src, src, attn_mask=src_mask,
                               key_padding_mask=src_key_padding_mask)
-        src = src + self.dropout1(src2)  # (seq_len, batch_size, d_model)
+        src = src + self.dropout1(src2)
 
         if self.args.layer_norm:
             src = src.permute(1, 2, 0)  # (batch_size, d_model, seq_len)
