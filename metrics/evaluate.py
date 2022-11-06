@@ -1,6 +1,6 @@
 import torch
 from torchtext.datasets import IMDB
-from models.base.dense_transformer_nlp import TransformerModel
+
 from models.base.sparse_binary_transformer_nlp import SBTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
