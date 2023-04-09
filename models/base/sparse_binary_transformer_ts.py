@@ -63,8 +63,6 @@ class TSSparseTransformerModel(nn.Module):
                 mask[half,:]=0
 
                 self.src_mask = mask.to(self.args.device)
-                print("HERE")
-                sys.exit()
 
         else:
             self.src_mask = None
