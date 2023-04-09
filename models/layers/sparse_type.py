@@ -29,9 +29,6 @@ class GetSubnetBinary(autograd.Function):
 
         # Perform binary quantization of weights
         abs_wgt = torch.abs(weights.clone()) # Absolute value of original weights
-        #q_weight = abs_wgt * out # Remove pruned weights
-        #num_unpruned = int(k * scores.numel()) # Number of unpruned weights
-        #alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
 
         # Save absolute value of weights for backward
         ctx.save_for_backward(abs_wgt)

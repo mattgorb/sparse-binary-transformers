@@ -20,7 +20,7 @@ sns.set_style("whitegrid")
 #plt.rcParams["figure.figsize"] = (15,3)
 # plot it
 plt.clf()
-f, (a0, a1,a2,a3) = plt.subplots(4, 1, figsize=(15, 10), gridspec_kw={'height_ratios': [3, 1,3,1]})
+f, (a0, a1,a2,a3) = plt.subplots(4, 1, figsize=(15, 7), gridspec_kw={'height_ratios': [3, 1,3,1]})
 
 a2.plot(df['Dates'].values, df['1'], linestyle='dashed',label='Actual' )
 a2.plot(df['Dates'].values, df['1.1'], label='SBT'  )
@@ -106,7 +106,7 @@ lines_labels = [ax.get_legend_handles_labels() for ax in f.axes]
 lines, labels = [sum(lol, []) for lol in zip(*lines_labels)]
 lines=[lines[0],lines[1],lines[-1]]
 labels=[labels[0],labels[1],labels[-1]]
-f.legend(lines, labels,loc='lower center',ncol=3,frameon=False,bbox_to_anchor=(.42, -.02, 0.0, 0), prop={'size': 24})
+f.legend(lines, labels,loc='lower center',ncol=3,frameon=False,bbox_to_anchor=(.44, -.04, 0.0, 0), prop={'size': 24})
 
 a0.spines['top'].set_visible(True)
 a1.spines['top'].set_visible(False)
@@ -117,4 +117,6 @@ a3.spines['bottom'].set_visible(True)
 a2.spines['bottom'].set_visible(False)
 a3.spines['left'].set_visible(True)
 
-f.savefig('ts.pdf', bbox_inches='tight')
+
+#plt.show()
+f.savefig('ts2.pdf', bbox_inches='tight')

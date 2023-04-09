@@ -51,14 +51,6 @@ def main():
         root_dir='data/'
         weight_file_base = 'weights/' + args.weight_file
 
-    '''if args.dataset=='SMD':
-        entities=28
-    elif args.dataset=='SMAP':
-        entities=55
-    elif args.dataset=='MSL':
-        entities=27
-    else:
-        entities=1'''
     ent=1
     #for ent in range(entities):
         #ent=args.entity
@@ -106,9 +98,7 @@ def main():
     print(f'number of training batches: {train_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
-    #print(train_dataloader.dataset.train.shape)
-    #print(train_dataloader.dataset.val.shape)
-    #print(train_dataloader.dataset.test.shape)
+
 
     early_stopping_increment=0
     for epoch in range(args.epochs):
@@ -144,9 +134,7 @@ def main():
             if early_stopping_increment>=args.es_epochs:
                 print("Early Stopping")
                 return
-        #if epoch%5==0:
-            #if args.rerandomize==True and epoch>0 and epoch != args.epochs - 1:
-                #rerandomize_model(model, args)
+
 
 if __name__ == "__main__":
     print(args)

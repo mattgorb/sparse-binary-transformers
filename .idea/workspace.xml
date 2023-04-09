@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ad51ff8f-c243-4a74-91ac-5d78d7e845a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/environment.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/ECL.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/informer/Informer2020/data/LD2011_2014.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run_dense.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/dense_ts_wth_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_wth_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/args.py" beforeDir="false" afterPath="$PROJECT_DIR$/args.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dense_ts_smap_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_smap_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/dense_ts_smd_anomaly.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/dense_ts_smd_anomaly.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_hb.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_hb.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/sparse_ts_classification_japan.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_classification_japan.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/configs/sparse_ts_wth_forecast.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/sparse_ts_wth_forecast.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphs.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/data/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/exp/exp_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/main_informer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/base/dense_transformer_nlp.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_encoder_layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_ts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_ts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/sparse_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_type.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data/app_zone_rpc_hour_encrypted.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/data_loader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/long_range_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyraformer/Pyraformer/single_step_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run_current.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_current.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_evaluate.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run_evaluate.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ts.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/ts.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ts_fig.py" beforeDir="false" afterPath="$PROJECT_DIR$/ts_fig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/dense.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/dense_ts_smd.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/dense_ts_smd_entity_0_ds_SMAP_forecast_False_ws_200.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/dense_ts_smdclassification_ds_Heartbeat_ws_405.pt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights/sb_weight.pt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +54,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2AgeG9s2Rqgnv5p22cyrttziddl" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -42,15 +64,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -69,7 +83,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="graphs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="graphs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="sparse-binary-transformers" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -97,6 +111,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -120,101 +135,31 @@
       <workItem from="1665329939999" duration="176974000" />
       <workItem from="1667054559694" duration="34114000" />
       <workItem from="1667510150063" duration="37000" />
-      <workItem from="1667510439400" duration="27995000" />
+      <workItem from="1667510439400" duration="41440000" />
+      <workItem from="1668442491965" duration="179000" />
+      <workItem from="1668487791938" duration="81000" />
+      <workItem from="1668895427556" duration="461000" />
+      <workItem from="1669302760314" duration="3301000" />
+      <workItem from="1669407814779" duration="14000" />
+      <workItem from="1673926923420" duration="4340000" />
+      <workItem from="1674061924442" duration="6000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="2683" y="363" key="#Notifications" timestamp="1659329018058">
-      <screen x="1680" y="25" width="1920" height="1055" />
-    </state>
-    <state x="2683" y="363" key="#Notifications/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1659329018058" />
-    <state x="291" y="139" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1664333972796">
-      <screen x="0" y="25" width="1680" height="910" />
-    </state>
-    <state x="291" y="139" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1680.910@0.25.1680.910" timestamp="1664333972796" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1665689133152">
-      <screen x="1680" y="25" width="1920" height="1055" />
-    </state>
-    <state x="586" y="305" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.910@0.25.1680.910" timestamp="1661140448072" />
-    <state x="586" y="307" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.918@0.25.1680.918" timestamp="1661738045941" />
-    <state x="586" y="308" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.922@0.25.1680.922" timestamp="1665457505389" />
-    <state x="586" y="311" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.930@0.25.1680.930" timestamp="1665635275484" />
-    <state x="586" y="313" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.937@0.25.1680.937" timestamp="1665587084070" />
-    <state x="586" y="314" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1680.940@0.25.1680.940" timestamp="1665539521155" />
-    <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@1680.25.1920.1055" timestamp="1661034057442" />
-    <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1664566454712" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1665412003966" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@1680.25.1920.1055" timestamp="1665435243613" />
-    <state x="2350" y="350" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1665418309086" />
-    <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@3600.-40.1920.1055" timestamp="1664761803319" />
-    <state x="4270" y="285" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.930@3600.-40.1920.1055" timestamp="1664803801184" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.934@1680.25.1920.1055" timestamp="1665689133152" />
-    <state x="2350" y="349" key="#com.intellij.fileTypes.FileTypeChooser/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.937@1680.25.1920.1055" timestamp="1665687284697" />
-    <state x="209" y="125" width="1371" height="710" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1660619622069">
-      <screen x="0" y="25" width="1680" height="910" />
-    </state>
-    <state x="209" y="125" width="1371" height="710" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.25.1680.910@0.25.1680.910" timestamp="1660619622069" />
-    <state x="3709" y="224" width="1390" height="576" key="dock-window-1" timestamp="1664741013624">
-      <screen x="3600" y="-40" width="1920" height="1055" />
-    </state>
-    <state x="3709" y="224" width="1390" height="576" key="dock-window-1/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1664741013624" />
-    <state x="3600" y="-26" width="1390" height="576" key="dock-window-2" timestamp="1664741013625">
-      <screen x="3600" y="-40" width="1920" height="1055" />
-    </state>
-    <state x="3600" y="-26" width="1390" height="576" key="dock-window-2/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1664741013625" />
-    <state x="2194" y="25" width="1390" height="999" key="dock-window-3" timestamp="1664758061503">
-      <screen x="1680" y="25" width="1920" height="1055" />
-    </state>
-    <state x="2194" y="25" width="1390" height="999" key="dock-window-3/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@3600.-40.1920.1055" timestamp="1664758061503" />
-    <state x="3600" y="-40" width="1920" height="540" key="dock-window-4" timestamp="1664907042437">
-      <screen x="3600" y="-40" width="1920" height="1055" />
-    </state>
-    <state x="1680" y="25" width="1920" height="540" key="dock-window-4/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@3600.-40.1920.1055" timestamp="1664894181896" />
-    <state x="3600" y="-40" width="1920" height="540" key="dock-window-4/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1664907042437" />
-    <state x="34" y="25" width="1428" height="598" key="dock-window-5" timestamp="1664986535808">
-      <screen x="0" y="25" width="1680" height="927" />
-    </state>
-    <state x="34" y="25" width="1428" height="598" key="dock-window-5/0.25.1680.927@0.25.1680.927" timestamp="1664986535808" />
-    <state x="3634" y="-40" width="1428" height="598" key="dock-window-5/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1664978242069" />
-    <state x="546" y="100" width="598" height="631" key="find.popup" timestamp="1667745968441">
-      <screen x="0" y="25" width="1680" height="918" />
-    </state>
-    <state x="702" y="235" width="888" height="582" key="find.popup/0.25.1680.910@0.25.1680.910" timestamp="1667511944533" />
-    <state x="702" y="236" width="597" height="490" key="find.popup/0.25.1680.913@0.25.1680.913" timestamp="1667709001833" />
-    <state x="546" y="100" width="598" height="631" key="find.popup/0.25.1680.918@0.25.1680.918" timestamp="1667745968441" />
-    <state x="702" y="238" width="818" height="645" key="find.popup/0.25.1680.922@0.25.1680.922" timestamp="1665508755210" />
-    <state x="702" y="239" width="599" height="500" key="find.popup/0.25.1680.927@0.25.1680.927" timestamp="1666065419443" />
-    <state x="697" y="304" width="888" height="655" key="find.popup/0.25.1680.934@0.25.1680.934" timestamp="1666924967916" />
-    <state x="702" y="241" width="818" height="656" key="find.popup/0.25.1680.937@0.25.1680.937" timestamp="1665544066881" />
-    <state x="702" y="242" width="599" height="508" key="find.popup/0.25.1680.940@0.25.1680.940" timestamp="1666668889148" />
-    <state x="4402" y="203" width="683" height="601" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.910@3600.-40.1920.1055" timestamp="1660517181769" />
-    <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@1680.25.1920.1055" timestamp="1665371324089" />
-    <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.913@3600.-40.1920.1055" timestamp="1664733260716" />
-    <state x="2482" y="269" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@1680.25.1920.1055" timestamp="1664132093911" />
-    <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@3600.-40.1920.1055" timestamp="1659665994840" />
-    <state x="2482" y="111" width="684" height="726" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@1680.25.1920.1055" timestamp="1665165705089" />
-    <state x="4402" y="204" width="683" height="567" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.922@3600.-40.1920.1055" timestamp="1659191672012" />
-    <state x="2482" y="269" width="685" height="570" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.927@1680.25.1920.1055" timestamp="1664978477197" />
-    <state x="4402" y="204" width="684" height="568" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.930@3600.-40.1920.1055" timestamp="1664765791811" />
-    <state x="2477" y="340" width="1015" height="740" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.934@1680.25.1920.1055" timestamp="1666017851049" />
-    <state x="2482" y="269" width="685" height="571" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.937@1680.25.1920.1055" timestamp="1666804406890" />
-    <state x="4402" y="204" width="685" height="571" key="find.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.937@3600.-40.1920.1055" timestamp="1666807341837" />
-    <state x="2482" y="268" width="935" height="739" key="find.popup/1680.25.1920.1055/3600.-40.1920.953/0.25.1680.1025@1680.25.1920.1055" timestamp="1665966569384" />
-    <state x="2482" y="242" width="683" height="536" key="find.popup/1680.25.1920.940/3600.-40.1920.1055/0.25.1680.1025@1680.25.1920.940" timestamp="1665370508062" />
-    <state x="2482" y="243" width="683" height="539" key="find.popup/1680.25.1920.945/3600.-40.1920.1055/0.25.1680.1025@1680.25.1920.945" timestamp="1665338467290" />
-    <state x="585" y="224" width="670" height="676" key="search.everywhere.popup" timestamp="1667662921868">
-      <screen x="0" y="25" width="1680" height="913" />
-    </state>
-    <state x="585" y="223" width="670" height="674" key="search.everywhere.popup/0.25.1680.910@0.25.1680.910" timestamp="1667157844274" />
-    <state x="585" y="224" width="670" height="676" key="search.everywhere.popup/0.25.1680.913@0.25.1680.913" timestamp="1667662921868" />
-    <state x="585" y="225" width="670" height="680" key="search.everywhere.popup/0.25.1680.918@0.25.1680.918" timestamp="1659495432154" />
-    <state x="585" y="228" width="670" height="692" key="search.everywhere.popup/0.25.1680.934@0.25.1680.934" timestamp="1666932539599" />
-    <state x="585" y="229" width="670" height="694" key="search.everywhere.popup/0.25.1680.937@0.25.1680.937" timestamp="1665709062443" />
-    <state x="4269" y="190" width="766" height="782" key="search.everywhere.popup/1680.25.1920.1055/3600.-40.1920.1055/0.25.1680.918@3600.-40.1920.1055" timestamp="1659665476815" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -231,7 +176,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main_ts.py</url>
-          <line>105</line>
+          <line>97</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

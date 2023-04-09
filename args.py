@@ -73,9 +73,7 @@ def parse_arguments():
     parser.add_argument("--attention_prune_rate", default=1, type=float)
     parser.add_argument("--scheduler", default=False, type=bool)
     parser.add_argument("--mode", default="fan_in", help="Weight initialization mode")
-    parser.add_argument(
-        "--nonlinearity", default="relu", help="Nonlinearity used by initialization"
-    )
+    parser.add_argument("--nonlinearity", default="relu", help="Nonlinearity used by initialization")
     parser.add_argument("--has_src_mask", default=False, help="Weight initialization mode")
 
 

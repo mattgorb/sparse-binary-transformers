@@ -16,7 +16,7 @@ attention_prune_rate: .1
 #weight_init: 'kaiming_normal'
 #scale_fan: False
 
-epochs: 150
+epochs: 200
 weight_file: sparse_cls_hb
 
 nhid: 256
