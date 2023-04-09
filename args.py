@@ -75,7 +75,7 @@ def parse_arguments():
     parser.add_argument("--mode", default="fan_in", help="Weight initialization mode")
     parser.add_argument("--nonlinearity", default="relu", help="Nonlinearity used by initialization")
     parser.add_argument("--has_src_mask", default=False, help="Weight initialization mode")
-
+    parser.add_argument("--rand_mask", default=False, type=bool)
 
     parser.add_argument(
         "-p",

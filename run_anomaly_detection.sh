@@ -13,3 +13,11 @@ nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=0
 nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=1 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/10.txt 2>&1 &
 nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=2 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/11.txt 2>&1 &
 nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=3 --lin_prune_rate=0.1 --attention_prune_rate=0.1> ~/results_anomaly/12.txt 2>&1 &
+
+
+
+
+
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=3  --rand_mask=True > ~/results_anomaly/4.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=4  --rand_mask=True > ~/results_anomaly/5.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=5  --rand_mask=True > ~/results_anomaly/6.txt 2>&1 &

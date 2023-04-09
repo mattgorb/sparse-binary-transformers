@@ -24,7 +24,7 @@ class TSSparseTransformerModel(nn.Module):
         else:
             self.pos_encoder = PositionalEncoding(ninp,)
 
-        #self.pos_encoder = LearnablePositionalEncoding(ninp, )
+
         encoder_layers = SparseTransformerEncoderLayer(ninp, nhead, nhid, args=self.args)
         self.transformer_encoder = SparseTransformerEncoder(encoder_layers, nlayers)
 
@@ -55,7 +55,14 @@ class TSSparseTransformerModel(nn.Module):
 
                 mask[-1,-1]=float('-inf')
                 self.src_mask = mask.to(self.args.device)
+            if self.args.rand_mask:
+                size=src.size(1)
+                half=int(size/2)
+                mask=torch.eye(size,)
+                mask=mask.masked_fill(mask == 0, float('-inf'))
+                mask[half,:]=0
 
+                self.src_mask = mask.to(self.args.device)
         else:
             self.src_mask = None
         if has_pad_mask:
