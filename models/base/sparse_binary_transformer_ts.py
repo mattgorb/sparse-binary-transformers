@@ -54,15 +54,14 @@ class TSSparseTransformerModel(nn.Module):
                 mask[-1,:]=0
 
                 mask[-1,-1]=float('-inf')
-                #print(mask)
-                #sys.exit()
+
                 self.src_mask = mask.to(self.args.device)
             if self.args.rand_mask:
                 size=src.size(1)
-                #half=int(size/2)
+
                 mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
-                #mask[half,:]=0
+
 
                 self.src_mask = mask.to(self.args.device)
 
