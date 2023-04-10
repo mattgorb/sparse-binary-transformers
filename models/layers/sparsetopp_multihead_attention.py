@@ -297,18 +297,28 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
         if self.args.ablation:
-            prune_size = int(torch.flatten(q).size()[0] * self.attention_prune_rate)
+            #prune lowest magnitude activations
+            prune_size = int(q.size(0)*q.size(2)[0] * self.attention_prune_rate)
             print(prune_size)
             print(q.size())
 
-            q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
+            q_sort_val, q_sort_ind = torch.sort(q.abs().view(-1,q.size(0)*q.size(2)[0] ), descending=True)
+            q.flatten()[q_sort_ind[prune_size:]] = 0
+            print(q_sort_val.size())
+            sys.exit()
+            k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
+            k.flatten()[k_sort_ind[prune_size:]] = 0
+
+            v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
+            v.flatten()[v_sort_ind[prune_size:]] = 0
+            '''q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
             q.flatten()[q_sort_ind[prune_size:]] = 0
 
             k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
             k.flatten()[k_sort_ind[prune_size:]] = 0
 
             v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
-            v.flatten()[v_sort_ind[prune_size:]] = 0
+            v.flatten()[v_sort_ind[prune_size:]] = 0'''
 
             print("HERE")
 
