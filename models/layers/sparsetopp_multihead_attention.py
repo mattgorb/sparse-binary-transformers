@@ -317,6 +317,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             k.view(-1, k.size(0) * k.size(2))[indices] = 0
             sorted, indices = torch.sort(self.v.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
             v.view(-1, v.size(0) * v.size(2))[indices] = 0
+            sys.exit()
         else:
             #static mask over qkv
             q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
