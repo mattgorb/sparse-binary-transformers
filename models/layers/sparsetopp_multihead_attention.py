@@ -310,10 +310,18 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        #static mask over qkv
-        q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
-        k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
-        v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
+        if self.args.ablation:
+            sorted, indices = torch.sort(self.q.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            q.view(-1, q.size(0) * q.size(2))[indices] = 0
+            sorted, indices = torch.sort(self.k.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            k.view(-1, k.size(0) * k.size(2))[indices] = 0
+            sorted, indices = torch.sort(self.v.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            v.view(-1, v.size(0) * v.size(2))[indices] = 0
+        else:
+            #static mask over qkv
+            q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
+            k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
+            v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
 
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
@@ -439,15 +447,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
 
-        if self.args.ablation:
-            print('here')
-            print(attn_output_weights)
-            print(attn_output_weights.size())
-            print(torch.count_nonzero(attn_output_weights))
 
-            print(attn_output.size())
-            print(torch.count_nonzero(attn_output))
-            sys.exit()
 
         assert list(attn_output.size()) == [bsz * self.num_heads, tgt_len, head_dim]
         if self.batch_first:
