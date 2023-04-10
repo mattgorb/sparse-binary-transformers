@@ -389,11 +389,15 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
         if attn_mask is not None:
-
+            print("HERE2")
             if attn_mask.dtype == torch.bool:
+                print("HERE")
                 attn_output_weights.masked_fill_(attn_mask, float('-inf'))
             else:
                 attn_output_weights += attn_mask
+
+            print(attn_mask)
+            sys.exit()
 
         if key_padding_mask is not None:
             attn_output_weights = attn_output_weights.view(bsz, self.num_heads, tgt_len, src_len)
