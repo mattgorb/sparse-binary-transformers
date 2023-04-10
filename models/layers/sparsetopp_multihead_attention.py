@@ -297,7 +297,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         if self.args.ablation:
             #print(self.args.window_size)
-            print(self.embed_dim)
+            '''print(self.embed_dim)
             print(query.size())
             print(self.linear_Q)
             print(self.linear_Q.weight.size())
@@ -306,16 +306,18 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             print(q.size())
             print(int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size))
             print(1-self.attention_prune_rate)
-            sys.exit()
-            sorted, indices = torch.sort(q.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            sys.exit()'''
+            sorted, indices = torch.sort(q.view(-1, q.size(0) * q.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
             q.view(-1, q.size(0) * q.size(2))[indices] = 0
-            sorted, indices = torch.sort(k.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            sorted, indices = torch.sort(k.view(-1, k.size(0) * k.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
             k.view(-1, k.size(0) * k.size(2))[indices] = 0
-            sorted, indices = torch.sort(v.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            sorted, indices = torch.sort(v.view(-1, v.size(0) * v.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
             v.view(-1, v.size(0) * v.size(2))[indices] = 0
+
+            print("HJEREERE")
             sys.exit()
         else:
-            #static mask over qkv
+            #static mask over qkv.
             q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
             k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
             v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
