@@ -300,6 +300,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             print(self.embed_dim)
             print(query.size())
             print(self.linear_Q)
+            print(self.linear_Q.weight.size())
             print(self.linear_K)
             print(self.linear_V)
             print(q.size())
