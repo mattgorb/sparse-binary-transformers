@@ -308,10 +308,14 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             print(1-self.attention_prune_rate)
             sys.exit()'''
             sorted, indices = torch.sort(q.view(-1, q.size(0) * q.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            print(sorted.size())
+
             q.view(-1, q.size(0) * q.size(2))[indices] = 0
             sorted, indices = torch.sort(k.view(-1, k.size(0) * k.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            print(sorted.size())
             k.view(-1, k.size(0) * k.size(2))[indices] = 0
             sorted, indices = torch.sort(v.view(-1, v.size(0) * v.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
+            print(sorted.size())
             v.view(-1, v.size(0) * v.size(2))[indices] = 0
 
             print("HJEREERE")
