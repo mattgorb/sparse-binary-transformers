@@ -18,6 +18,6 @@ nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=3
 
 
 
-nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=3  --rand_mask=True > ~/results_anomaly/4.txt 2>&1 &
-nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=4  --rand_mask=True > ~/results_anomaly/5.txt 2>&1 &
-nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=5  --rand_mask=True > ~/results_anomaly/6.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=2  --rand_mask=True > ~/results_anomaly/4.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=2  --rand_mask=True > ~/results_anomaly/5.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=2  --rand_mask=True > ~/results_anomaly/6.txt 2>&1 &
