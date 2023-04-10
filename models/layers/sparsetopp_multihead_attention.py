@@ -311,6 +311,10 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
         if self.args.ablation:
+            print(q.size())
+            print(int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size))
+            print(1-self.attention_prune_rate)
+            sys.exit()
             sorted, indices = torch.sort(q.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
             q.view(-1, q.size(0) * q.size(2))[indices] = 0
             sorted, indices = torch.sort(k.abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
