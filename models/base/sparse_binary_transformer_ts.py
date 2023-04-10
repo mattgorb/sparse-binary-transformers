@@ -59,7 +59,7 @@ class TSSparseTransformerModel(nn.Module):
                 self.src_mask = mask.to(self.args.device)
             if self.args.rand_mask:
                 size=src.size(1)
-                half=int(size/2)
+                #half=int(size/2)
                 mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
                 #mask[half,:]=0
