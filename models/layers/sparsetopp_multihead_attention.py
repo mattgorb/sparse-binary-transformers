@@ -307,7 +307,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             print(q.view(-1,q.size(0)*q.size(2) ).size())
             print(q_sort_val.size())
             #print(q)
-            print(q_sort_ind[0,-2:])
+            print(q_sort_ind[:,-2:])
             sys.exit()
             q.view(-1,q.size(0)*q.size(2) )[q_sort_ind[:,prune_size:]] = 0
 
