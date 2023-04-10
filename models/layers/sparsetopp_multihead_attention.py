@@ -298,11 +298,11 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
         if self.args.ablation:
             #prune lowest magnitude activations
-            prune_size = int(q.size(0)*q.size(2)[0] * self.attention_prune_rate)
+            prune_size = int(q.size(0)*q.size(2) * self.attention_prune_rate)
             print(prune_size)
             print(q.size())
 
-            q_sort_val, q_sort_ind = torch.sort(q.abs().view(-1,q.size(0)*q.size(2)[0] ), descending=True)
+            q_sort_val, q_sort_ind = torch.sort(q.abs().view(-1,q.size(0)*q.size(2) ), descending=True)
             q.flatten()[q_sort_ind[prune_size:]] = 0
             print(q_sort_val.size())
             sys.exit()
