@@ -390,9 +390,8 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
 
         if attn_mask is not None:
             print("HERE2")
+            print(attn_output_weights)
             if attn_mask.dtype == torch.bool:
-                print("HERE")
-                print(attn_output_weights)
                 attn_output_weights.masked_fill_(attn_mask, float('-inf'))
             else:
                 attn_output_weights += attn_mask
