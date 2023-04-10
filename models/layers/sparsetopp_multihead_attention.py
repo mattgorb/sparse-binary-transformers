@@ -295,30 +295,23 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
+
         if self.args.ablation:
-            #print(self.args.window_size)
-            '''print(self.embed_dim)
-            print(query.size())
-            print(self.linear_Q)
-            print(self.linear_Q.weight.size())
-            print(self.linear_K)
-            print(self.linear_V)
+            prune_size = int(torch.flatten(q).size()[0] * self.attention_prune_rate)
+            print(prune_size)
             print(q.size())
-            print(int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size))
-            print(1-self.attention_prune_rate)
-            sys.exit()'''
-            sorted, indices = torch.sort(q.view(-1, q.size(0) * q.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
-            print(sorted.size())
 
-            q.view(-1, q.size(0) * q.size(2))[indices] = 0
-            sorted, indices = torch.sort(k.view(-1, k.size(0) * k.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
-            print(sorted.size())
-            k.view(-1, k.size(0) * k.size(2))[indices] = 0
-            sorted, indices = torch.sort(v.view(-1, v.size(0) * v.size(2)).abs().flatten())[: int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size)]
-            print(sorted.size())
-            v.view(-1, v.size(0) * v.size(2))[indices] = 0
+            q_sort_val, q_sort_ind = torch.sort(q.abs().flatten(), descending=True)
+            q.flatten()[q_sort_ind[prune_size:]] = 0
 
-            print("HJEREERE")
+            k_sort_val, k_sort_ind = torch.sort(k.abs().flatten(), descending=True)
+            k.flatten()[k_sort_ind[prune_size:]] = 0
+
+            v_sort_val, v_sort_ind = torch.sort(v.abs().flatten(), descending=True)
+            v.flatten()[v_sort_ind[prune_size:]] = 0
+
+            print("HERE")
+
             sys.exit()
         else:
             #static mask over qkv.
