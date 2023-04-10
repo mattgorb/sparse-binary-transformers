@@ -392,11 +392,13 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
             print("HERE2")
             if attn_mask.dtype == torch.bool:
                 print("HERE")
+                print(attn_output_weights)
                 attn_output_weights.masked_fill_(attn_mask, float('-inf'))
             else:
                 attn_output_weights += attn_mask
 
             print(attn_mask)
+            print(attn_output_weights)
             sys.exit()
 
         if key_padding_mask is not None:
