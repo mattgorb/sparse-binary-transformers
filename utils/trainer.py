@@ -247,8 +247,7 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
     model.train()
     model.float()
     for i, batch in enumerate(iterator):
-        #if i % 50 == 0:
-            #print(i)
+
         optimizer.zero_grad()
         data_base, labels = batch
 
@@ -257,7 +256,6 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
             data[:, -1:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
-        #print(data)
         predictions, _ = model(data)
 
         sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
@@ -282,22 +280,10 @@ def metrics(preds, actual,iterator):
 
     se_loss = diffs * diffs
 
-
     mse=torch.mean(se_loss).item()
     print(f'MSE: {mse}')
 
-    #print('mae')
     print(f'MAE: {torch.mean(torch.abs(diffs)).item()}')
-    #print()
-
-    '''nrmse = torch.sqrt(torch.sum(se_loss) / len(torch.flatten(diffs))) / (torch.sum(actual) / len(torch.flatten(diffs)))
-    print("nrmse")
-    print(nrmse.item())
-
-    print('quantiles')
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.9)
-    quantile_loss(torch.flatten(actual), torch.flatten(preds), 0.5)'''
-
     return mse
 
 
@@ -327,7 +313,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
 
             sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
             sample_loss = sample_loss.mean(dim=1)
-            #epoch_loss += sum(sample_loss.detach().cpu().numpy())
+
             batch_num+=1
 
             if i==0:
@@ -340,10 +326,7 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     #print('\nstandardized')
     loss1=metrics(preds,actual,iterator)
 
-    #print('\nnon standardized')
-    #preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
-    #actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
-    #loss2=metrics(preds,actual, iterator)
+
 
 
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))

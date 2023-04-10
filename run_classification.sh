@@ -29,3 +29,6 @@ nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classifica
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_hb.yaml --gpu=4 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --epochs=64 --dmodel=64 --epochs=50 --ablation=True> ~/results_classification/3.txt 2>&1 &
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_insect.yaml --gpu=4 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --dmodel=256 --ablation=True> ~/results_classification/4.txt 2>&1 &
 nohup python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_japan.yaml --gpu=4 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --ablation=True> ~/results_classification/5.txt 2>&1 &
+
+
+python3 -u main_ts_classification.py --config=configs/sparse_ts_classification_japan.yaml --gpu=0 --lin_prune_rate=0.5 --attention_prune_rate=0.5 --ablation=True

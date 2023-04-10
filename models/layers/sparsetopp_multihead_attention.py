@@ -83,19 +83,6 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.k_act_mask=torch.randperm(self.kdim*self.args.window_size)[:int((1-self.attention_prune_rate)*self.kdim*self.args.window_size)]
         self.v_act_mask=torch.randperm(self.vdim*self.args.window_size)[:int((1-self.attention_prune_rate)*self.vdim*self.args.window_size)]
 
-        #static softmax mask.  multi
-        '''sm_p=int((1-self.attention_prune_rate) * self.args.window_size)
-        raw = torch.zeros((self.args.window_size , self.args.window_size,))
-        for i in range(self.args.window_size ):
-            raw[i][torch.randperm(self.args.window_size)[:sm_p]] = float('-inf')
-        self.softmax_mask = raw.to(self.args.device)'''
-
-        #raw = torch.zeros((self.args.window_size * self.args.window_size,))
-        #raw[:int((1-self.attention_prune_rate) * self.args.window_size * self.args.window_size)] = float('-inf')  # set EXACTLY 30% of the pixels in the mask
-        #ridx = torch.randperm(self.args.window_size * self.args.window_size)  # a random permutation of the entries
-        #self.softmax_mask= torch.reshape(raw[ridx], (self.args.window_size, self.args.window_size)).to(self.args.device)
-        #self.softmax_mask=torch.randperm(self.args.window_size*self.args.window_size)[:int((1-self.attention_prune_rate)*  self.args.window_size*self.args.window_size)]
-
         # Functionals
         self.q_scaling_product = nnq.FloatFunctional()
 
@@ -105,8 +92,6 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         self.dequant_q = torch.quantization.DeQuantStub()
         self.dequant_k = torch.quantization.DeQuantStub()
         self.dequant_v = torch.quantization.DeQuantStub()
-
-
 
     def _get_name(self):
         return 'SparseTopPMultiheadAttention'
@@ -311,6 +296,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
         if self.args.ablation:
+            print(self.linear_Q)
             print(q.size())
             print(int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size))
             print(1-self.attention_prune_rate)
