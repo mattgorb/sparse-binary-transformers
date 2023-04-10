@@ -296,10 +296,12 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         v = self.linear_V(value)
 
         if self.args.ablation:
-            print(self.args.window_size)
+            #print(self.args.window_size)
             print(self.embed_dim)
             print(query.size())
             print(self.linear_Q)
+            print(self.linear_K)
+            print(self.linear_V)
             print(q.size())
             print(int((1 - self.attention_prune_rate) * self.embed_dim * self.args.window_size))
             print(1-self.attention_prune_rate)
