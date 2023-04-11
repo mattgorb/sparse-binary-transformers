@@ -317,7 +317,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
             print(q.size())
-            print(q[1])
+            print(q)
             sys.exit()
 
 
