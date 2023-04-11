@@ -302,19 +302,19 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             prune_size = int(q.size(0)*q.size(2) * self.attention_prune_rate)
 
 
-            q_sort_val, q_sort_ind = torch.sort(q.abs().view(-1,q.size(0)*q.size(2) ),dim=-1, descending=True)
+            q_sort_val, q_sort_ind = torch.sort(q.abs().view(-1,q.size(0)*q.size(2) ),dim=-1, descending=False)
             #print(q_sort_val.size())
             #print(q_sort_val[:,prune_size:].size())
-            print(q_sort_ind[0,0])
-            print(q_sort_ind[:,-2:])
-            print(q_sort_ind[0])
+            #print(q_sort_ind[0,0])
+            #print(q_sort_ind[:,-2:])
+            #print(q_sort_ind[0])
+            #print(q_sort_val[:,prune_size:].size())
             print(q_sort_val[:,prune_size:].size())
-            print(q_sort_val[:,prune_size:][0].size())
-            q.view(-1,q.size(0)*q.size(2) )[q_sort_ind[0,0]] = 0
+            print(q_sort_val[:,].size())
+            q.view(-1,q.size(0)*q.size(2) ).scatter(1, q_sort_val[:,:prune_size ],torch.zeros_like(q.view(-1,q.size(0)*q.size(2) )) )
+            #q.view(-1,q.size(0)*q.size(2) )[q_sort_ind[0,0]] = 0
 
-            #print(q.view(-1,q.size(0)*q.size(2) ).size())
-            #print(q_sort_ind[:,prune_size:].size())
-            #print(q.size())
+
             print(q)
             sys.exit()
 
