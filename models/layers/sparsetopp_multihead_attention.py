@@ -313,7 +313,8 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             print(k.size())
             print("HERE")
             print(k_sort_ind[:,prune_size:].size())
-            print(k_sort_ind[:,prune_size:])
+            print(k_sort_ind.size() )
+            print(k_sort_ind)
             sys.exit()
             k.view(-1,k.size(0)*k.size(2))[k_sort_ind[:,prune_size:]] = 0
 
