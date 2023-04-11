@@ -309,8 +309,9 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             #print(q_sort_ind[:,-2:])
             #print(q_sort_ind[0])
             #print(q_sort_val[:,prune_size:].size())
-            print(q_sort_val[:,prune_size:].size())
-            print(q_sort_val[:,].size())
+            #print(q_sort_val[:,prune_size:].size())
+            print(q_sort_val.dtype)
+            print(torch.zeros_like(q.view(-1,q.size(0)*q.size(2) )).dtype)
             q.view(-1,q.size(0)*q.size(2) ).scatter(1, q_sort_val[:,:prune_size ].int(),torch.zeros_like(q.view(-1,q.size(0)*q.size(2) )) )
             #q.view(-1,q.size(0)*q.size(2) )[q_sort_ind[0,0]] = 0
 
