@@ -307,10 +307,10 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
             q.view(-1,q.size(0)*q.size(2) )[q_sort_ind[:,prune_size:]] = 0
 
-            k_sort_val, k_sort_ind = torch.sort(k.abs().view(-1,k.size(0)*k.size(2) ),dim=-1, descending=True)
-            print(k_sort_val.size())
-            print(k_sort_ind[:,prune_size:].size())
-            k.view(-1,k.size(0)*k.size(2) )[k_sort_ind[:,prune_size:]] = 0
+            #k_sort_val, k_sort_ind = torch.sort(k.abs().view(-1,k.size(0)*k.size(2) ),dim=-1, descending=True)
+            #print(k_sort_val.size())
+            #print(k_sort_ind[:,prune_size:].size())
+            #k.view(-1,k.size(0)*k.size(2) )[k_sort_ind[:,prune_size:]] = 0
 
             v_sort_val, v_sort_ind = torch.sort(v.abs().view(-1,v.size(0)*v.size(2) ),dim=-1, descending=True)
             v.view(-1,v.size(0)*v.size(2) )[v_sort_ind[:,prune_size:]] = 0
