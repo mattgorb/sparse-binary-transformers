@@ -295,6 +295,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         k = self.linear_K(key)
         v = self.linear_V(value)
 
+        print(k)
 
         if self.args.ablation:
             #prune lowest magnitude activations
