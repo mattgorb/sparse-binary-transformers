@@ -297,7 +297,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
 
-        if self.args.ablation:
+        '''if self.args.ablation:
             #prune lowest magnitude activations
             prune_size = int(q.size(0)*q.size(2) * self.attention_prune_rate)
 
@@ -317,7 +317,7 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
             #static mask over qkv.
             q.view(-1, q.size(0)*q.size(2))[:,self.q_act_mask]=0
             k.view(-1, k.size(0)*k.size(2))[:,self.k_act_mask]=0
-            v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0
+            v.view(-1, v.size(0)*v.size(2))[:,self.v_act_mask]=0'''
 
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
