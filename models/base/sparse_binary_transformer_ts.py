@@ -46,7 +46,7 @@ class TSSparseTransformerModel(nn.Module):
         nn.init.uniform_(self.decoder.weight, -initrange, initrange)
 
     def forward(self, src, has_src_mask=True, has_pad_mask=False, pad_mask=None,):
-        if has_src_mask:
+        '''if has_src_mask:
             if self.src_mask is None :
                 size=src.size(1)
                 mask=torch.eye(size,)
@@ -66,7 +66,7 @@ class TSSparseTransformerModel(nn.Module):
                 self.src_mask = mask.to(self.args.device)
 
         else:
-            self.src_mask = None
+            self.src_mask = None'''
         if has_pad_mask:
             device = src.device
             mask = (src == 0).t()
