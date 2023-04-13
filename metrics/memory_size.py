@@ -88,7 +88,7 @@ def model_size(model,args,quantized=False, as_bits=True):
         for name, m in model.named_modules():
             if hasattr(m, "weight") and m.weight is not None:
                 b=t=nz=f=0
-                print(f'Weights found for {m._get_name()}, {tensor.shape}')
+                print(f'Weights found for {m._get_name()}')
                 if m._get_name()=='SubnetLinBiprop'  :
                     tensor=m.weight.detach().cpu().numpy()
                     b = np.prod(tensor.shape)

@@ -31,3 +31,10 @@ nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=5
 nohup python3 -u main_ts.py --config=configs/dense_ts_smd_anomaly.yaml --gpu=5   > ~/results_anomaly/7.txt 2>&1 &
 nohup python3 -u main_ts.py --config=configs/dense_ts_msl_anomaly.yaml --gpu=5   > ~/results_anomaly/8.txt 2>&1 &
 nohup python3 -u main_ts.py --config=configs/dense_ts_smap_anomaly.yaml --gpu=5  > ~/results_anomaly/9.txt 2>&1 &
+
+
+
+#no mask
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smd_anomaly.yaml --gpu=4  --ablation=True > ~/results_anomaly/10.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_msl_anomaly.yaml --gpu=3  --ablation=True > ~/results_anomaly/11.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_smap_anomaly.yaml --gpu=4  --ablation=True > ~/results_anomaly/12.txt 2>&1 &
