@@ -43,3 +43,4 @@ nohup python3 -u main_ts.py --config=configs/sparse_ts_elect_forecast.yaml --gpu
 nohup python3 -u main_ts.py --config=configs/sparse_ts_wth_forecast.yaml --gpu=4 --ablation=True > ~/results_forecasting/7.txt 2>&1 &
 
 nohup python3 -u main_ts.py --config=configs/sparse_ts_elect_forecast.yaml --gpu=2 --ablation=True > ~/results_forecasting/8.txt 2>&1 &
+nohup python3 -u main_ts.py --config=configs/sparse_ts_elect_forecast.yaml --gpu=2  > ~/results_forecasting/9.txt 2>&1 &
