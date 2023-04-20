@@ -288,14 +288,12 @@ class SparseMultiheadAttention(nn.MultiheadAttention):
         assert head_dim * self.num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
         scaling = float(head_dim) ** -0.5
 
-        print(self.linear_Q)
-        print(query.size())
+
         q = self.linear_Q(query)
         k = self.linear_K(key)
         v = self.linear_V(value)
 
-        print(q.size())
-        sys.exit()
+
 
         q = self.q_scaling_product.mul_scalar(q, scaling)
 
