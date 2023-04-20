@@ -90,7 +90,7 @@ def flops(model, input, args):
             module_bops, module_nonzero_flops = sbt_fn[m.__class__](m, act, args)
             flops_dict['total_flops'] += module_nonzero_flops
             #flops_dict['total_bops'] += module_bops
-            print(m.size())
+            print(act)
             print(f'Module: {m._get_name()},   Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')
 
         else:
