@@ -79,13 +79,7 @@ def flops(model, input, args):
 
     modules_not_found=[]
 
-    '''for n, m in model.named_modules():
-        print(f'{n}, {m._get_name()}')
-        print(m.__class__)
 
-        if m.__class__ in FLOP_fn:
-            print('heere')'''
-    #sys.exit()
     for m, act in activations.items():
 
         if m.__class__ in FLOP_fn:
@@ -96,6 +90,7 @@ def flops(model, input, args):
             module_bops, module_nonzero_flops = sbt_fn[m.__class__](m, act, args)
             flops_dict['total_flops'] += module_nonzero_flops
             #flops_dict['total_bops'] += module_bops
+            print(m.size())
             print(f'Module: {m._get_name()},   Nonzero FLOPs: {module_nonzero_flops}')  # , nonzero FLOPS: {module_nonzero_flops}')
 
         else:

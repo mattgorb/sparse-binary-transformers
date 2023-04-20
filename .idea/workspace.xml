@@ -14,6 +14,7 @@
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/embed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/informer/Informer2020/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/informer/Informer2020/models/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/metrics/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics/flops.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/flops.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparse_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers/sparsetopp_multihead_attention.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyraformer/Pyraformer/data/app_zone_rpc_hour_encrypted.zip" beforeDir="false" />
