@@ -291,14 +291,10 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
         assert head_dim * self.num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
         scaling = float(head_dim) ** -0.5
 
-        print(query.size())
-        print(self.linear_Q)
+
         q = self.linear_Q(query)
         k = self.linear_K(key)
         v = self.linear_V(value)
-
-        print(q.size())
-        sys.exit()
 
 
         if self.args.ablation:
@@ -417,6 +413,11 @@ class SparseTopPMultiheadAttention(nn.MultiheadAttention):
 
 
         attn_output_weights = torch.bmm(q, k.transpose(1, 2))
+
+        print(q.size())
+        print(k.size())
+        print(attn_output_weights.size())
+        sys.exit()
 
         assert list(attn_output_weights.size()) == [bsz * self.num_heads, tgt_len, src_len]
 
