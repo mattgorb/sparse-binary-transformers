@@ -17,7 +17,7 @@ def linear_init(in_dim, out_dim, bias=None, args=None, **factory_kwargs):
 
 class GetSubnetBinary(autograd.Function):
     @staticmethod
-    def forward(ctx, scores, weights, k, alpha):
+    def forward(ctx, scores, weights, k):
         # Get the subnetwork by sorting the scores and using the top k%
         out = scores.clone()
         _, idx = scores.flatten().sort()
@@ -27,8 +27,12 @@ class GetSubnetBinary(autograd.Function):
         flat_out[idx[:j]] = 0
         flat_out[idx[j:]] = 1
 
+        
         # Perform binary quantization of weights
         abs_wgt = torch.abs(weights.clone()) # Absolute value of original weights
+        q_weight = abs_wgt * out # Remove pruned weights
+        num_unpruned = int(k * scores.numel()) # Number of unpruned weights
+        alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
 
         # Save absolute value of weights for backward
         ctx.save_for_backward(abs_wgt)
@@ -83,7 +87,7 @@ class SubnetLinBiprop(nn.Linear):
     def forward(self, x):
 
         # Get binary mask and gain term for subnetwork
-        quantnet = GetSubnetBinary.apply(self.clamped_scores, self.weight, self.prune_rate, self.calc_alpha())
+        quantnet = GetSubnetBinary.apply(self.clamped_scores, self.weight, self.prune_rate)
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = torch.sign(self.weight) * quantnet
         # Pass binary subnetwork weights to convolution layer
