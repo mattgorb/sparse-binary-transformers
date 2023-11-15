@@ -510,7 +510,7 @@ class ForecastDS(object):
             valid_end = '2014-09-08 00:00:00'
             test_start = '2014-09-01 00:00:00'
             test_end = '2014-12-31 23:00:00'''
-            data_frame = pd.read_csv(f'{data_path}electricity/ECL.csv', index_col=0, parse_dates=True,)
+            data_frame = pd.read_csv(f'{data_path}/ECL.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values
@@ -570,6 +570,7 @@ class ForecastDS(object):
             valid_end = '2017-10-20 23:45:00'
             test_start = '2017-10-20 00:00:00'
             test_end = '2018-02-20 23:45:00'
+
             data_frame = pd.read_csv(f'{data_path}ETTm1/ETTm1.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
@@ -626,23 +627,15 @@ class ForecastDS(object):
 def get_entity_dataset(data_path, batch_size, win_size=100, step=100, mode='train', dataset='KDD', entity=None, shuffle=False, forecast=None):
     if dataset == 'SMD':
         print(data_path)
-        #entities=os.listdir(f'{data_path}/SMD_raw/train')
-        #print(f'Dataset: {entities[entity]}')
-        #print(entities)
+
         dataset=SMDSegLoader(f'{data_path}/SMD/', win_size, step, mode=mode)
         #dataset = SMD(data_path,entities[entity], win_size, step, mode, forecast)
     elif dataset == 'SMAP':
-        #entities=pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
-        #entities=entities[entities['spacecraft']=='SMAP']
-        #entities=entities['chan_id'].values
-        #print(f'Dataset: {entities[entity]}')
+
         dataset = SMAPSegLoader(f'{data_path}/SMAP/', win_size, step, mode=mode)
         #print(entities)
     elif dataset == 'MSL':
-        #entities = pd.read_csv(f'{data_path}/SMAP_MSL/labeled_anomalies.csv')
-        #entities = entities[entities['spacecraft'] == 'MSL']
-        #entities = entities['chan_id'].values
-        #print(f'Dataset: {entities[entity]}')
+
         dataset = MSLSegLoader(f'{data_path}/MSL/', win_size, step, mode=mode)
     elif dataset == 'electricity' :
         #dataset = electTestDataset(data_path+'electricity/', dataset,1,mode )

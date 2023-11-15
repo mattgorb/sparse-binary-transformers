@@ -11,6 +11,6 @@ torch
 torchvision
 tqdm
 Werkzeug
-torchtext
+
 torchdata
 spacy

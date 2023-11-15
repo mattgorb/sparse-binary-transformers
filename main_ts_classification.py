@@ -1,15 +1,14 @@
 import torch
-from torchtext.datasets import IMDB
+
 from models.base.dense_transformer_ts_classification import TSClassificationTransformer
 from models.base.sparse_binary_transformer_ts_cls import TSClsSparseTransformerModel
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
-import torchtext
-from torchtext.data.utils import get_tokenizer
+
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from utils.model_utils import *
-from torchtext.data.functional import to_map_style_dataset
+
 import time
 from torch import optim
 from args import args

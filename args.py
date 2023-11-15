@@ -12,8 +12,10 @@ def parse_arguments():
 
     # General Config
     parser.add_argument(
-        "--data", help="path to dataset base directory", default="/s/luffy/b/nobackup/mgorb/data"
+        "--data", help="path to dataset base directory", default="/s/lovelace/c/nobackup/iray/mgorb/luffy-data"
+        #default="/s/luffy/b/nobackup/mgorb/data"
     )
+    
     parser.add_argument("--optimizer", help="Which optimizer to use", default="sgd")
     parser.add_argument("--set", help="name of dataset", type=str, default="ImageNet")
     parser.add_argument("--entity", help="num of entity", type=int, default=None)

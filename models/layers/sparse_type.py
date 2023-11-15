@@ -68,12 +68,7 @@ class SubnetLinBiprop(nn.Linear):
         self.prune_rate=args.lin_prune_rate
 
 
-    def calc_alpha(self):
-        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
-        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
-        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
-        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
-        return self.alpha
+
 
     def rerandomize(self):
         with torch.no_grad():
@@ -184,15 +179,10 @@ class SubnetLayerNorm(nn.LayerNorm):
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.layer_norm_prune_rate
 
-    def calc_alpha(self):
-        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
-        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
-        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
-        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
-        return self.alpha
+
 
     def forward(self, x):
-        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)#s, self.calc_alpha())
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
         # Pass binary subnetwork weights to convolution layer
@@ -225,15 +215,10 @@ class SubnetBatchNorm(nn.LayerNorm):
         self.scores=_init_score(self.args, self.scores)
         self.prune_rate=args.layer_norm_prune_rate
 
-    def calc_alpha(self):
-        abs_wgt = torch.abs(self.weight.clone()) # Absolute value of original weights
-        q_weight = abs_wgt * self.scores.abs() # Remove pruned weights
-        num_unpruned = int(self.prune_rate * self.scores.numel()) # Number of unpruned weights
-        self.alpha = torch.sum(q_weight) / num_unpruned # Compute alpha = || q_weight ||_1 / (number of unpruned weights)
-        return self.alpha
+
 
     def forward(self, x):
-        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)#s, self.calc_alpha())
+        subnet = GetSubnetContinuous.apply(self.clamped_scores, self.weight, self.prune_rate)
         # Binarize weights by taking sign, multiply by pruning mask and gain term (alpha)
         w = self.weight * subnet
         # Pass binary subnetwork weights to convolution layer

@@ -1,16 +1,14 @@
 import torch
-from torchtext.datasets import IMDB
 from models.base.dense_transformer_ts import TSTransformerModel
 from models.base.sparse_binary_transformer_ts import TSSparseTransformerModel
 from models.base.dense_transformer_ts_forecast import TSTransformerModelForecast
 from models.layers.sparse_type import SubnetLinBiprop
 from collections import Counter
-import torchtext
-from torchtext.data.utils import get_tokenizer
+
 from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence
 from utils.model_utils import *
-from torchtext.data.functional import to_map_style_dataset
+
 import time
 from torch import optim
 from args import args
@@ -45,8 +43,8 @@ def main():
     device = torch.device(f'cuda:{args.gpu}' if torch.cuda.is_available() else 'cpu')
     args.device=device
     if 'cuda' in str(device):
-        root_dir='/s/luffy/b/nobackup/mgorb/data/'
-        weight_file_base='/s/luffy/b/nobackup/mgorb/weights/'+args.weight_file
+        root_dir='/s/lovelace/c/nobackup/iray/mgorb/luffy-data/'
+        weight_file_base='/s/lovelace/c/nobackup/iray/mgorb/weights/'+args.weight_file
     else:
         root_dir='data/'
         weight_file_base = 'weights/' + args.weight_file

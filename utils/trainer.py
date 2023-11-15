@@ -332,10 +332,10 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
     preds=torch.tensor(iterator.dataset.inverse(np.array(preds.detach().cpu().numpy())))
     actual = torch.tensor(iterator.dataset.inverse(np.array(actual.detach().cpu().numpy())))
     df = pd.DataFrame(preds.detach().cpu().numpy(), columns = [i for i in range(preds.detach().cpu().numpy().shape[1])])
-    df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_epoch{epoch}_preds_model_type_{args.model_type}.csv')
+    df.to_csv(f'/s/lovelace/c/nobackup/iray/mgorb/data/forecast_output/{args.dataset}_epoch{epoch}_preds_model_type_{args.model_type}.csv')
     if epoch==0:
         df = pd.DataFrame(actual.detach().cpu().numpy(), columns = [i for i in range(actual.detach().cpu().numpy().shape[1])])
-        df.to_csv(f'/s/luffy/b/nobackup/mgorb/data/forecast_output/{args.dataset}_actual_model_type_{args.model_type}.csv')
+        df.to_csv(f'/s/lovelace/c/nobackup/iray/mgorb/data/forecast_output/{args.dataset}_actual_model_type_{args.model_type}.csv')
     #
 
     return loss1
