@@ -1,0 +1,34 @@
+#weight_init: kaiming_normal
+#score_init: None
+dataset: electricity
+
+weight_seed: 3
+score_seed: 0
+gpu: 2
+batch_size: 128
+
+model_type: 'Sparse'
+attention: 'Dense'
+
+epochs: 100
+weight_file: sparse_ts_electricity
+
+layer_norm_prune_rate: 0.5
+lin_prune_rate: 0.5
+attention_prune_rate: 0.5
+has_src_mask: True
+
+#window_size: 210
+dmodel: 350
+forecast: True
+save_scores: False
+layer_norm: True
+batch_norm: False
+save_graphs: False
+
+pos_enc: 'Standard'
+lr: .001
+scheduler: True
+
+forecasting_steps: 1
+window_size: 200

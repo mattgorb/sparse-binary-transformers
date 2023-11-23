@@ -186,25 +186,6 @@ class SMD(object):
             self.test=self.test[filter_anomalies[:,0]]
             self.test_labels=self.test_labels[filter_anomalies[:,0]]
 
-        '''print(self.train.shape)
-        for i in range(self.train.shape[1]):
-            print(f'{i}: {len(set(self.train[:,i]))}')
-
-            train_set=set(self.train[:,i])
-            if len(train_set)<50:
-                print(train_set)
-            #print(len([i for i in self.test[:,i] if i not in train_set]))
-        sys.exit()'''
-        '''import matplotlib.pyplot as plt
-        for feat in range(self.train.shape[1]):
-            plt.clf()
-            plt.plot([i for i in range(self.train.shape[0])],self.train[:,feat],label='train')
-            #plt.plot([i for i in range(self.test.shape[0])],self.test[:,feat],label='test')
-            plt.plot([i for i in range(self.val.shape[0])],self.val[:,feat],label='test')
-            plt.legend()
-            print(feat)
-            plt.show()
-        sys.exit()'''
     def __len__(self):
 
         if self.mode == "train":
@@ -373,13 +354,13 @@ class Dataset_ETT_hour(Dataset):
         r_begin = s_end - self.label_len
         r_end = r_begin + self.label_len + self.pred_len
         seq_x = self.data_x[s_begin:s_end]
-        if self.inverse:
+        '''if self.inverse:
             seq_y = np.concatenate(
                 [self.data_x[r_begin:r_begin + self.label_len], self.data_y[r_begin + self.label_len:r_end]], 0)
         else:
             seq_y = self.data_y[r_begin:r_end]
         seq_x_mark = self.data_stamp[s_begin:s_end]
-        seq_y_mark = self.data_stamp[r_begin:r_end]
+        seq_y_mark = self.data_stamp[r_begin:r_end]'''
 
         return np.float32(seq_x), np.float32(seq_x)
 
@@ -485,32 +466,8 @@ class ForecastDS(object):
         self.win_size = win_size
         self.scaler = StandardScaler()
         if dataset=='electricity':
-            '''train_start = '2011-01-01 00:00:00'
-            train_end = '2014-09-01 00:00:00'
-            valid_start = '2014-08-25 00:00:00'
-            valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-09-01 00:00:00'
-            test_end = '2014-12-31 23:00:00'
 
-            data_frame = pd.read_csv(f'{data_path}electricity/LD2011_2014.txt', sep=";", index_col=0, parse_dates=True, decimal=',')
-            data_frame = data_frame.resample('1H', label='left', closed='right').sum()[train_start:test_end]'''
-
-            #informer dates
-            train_start = '2012-01-01 00:00:00'
-            train_end = '2014-02-06 03:0:00'
-            valid_start = '2014-02-04 04:00:00'
-            valid_end = '2014-05-26 20:00:00'
-            test_start = '2014-05-24 20:00:00'
-            test_end = '2015-01-01 00:00:00'
-
-            #pyraformer dates
-            '''train_start = '2012-01-01 00:00:00'
-            train_end = '2014-09-01 00:00:00'
-            valid_start = '2014-08-25 00:00:00'
-            valid_end = '2014-09-08 00:00:00'
-            test_start = '2014-09-01 00:00:00'
-            test_end = '2014-12-31 23:00:00'''
-            data_frame = pd.read_csv(f'{data_path}/ECL.csv', index_col=0, parse_dates=True,)
+            data_frame = pd.read_csv(f'{data_path}ECL.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values
             valid_data = data_frame[valid_start: valid_end].values

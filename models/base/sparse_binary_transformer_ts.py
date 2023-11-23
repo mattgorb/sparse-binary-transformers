@@ -48,21 +48,18 @@ class TSSparseTransformerModel(nn.Module):
     def forward(self, src, has_src_mask=True, has_pad_mask=False, pad_mask=None,):
         if has_src_mask:
             if self.src_mask is None :
+                #step t attention
                 size=src.size(1)
                 mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
                 mask[-1,:]=0
-
                 mask[-1,-1]=float('-inf')
 
                 self.src_mask = mask.to(self.args.device)
             if self.args.ablation:
                 size=src.size(1)
-
                 mask=torch.eye(size,)
                 mask=mask.masked_fill(mask == 0, float('-inf'))
-
-
                 self.src_mask = mask.to(self.args.device)
 
         else:

@@ -253,12 +253,12 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
 
         data = torch.clone(data_base)
         if args.forecast:
-            data[:, -1:, :] = 0
+            data[:, -args.forecasting_steps:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
         predictions, _ = model(data)
 
-        sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+        sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
         sample_loss = sample_loss.mean(dim=1)
         batch_loss = torch.sum(sample_loss)
         epoch_loss += torch.sum(sample_loss)
@@ -281,9 +281,9 @@ def metrics(preds, actual,iterator):
     se_loss = diffs * diffs
 
     mse=torch.mean(se_loss).item()
-    print(f'MSE: {mse}')
+    print(f'Test set MSE: {mse}')
 
-    print(f'MAE: {torch.mean(torch.abs(diffs)).item()}')
+    print(f'Test set MAE: {torch.mean(torch.abs(diffs)).item()}')
     return mse
 
 
@@ -340,3 +340,103 @@ def test_forecast(model, iterator, val_iterator, criterion, device, args, epoch)
 
     return loss1
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def metrics_lt(preds, actual,iterator):
+    diffs = preds - actual
+
+    se_loss = diffs * diffs
+
+    mse=torch.mean(se_loss).item()
+    print(f'Test set MSE: {mse}')
+
+    mae=torch.mean(torch.abs(diffs)).item()
+    print(f'Test set MAE: {mae}')
+    return mse, mae
+
+
+
+def train_lt_forecast(model, iterator, optimizer, criterion, device, args, epoch):
+    epoch_loss = 0
+    model.train()
+    model.float()
+    for i, batch in enumerate(iterator):
+
+        optimizer.zero_grad()
+        data_base, labels = batch
+
+        data = torch.clone(data_base)
+        if args.forecast:
+            data[:, -args.forecasting_steps:, :] = 0
+        data = data.to(device)
+        data_base = data_base.to(device)
+        predictions, _ = model(data,has_src_mask=False)
+
+        sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
+        sample_loss = sample_loss.mean(dim=1)
+        batch_loss = torch.sum(sample_loss)
+        epoch_loss += torch.sum(sample_loss)
+
+        batch_loss.backward()
+        optimizer.step()
+
+    return epoch_loss.item()/iterator.dataset.__len__()
+
+
+
+def test_lt_forecast(model, iterator, val_iterator, criterion, device, args, epoch):
+    epoch_loss = 0
+    batch_num=1
+    model.eval()
+
+
+    preds=[]
+    actual=[]
+
+    with torch.no_grad():
+        for i,batch in enumerate(iterator):
+            data_base, label = batch
+
+            data = torch.clone(data_base)
+            if args.forecast:
+                data[:, -args.forecasting_steps::, :] = 0
+                
+
+            data = data.to(device)
+            data_base = data_base.to(device)
+
+            # full loss
+            predictions, _ = model(data,has_src_mask=False )
+
+            sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
+            sample_loss = sample_loss.mean(dim=1)
+
+            batch_num+=1
+
+            if i==0:
+                preds=predictions[:, -args.forecasting_steps:, :]
+                actual=data_base[:, -args.forecasting_steps:, :]
+            else:
+                preds=torch.cat([preds,predictions[:, -args.forecasting_steps:, :]], dim=0)
+                actual=torch.cat([actual,data_base[:, -args.forecasting_steps:, :]], dim=0)
+
+    #print('\nstandardized')
+    mse, mae=metrics_lt(preds,actual,iterator)
+
+
+
+
+
+    return mse, mae

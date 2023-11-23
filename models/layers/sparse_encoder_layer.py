@@ -56,14 +56,7 @@ class SparseTransformerEncoderLayer(nn.Module):
 
 
     def forward(self, src, src_mask= None, src_key_padding_mask = None):
-        '''x = src
 
-        x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask))
-        x = self.norm2(x + self._ff_block(x))
-        #x=x + self._sa_block(x, src_mask, src_key_padding_mask)
-        #x=x + self._ff_block(x)
-
-        return x'''
 
         src2, attention = self.self_attn(src, src, src, attn_mask=src_mask,
                               key_padding_mask=src_key_padding_mask)
