@@ -466,7 +466,13 @@ class ForecastDS(object):
         self.win_size = win_size
         self.scaler = StandardScaler()
         if dataset=='electricity':
-
+            train_start = '2012-01-01 00:00:00'
+            train_end = '2014-02-06 03:0:00'
+            valid_start = '2014-02-04 04:00:00'
+            valid_end = '2014-05-26 20:00:00'
+            test_start = '2014-05-24 20:00:00'
+            test_end = '2015-01-01 00:00:00'
+            
             data_frame = pd.read_csv(f'{data_path}ECL.csv', index_col=0, parse_dates=True,)
 
             self.data = data_frame[train_start:train_end].values

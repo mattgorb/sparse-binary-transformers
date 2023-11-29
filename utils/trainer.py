@@ -253,13 +253,16 @@ def train_forecast(model, iterator, optimizer, criterion, device, args, epoch):
 
         data = torch.clone(data_base)
         if args.forecast:
-            data[:, -args.forecasting_steps:, :] = 0
+            data[:, -1:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
         predictions, _ = model(data)
 
-        sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
-        sample_loss = sample_loss.mean(dim=1)
+        sample_loss = criterion(predictions[:, -1, :], data_base[:, -1, :])
+        #print(sample_loss.size())
+        sample_loss = sample_loss.view(sample_loss.size()[0], -1).mean(dim=1)
+        
+        #sys.exit()
         batch_loss = torch.sum(sample_loss)
         epoch_loss += torch.sum(sample_loss)
 
@@ -360,10 +363,10 @@ def metrics_lt(preds, actual,iterator):
     se_loss = diffs * diffs
 
     mse=torch.mean(se_loss).item()
-    print(f'Test set MSE: {mse}')
+    #print(f'Test set MSE: {mse}')
 
     mae=torch.mean(torch.abs(diffs)).item()
-    print(f'Test set MAE: {mae}')
+    #print(f'Test set MAE: {mae}')
     return mse, mae
 
 
@@ -375,17 +378,29 @@ def train_lt_forecast(model, iterator, optimizer, criterion, device, args, epoch
     for i, batch in enumerate(iterator):
 
         optimizer.zero_grad()
-        data_base, labels = batch
+        data_base, _ = batch
 
         data = torch.clone(data_base)
         if args.forecast:
             data[:, -args.forecasting_steps:, :] = 0
         data = data.to(device)
         data_base = data_base.to(device)
+
+        # has_src_mask=False is turning off step-t mask.  important
         predictions, _ = model(data,has_src_mask=False)
 
-        sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
-        sample_loss = sample_loss.mean(dim=1)
+        #data/preds in format (batch, windows,features)
+        #we are interested in calculating loss on last t time steps, since we set them to 0 above.
+        #criterion has no reduction, doing manually below for flexibility (see next few lines of code)
+        sample_loss = criterion(predictions[:, -args.forecasting_steps:, :],
+                                  data_base[:, -args.forecasting_steps:, :])
+        
+        #first get average loss of t time steps. 
+        sample_loss=torch.mean(sample_loss, dim=1)
+
+        #then get average loss over all features. 
+        sample_loss=torch.mean(sample_loss, dim=1)
+
         batch_loss = torch.sum(sample_loss)
         epoch_loss += torch.sum(sample_loss)
 
@@ -417,7 +432,7 @@ def test_lt_forecast(model, iterator, val_iterator, criterion, device, args, epo
             data = data.to(device)
             data_base = data_base.to(device)
 
-            # full loss
+            # has_src_mask=False is turning off step-t mask
             predictions, _ = model(data,has_src_mask=False )
 
             sample_loss = criterion(predictions[:, -args.forecasting_steps:, :], data_base[:, -args.forecasting_steps:, :])
@@ -434,9 +449,5 @@ def test_lt_forecast(model, iterator, val_iterator, criterion, device, args, epo
 
     #print('\nstandardized')
     mse, mae=metrics_lt(preds,actual,iterator)
-
-
-
-
 
     return mse, mae

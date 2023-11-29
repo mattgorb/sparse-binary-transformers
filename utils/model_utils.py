@@ -5,6 +5,8 @@ import torch.nn.functional as F
 import math
 import random
 
+#from models.layers.sparse_type import SubnetLinBiprop
+
 def set_seed(seed):
 
     random.seed(seed)
@@ -130,3 +132,6 @@ def freeze_model_weights(model):
                 if m.bias.grad is not None:
                     print(f"==> Setting gradient of {n}.bias to None")
                     m.bias.grad = None
+
+
+

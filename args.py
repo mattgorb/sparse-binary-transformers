@@ -8,7 +8,7 @@ args = None
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="PyTorch ImageNet Training")
+    parser = argparse.ArgumentParser(description="PyTorch SBT Training")
 
     # General Config
     parser.add_argument(
@@ -16,8 +16,8 @@ def parse_arguments():
         #default="/s/luffy/b/nobackup/mgorb/data"
     )
     
-    parser.add_argument("--optimizer", help="Which optimizer to use", default="sgd")
-    parser.add_argument("--set", help="name of dataset", type=str, default="ImageNet")
+    parser.add_argument("--optimizer", help="Which optimizer to use", default="adam")
+    
     parser.add_argument("--entity", help="num of entity", type=int, default=None)
 
     parser.add_argument("--dmodel", help="num of entity", type=int, default=None)
@@ -31,6 +31,14 @@ def parse_arguments():
     parser.add_argument(
         "--window_size", help="WS",   type=int,default=None
     )
+    parser.add_argument(
+        "--rerand_epoch_freq", type=int,default=None
+    )
+    parser.add_argument(
+        "--rerand_rate", type=float,default=None
+    )
+
+    
 
     parser.add_argument(
         "-j",

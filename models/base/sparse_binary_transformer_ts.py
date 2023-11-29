@@ -9,11 +9,10 @@ class TSSparseTransformerModel(nn.Module):
 
     def __init__(self, input_dim, ninp, nhead, nhid, nlayers=6, args=None):
         super(TSSparseTransformerModel, self).__init__()
-        try:
-            from models.layers.sparse_encoder import SparseTransformerEncoder
-            from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer
-        except:
-            raise ImportError("Had trouble importing transformer modules. ")
+
+        from models.layers.sparse_encoder import SparseTransformerEncoder
+        from models.layers.sparse_encoder_layer import  SparseTransformerEncoderLayer
+
         self.model_type = 'Transformer'
         self.src_mask = None
         self.pad_mask = None

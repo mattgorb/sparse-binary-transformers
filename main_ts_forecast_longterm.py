@@ -23,7 +23,8 @@ from utils.trainer import train,test_forecast,validation,test_anomaly_detection,
 from metrics.evaluate import evaluate
 #from utils.trainer import train,test, validation,test_forecast
 from data_factory.entity_loader import get_entity_dataset
-from models.layers.sparse_type import SubnetLinBiprop
+from models.layers.sparse_type import SubnetLinBiprop, rerandomize_model
+from torch.optim.lr_scheduler import StepLR,CosineAnnealingLR
 
 
 
@@ -49,19 +50,18 @@ def main():
         root_dir='data/'
         weight_file_base = 'weights/' + args.weight_file
 
-    ent=1
 
-    weight_file = weight_file_base + f'_entity_{ent}_ds_{args.dataset}_forecast_{args.forecast}_ws_{args.window_size}.pt'
+    weight_file = weight_file_base + f'_ds_{args.dataset}_forecast_ws_{args.window_size}_forecasting_steps_{args.forecasting_steps}_rerand_epoch_freq_{args.rerand_epoch_freq}.pt'
 
     train_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='train',win_size=args.window_size,
-                                        dataset=args.dataset, entity=ent, shuffle=True, forecast=args.forecast)
+                                        dataset=args.dataset, entity=1, shuffle=True, forecast=args.forecast)
     val_dataloader=get_entity_dataset(root_dir, args.batch_size,mode='val',win_size=args.window_size,
-                                      dataset=args.dataset, entity=ent, forecast=args.forecast)
+                                      dataset=args.dataset, entity=1, forecast=args.forecast)
     test_dataloader=get_entity_dataset(root_dir,args.batch_size, mode='test',
-                                       win_size=args.window_size, dataset=args.dataset, entity=ent, forecast=args.forecast)
+                                       win_size=args.window_size, dataset=args.dataset, entity=1, forecast=args.forecast)
 
     input_dim=train_dataloader.dataset.train.shape[1]
-    #input_dim=7
+
 
     if args.dmodel is None:
         dmodel = input_dim*2
@@ -80,7 +80,17 @@ def main():
     freeze_model_weights(model)
     print(f'The model has {count_parameters(model):,} trainable parameters')
 
-    optimizer = optim.Adam(model.parameters(),lr=args.lr)
+    if args.optimizer=='adam':
+        optimizer = optim.Adam(model.parameters(),lr=args.lr)
+        #scheduler=None
+        #scheduler = CosineAnnealingLR(optimizer, T_max=args.epochs) 
+        scheduler = StepLR(optimizer, step_size=10, gamma=0.5)
+    else: 
+        #these hyperparameters are bleh, should be tuned better
+        learning_rate = 0.01 #
+        weight_decay = 1e-5
+        optimizer = optim.SGD(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+        scheduler = CosineAnnealingLR(optimizer, T_max=args.epochs) 
     
     criterion = nn.MSELoss(reduction='none')
     best_loss = float('inf')
@@ -95,8 +105,9 @@ def main():
     print(f'number of test batches: {test_dataloader.dataset.__len__()/args.batch_size}')
     print(f'number of val batches: {val_dataloader.dataset.__len__()/args.batch_size}')
 
-
-    early_stopping_increment=0
+    print(f'weight file: {weight_file}')
+    best_test_mse=0
+    best_test_mae=0
     for epoch in range(args.epochs):
 
         train_loss = train_lt_forecast(model, train_dataloader, optimizer, criterion, device, args, epoch)
@@ -105,10 +116,20 @@ def main():
             best_loss=test_loss_mse
             torch.save(model.state_dict(), weight_file)
             print(f"New best, Saving model... ")
-            print(f'\t Performance: Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss_mse}')
+            print(f'\t Performance: Epoch: {epoch} | Train loss: {train_loss} |  Test loss mse: {test_loss_mse} |  Test loss mae: {test_loss_mae}')
+            
+            best_test_mae=test_loss_mae
+            best_test_mse=test_loss_mse
+        current_lr = optimizer.param_groups[0]['lr'] 
+        print(f'Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss_mse}  |  current_lr: {current_lr}')
+        #if scheduler is not None: 
+        scheduler.step()
 
-        print(f'Epoch: {epoch} | Train loss: {train_loss} |  Test loss: {test_loss_mse}')
+        if args.rerand_epoch_freq is not None:
+            if epoch%int(args.rerand_epoch_freq)==0 and epoch>0 and epoch != args.epochs - 1:
+                rerandomize_model(model, args)
 
+    print(f'\tFinal Model Performance: Test loss mse: {best_test_mse} |  Test loss mae: {best_test_mae}')
 
 
 if __name__ == "__main__":
