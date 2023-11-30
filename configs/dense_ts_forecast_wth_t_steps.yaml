@@ -2,7 +2,7 @@
 #score_init: None
 dataset: WTH
 
-weight_seed: 0
+weight_seed: 2
 score_seed: 0
 gpu: 2
 batch_size: 128

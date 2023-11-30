@@ -75,7 +75,7 @@ def parse_arguments():
         help="initial learning rate",
         dest="lr",
     )
-    parser.add_argument("--model_runs", help="number of times to run model", default=3)
+    parser.add_argument("--model_runs", help="number of times to run model", default=5, type=int)
     parser.add_argument("--forecast", help="forecast", default=False)
     parser.add_argument("--es_epochs", help="earlystopping epochs", default=None)
     parser.add_argument("--scale_fan", default=False, type=bool)
