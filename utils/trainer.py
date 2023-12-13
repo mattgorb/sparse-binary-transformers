@@ -405,6 +405,8 @@ def train_lt_forecast(model, iterator, optimizer, criterion, device, args, epoch
         epoch_loss += torch.sum(sample_loss)
 
         batch_loss.backward()
+
+
         optimizer.step()
 
     return epoch_loss.item()/iterator.dataset.__len__()
