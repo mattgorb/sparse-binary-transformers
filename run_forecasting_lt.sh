@@ -43,7 +43,7 @@ nohup python -u main_ts_forecast_longterm.py --config=configs/dense_ts_forecast_
 nohup python -u main_ts_forecast_longterm.py --config=configs/sparse_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=216 --forecasting_steps=16 --epochs=100 --model_runs=5 > ~/results_forecasting/18.txt 2>&1 & 
 
 nohup python -u main_ts_forecast_longterm.py --config=configs/dense_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=224 --forecasting_steps=24 --epochs=100  --model_runs=5 >  ~/results_forecasting/19.txt 2>&1 &
-nohup python -u main_ts_forecast_longterm.py --config=configs/sparse_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=224 --forecasting_steps=24 --epochs=100 --model_runs=5 >  ~/results_forecasting/20.txt 2>&1 & 
+nohup python -u main_ts_forecast_longterm.py --config=configs/sparse_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=224 --forecasting_steps=24 --epochs=100 --model_runs=1 >  ~/results_forecasting/20.txt 2>&1 & 
 
 nohup python -u main_ts_forecast_longterm.py --config=configs/dense_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=228 --forecasting_steps=28 --epochs=100  --model_runs=5 >  ~/results_forecasting/21.txt 2>&1 &
 nohup python -u main_ts_forecast_longterm.py --config=configs/sparse_ts_forecast_elect_t_steps.yaml --gpu=0 --window_size=228 --forecasting_steps=28 --epochs=100 --model_runs=5 >  ~/results_forecasting/22.txt 2>&1 & 

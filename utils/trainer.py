@@ -449,6 +449,10 @@ def test_lt_forecast(model, iterator, val_iterator, criterion, device, args, epo
                 preds=torch.cat([preds,predictions[:, -args.forecasting_steps:, :]], dim=0)
                 actual=torch.cat([actual,data_base[:, -args.forecasting_steps:, :]], dim=0)
 
+
+    preds=preds.numpy()
+    actual=actual.detach().cpu().numpy()
+    #preds.to_csv(f'epohc_{epoch}_forecasting_steps_{forecasting_steps}_model_type_{dense_or_sparse?}')
     #print('\nstandardized')
     mse, mae=metrics_lt(preds,actual,iterator)
 
