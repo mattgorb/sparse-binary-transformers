@@ -67,8 +67,6 @@ class SubnetLinBiprop(nn.Linear):
         #self.register_buffer('alpha' , torch.tensor(1, requires_grad=False))
         nn.init.kaiming_uniform_(self.scores, a=math.sqrt(5))
 
-
-
     def init(self,args):
         self.args=args
         print(f'Linear init with p.r. {args.lin_prune_rate}')
