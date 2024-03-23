@@ -3,7 +3,7 @@
 https://dl.acm.org/doi/pdf/10.1145/3580305.3599508
 
 
-Experimental runs contained in "run_*.sh" files
+Experiment scripts in "run_*.sh" files
 
 For example, to train the SMD anomaly detection model run the following: 
 ```
