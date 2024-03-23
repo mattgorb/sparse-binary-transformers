@@ -16,4 +16,4 @@ nohup python -u main_ts.py --config=configs/sparse_ts_ettm1_forecast.yaml --gpu=
 
 ```
 
-New project examines longer term forecasting.  I created main_ts_forecast_longterm.py
+
